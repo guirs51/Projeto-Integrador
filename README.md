@@ -18,14 +18,14 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 
 # Apresentação : 
 
-[clique aqui](https://www.canva.com/design/DAGgIc0jo-s/86ZGRkdUFhSY46Y1MvnmBg/edit) para ver nosso cronograma
+[clique aqui](https://www.canva.com/design/DAGgIc0jo-s/86ZGRkdUFhSY46Y1MvnmBg/edit) para ver nossos slides
 
 ---
 
 
 # Projeto das telas: 
 
-[clique aqui](https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit) para ver nosso cronograma
+[clique aqui](https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit) para ver nosso projeto de tela
 
 
 ---
