@@ -4,6 +4,8 @@
 
 
 ---
+
+# Cronograma do grupo 📆 :
 https://trello.com/b/sxXisBDp/kanban-projeto-integrador
 
 ---
@@ -11,7 +13,7 @@ https://trello.com/b/sxXisBDp/kanban-projeto-integrador
 
 ---
 
-# Apresentação:
+# Apresentação : :
 
 https://www.canva.com/design/DAGgIc0jo-s/86ZGRkdUFhSY46Y1MvnmBg/edit
 
@@ -21,3 +23,7 @@ https://www.canva.com/design/DAGgIc0jo-s/86ZGRkdUFhSY46Y1MvnmBg/edit
 # Projeto das telas: 
 
 https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit
+
+---
+
+# Instalação:
