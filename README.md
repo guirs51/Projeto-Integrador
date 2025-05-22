@@ -36,6 +36,7 @@ https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit
 
 - [Pedro Machado](https://github.com/PedroMachadoGRP)
 - [Nathalia Minossi](https://github.com/nathaliaminossi)
+- [Guilherme Dias](https://github.com/guirs51)
 ---
 
 ## Licença
