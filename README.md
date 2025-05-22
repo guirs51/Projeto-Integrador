@@ -30,7 +30,7 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 
 ---
 
-# Instalação:
+
 
 ---
 # Contribuições: 
