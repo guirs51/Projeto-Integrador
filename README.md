@@ -32,8 +32,18 @@ https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit
 # Instalação:
 
 ---
+#Contribuições: 
 
-## Autores
+Para contribuir com o projeto siga os passos a seguir:
+
+1. Faça um fork do projeto
+2. Crie uma branch própria (VocÊ pode usar os comandos : (`git checkout -b feature/... `)
+3. Faça um commit com as suas modificações (`git commit -m '...'`)
+4. Envie para sua branch (`git push origin feature/...`)
+5. Crie uma nova pull request para  a avaliação das suas alterações
+---
+
+# Autores
 
 - [Pedro Machado](https://github.com/PedroMachadoGRP)
 - [Nathalia Minossi](https://github.com/nathaliaminossi)
