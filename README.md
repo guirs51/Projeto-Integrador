@@ -2,6 +2,7 @@
 ---
 # Descrição
 
+O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de métodos inovadores que fornce incentivos aos usuários a criar habitos mais sustentáveis
 
 ---
 
