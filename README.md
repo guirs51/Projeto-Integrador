@@ -7,7 +7,7 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 ---
 
 # Cronograma do grupo 📆 :
-https://trello.com/b/sxXisBDp/kanban-projeto-integrador
+[clique aqui](https://trello.com/b/sxXisBDp/kanban-projeto-integrador) para ver nosso cronograma
 
 ---
 
