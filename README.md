@@ -4,6 +4,8 @@
 Índice :
 
 - [Descrição](#Descrição)
+- [Cronograma](#Cronograma)
+- [Banco de dados](Banco)
 ---
 # Descrição
 
@@ -11,7 +13,7 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 
 ---
 
-# Cronograma do grupo 📆 :
+# Cronograma
 [Clique aqui](https://trello.com/b/sxXisBDp/kanban-projeto-integrador) para ver nosso cronograma
 
 ---
