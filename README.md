@@ -5,7 +5,12 @@
 
 - [Descrição](#Descrição)
 - [Cronograma](#Cronograma)
-- [Banco de dados](#BancodedadosLógico)
+- [Banco de dados](#Banco)
+- [Apresentação](#Apresentação)
+- [Telas](#Telas)
+- [Contribuições](#Contribuições)
+- [Autores](#Autores)
+- [Licença](#Licença)
 ---
 # Descrição
 
@@ -18,7 +23,7 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 
 ---
 
-# Banco de dados Lógico
+# Banco
 ![Captura de tela 2025-02-27 172431](https://github.com/user-attachments/assets/fb372ab8-3176-4297-991b-440373013445)
 
 ---
@@ -30,14 +35,14 @@ O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de 
 ---
 
 
-# Projeto das telas: 
+# Telas: 
 
 [clique aqui](https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit) para ver nosso projeto de tela
 
 
 
 ---
-# Contribuições: 
+# Contribuições
 
 Para contribuir com o projeto siga os passos a seguir:
 
