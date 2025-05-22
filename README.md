@@ -29,3 +29,9 @@ https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit
 ---
 
 # Instalação:
+
+---
+
+## Licença
+
+Este projeto está licenciado sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
