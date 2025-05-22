@@ -32,7 +32,7 @@ https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit
 # Instalação:
 
 ---
-#Contribuições: 
+# Contribuições: 
 
 Para contribuir com o projeto siga os passos a seguir:
 
