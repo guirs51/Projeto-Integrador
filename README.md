@@ -12,36 +12,36 @@
 - [Autores](#Autores)
 - [Licença](#Licença)
 ---
-# Descrição
+## Descrição
 
 O projeto Recicle + tem o objetivo de aumentar a taxa de reciclagem através de métodos inovadores que fornce incentivos aos usuários a criar habitos mais sustentáveis
 
 ---
 
-# Cronograma
+## Cronograma
 [Clique aqui](https://trello.com/b/sxXisBDp/kanban-projeto-integrador) para ver nosso cronograma
 
 ---
 
-# Banco
+## Banco
 ![Captura de tela 2025-02-27 172431](https://github.com/user-attachments/assets/fb372ab8-3176-4297-991b-440373013445)
 
 ---
 
-# Apresentação
+## Apresentação
 
 [Clique aqui](https://www.canva.com/design/DAGgIc0jo-s/86ZGRkdUFhSY46Y1MvnmBg/edit) para ver nossos slides
 
 ---
 
 
-# Telas
+## Telas
 
 [clique aqui](https://www.canva.com/design/DAGoAfUQtrA/qOCR_aO_PtICYkDq646fZg/edit) para ver nosso projeto de tela
 
 ---
 
-Tecnologias
+## Tecnologias
 
 ![](https://img.shields.io/badge/JavaScript-F7DF1E.svg?style=for-the-badge&logo=JavaScript&logoColor=black)
 ![](https://img.shields.io/badge/HTML5-E34F26.svg?style=for-the-badge&logo=HTML5&logoColor=white)
@@ -56,7 +56,7 @@ Tecnologias
 
 
 ---
-# Contribuições
+## Contribuições
 
 Para contribuir com o projeto siga os passos a seguir:
 
@@ -67,7 +67,7 @@ Para contribuir com o projeto siga os passos a seguir:
 5. Crie uma nova pull request para  a avaliação das suas alterações
 ---
 
-# Autores
+## Autores
 
 - [Pedro Machado](https://github.com/PedroMachadoGRP)
 - [Nathalia Minossi](https://github.com/nathaliaminossi)
