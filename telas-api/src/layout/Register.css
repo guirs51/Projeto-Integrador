@@ -1,0 +1,44 @@
+body,html{
+    height: 100%;
+}
+
+#text{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    text-align: start;
+    
+}
+
+#big-txt{
+    font-size: 120px;
+}
+
+#small-txt{
+    font-size: 60px;
+}
+
+#register-container{
+    display: flex;
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-image: url(https://images.pexels.com/photos/339614/pexels-photo-339614.jpeg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    color: whitesmoke;
+}
+
+#register{
+    display: flex;
+    position: absolute;
+    flex-direction: column;
+    justify-content: center;
+    left: 1200px;
+    bottom: 400px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
