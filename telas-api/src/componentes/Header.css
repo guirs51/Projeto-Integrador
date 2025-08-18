@@ -8,7 +8,7 @@ header {
 
 body {
     height: 100vh;
-    background-image: url("../src/img/fundo.png");
+    background-image: url("../src/img/fundo2.png");
     object-fit: cover;
     background-size: cover;
     background-repeat: no-repeat;
@@ -23,7 +23,7 @@ nav {
 
 nav a {
     text-decoration: none;
-    font-size: 1.7em;
+    font-size: 1.2em;
     font-family: sans-serif;
     font-weight: 500;
     color: white;
@@ -36,10 +36,10 @@ nav a:hover {
 }
 
 
-img  {
-height: 5em;
-width: 7em;
+img {
+height:5em;
+width: 6em;
 position: relative;
 left: 250px;
-top: 15px;
+top: 10px;
 }

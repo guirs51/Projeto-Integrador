@@ -4,6 +4,7 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Hearder from './componentes/Hearder'
 import Banner from './componentes/Banner'
+import Login from './componentes/Login'
 
 function App() {
 
@@ -12,7 +13,10 @@ function App() {
     <>
       <Hearder></Hearder>
      {/* <Banner img={'../src/img/fundo.png'}/> */}
+    
+    <Login></Login>
     </>
+    
   )
 }
 
