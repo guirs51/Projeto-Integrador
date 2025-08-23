@@ -1,0 +1,16 @@
+#texto{
+    font-size: 27px;
+    color: white;
+}
+
+input{
+    background-color: white;
+    border-radius: 15px;
+    color: black;
+    opacity: 0.5;
+    border: none;
+    width: 25vw;
+    height: 3vh;
+    padding: 15px;
+    font-size: 20px;
+}

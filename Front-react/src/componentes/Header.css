@@ -1,0 +1,36 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 600px;
+    padding: 10px;
+}
+
+nav {
+    display: flex;
+    gap: 120px;
+    margin-right: 1000px;
+}
+
+nav a {
+    text-decoration: none;
+    font-size: 1.7em;
+    font-family: sans-serif;
+    font-weight: 500;
+    color: rgb(248, 239, 239);
+    white-space: nowrap;
+    transition: font-weight 1s ease;
+}
+
+nav a:hover {
+    font-weight: 600;
+}
+
+
+img  {
+height: 5em;
+width: 7em;
+position: relative;
+left: 450px;
+top: 15px;
+}
