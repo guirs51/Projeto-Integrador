@@ -4,8 +4,9 @@ import './registerField.css'
 function RegisterField(prop) {
     return (
         <>
-            <h2>{prop.texto}</h2>
-            <div id='form-register'>
+            
+            <div className='form-register'>
+                <h2>{prop.texto}</h2>
                 <form> 
                     <input type="text" />
                 </form>

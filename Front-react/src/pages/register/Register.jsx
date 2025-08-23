@@ -4,6 +4,7 @@ import PasswordField from '../../componentes/passwordField'
 import './Register.css'
 import Hearder from '../../componentes/Hearder'
 
+
 function Register() {
     return (
         <>
@@ -12,7 +13,7 @@ function Register() {
 
                 <div id='text'>
                     <h2 id='big-txt'>
-                        Create an account:
+                        Create an  <br /> account:
                     </h2>
                     <h3 id='small-txt'>
                         Transform the future now.Your help will <br />
@@ -21,10 +22,10 @@ function Register() {
                 </div>
 
                 <div id='register'>
-                    <RegisterField texto='Email' />
-                    <RegisterField texto='Cpf' />
-                    <PasswordField texto='Password' />
-                    <PasswordField texto='Confirm password' />
+                    <RegisterField texto='Email:' />
+                    <RegisterField texto='CPF:' />
+                    <PasswordField texto='Password:' />
+                    <PasswordField texto='Confirm password:' />
                 </div>
             </div>
         </>

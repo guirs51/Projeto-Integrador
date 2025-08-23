@@ -4,8 +4,9 @@ import './passwordField.css'
 function PasswordField(prop) {
     return (
         <>
-            <h2 id='texto'>{prop.texto}</h2>
-            <div id='form-password'>
+
+            <div className='form-password'>
+                <h2 id='texto'>{prop.texto}</h2>
                 <form >
                     <input type="password" />
                 </form>

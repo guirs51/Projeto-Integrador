@@ -9,7 +9,7 @@ header {
 nav {
     display: flex;
     gap: 120px;
-    margin-right: 1000px;
+    margin-right: 600px;
 }
 
 nav a {
@@ -31,6 +31,6 @@ img  {
 height: 5em;
 width: 7em;
 position: relative;
-left: 450px;
-top: 15px;
+left: 400px;
+top: -10px;
 }

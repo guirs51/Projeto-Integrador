@@ -18,16 +18,18 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 2px;
     text-align: start;
+    position: relative;
+    bottom: 90px;
 }
 
+
 #big-txt{
-    font-size: 100px;
+    font-size: 110px;
 }
 
 #small-txt{
-    font-size: 30px;
+    font-size: 20px;
 }
 
 .register-container {
@@ -35,9 +37,9 @@ html {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10px;
+    gap: 200px;
     position: relative;
-    right: 200px;
+    right: 30px;
     top: 100px;
 
 }
@@ -47,5 +49,5 @@ html {
     flex-direction: column;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 20px;
 }
