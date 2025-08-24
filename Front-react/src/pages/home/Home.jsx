@@ -1,23 +1,20 @@
 import { useState } from 'react'
 import './Home.css'
+import Hearder from '../../componentes/Hearder'
 
 function Home() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
+      <Hearder />
+      <div className='div-pai'>
+        <span className='box-branca'><h3 className='home-title'>Recicle +</h3> <span className='home-ball'></span> </span>
+        <h1 className='h1-home'>Create your  <br />account or log in!</h1>
+        <p className='home-p'>rascunho apresentado site</p>
+        <div className='home-buttons'>
+          <button className='home-botao'><h6 className='home-h6'>register</h6></button>
+          <button className='home-botao'><h6 className='home-h6'>Login</h6></button>
+        </div>
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </>
   )
 }

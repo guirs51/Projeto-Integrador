@@ -1,42 +1,64 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.div-pai {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  color: white;
+  margin-top: 100px;
+  margin-left: 150px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.box-branca {
+  width: 30em;
+  height: 2.3em;
+  color: rgba(250, 246, 246, 0.908);
+  background-color: rgba(255, 255, 255, 0.274);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  gap: 250px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
+.home-ball {
+  background-color: greenyellow;
+  width: 20px;
+  height: 20px;
+  border-radius: 100%;
 }
 
-.card {
-  padding: 2em;
+.h1-home {
+  font-size: 80px;
 }
 
-.read-the-docs {
-  color: #888;
+.home-title {
+  font-size: 2em;
+}
+
+.home-p {
+  font-size: 30px;
+}
+
+.home-buttons {
+  display: flex;
+  gap: 30px;
+}
+
+.home-botao {
+  width: 15em;
+  height: 2.8em;
+  border-radius: 30px;
+  border: none;
+  background-color: rgba(255, 255, 255, 0.459);
+}
+
+.home-h6 {
+  font-size: 20px;
+  color: rgb(232, 223, 223);
 }
