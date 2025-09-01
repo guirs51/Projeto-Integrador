@@ -1,10 +1,11 @@
 import Home from "../pages/home/Home"
 import Register from "../pages/register/Register";
+import RecicleArea from "../pages/recicle/RecicleArea";
 
 const routes = [
   {
-    path: "/home",
-    element: <Home />
+    path: "/",
+    element: <RecicleArea />
   },
   {
     path: "/regis",
