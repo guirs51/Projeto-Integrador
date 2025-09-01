@@ -11,8 +11,8 @@ function Home() {
         <h1 className='h1-home'>Create your  <br />account or log in!</h1>
         <p className='home-p'>rascunho apresentado site</p>
         <div className='home-buttons'>
-          <button className='home-botao'><h6 className='home-h6'>register</h6></button>
-          <button className='home-botao'><h6 className='home-h6'>Login</h6></button>
+          <a href="/regis"><button className='home-botao'><h6 className='home-h6'>Register</h6></button></a>
+          <a href="/login"><button className='home-botao'><h6 className='home-h6'>Login</h6></button></a>
         </div>
       </div>
     </>

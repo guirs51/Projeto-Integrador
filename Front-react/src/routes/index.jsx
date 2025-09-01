@@ -3,7 +3,7 @@ import Register from "../pages/register/Register";
 
 const routes = [
   {
-    path: "/home",
+    path: "/",
     element: <Home />
   },
   {
