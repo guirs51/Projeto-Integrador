@@ -20,4 +20,11 @@ input{
     flex-direction: column;
     align-items: start;
     gap: 5px;
+
 }
+
+textarea:focus, input:focus, select:focus {
+    box-shadow: 0 0 0 0;
+    border: 0 none;
+    outline: 0;
+} 

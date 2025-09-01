@@ -21,17 +21,11 @@
 .div-campos-login {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 40px;
     position: absolute;
     left: 800px;
     font-size: 1.5em;
 }
-
-.login-input {
-    width: 20em;
-    height: 1em;
-}
-
 
 .box-branca-login {
   width: 25em;
@@ -60,11 +54,4 @@
 p {
     font-size: 1.5em;
     font-family: sans-serif;
-}
-
-.campos-login {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 15px;
 }

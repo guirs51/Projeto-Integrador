@@ -1,6 +1,8 @@
 import React from "react";
 import Hearder from "../../componentes/Hearder";
 import "../login/Login.css";
+import RegisterField from "../../componentes/registerField";
+import PasswordField from "../../componentes/passwordField";
 
 function Login() {
   return (
@@ -15,16 +17,9 @@ function Login() {
         <p>
           Connect and start your process of <br /> helping your environment.
         </p>
-
         <div className="div-campos-login">
-          <div className="campos-login">
-            <label htmlFor="">Email:</label>
-            <input type="text" className="login-input" />
-          </div>
-          <div className="campos-login">
-            <label htmlFor="password">Password:</label>
-            <input type="password" className="login-input" />
-          </div>
+          <RegisterField texto="Email:" />
+          <PasswordField texto="Password:" />
         </div>
       </div>
     </>
