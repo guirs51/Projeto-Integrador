@@ -6,9 +6,9 @@ function Hearder() {
         <header>
             <img src="../src/img/logo.png" alt="Logo" />
             <nav>
-                <a href="/home">Home</a>
+                <a href="/">Home</a>
                 <a href="/regis">Register</a>
-                <a href="">Login</a>
+                <a href="/login">Login</a>
                 <a href="">About us</a>
                 <a href="">Others</a>
             </nav>
