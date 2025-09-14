@@ -1,9 +1,9 @@
-import { appDataSource } from "../data-source";
+import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
 
 export class UserService {
 
-    private userRepo = appDataSource.getRepository(User);
+    private userRepo = AppDataSource.getRepository(User);
 
     async create(data: {name: string, email: string, cpf: string, password: string}) {
         const emailExist = await this.userRepo.findOne({where: {email: data.email}})

@@ -5,7 +5,7 @@ import { User } from './entities/User'
 
 config()
 
-export const appDataSource = new DataSource({
+export const AppDataSource = new DataSource({
     type: 'mysql',
     host: process.env.DB_HOST,
     port: Number(process.env.DB_PORT) || 3306,
