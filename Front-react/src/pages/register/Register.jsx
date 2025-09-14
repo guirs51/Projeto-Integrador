@@ -3,6 +3,7 @@ import RegisterField from '../../componentes/registerField'
 import PasswordField from '../../componentes/passwordField'
 import './Register.css'
 import Hearder from '../../componentes/Hearder'
+import Button from '../../componentes/Button'
 
 
 function Register() {
@@ -26,6 +27,7 @@ function Register() {
                     <RegisterField texto='CPF:' />
                     <PasswordField texto='Password:' />
                     <PasswordField texto='Confirm password:' />
+                    <Button texto='Next'/>
                 </div>
             </div>
         </>

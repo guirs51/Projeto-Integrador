@@ -3,6 +3,7 @@ import Hearder from "../../componentes/Hearder";
 import "../login/Login.css";
 import RegisterField from "../../componentes/registerField";
 import PasswordField from "../../componentes/passwordField";
+import Button from "../../componentes/Button";
 
 function Login() {
   return (
@@ -20,6 +21,7 @@ function Login() {
         <div className="div-campos-login">
           <RegisterField texto="Email:" />
           <PasswordField texto="Password:" />
+          <Button texto="Login"></Button>
         </div>
       </div>
     </>
