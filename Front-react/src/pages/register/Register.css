@@ -1,53 +1,141 @@
 * {
-    margin: 0;
     padding: 0;
+    margin: 0;
     box-sizing: border-box;
+    color: white;
+    font-family: sans-serif;
 }
 
-body,
-html {
+.container {
     width: 100vw;
     height: 100vh;
-    background-image: url(https://images.pexels.com/photos/339614/pexels-photo-339614.jpeg);
-    background-repeat: no-repeat;
     background-size: cover;
-    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#text {
+h1 {
+    font-size: 40px;
+    margin-bottom: 32px;
+}
+
+p {
+    margin-bottom: 32px;
+    font-size: 22px;
+}
+
+.card {
+    width: 80%;
+    height: 70%;
+    background-color: rgba(15, 74, 32, 0.995);
+    border-radius: 32px;
+    padding: 32px 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.esquerda,
+.direita {
+    width: 50%;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    text-align: start;
-    position: relative;
-    bottom: 90px;
+    align-items: center;
+    z-index: 1;
 }
 
-
-#big-txt{
-    font-size: 110px;
-}
-
-#small-txt{
-    font-size: 20px;
-}
-
-.register-container {
-    color: whitesmoke;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 200px;
-    position: relative;
-    right: 30px;
-    top: 100px;
-
-}
-
-#register{
+.formLogin,
+.login,
+.formCadastro,
+.cadastro {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-wrap: wrap;
-    gap: 20px;
+    align-items: center;
+}
+
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+
+    button {
+        background: linear-gradient(90deg, rgba(11, 125, 44, 0.782), white 100%);
+    }
+}
+
+input {
+    width: 400px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: none;
+    outline: none;
+    background-color: rgba(255 255 255 / .11);
+    color: white;
+}
+
+input::placeholder {
+    color: rgba(255, 255, 255, 1);
+}
+
+button {
+    padding: 12px 25px;
+    border: none;
+    border-radius: 12px;
+    outline: none;
+    color: black;
+    margin-top: 12px;
+    width: 400px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
+.cadastro, .login {
+    position: absolute;
+}
+
+
+.card.loginActive .login  {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card.loginActive .formCadastro {
+    opacity: 0;
+}
+
+.card.cadastroActive .cadastro {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.card.cadastroActive .formLogin {
+    opacity: 0;
+}
+
+.background {
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0, 0, 0);
+    position: absolute;
+    z-index: 0;
+    transition: all 0.5s ease-in-out;
+    border-radius: 35px;
+}
+
+.card.loginActive .background{
+    transform: translateX(50%);
+}
+
+.card.cadastroActive .background {
+    transform: translateX(-50%);
 }
