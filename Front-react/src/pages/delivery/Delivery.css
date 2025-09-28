@@ -1,0 +1,79 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+
+#map {
+    position: relative;
+    height: 50vh;
+    width: 75vw;
+    margin-bottom: 20px;
+}
+
+
+#delivery-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+
+#address-local form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+#one-choose,
+#two-choose,
+#three-choose {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+#one-choose h2,
+#two-choose h2,
+#three-choose h2 {
+    width: 180px; 
+    white-space: nowrap; 
+    text-align: right;   
+}
+
+
+.delivery-Local,
+#trash-type {
+    width: 300px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid lightslategrey;
+    border-radius: 5px;
+}
+
+.MuiInputBase-root {
+    width: 300px;
+}
+
+button[type="submit"] {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    transition: background-color 0.3s;
+}
+
+button[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+option {
+    padding: 5px;
+}

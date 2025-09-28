@@ -8,7 +8,7 @@ function PasswordField(prop) {
             <div className='form-password'>
                 <h2 id='texto'>{prop.texto}</h2>
                 <form >
-                    <input type="password" />
+                    <input type="password" id='input' />
                 </form>
             </div>
 

@@ -8,7 +8,7 @@ function RegisterField(prop) {
             <div className='form-register'>
                 <h2>{prop.texto}</h2>
                 <form> 
-                    <input type="text" />
+                    <input type="text" id='input' />
                 </form>
             </div>
 
