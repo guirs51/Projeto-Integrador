@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import bycrypt from 'bcrypt';
+import { Delivery } from "./delivery";
 
 @Entity('users')
 export class User {
@@ -38,4 +39,7 @@ export class User {
     async validatePassword(plain: string): Promise<boolean> {
         return bycrypt.compare(plain, this.password)
     }
+
+    @OneToMany(() => Delivery,delivery => delivery.user)
+    delivery: Delivery[];
 }
