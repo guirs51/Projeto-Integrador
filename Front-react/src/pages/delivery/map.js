@@ -9,6 +9,7 @@ const map = L.map("map").setView([0, 0], 2); // Esse trecho de código é a prim
 L.tileLayer("https\://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
 maxZoom: 19, // Define o zoom máximo que o usuário pode dar.
 attribution: '© OpenStreetMap contribuidores' // É o texto de créditos mostrado no canto do mapa. Por licença, você deve dar crédito ao OSM (e a outros provedores, se usar).
+
 }).addTo(map); // Adiciona essa camada de tiles no mapa que você criou. Sem essa parte, o mapa fica em branco.
 
 // 3. Verifica se o navegador suporta Geolocation
