@@ -31,29 +31,29 @@ function Register() {
                             <form action="">
                                 <input type="text" placeholder='Email' />
                                 <input type="text" placeholder='Password' />
-                                <button>Entrar</button>
+                                <button>Enter</button>
                             </form>
                         </div>
                         <div className='login'>
-                            <h1>Ja tem uma conta?</h1>
-                            <p>entre agora em sua conta</p>
+                            <h1>Already have an account?</h1>
+                            <p>Log into your account now.</p>
                             <button onClick={login}>Login</button>
                         </div>
                     </div>
                     <div className='direita'>
                         <div className='formCadastro'>
-                            <h1>Cadastro</h1>
+                            <h1>Register</h1>
                             <form action="">
-                                <input type="text" placeholder='Nome' />
+                                <input type="text" placeholder='Name' />
                                 <input type="text" placeholder='Email'/>
                                 <input type="Password" placeholder='Password'/>
-                                <button>Cadastrar</button>
+                                <button>Register</button>
                             </form>
                         </div>
                         <div className='cadastro'>
-                            <h1>Não tem uma Conta</h1>
-                            <p>cria sua conta agora!</p>
-                            <button onClick={cadastro}>Cadastrar</button>
+                            <h1>Don't have an account?</h1>
+                            <p>Create your account now!</p>
+                            <button onClick={cadastro}>Register</button>
                         </div>
                     </div>
                     <div className='background'>
