@@ -25,8 +25,9 @@ export class User {
     @UpdateDateColumn()
     updatedAt: Date
 
+    @OneToMany(() => Delivery,delivery => delivery.user)
+    delivery:Delivery;
 
-    //salvar a senha antes de salvar ou atualizar dados
     @BeforeInsert()
     @BeforeUpdate()
     async hashPassword() {
