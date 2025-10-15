@@ -39,10 +39,4 @@ export class User {
     async validatePassword(plain: string): Promise<boolean> {
         return bycrypt.compare(plain, this.password)
     }
-
-
-    //@OneToMany(() => Delivery, delivery => delivery.user)
-    //delivery:Delivery[];
-
-
 }
