@@ -5,6 +5,6 @@ const PORT = process.env.PORT || 3306
 
 AppDataSource.initialize()
   .then(() => {
-    app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`))
+    app.listen(PORT, () => console.log(`Servidor rodando na porta: http://localhost:${PORT}`))
   })
   .catch(err => console.error('Erro ao conectar no banco:', err))

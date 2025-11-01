@@ -15,7 +15,7 @@ export class Delivery{
     @Column()
     deliveryDate:Date
 
-    @ManyToOne(() => User,user => user.delivery)
+    @ManyToOne(() => User, (user) => user.delivery)
     user:User
 
 }
