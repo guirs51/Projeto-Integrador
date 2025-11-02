@@ -16,6 +16,9 @@ export class User {
     @Column({ unique: true, length: 20 })
     cpf: string
 
+    @Column({ length: 100 })
+    Points: number
+
     @Column()
     password: string
 
@@ -25,6 +28,8 @@ export class User {
     @UpdateDateColumn()
     updatedAt: Date
 
+    @OneToMany(() => Delivery, (delivery) => delivery.user)
+    delivery: Delivery[];
 
     //salvar a senha antes de salvar ou atualizar dados
     @BeforeInsert()
@@ -39,7 +44,4 @@ export class User {
     async validatePassword(plain: string): Promise<boolean> {
         return bycrypt.compare(plain, this.password)
     }
-
-    @OneToMany(() => Delivery, (delivery) => delivery.user)
-    delivery: Delivery[];
 }
