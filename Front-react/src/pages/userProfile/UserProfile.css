@@ -1,0 +1,44 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#user-head{
+    display: flex;
+    gap: 30px;
+    padding: 15px;
+    background-color: rgba(168, 165, 165, 0.295);
+    border-radius: 20px;
+}
+.big-text{
+    position: relative;
+    top: 10px;
+    right: 5px;
+    color: black;
+}
+
+#edit-btn{
+    width: 20vw;
+    border-radius: 10px;
+    background-color: rgb(35, 201, 192);
+}
+
+#info-header{
+    display: flex;
+    flex-direction: row;
+}
+
+html{
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: rgb(131, 129, 129);
+}
+
+#img{
+    
+    width: 3vw;
+    height: 6vh;
+    border-radius: 100px;
+}

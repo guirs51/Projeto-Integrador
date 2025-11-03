@@ -6,11 +6,11 @@ function Register() {
 
     const [activeForm, setActiveForm] = useState('cadastro');
 
-    function login(){
+    function login() {
         setActiveForm('login');
     }
 
-    function cadastro(){
+    function cadastro() {
         setActiveForm('cadastro');
     }
 
@@ -26,7 +26,7 @@ function Register() {
                             <form action="">
                                 <input type="text" placeholder='Email' />
                                 <input type="text" placeholder='Password' />
-                                <button>Enter</button>
+                                <a href="/userProfile"><button>enter</button></a>
                             </form>
                         </div>
                         <div className='login'>
@@ -40,8 +40,8 @@ function Register() {
                             <h1>Register</h1>
                             <form action="">
                                 <input type="text" placeholder='Name' />
-                                <input type="text" placeholder='Email'/>
-                                <input type="Password" placeholder='Password'/>
+                                <input type="text" placeholder='Email' />
+                                <input type="Password" placeholder='Password' />
                                 <button>Register</button>
                             </form>
                         </div>
