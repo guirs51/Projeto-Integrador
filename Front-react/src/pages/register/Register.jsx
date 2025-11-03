@@ -47,8 +47,9 @@ function Register() {
                                 <input type="text" placeholder='Name' />
                                 <input type="text" placeholder='Email'/>
                                 <input type="Password" placeholder='Password'/>
-                                <button>Register</button>
+                                
                             </form>
+                            <button>Register</button>
                         </div>
                         <div className='cadastro'>
                             <h1>Don't have an account?</h1>

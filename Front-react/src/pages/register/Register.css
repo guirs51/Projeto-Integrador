@@ -7,36 +7,35 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ===== CONTAINER GERAL ===== */
+
 .container {
   width: 100vw;
   height: 100vh;
-  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1470&q=80")
-    no-repeat center center/cover;
+  background-color: #bfc3ba;
   display: flex;
   justify-content: center;
   align-items: center;
   position: relative;
   overflow: hidden;
+  
 }
 
-/* camada escura sobre o fundo */
+
 .container::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: rgba(0, 30, 0, 0.8);
+
   backdrop-filter: blur(6px);
 }
 
-/* ===== CARD PRINCIPAL ===== */
 .card {
-  width: 80%;
-  max-width: 950px;
-  height: 70%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 25px;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6);
+  width: 100%;
+  max-width: 80vw;
+  height: 80%;
+  background: #cfd2cd;
+  border-radius: 10px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.233);
   display: flex;
   overflow: hidden;
   position: relative;
@@ -44,7 +43,7 @@
   transition: all 0.6s ease;
 }
 
-/* ===== SEÇÕES ===== */
+
 .esquerda,
 .direita {
   width: 50%;
@@ -60,21 +59,20 @@
   text-align: center;
 }
 
-/* ===== TEXTOS ===== */
+
 h1 {
   font-size: 2rem;
   font-weight: 600;
-  color: #e8f5e9;
+  color: #2b2c28;
   margin-bottom: 20px;
 }
 
 p {
   font-size: 0.95rem;
-  color: #cde3cd;
+  color: #1c1d1c;
   margin-bottom: 25px;
 }
 
-/* ===== FORMULÁRIOS ===== */
 form {
   display: flex;
   flex-direction: column;
@@ -85,45 +83,46 @@ form {
 
 input {
   width: 100%;
-  padding: 12px 18px;
-  border-radius: 10px;
+  padding: 12px 100px;
+  border-radius: 5px;
   border: none;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
+  background: rgba(107, 102, 102, 0.39);
+  color: #000000;
   font-size: 1rem;
   transition: all 0.3s ease;
   text-align: left;
 }
 
 input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
+  color: rgb(36, 35, 35);
 }
 
 input:focus {
   outline: none;
-  background: rgba(255, 255, 255, 0.25);
+  background: rgba(87, 85, 85, 0.37);
 }
 
-/* ===== BOTÕES ===== */
+
 button {
-  width: 80%;
+  width: 100%;
+  margin-top: 20px;
   padding: 12px 0;
   border: none;
-  border-radius: 12px;
+  border-radius: 5px;
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
   color: #fff;
-  background: #3a5a40;
+  background: #38302e;
   transition: all 0.3s ease;
 }
 
 button:hover {
   transform: translateY(-2px);
-  background: #1b4332;
+  background: #534b52;
 }
 
-/* ===== ANIMAÇÃO DE TROCA ENTRE LOGIN/CADASTRO ===== */
+
 .cadastro,
 .login {
   position: absolute;
@@ -137,7 +136,7 @@ button:hover {
   transition: opacity 0.6s ease;
 }
 
-/* ===== ESTADOS ===== */
+
 .card.loginActive .login {
   opacity: 0;
   transform: translateX(-40px);
@@ -158,11 +157,11 @@ button:hover {
   opacity: 0;
 }
 
-/* ===== FUNDO ANIMADO ===== */
+
 .background {
   width: 100%;
   height: 100%;
-  background: #344e41;
+  background: #000000;
   position: absolute;
   z-index: 0;
   transition: all 0.6s ease-in-out;
@@ -172,15 +171,15 @@ button:hover {
 
 .card.loginActive .background {
   transform: translateX(50%);
-  background: linear-gradient(120deg, #2d6a4f, #1b4332);
+  background: linear-gradient(120deg, #90a955, #878d8a73);
 }
 
 .card.cadastroActive .background {
   transform: translateX(-50%);
-  background: linear-gradient(120deg, #1b4332, #081c15);
+  background: linear-gradient(120deg, #acb6b265, #90a955);
 }
 
-/* ===== RESPONSIVO ===== */
+
 @media (max-width: 850px) {
   .card {
     flex-direction: column;
@@ -196,7 +195,7 @@ button:hover {
 
   input,
   button {
-    width: 90%;
+    width: 70%;
   }
 
   h1 {
