@@ -1,64 +1,203 @@
+/* Reset */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
 }
 
-.div-pai {
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  color: white;
-  margin-top: 100px;
-  margin-left: 150px;
-}
-
-.box-branca {
-  width: 30em;
-  height: 2.3em;
-  color: rgba(250, 246, 246, 0.908);
-  background-color: rgba(255, 255, 255, 0.274);
-  border-radius: 20px;
-  display: flex;
-  flex-direction: row;
+  justify-content: flex-start; 
   align-items: center;
-  justify-content: space-around;
-  gap: 250px;
+  padding-left: 8%; 
+  text-align: left;
+  color: #fff;
+}
+ 
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
 }
 
-.home-ball {
-  background-color: greenyellow;
-  width: 20px;
-  height: 20px;
-  border-radius: 100%;
+
+.dark-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6); 
+  z-index: -1;
 }
 
-.h1-home {
-  font-size: 80px;
+/* Conteúdo principal */
+
+.hero-content {
+    max-width: 700px;
+  position: relative;
+  z-index: 2;
 }
 
-.home-title {
-  font-size: 2em;
+.hero-content * {
+  font-size: inherit;
+  line-height: inherit;
 }
 
-.home-p {
-  font-size: 30px;
+
+.hero-content h1 {
+  font-size: 4rem;
+  line-height: 1.2;
+  font-weight: 700;
+  margin-bottom: 25px;
 }
 
-.home-buttons {
+.hero-content h1 span {
+  color: #9be15d;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  color: #e0e0e0;
+  margin-bottom: 35px;
+  max-width: 600px;
+}
+
+
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .hero {
+    justify-content: center;
+    text-align: center;
+    padding: 0 20px;
+  }
+
+  .hero-content h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+.apresentacao {
   display: flex;
-  gap: 30px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  padding: 80px 10%;
+  background-color: #ffffff;
+  
 }
 
-.home-botao {
-  width: 15em;
-  height: 2.8em;
-  border-radius: 30px;
+.apresentacao .imagem {
+  flex: 1;
+}
+
+.apresentacao .imagem img {
+  width: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+.apresentacao .texto {
+  flex: 1.2;
+  color: #1b1b1b;
+}
+
+.apresentacao .texto h4 {
+  color: #4f772d;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+}
+
+.apresentacao .texto h2 {
+  font-size: 2.3rem;
+  line-height: 1.3;
+  font-weight: 700;
+  margin-bottom: 25px;
+}
+
+.apresentacao .texto h2 span {
+  color: #4f772d;
+  font-size: 2.5rem; /* mesmo tamanho do h2 */
+  line-height: 1.3;  /* opcional, para garantir alinhamento */
+}
+
+
+.apresentacao .texto p {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: #444;
+}
+
+/* Responsividade */
+@media (max-width: 900px) {
+  .apresentacao {
+    flex-direction: column;
+    text-align: center;
+    padding: 60px 6%;
+  }
+
+  .apresentacao .imagem {
+    order: -1; /* imagem em cima no mobile */
+  }
+
+  .apresentacao .texto h2 {
+    font-size: 1.8rem;
+  }
+
+  .apresentacao .texto p {
+    font-size: 1rem;
+  }
+}
+
+/* Seção Registro */
+.register-part {
+  background-color: #2A3218;
+  color: white;
+  text-align: center;
+  padding: 80px 30px;
+}
+
+.register-part h3 {
+  font-size: 2rem;
+  margin-bottom: 15px;
+}
+
+.register-part p {
+  font-size: 1.1rem;
+  margin-bottom: 25px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.register-part .btn-register {
+  background-color: #656d4a; 
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 12px 32px;
   border: none;
-  background-color: rgba(255, 255, 255, 0.459);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
-.home-h6 {
-  font-size: 20px;
-  color: rgb(232, 223, 223);
+.register-part .btn-register:hover {
+  background-color: #414833; /* leve variação no hover */
 }
