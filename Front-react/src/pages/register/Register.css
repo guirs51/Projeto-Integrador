@@ -1,0 +1,203 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+/* ===== CONTAINER GERAL ===== */
+.container {
+  width: 100vw;
+  height: 100vh;
+  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1470&q=80")
+    no-repeat center center/cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  overflow: hidden;
+}
+
+/* camada escura sobre o fundo */
+.container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 30, 0, 0.8);
+  backdrop-filter: blur(6px);
+}
+
+/* ===== CARD PRINCIPAL ===== */
+.card {
+  width: 80%;
+  max-width: 950px;
+  height: 70%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 25px;
+  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6);
+  display: flex;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  transition: all 0.6s ease;
+}
+
+/* ===== SEÇÕES ===== */
+.esquerda,
+.direita {
+  width: 50%;
+  height: 100%;
+  padding: 50px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.6s ease;
+  text-align: center;
+}
+
+/* ===== TEXTOS ===== */
+h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #e8f5e9;
+  margin-bottom: 20px;
+}
+
+p {
+  font-size: 0.95rem;
+  color: #cde3cd;
+  margin-bottom: 25px;
+}
+
+/* ===== FORMULÁRIOS ===== */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+  gap: 15px;
+}
+
+input {
+  width: 100%;
+  padding: 12px 18px;
+  border-radius: 10px;
+  border: none;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  text-align: left;
+}
+
+input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+input:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ===== BOTÕES ===== */
+button {
+  width: 80%;
+  padding: 12px 0;
+  border: none;
+  border-radius: 12px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  color: #fff;
+  background: #3a5a40;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  background: #1b4332;
+}
+
+/* ===== ANIMAÇÃO DE TROCA ENTRE LOGIN/CADASTRO ===== */
+.cadastro,
+.login {
+  position: absolute;
+  transition: all 0.6s ease;
+}
+
+.formLogin,
+.formCadastro {
+  position: relative;
+  opacity: 1;
+  transition: opacity 0.6s ease;
+}
+
+/* ===== ESTADOS ===== */
+.card.loginActive .login {
+  opacity: 0;
+  transform: translateX(-40px);
+  pointer-events: none;
+}
+
+.card.loginActive .formCadastro {
+  opacity: 0;
+}
+
+.card.cadastroActive .cadastro {
+  opacity: 0;
+  transform: translateX(40px);
+  pointer-events: none;
+}
+
+.card.cadastroActive .formLogin {
+  opacity: 0;
+}
+
+/* ===== FUNDO ANIMADO ===== */
+.background {
+  width: 100%;
+  height: 100%;
+  background: #344e41;
+  position: absolute;
+  z-index: 0;
+  transition: all 0.6s ease-in-out;
+  border-radius: 25px;
+  opacity: 0.9;
+}
+
+.card.loginActive .background {
+  transform: translateX(50%);
+  background: linear-gradient(120deg, #2d6a4f, #1b4332);
+}
+
+.card.cadastroActive .background {
+  transform: translateX(-50%);
+  background: linear-gradient(120deg, #1b4332, #081c15);
+}
+
+/* ===== RESPONSIVO ===== */
+@media (max-width: 850px) {
+  .card {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+  }
+
+  .esquerda,
+  .direita {
+    width: 100%;
+    padding: 30px 20px;
+  }
+
+  input,
+  button {
+    width: 90%;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+}

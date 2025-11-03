@@ -64,7 +64,7 @@ function Home() {
       <section className="register-part">
         <h3>Junte-se a nós!</h3>
         <p>Cadastre-se e faça parte dessa jornada em busca ao futuro melhor.</p>
-        <button className="btn-register">Ir para o Cadastro</button>
+        <a href="/regis"><button className="btn-register">Ir para o Cadastro</button></a>
       </section>
     </>
   )
