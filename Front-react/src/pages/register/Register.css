@@ -26,10 +26,12 @@ html {
 
 #big-txt{
     font-size: 110px;
+      font-family: "Roboto", sans-serif;
 }
 
 #small-txt{
     font-size: 20px;
+      font-family: "Roboto", sans-serif;
 }
 
 .register-container {
@@ -50,4 +52,5 @@ html {
     justify-content: center;
     flex-wrap: wrap;
     gap: 20px;
+      font-family: "Roboto", sans-serif;
 }

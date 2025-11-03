@@ -11,6 +11,7 @@
   color: white;
   margin-top: 100px;
   margin-left: 150px;
+  font-family: Arial, Helvetica, sans-serif;
 }
 
 .box-branca {
@@ -48,11 +49,13 @@
 .home-buttons {
   display: flex;
   gap: 30px;
+  padding-top: 10px;
 }
 
 .home-botao {
   width: 15em;
   height: 2.8em;
+
   border-radius: 30px;
   border: none;
   background-color: rgba(255, 255, 255, 0.459);
@@ -60,5 +63,5 @@
 
 .home-h6 {
   font-size: 20px;
-  color: rgb(232, 223, 223);
+  color: white;
 }
