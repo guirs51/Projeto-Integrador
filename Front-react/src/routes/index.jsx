@@ -5,7 +5,7 @@ import Register from "../pages/register/Register";
 const routes = [
   {
     path: "/",
-    element: <Register />
+    element: <Home />
   },
   {
     path: "/regis",
