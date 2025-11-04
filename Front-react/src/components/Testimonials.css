@@ -1,0 +1,45 @@
+.testimonials {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 20px 0 0 0;
+  color: #fff;
+  text-align: left;
+  margin-left: 0px;
+}
+
+.testimonial-card {
+
+  padding: 40px;
+  border-radius: 12px;
+
+}
+
+
+.text {
+  font-size: 1.3rem;
+  line-height: 1.6;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+h4 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+span {
+  font-size: 0.95rem;
+  color: #ccc;
+}
+
+
+.swiper-pagination-bullet {
+  background: #fff !important;
+  opacity: 0.6;
+}
+
+.swiper-pagination-bullet-active {
+  background: #7ed957 !important;
+  opacity: 1;
+}

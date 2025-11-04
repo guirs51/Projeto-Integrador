@@ -1,10 +1,6 @@
-import React from 'react'
-import RegisterField from '../../componentes/registerField'
-import PasswordField from '../../componentes/passwordField'
 import './Register.css'
-import Hearder from '../../componentes/Hearder'
-import Button from '../../componentes/Button'
 import { useState } from 'react'
+
 
 
 function Register() {
