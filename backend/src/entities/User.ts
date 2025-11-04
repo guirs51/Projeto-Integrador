@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import bycrypt from 'bcrypt';
-import { Delivery } from "./delivery";
+import { Delivery } from "./Delivery";
 
 @Entity('users')
 export class User {
@@ -16,7 +16,7 @@ export class User {
     @Column({ unique: true, length: 20 })
     cpf: string
 
-    @Column({ length: 100 })
+    @Column()
     Points: number
 
     @Column()
