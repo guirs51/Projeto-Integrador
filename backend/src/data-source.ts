@@ -3,6 +3,7 @@ import { DataSource} from 'typeorm'
 import { config } from 'dotenv'
 import { User } from './entities/User'
 import { Delivery } from './entities/Delivery'
+import { Company } from './entities/Company'
 
 config()
 
@@ -13,7 +14,7 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [User, Delivery],
+    entities: [User, Delivery, Company],
     synchronize: true, // cria tabelas automaticamentes (apenas para desevolvimento);
     logging: false
 })

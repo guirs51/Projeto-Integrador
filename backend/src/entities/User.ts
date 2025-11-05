@@ -16,7 +16,7 @@ export class User {
     @Column({ unique: true, length: 20 })
     cpf: string
 
-    @Column()
+    @Column({nullable: true, default: 0})
     Points: number
 
     @Column()

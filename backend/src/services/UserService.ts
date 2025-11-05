@@ -43,7 +43,7 @@ export class UserService {
 
       if (!user) throw new Error("Usuario não encotrado");
 
-      const clone: any = { ...User };
+      const clone: any = { ...user };
 
       delete clone.password;
 

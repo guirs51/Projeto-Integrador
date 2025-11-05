@@ -1,3 +1,4 @@
+import e from "express";
 import { AppDataSource } from "../data-source";
 import { Company } from "../entities/Company";
 
@@ -7,10 +8,10 @@ export class CompanyService {
   async create(data: { name: string; email: string; cnpj: string }) {
     try {
       const emailOrCnpj = await this.CompanyRepo.findOne({
-        where: { email: data.email, cnpj: data.cnpj  },
+        where: { email: data.email, cnpj: data.cnpj },
       });
 
-      if (emailOrCnpj) throw new Error("E-mail já cadastrado");
+      if (emailOrCnpj) throw new Error("E-mail ou CNPJ já cadastrado");
 
       const company = await this.CompanyRepo.create(data);
       return await this.CompanyRepo.save(company);
@@ -20,54 +21,74 @@ export class CompanyService {
   }
 
   async findAll() {
-    const companys = this.CompanyRepo.find();
+    try {
+      const companys = this.CompanyRepo.find();
 
-    return (await companys).map((u) => {
-      const clone: any = { ...u };
-      return clone;
-    });
+      return (await companys).map((u) => {
+        const clone: any = { ...u };
+        return clone;
+      });
+    } catch (e) {
+      console.log("Erro ao listar todas as empresas: " + e)
+    }
   }
 
   async findById(id: Number) {
-    const company = await this.CompanyRepo.findOne({ where: { id } });
+    try {
+      const company = await this.CompanyRepo.findOne({ where: { id } });
 
-    if (!company) throw new Error("Usuario não encotrado");
+      if (!company) throw new Error("Empresa não encotrado");
 
-    const clone: any = { ...Company };
+      const clone: any = { ...company };
 
-    return clone;
+      return clone;
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async update(id: Number, data: Partial<Company>) {
-    const company = await this.CompanyRepo.findOne({ where: { id } });
-    if (!company) throw new Error("usuario não encontrado");
+    try {
+      const company = await this.CompanyRepo.findOne({ where: { id } });
+      if (!company) throw new Error("Empresa não encontrado");
 
-    // if(data.password){
-    //     user.password = data.password
-    // }
+      // if(data.password){
+      //     user.password = data.password
+      // }
 
-    const { ...rest } = data;
+      const { ...rest } = data;
 
-    Object.assign(company, rest);
+      Object.assign(company, rest);
 
-    return await this.CompanyRepo.save(company);
+      return await this.CompanyRepo.save(company);
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async remove(id: Number) {
-    const company = await this.CompanyRepo.findOne({ where: { id } });
+    try {
+      const company = await this.CompanyRepo.findOne({ where: { id } });
 
-    if (!company) throw new Error("Usuario não encontrado");
+      if (!company) throw new Error("Empresa não encontrado");
 
-    await this.CompanyRepo.remove(company);
+      await this.CompanyRepo.remove(company);
 
-    return { mensagem: "Usuario deletado" };
+      return { mensagem: "Empresa deletado" };
+    } catch (e) {
+      console.log(e)
+    }
   }
 
   async findEmail(email: string) {
-    const company = await this.CompanyRepo.findOne({ where: { email } });
+    try {
+      const company = await this.CompanyRepo.findOne({ where: { email } });
 
-    if (!company) throw new Error("Usuario não encontrado");
+      if (!company) throw new Error("Usuario não encontrado");
 
-    return company;
+      return company;
+    } catch (e) {
+      console.log(e)
+    }
   }
 }
