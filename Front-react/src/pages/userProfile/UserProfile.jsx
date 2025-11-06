@@ -10,6 +10,9 @@ export default function UserProfile() {
             </div>
 
             <section id="personal-info">
+                <div className="bio"> 
+                    <h2>Hi, my names is Fulana! im developer sistems and i have 18 years old.</h2>
+                </div>
                 <div id="info-header">
                     <h2>Informações</h2>
                     <button id="edit-btn">editar</button>
