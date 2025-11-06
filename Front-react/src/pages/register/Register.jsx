@@ -5,56 +5,37 @@ import { useState } from 'react'
 
 function Register() {
 
-    const [activeForm, setActiveForm] = useState('cadastro');
 
-    function login(){
-        setActiveForm('login');
-    }
-
-    function cadastro(){
-        setActiveForm('cadastro');
-    }
-
-    const cardClass = `card ${activeForm === 'cadastro' ? 'cadastroActive' : 'loginActive'}`;
 
     return (
         <>
             <div className='container'>
-                <div className={cardClass} id='card'>
-                    <div className='esquerda'>
-                        <div className='formLogin'>
-                            <h1>Login</h1>
-                            <form action="">
-                                <input type="text" placeholder='Email' />
-                                <input type="text" placeholder='Password' />
-                                <button>Enter</button>
-                            </form>
-                        </div>
-                        <div className='login'>
-                            <h1>Already have an account?</h1>
-                            <p>Log into your account now.</p>
-                            <button onClick={login}>Login</button>
-                        </div>
+                <div className='card-esquerda'> 
+                    <div className='register'>
+                        <h1>Bem-vindo ao <span>Recicle +</span></h1>
+                        <h2>Junte-se à nossa comunidade na busca por um futuro melhor. <span>future</span>.</h2>
                     </div>
-                    <div className='direita'>
-                        <div className='formCadastro'>
-                            <h1>Register</h1>
-                            <form action="">
-                                <input type="text" placeholder='Name' />
-                                <input type="text" placeholder='Email'/>
-                                <input type="Password" placeholder='Password'/>
-                                
-                            </form>
-                            <button>Register</button>
-                        </div>
-                        <div className='cadastro'>
-                            <h1>Don't have an account?</h1>
-                            <p>Create your account now!</p>
-                            <button onClick={cadastro}>Register</button>
-                        </div>
+                    <div className='form'>
+                    <form action="">
+                        <h2>Nome</h2>
+                        <input type="text" placeholder='Nome' />
+                        <h2>Email</h2>
+                         <input type="text" placeholder='Email' />
+                         <h2>Senha</h2>
+                          <input type="password" placeholder='Senha' />
+                    </form>
+
+                    
+                    <button>Entrar</button>
+
+                    <div className='createAccount'>
+                        <h1>Já tem uma conta? <a href="./login">Entre agora!</a></h1>  
                     </div>
-                    <div className='background'>
                     </div>
+                </div>
+
+                <div className='card-direita'>
+                    <h1>Preservar a natureza é o primeiro passo para preservar o futuro.</h1>
                 </div>
             </div>
         </>
