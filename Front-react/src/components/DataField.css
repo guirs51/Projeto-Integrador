@@ -1,0 +1,29 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#text-local {
+    color: rgba(0, 0, 0, 0.322);
+    font-size: 1.5rem;
+}
+
+
+
+#input-field::placeholder {
+    color: black;
+    font-size: 1.5rem;
+}
+
+#data-field {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-start; /* alinha à esquerda */
+}
+
+#input-field {
+    width: 100%; /* ocupa toda a largura do campo */
+    padding: 8px 12px;
+}
