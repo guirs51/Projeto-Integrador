@@ -2,7 +2,7 @@ import 'reflect-metadata'
 import { DataSource} from 'typeorm'
 import { config } from 'dotenv'
 import { User } from './entities/User'
-import { Delivery } from './entities/Delivery'
+import { Delivery } from './entities/delivery'
 import { Company } from './entities/Company'
 
 config()

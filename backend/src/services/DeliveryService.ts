@@ -1,6 +1,6 @@
 
 import { AppDataSource } from "../data-source";
-import { Delivery } from "../entities/Delivery";
+import { Delivery } from "../entities/delivery";
 import { User } from "../entities/User";
 
 export class DeliveryService {

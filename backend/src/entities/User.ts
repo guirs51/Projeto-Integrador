@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import bycrypt from 'bcrypt';
-import { Delivery } from "./Delivery";
+import { Delivery } from "./delivery";
 
 @Entity('users')
 export class User {

@@ -1,4 +1,3 @@
- import { cp } from "fs";
 import { Entity,PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
  
  @Entity('prize')
@@ -11,5 +10,5 @@ import { Entity,PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
 
      @Column({length: 100})
      prize_points:string
- 
+
  }
