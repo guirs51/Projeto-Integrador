@@ -5,10 +5,10 @@ import { Delivery } from "./delivery";
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
 
     @Column({ length: 100 })
-    name: String
+    name: string
 
     @Column({ unique: true, length: 200 })
     email: string

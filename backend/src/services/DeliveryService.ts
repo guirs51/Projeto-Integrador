@@ -11,6 +11,7 @@ export class DeliveryService {
         try {
             const { user, ...data } = dataDelivery
             const userDelivery = await this.userRepo.findOneBy({ id: user.id });
+            if(userDelivery.id != user.id) return "Erro ao pegar o id_user:  " + user.id 
             const delivery = this.Repo.create({
                 ...data,
                 user: userDelivery

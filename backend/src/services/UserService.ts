@@ -37,7 +37,7 @@ export class UserService {
     }
   }
 
-  async findById(id: Number) {
+  async findById(id: number) {
     try {
       const user = await this.userRepo.findOne({ where: { id } });
 
@@ -53,7 +53,7 @@ export class UserService {
     }
   }
 
-  async update(id: Number, data: Partial<User>) {
+  async update(id: number, data: Partial<User>) {
     try {
       const user = await this.userRepo.findOne({ where: { id } });
       if (!user) throw new Error("usuario não encontrado");
@@ -72,7 +72,7 @@ export class UserService {
     }
   }
 
-  async remove(id: Number) {
+  async remove(id: number) {
     try {
       const user = await this.userRepo.findOne({ where: { id } });
 
