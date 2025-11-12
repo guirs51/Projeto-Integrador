@@ -1,8 +1,8 @@
 import { Router } from 'express'
-import { DeliveryController } from '../controllers/DeliveryController'
+import { PrizeController } from '../controllers/PrizeController'
 
 const router = Router()
-const controller = new DeliveryController()
+const controller = new PrizeController()
 
 router.get('/', controller.list.bind(controller))
 router.get('/:id', controller.getById.bind(controller))
