@@ -25,7 +25,7 @@ export class UserService {
 
   async findAll() {
     try {
-      const users = this.userRepo.find();
+      const users = this.userRepo.find({relations: ["delivery"]});
       return (await users).map((u) => {
         const clone: any = { ...u };
         delete clone.password;
@@ -39,7 +39,7 @@ export class UserService {
 
   async findById(id: number) {
     try {
-      const user = await this.userRepo.findOne({ where: { id } });
+      const user = await this.userRepo.findOne({ where: { id }, relations: ["delivery"] });
 
       if (!user) throw new Error("Usuario não encotrado");
 
