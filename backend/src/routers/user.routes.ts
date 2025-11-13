@@ -9,7 +9,7 @@ const controllerDelivery = new DeliveryController()
 
 router.get('/', authMiddleware, controller.list.bind(controller))
 router.get('/:id', controller.getById.bind(controller))
-router.post('/', controller.create.bind(controller))
+// router.post('/', controller.create.bind(controller)) user já pode ser criado usando a rota auth
 router.put('/:id', controller.update.bind(controller))
 router.delete('/:id', controller.remove.bind(controller))
 

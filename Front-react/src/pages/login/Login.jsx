@@ -15,9 +15,7 @@ function Login() {
           </div>
           <div className='form'>
             <form action="">
-              <h2>Nome</h2>
               <input type="text" placeholder='Nome' />
-              <h2>Senha</h2>
               <input type="password" placeholder='Senha' />
             </form>
 
@@ -29,12 +27,12 @@ function Login() {
             </div>
 
           </div>
-          
+
         </div>
 
-                <div className='card-direita'>
-                    <h1>Preservar a natureza é o primeiro passo para preservar o futuro.</h1>
-                </div>
+        <div className='card-direita'>
+          <h1>Preservar a natureza é o primeiro passo para preservar o futuro.</h1>
+        </div>
 
       </div>
     </>
