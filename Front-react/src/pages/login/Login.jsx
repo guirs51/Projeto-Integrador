@@ -1,9 +1,20 @@
 import React from "react";
 
 import "../login/Login.css";
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { useState } from "react";
 
 
 function Login() {
+
+  const [show, setShow] = useState(false)
+
+  const mostraOcultar = () => {
+    setShow(!show)
+  }
+
   return (
     <>
 
@@ -16,7 +27,10 @@ function Login() {
           <div className='form'>
             <form action="">
               <input type="text" placeholder='Nome' />
-              <input type="password" placeholder='Senha' />
+              <input type={show ? "text" : "password"} placeholder='Senha' id='password'/>
+              <button className='btn-view' onClick={mostraOcultar} type='button'>
+                {!show ? <FaEyeSlash size={20} color='black' /> : <IoEyeSharp size={20} color='black' />}
+              </button>
             </form>
 
 
@@ -26,6 +40,9 @@ function Login() {
               <h1> Não tem uma conta? <a href="./regis">Crie agora!</a></h1>
             </div>
 
+            <p>continue com </p>
+
+            <button className='btn-google'><span className='google-logo'><FcGoogle size={30} /></span></button>
           </div>
 
         </div>

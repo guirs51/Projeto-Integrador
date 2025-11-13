@@ -1,6 +1,8 @@
 import './Register.css'
 import { useEffect, useState } from 'react'
-
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 
 function Register() {
@@ -9,6 +11,12 @@ function Register() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const cpf = "0000001"
+
+    const [show, setShow] = useState(false)
+
+    const mostraOcultar = () => {
+        setShow(!show)
+    }
 
     async function createUser() {
         try {
@@ -49,9 +57,11 @@ function Register() {
                         <form >
                             <input type="text" placeholder='Nome' onChange={(e) => setName(e.target.value)} />
                             <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
-                            <input type="password" placeholder='Senha' onChange={(e) => setPassword(e.target.value)} />
+                            <input type={show ? "text" : "password"} placeholder='Senha' id='password' onChange={(e) => setPassword(e.target.value)} />
+                            <button className='btn-view' onClick={mostraOcultar} type='button'>
+                                {!show ? <FaEyeSlash size={20} color='black' /> : <IoEyeSharp size={20} color='black' />}
+                            </button>
                         </form>
-
 
                         <button onClick={createUser}>Cadastrar</button>
 
@@ -59,6 +69,9 @@ function Register() {
                             <h1>Já tem uma conta? <a href="./login">Entre agora!</a></h1>
                         </div>
 
+                        <p>continue com</p>
+                        
+                        <button className='btn-google'><span className='google-logo'><FcGoogle  size={30}/></span></button>
                     </div>
                 </div>
 

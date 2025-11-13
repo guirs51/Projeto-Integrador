@@ -48,7 +48,6 @@
    display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 15px;
   width: 100%;
   max-width: 350px;
   text-align: start;
@@ -115,4 +114,36 @@ button {
   text-align: start;
   max-width: 550px;
   margin-right: 100px;
+}
+
+#password {
+  position: relative;
+}
+
+.btn-view {
+  background-color: rgba(234, 11, 11, 0);
+  border: 0px;
+  outline: none;
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  margin-bottom: 35px;
+}
+
+p {
+ font-size: 14px;
+}
+
+.btn-google {
+  border: 1px solid rgba(0, 0, 0, 0.485);
+  background-color: white;
+  width: 30px;
+  height: 45px;
+  position: relative;
+}
+
+.google-logo {
+  position: absolute;
+  left: 30px;
+  top: 8px;
 }
