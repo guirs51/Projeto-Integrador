@@ -1,4 +1,4 @@
-import { Entity,PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
+import { Entity,PrimaryGeneratedColumn,Column,ManyToOne,JoinColumn} from "typeorm";
 import { User } from "./User";
 
 @Entity('delivery')
@@ -13,9 +13,9 @@ export class Delivery{
     materialType:string
 
     @Column()
-    deliveryDate:Date
+    deliveryDate: string
 
     @ManyToOne(() => User, (user) => user.delivery)
-    user:User
-
+    @JoinColumn({ name: 'user_id' }) // ← Adicionar JoinColumn para criar a FK
+    user: User
 }
