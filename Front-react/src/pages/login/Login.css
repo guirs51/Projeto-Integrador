@@ -120,14 +120,15 @@ button {
   position: relative;
 }
 
-.btn-view {
+.btn-view-login {
   background-color: rgba(234, 11, 11, 0);
   border: 0px;
   outline: none;
   width: 1px;
   height: 1px;
   position: absolute;
-  margin-bottom: 35px;
+  top: 280px;
+  left: 450px;
 }
 
 p {

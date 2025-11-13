@@ -28,7 +28,7 @@ function Login() {
             <form action="">
               <input type="text" placeholder='Nome' />
               <input type={show ? "text" : "password"} placeholder='Senha' id='password'/>
-              <button className='btn-view' onClick={mostraOcultar} type='button'>
+              <button className='btn-view-login' onClick={mostraOcultar} type='button'>
                 {!show ? <FaEyeSlash size={20} color='black' /> : <IoEyeSharp size={20} color='black' />}
               </button>
             </form>
