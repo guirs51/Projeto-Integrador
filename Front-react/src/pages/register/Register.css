@@ -53,6 +53,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  position: relative;
   gap: 15px;
   width: 100%;
   max-width: 350px;
@@ -140,8 +141,8 @@ button {
   width: 1px;
   height: 1px;
   position: absolute;
-  bottom: 350px;
-  left: 450px;
+bottom: 267px;
+    left: 250px;
 }
 
 p {

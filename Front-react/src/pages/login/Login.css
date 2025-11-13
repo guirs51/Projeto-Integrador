@@ -47,6 +47,7 @@
 .form {
    display: flex;
   flex-direction: column;
+  position: relative;
   align-items: center;
   width: 100%;
   max-width: 350px;
@@ -126,9 +127,9 @@ button {
   outline: none;
   width: 1px;
   height: 1px;
-  position: absolute;
-  top: 280px;
-  left: 450px;
+  position: relative;
+left: 225px;
+    bottom: 75px;
 }
 
 p {

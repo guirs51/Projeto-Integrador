@@ -1,5 +1,5 @@
 import './Register.css'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
@@ -10,7 +10,7 @@ function Register() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const cpf = "0000001"
+    const cpf = "0000002"
 
     const [show, setShow] = useState(false)
 
@@ -69,7 +69,7 @@ function Register() {
                             <h1>Já tem uma conta? <a href="./login">Entre agora!</a></h1>
                         </div>
 
-                        <p>continue com</p>
+                        <p>Ou continue com</p>
                         
                         <button className='btn-google'><span className='google-logo'><FcGoogle  size={30}/></span></button>
                     </div>

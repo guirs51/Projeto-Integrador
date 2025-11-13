@@ -40,7 +40,7 @@ function Login() {
               <h1> Não tem uma conta? <a href="./regis">Crie agora!</a></h1>
             </div>
 
-            <p>continue com </p>
+            <p>Ou continue com </p>
 
             <button className='btn-google'><span className='google-logo'><FcGoogle size={30} /></span></button>
           </div>
