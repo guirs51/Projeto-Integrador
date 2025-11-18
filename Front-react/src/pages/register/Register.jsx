@@ -10,7 +10,7 @@ function Register() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const cpf = "0000002"
+    const cpf = "1234"
 
     const [show, setShow] = useState(false)
 
@@ -38,6 +38,11 @@ function Register() {
 
             alert("Cadastro realizado com sucesso!");
             console.log("Usuário criado:", data);
+
+            const token = data.token
+            alert(token)
+
+            localStorage.setItem("token", token)
 
         } catch (e) {
             console.log("Houve um erro: " + e);
