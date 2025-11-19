@@ -36,6 +36,37 @@
     font-size: 10px;
 }
 
+#bio-edit {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    width: auto;
+    height: auto;
+    margin-top: 9px;
+}
+
+.icon{
+    height: 2vh;
+    width: 1.1vw;
+}
+
+#bio-edit .icon path {
+    fill: black;
+    transition: 0.3s;
+    width: 20px;
+
+}
+
+#bio-edit:hover .icon path {
+    opacity: 0.63;
+}
+
+#bio-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
 #edit-btn {
     width: 12vw;
     border-radius: 10px;
