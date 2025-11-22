@@ -1,29 +1,39 @@
+/* ==================================== */
+/*            MODAL OVERLAY             */
+/* ==================================== */
+
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.55);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(3px);
 }
+
+/* ==================================== */
+/*            LIGHT MODE                */
+/* ==================================== */
 
 .modal-content {
-  background-color: white;
+  background-color: #ffffff;
   padding: 30px;
   border-radius: 12px;
-  width: 90%;
-  max-width: 400px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  transition: background 0.3s, color 0.3s, border 0.3s;
 }
 
-h2 {
+.modal-content h2 {
   text-align: center;
   margin-bottom: 20px;
-  color: #333;
+  color: #222;
 }
 
 .modal-form label {
@@ -31,14 +41,16 @@ h2 {
   flex-direction: column;
   margin-bottom: 15px;
   font-weight: 500;
-  color: #444;
+  color: #333;
 }
 
 .modal-form input {
-  margin-top: 5px;
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  padding: 8px 0;
+  font-size: 15px;
+  color: #333;
+  background: transparent;
   outline: none;
 }
 
@@ -46,34 +58,82 @@ h2 {
   border-color: #4f46e5;
 }
 
+/* Buttons */
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  margin-top: 20px;
+  margin-top: 25px;
 }
 
 .save-btn {
-  background-color: #16a34a;
-  color: white;
+  background-color: #4ade80;
+  color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .save-btn:hover {
-  background-color: #15803d;
+  background-color: #16a34a;
 }
 
 .cancel-btn {
   background-color: #ef4444;
-  color: white;
+  color: #ffffff;
   border: none;
-  padding: 10px 20px;
+  padding: 10px 22px;
   border-radius: 8px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .cancel-btn:hover {
   background-color: #dc2626;
 }
+
+
+/* ==================================== */
+/*            DARK MODE                 */
+/* ==================================== */
+
+.dark .modal-content {
+  background-color: #1b1b1b;
+  border: 1px solid #2e2e2e;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.55);
+}
+
+.dark .modal-content h2 {
+  color: #ffffff;
+}
+
+.dark .modal-form label {
+  color: #dddddd;
+}
+
+.dark .modal-form input {
+  color: #e5e5e5;
+  border-bottom: 1px solid #555;
+}
+
+.dark .modal-form input:focus {
+  border-color: #818cf8;
+}
+
+.dark .save-btn {
+  background-color: #22c55e;
+}
+
+.dark .save-btn:hover {
+  background-color: #15803d;
+}
+
+.dark .cancel-btn {
+  background-color: #dc2626;
+}
+
+.dark .cancel-btn:hover {
+  background-color: #b91c1c;
+}
+

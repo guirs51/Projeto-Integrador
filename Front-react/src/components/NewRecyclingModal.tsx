@@ -26,7 +26,7 @@ export default function NewRecyclingModal({
 
   if (!isOpen) return null;
 
-  // ✅ Aqui está o ajuste importante ↓
+ 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -43,7 +43,7 @@ export default function NewRecyclingModal({
   };
 
   return (
-    <div className="modal-overlay" onClick={onClose}>
+    <div className={`modal-overlay ${isOpen ? "active" : ""}`} onClick={onClose} >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Registrar Nova Reciclagem</h2>
         <form onSubmit={handleSubmit} className="modal-form">
@@ -60,13 +60,13 @@ export default function NewRecyclingModal({
           </label>
 
           <label>
-            Quantidade (kg):
+            Quantidade:
             <input
               type="number"
               name="quantidade"
               value={formData.quantidade}
               onChange={handleChange}
-              placeholder="Ex: 2.5"
+              placeholder="Ex: 2"
               required
             />
           </label>
