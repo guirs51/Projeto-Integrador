@@ -1,0 +1,128 @@
+/* ---------- 🌿 MODO CLARO (DEFAULT) ---------- */
+
+.location-page {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 40px;
+  background: #f6f7f3;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.location-card {
+  background: #ffffff;
+  width: 100%;
+  max-width: 550px;
+  padding: 24px;
+  border-radius: 20px;
+  box-shadow: 0px 6px 22px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Barra de busca */
+.search-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.search-box {
+  background: #ffffff;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  align-items: center;
+  padding: 12px 16px;
+  border-radius: 40px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.12);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-icon {
+  color: #6e6e6e;
+  margin-right: 8px;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+  background: transparent;
+}
+
+.clear-btn {
+  background: #efefef;
+  border: none;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.clear-btn:hover {
+  background: #dedede;
+}
+
+/* Placeholder mapa */
+.map-placeholder {
+  margin-top: 25px;
+  height: 350px;
+  background: #f1f1f1;
+  border: 1px dashed #c7c7c7;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #6d6d6d;
+  font-size: 15px;
+  transition: background 0.3s ease, border 0.3s ease, color 0.3s ease;
+}
+
+
+
+/* ---------- 🌙 MODO ESCURO ---------- */
+
+body.dark-mode .location-page {
+  background: #1b1f15;
+}
+
+body.dark-mode .location-card {
+  background: #232b1d;
+  color: #dfe8d8;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+body.dark-mode .search-box {
+  background: #2e3629;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
+}
+
+body.dark-mode .search-input {
+  color: #dfe8d8;
+}
+
+body.dark-mode .search-icon {
+  color: #c7d2c0;
+}
+
+body.dark-mode .clear-btn {
+  background: #3c4637;
+  color: #e3eedb;
+}
+
+body.dark-mode .clear-btn:hover {
+  background: #485444;
+}
+
+body.dark-mode .map-placeholder {
+  background: #2b3326;
+  border-color: #4e604a;
+  color: #c0ccb9;
+}
+
