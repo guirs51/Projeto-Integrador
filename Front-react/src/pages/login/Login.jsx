@@ -5,9 +5,12 @@ import { IoEyeSharp } from "react-icons/io5";
 import { FaEyeSlash } from "react-icons/fa";
 import { FcEditImage, FcGoogle } from "react-icons/fc";
 import { useState } from "react";
+import { useNavigate } from "react-router";
+import { User } from "lucide-react";
 
 function Login() {
   const [show, setShow] = useState(false);
+  const navigate = useNavigate();
 
   const mostraOcultar = () => {
     setShow(!show);
@@ -18,18 +21,18 @@ function Login() {
 
   async function login() {
     try {
-      const token = localStorage.getItem("token");
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
         },
 
         body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
+      const token = data.token
+      localStorage.setItem("token", token)
 
       if (!response.ok) {
         alert(
@@ -37,8 +40,10 @@ function Login() {
         );
         return;
       }
-
+      
       alert("Login realizado com sucesso");
+      navigate("/UserHome", { state: {id: data.user.id, mensagem: "Recebeu"} })
+
     } catch (e) {
       console.log("Erro: " + e);
     }

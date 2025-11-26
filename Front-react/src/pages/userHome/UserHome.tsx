@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NewRecyclingModal from '../../components/NewRecyclingModal';
 import RecyclingCard from '../../components/RecyclingCard';
 import './UserHome.css'
@@ -13,11 +13,20 @@ import {
     Sun,
     Moon
 } from 'lucide-react';
+import { useLocation } from 'react-router';
 
 interface RecyclingData {
     material: string;
     quantidade: string;
     localizacao: string;
+}
+
+interface User {
+    id: number
+    name: string
+    email: string
+    cpf: string
+    Points: number
 }
 
 export default function ProfilePage() {
@@ -27,9 +36,45 @@ export default function ProfilePage() {
     const handleAddRecycling = (newItem: RecyclingData) => {
         setRecyclingHistory((prev) => [...prev, newItem]);
 
-
     };
 
+    const [user, setUser] = useState<User | null>(null)
+    const token = localStorage.getItem("token")
+    const location = useLocation()
+    const { id, mensagem } = location.state || {}
+    console.log("Voce " + mensagem + " um " + id)
+
+    useEffect(() => {
+        async function getUser() {
+            try {
+                const response = await fetch(`http://localhost:3000/users/${id}`, {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": "Bearer " + token
+                    }
+                });
+
+                const data = await response.json();
+
+                if (!response.ok) {
+                    alert(
+                        "Erro ao buscar dados do usuário: " +
+                        response.status + " " + data.mensagem
+                    );
+                    return;
+                }
+
+                setUser(data);
+            } catch (error) {
+                console.error("Erro de rede:", error);
+            }
+        }
+
+        if (id && token) {
+            getUser();
+        }
+    }, [id, token]);
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -83,7 +128,7 @@ export default function ProfilePage() {
                         </a>
                         <div className="darkmode-toggle" onClick={toggleDarkMode}>
                             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                            
+
                         </div>
 
                     </div>
@@ -95,7 +140,7 @@ export default function ProfilePage() {
                 <img src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbnRhJTIwdHJvcGljYWx8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="" id="img" />
 
                 <div className="bio">
-                    <h1 className="big-text">Fulano de Tal </h1>
+                    <h1 className="big-text">{user?.name || "null"} </h1>
                     <h2>Hi, my names is Fulana! im developer sistems and i have 18 years old.</h2>
                     <h3>rua tal 123</h3>
                 </div>
@@ -168,7 +213,7 @@ export default function ProfilePage() {
 
                 <div className="points_log">
                     <div className="points_area">
-                        <h1>Points</h1>
+                        <h1>Points: {String(user?.Points) || "erro ao buscar pontos"}</h1>
                     </div>
                 </div>
             </div>
