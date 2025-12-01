@@ -26,14 +26,12 @@
 }
 
 #default {
-       min-height: 100vh;
     background-color: var(--bg);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    max-width: 1000vh;
-    height: auto;
-    padding: 30px;
-    margin-left: 260px;
-    width: calc(100% - 260px);
+    min-height: 100vh;
+    padding: 40px;
+    margin-left: 230px;
+    width: 85vw;
+
 }
 
 #user-head {
@@ -46,6 +44,7 @@
     border: 5px;
     margin-bottom: 30px;
     border-bottom: 1px solid #7f7f7f;
+
 }
 
 .big-text {
@@ -64,6 +63,7 @@
     width: 100px;
     font-size: 10px;
 }
+
 .bio {
     color: var(--text-light);
     font-size: 10px;
@@ -100,17 +100,20 @@
 }
 
 #edit-btn {
-    width: 12vw;
+    width: 8vw;
     border-radius: 10px;
     background-color: var(--accent);
     margin-right: 10px;
+    height: 5vh;
 }
 
 #more-info-btn {
-    width: 12vw;
+    width: 8vw;
     border-radius: 10px;
     background-color: var(--accent);
     margin-right: 10px;
+     height: 5vh;
+     font-size: 12px;
 }
 
 #img {
@@ -122,13 +125,44 @@
 }
 
 #personal-info {
-        flex: 1;
+    flex: 1;
     background-color: var(--card);
     border-radius: 20px;
     padding: 25px;
     min-width: 300px;
-      border: 1px solid #7f7f7f;
+    border: 1px solid #7f7f7f;
     font-size: 15px;
+
+}
+
+
+
+/* Diminui o header do card */
+#personal-info1 #info-header {
+    padding: 10px;
+    margin-left: 10px;
+}
+
+/* Diminui o espaço entre os campos */
+#personal-info1 #info-data {
+    row-gap: 10px;
+    column-gap: 20px;
+    height: auto;/
+}
+
+#personal-info1 {
+    flex: 1;
+    background-color: var(--card);
+    border-radius: 20px;
+    min-width: 300px;
+    border: 1px solid #7f7f7f;
+    font-size: 15px;
+    margin-top: 0px;
+    padding: 20px;
+    border-radius: 12px;
+    padding: 10px 15px;
+    width: 50vw;
+
 }
 
 #info-header {
@@ -139,8 +173,8 @@
     padding: 20px;
     justify-content: space-between;
     margin-left: 30px;
-     font-size: 15px;
-    
+    font-size: 15px;
+
 }
 
 #line {
@@ -154,11 +188,13 @@
 }
 
 #info-data {
-  display: grid;
+    display: grid;
     grid-template-columns: repeat(2, 1fr);
     column-gap: 40px;
     row-gap: 30px;
-     font-size: 15px;
+    font-size: 15px;
+    height: 130px;
+
 }
 
 #data-field {
@@ -172,15 +208,19 @@
     width: 100%;
     align-items: flex-start;
     justify-content: space-between;
-     font-size: 10px;
+    font-size: 10px;
+    flex-direction: column;
+    /* <-- Isso faz ficar um embaixo do outro */
+    gap: 20px;
+    /* espaçamento entre os cards */
 }
 
 #info-historic {
     display: flex;
     flex-direction: column;
     gap: 10px;
-   
-       flex: 1;
+
+    flex: 1;
     background-color: var(--card);
     border-radius: 20px;
     padding: 25px;
@@ -228,48 +268,49 @@
 
 
 .section-title {
-  font-size: 12px;
-  color: #777;
-  margin: 20px 0 10px;
-  font-weight: bold;
+    font-size: 12px;
+    color: #777;
+    margin: 20px 0 10px;
+    font-weight: bold;
 }
 
 .nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 2px;
-  text-decoration: none;
-  color: #444;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: 0.2s;  
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 2px;
+    text-decoration: none;
+    color: #444;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: 0.2s;
 }
 
 .nav-item:hover {
-  background: #f3f3f3;
+    background: #f3f3f3;
 }
 
 .nav-item.active {
-  color: rgb(23, 72, 23);
-  font-weight: bold;
+    color: rgb(23, 72, 23);
+    font-weight: bold;
 }
 
 .bottom {
-  margin-top: 330px;
+    margin-top: 330px;
 }
 
 .logout {
-  color: #d9534f;
+    color: #d9534f;
 }
+
 .logout:hover {
-  background: #fceaea;
+    background: #fceaea;
 }
 
 
@@ -303,6 +344,7 @@
 .dark .logout {
     color: #ff6b6b;
 }
+
 .dark .logout:hover {
     background: rgba(255, 0, 0, 0.1);
 }
@@ -311,17 +353,19 @@
 body:not(.dark) .sidebar {
     background-color: #ffffff;
     border-right: 1px solid #e0e0e0;
-    box-shadow: 2px 0px 10px rgba(0,0,0,0.05);
+    box-shadow: 2px 0px 10px rgba(0, 0, 0, 0.05);
 }
 
 /* Nav items com harmonia */
 body:not(.dark) .nav-item {
     color: #4a4a4a;
 }
+
 body:not(.dark) .nav-item:hover {
     background-color: #f0f0f0;
 }
 
 body:not(.dark) .nav-item.active {
-    color: #2e7d32;   /* verde suave */
+    color: #2e7d32;
+    /* verde suave */
 }

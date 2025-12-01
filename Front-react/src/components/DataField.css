@@ -6,24 +6,24 @@
 
 #text-local {
     color: rgba(0, 0, 0, 0.322);
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 
 
 #input-field::placeholder {
     color: black;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 
 #data-field {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 5px;
     align-items: flex-start; /* alinha à esquerda */
 }
 
 #input-field {
     width: 100%; /* ocupa toda a largura do campo */
-    padding: 8px 12px;
+    padding: 2px 5px;
 }

@@ -52,9 +52,9 @@ export default function UserProfile() {
                          <a className="nav-tem">
                             <LogOut size={18}/> Sair
                          </a>
-                         <div className="darkmode-toggle" >
-
-                         </div>
+                         <div className="darkmode-toggle" onClick={() => setDarkMode(!darkMode)}>
+    {darkMode ? <Sun size={20} /> : <Moon size={20} />}
+</div>
                     </div>
 
                 </aside>
@@ -83,7 +83,7 @@ export default function UserProfile() {
             </section>
 
             <section id="user-info">
-                <div id="personal-info">
+                <div id="personal-info1">
                     <div id="info-header">
                         <h2>Informações</h2>
                         <button id="edit-btn">Editar</button>
