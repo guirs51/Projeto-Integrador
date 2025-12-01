@@ -223,8 +223,33 @@
 }
 
 .points_log {
-    flex: 1;
+  background: var(--card-bg);
+  padding: 30px;
+  height: 300px;
+  border-radius: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+    margin-left: 100px;
+  
 }
+
+.points_area h1 {
+        margin-bottom: 10px;
+}
+
+.points_area {
+  text-align: center;
+ 
+  margin-top: -70px; /* ajuste fino */
+}
+
+.points_number {
+  margin-top: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
 .sem-scrollbar::-webkit-scrollbar {
     width: 0;              /* Remove a barra vertical */
     height: 0;             /* Remove a barra horizontal */
@@ -287,6 +312,7 @@
 .dark .usuario-info {
     background-color: #1a1a1a;
     color: #fff;
+      border: 1px solid #333;
 }
 
 .dark .big-text {
@@ -385,9 +411,10 @@ body:not(.dark) .nav-item.active {
 /* Card de usuário */
 body:not(.dark) .usuario-info {
     background-color: #ffffff;
-    border: 1px solid #e3e3e3;
+    border: 1px solid #c2c1c1a2;
     border-radius: 16px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+     
 }
 
 /* Títulos */
@@ -410,7 +437,7 @@ body:not(.dark) .btn span {
 /* Divider */
 body:not(.dark) .line,
 body:not(.dark) .line2 {
-    border-top: 1px solid #dfdfdf !important;
+    border-top: 1px solid #b2aeae !important;
 }
 
 /* Área de registros */
@@ -434,4 +461,11 @@ body:not(.dark) .points_area h1 {
 body:not(.dark) .darkmode-toggle {
  
     color: #333;
+}
+
+body:not(.dark) .logout {
+    color: #ff6b6b;
+}
+body:not(.dark) .logout:hover {
+    background: rgba(255, 0, 0, 0.1);
 }

@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import NewRecyclingModal from '../../components/NewRecyclingModal';
 import RecyclingCard from '../../components/RecyclingCard';
 import './UserHome.css'
+import PointsChart from "../../components/PointsChart";
+
 import {
     ArchiveRestore, PlusCircle, Home,
     Inbox,
@@ -13,6 +15,7 @@ import {
     Sun,
     Moon
 } from 'lucide-react';
+
 
 interface RecyclingData {
     material: string;
@@ -30,6 +33,7 @@ export default function ProfilePage() {
 
     };
 
+    const points = recyclingHistory.length * 10;
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -83,7 +87,7 @@ export default function ProfilePage() {
                         </a>
                         <div className="darkmode-toggle" onClick={toggleDarkMode}>
                             {darkMode ? <Sun size={20} /> : <Moon size={20} />}
-                            
+
                         </div>
 
                     </div>
@@ -168,9 +172,12 @@ export default function ProfilePage() {
 
                 <div className="points_log">
                     <div className="points_area">
-                        <h1>Points</h1>
+                        <h1>Pontuação</h1>
+                        <PointsChart points={points} />
+                        <p className="points_number">{points} pontos</p>
                     </div>
                 </div>
+
             </div>
 
         </div>
