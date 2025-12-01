@@ -6,6 +6,7 @@ import HistoricCard from "../../components/HistoricCard";
 import jsonData from './testHistorico.json'
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon } from 'lucide-react';
 
 export default function UserProfile() {
 
@@ -18,7 +19,53 @@ export default function UserProfile() {
 
 
         <div id="default" className={darkMode ? "dark" : ""}>
+
+            <div className="sidebar-container">
+                <aside className="sidebar">
+                    <nav className="nav">
+                        <a className="nav-tem ">
+                            <Home size={18} /> Home
+                        </a>
+                        <a className="nav-tem">
+                            <Inbox size={18} /> Bonificações
+                        </a>
+
+                        <a className="nav-tem">
+                            <BookOpen size={18} /> Materiais
+                        </a>
+
+                        <a className="nav-tem ">
+                            <CheckSquare size={18} /> Reciclagens
+                        </a>
+
+                        <a className="nav-tem ">
+                            <Users size={18}/> Localização
+                        </a>
+
+                    </nav>
+
+                    <div className="bottom">
+                        <div className="section-title">CONFIGURAÇÕES</div>
+                        <a className="nav-tem active">
+                            <Settings size={18}/> Configurações
+                        </a>
+                         <a className="nav-tem">
+                            <LogOut size={18}/> Sair
+                         </a>
+                         <div className="darkmode-toggle" >
+
+                         </div>
+                    </div>
+
+                </aside>
+            </div>
+ <div>Edit Profile</div>
+
+
             <section id="user-head">
+               <button className="photo">
+                    Up new photo
+               </button>
                 <img src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbnRhJTIwdHJvcGljYWx8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="" id="img" />
                 <div className="bio">
                     <div id="bio-header">
@@ -94,9 +141,7 @@ export default function UserProfile() {
 
             </div>
 
-            <button id="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
-                {darkMode ? "☀️" : "🌙"}
-            </button>
+        
 
         </div >
 

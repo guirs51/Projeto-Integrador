@@ -26,23 +26,26 @@
 }
 
 #default {
-    position: absolute;
+       min-height: 100vh;
     background-color: var(--bg);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     max-width: 1000vh;
-    width: 100%;
     height: auto;
     padding: 30px;
+    margin-left: 260px;
+    width: calc(100% - 260px);
 }
 
 #user-head {
     display: flex;
     gap: 30px;
-    padding: 25px 25px;
+    padding: 50px 25px;
     background-color: var(--card);
     border-radius: 20px;
+    width: 50vw;
     border: 5px;
     margin-bottom: 30px;
+    border-bottom: 1px solid #7f7f7f;
 }
 
 .big-text {
@@ -52,6 +55,15 @@
     color: var(--text);
 }
 
+.photo {
+    background-color: #ffffff;
+    border: 1px solid #ced1cf;
+    color: #0f0f0f;
+    height: 30px;
+    padding: 3px 5px;
+    width: 100px;
+    font-size: 10px;
+}
 .bio {
     color: var(--text-light);
     font-size: 10px;
@@ -110,14 +122,13 @@
 }
 
 #personal-info {
-    display: flex;
-    flex-direction: column;
+        flex: 1;
     background-color: var(--card);
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-    padding: 25px;
     border-radius: 20px;
-    width: 47vw;
-    height: 100%;
+    padding: 25px;
+    min-width: 300px;
+      border: 1px solid #7f7f7f;
+    font-size: 15px;
 }
 
 #info-header {
@@ -128,6 +139,8 @@
     padding: 20px;
     justify-content: space-between;
     margin-left: 30px;
+     font-size: 15px;
+    
 }
 
 #line {
@@ -137,14 +150,15 @@
     width: 45vw;
     height: 0.1px;
     border: none;
+
 }
 
 #info-data {
-    display: grid;
+  display: grid;
     grid-template-columns: repeat(2, 1fr);
-    column-gap: 300px;
-    row-gap: 50px;
-    padding: 15px;
+    column-gap: 40px;
+    row-gap: 30px;
+     font-size: 15px;
 }
 
 #data-field {
@@ -154,15 +168,23 @@
 
 #user-info {
     display: flex;
-    flex-direction: row;
+    gap: 20px;
+    width: 100%;
+    align-items: flex-start;
     justify-content: space-between;
+     font-size: 10px;
 }
 
 #info-historic {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    padding: 15px;
+   
+       flex: 1;
+    background-color: var(--card);
+    border-radius: 20px;
+    padding: 25px;
+    min-width: 260px;
 }
 
 #delete {
@@ -185,4 +207,121 @@
 #delete-btn:hover {
     background-color: rgba(255, 0, 0, 0.671);
     color: white;
+}
+
+
+
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 240px;
+    height: 100vh;
+    background: var(--card);
+    border-right: 1px solid var(--line);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+
+.section-title {
+  font-size: 12px;
+  color: #777;
+  margin: 20px 0 10px;
+  font-weight: bold;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 2px;
+  text-decoration: none;
+  color: #444;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;  
+}
+
+.nav-item:hover {
+  background: #f3f3f3;
+}
+
+.nav-item.active {
+  color: rgb(23, 72, 23);
+  font-weight: bold;
+}
+
+.bottom {
+  margin-top: 330px;
+}
+
+.logout {
+  color: #d9534f;
+}
+.logout:hover {
+  background: #fceaea;
+}
+
+
+.dark {
+    background-color: #0f0f0f;
+    color: white;
+}
+
+/* ----- Sidebar ----- */
+.dark .sidebar {
+    background-color: #181818;
+    color: #eaeaea;
+}
+
+.dark .nav-item {
+    color: #d1d1d1;
+}
+
+.dark .nav-item:hover {
+    background: #2a2a2a;
+}
+
+.dark .nav-item.active {
+    color: #4cd964;
+}
+
+.dark .section-title {
+    color: #bdbdbd;
+}
+
+.dark .logout {
+    color: #ff6b6b;
+}
+.dark .logout:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
+
+/* Sidebar bonita e suave */
+body:not(.dark) .sidebar {
+    background-color: #ffffff;
+    border-right: 1px solid #e0e0e0;
+    box-shadow: 2px 0px 10px rgba(0,0,0,0.05);
+}
+
+/* Nav items com harmonia */
+body:not(.dark) .nav-item {
+    color: #4a4a4a;
+}
+body:not(.dark) .nav-item:hover {
+    background-color: #f0f0f0;
+}
+
+body:not(.dark) .nav-item.active {
+    color: #2e7d32;   /* verde suave */
 }
