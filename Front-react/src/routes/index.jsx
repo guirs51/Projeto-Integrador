@@ -1,7 +1,9 @@
 import Home from "../pages/home/Home"
 import Login from "../pages/login/Login";
+import PointsPage from "../pages/pointsPage/PointsPage";
 import Register from "../pages/register/Register";
 import UserProfile from "../pages/userProfile/userProfile";
+
 
 const routes = [
   {
@@ -19,6 +21,10 @@ const routes = [
 {
   path: "/userProfile",
   element: <UserProfile/>
+}, 
+{
+  path: "/pointsPage",
+  element: <PointsPage/>
 }
 ];
 
