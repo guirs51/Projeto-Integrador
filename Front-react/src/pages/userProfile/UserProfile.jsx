@@ -12,11 +12,12 @@ export default function UserProfile() {
     const historic = jsonData["Atividades"];
     const [open, setOpen] = useState(false);
 
+    const [darkMode, setDarkMode] = useState(false);
 
     return (
 
 
-        <div id="default">
+        <div id="default" className={darkMode ? "dark" : ""}>
             <section id="user-head">
                 <img src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbnRhJTIwdHJvcGljYWx8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="" id="img" />
                 <div className="bio">
@@ -92,6 +93,10 @@ export default function UserProfile() {
                 </Snackbar>
 
             </div>
+
+            <button id="theme-toggle" onClick={() => setDarkMode(!darkMode)}>
+                {darkMode ? "☀️" : "🌙"}
+            </button>
 
         </div >
 

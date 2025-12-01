@@ -4,9 +4,30 @@
     box-sizing: border-box;
 }
 
+:root {
+    --bg: rgb(223, 223, 223);
+    --card: rgb(245, 245, 245);
+    --text: black;
+    --text-light: rgb(0, 0, 0);
+    --line: rgb(228, 228, 228);
+    --btn-bg: rgba(241, 241, 241, 0.904);
+    --accent: rgb(35, 201, 192);
+}
+
+
+.dark {
+    --bg: #0f0f0f;
+    --card: #1a1a1a;
+    --text: #ffffff;
+    --text-light: #e1e1e1;
+    --line: #333;
+    --btn-bg: #222;
+    --accent: #23c9c0;
+}
+
 #default {
     position: absolute;
-    background-color: rgb(223, 223, 223);
+    background-color: var(--bg);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     max-width: 1000vh;
     width: 100%;
@@ -18,7 +39,7 @@
     display: flex;
     gap: 30px;
     padding: 25px 25px;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--card);
     border-radius: 20px;
     border: 5px;
     margin-bottom: 30px;
@@ -28,11 +49,11 @@
     position: relative;
     top: 10px;
     right: 5px;
-    color: black;
+    color: var(--text);
 }
 
 .bio {
-    color: rgb(0, 0, 0);
+    color: var(--text-light);
     font-size: 10px;
 }
 
@@ -45,16 +66,15 @@
     margin-top: 9px;
 }
 
-.icon{
+.icon {
     height: 2vh;
     width: 1.1vw;
 }
 
 #bio-edit .icon path {
-    fill: black;
+    fill: var(--text);
     transition: 0.3s;
     width: 20px;
-
 }
 
 #bio-edit:hover .icon path {
@@ -70,14 +90,14 @@
 #edit-btn {
     width: 12vw;
     border-radius: 10px;
-    background-color: rgb(35, 201, 192);
+    background-color: var(--accent);
     margin-right: 10px;
 }
 
 #more-info-btn {
     width: 12vw;
     border-radius: 10px;
-    background-color: rgb(35, 201, 192);
+    background-color: var(--accent);
     margin-right: 10px;
 }
 
@@ -92,13 +112,12 @@
 #personal-info {
     display: flex;
     flex-direction: column;
-    background-color: rgb(245, 245, 245);
+    background-color: var(--card);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     padding: 25px;
     border-radius: 20px;
     width: 47vw;
     height: 100%;
-
 }
 
 #info-header {
@@ -114,27 +133,23 @@
 #line {
     display: flex;
     align-self: center;
-    background-color: rgb(228, 228, 228);
-    border: none;
+    background-color: var(--line);
     width: 45vw;
-    border: none;
     height: 0.1px;
+    border: none;
 }
 
 #info-data {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    /* sempre 2 por linha */
-    column-gap: 500px;
-    /* espaço entre as colunas */
+    column-gap: 300px;
     row-gap: 50px;
-    /* espaço entre as linhas */
     padding: 15px;
 }
 
-
 #data-field {
     width: 100%;
+    background-color: var(--card);
 }
 
 #user-info {
@@ -163,8 +178,8 @@
     justify-content: center;
     width: 10vw;
     height: 5vh;
-    background-color: rgba(241, 241, 241, 0.904);
-    color: black;
+    background-color: var(--btn-bg);
+    color: var(--text);
 }
 
 #delete-btn:hover {
