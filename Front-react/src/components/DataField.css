@@ -19,11 +19,12 @@
 #data-field {
     display: flex;
     flex-direction: column;
-    gap: 5px;
+
     align-items: flex-start; /* alinha à esquerda */
 }
 
 #input-field {
     width: 100%; /* ocupa toda a largura do campo */
     padding: 2px 5px;
+    height: 25px;
 }
