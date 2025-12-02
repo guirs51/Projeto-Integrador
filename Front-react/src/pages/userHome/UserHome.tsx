@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import NewRecyclingModal from '../../components/NewRecyclingModal';
 import RecyclingCard from '../../components/RecyclingCard';
 import './UserHome.css'
+import PointsChart from "../../components/PointsChart";
+
 import {
     ArchiveRestore, PlusCircle, Home,
     Inbox,
@@ -11,9 +13,11 @@ import {
     Settings,
     LogOut,
     Sun,
-    Moon
+    Moon,
+    User
 } from 'lucide-react';
 import { useLocation } from 'react-router';
+
 
 interface RecyclingData {
     material: string;
@@ -75,6 +79,7 @@ export default function ProfilePage() {
             getUser();
         }
     }, [id, token]);
+    const points = recyclingHistory.length * 10;
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
@@ -213,9 +218,12 @@ export default function ProfilePage() {
 
                 <div className="points_log">
                     <div className="points_area">
-                        <h1>Points: {String(user?.Points) || "erro ao buscar pontos"}</h1>
+                        <h1>Pontuação</h1>
+                        <PointsChart points={Number(user?.Points)} />
+                        <p className="points_number">{Number(user?.Points)} pontos</p>
                     </div>
                 </div>
+
             </div>
 
         </div>
