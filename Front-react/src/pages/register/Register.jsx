@@ -75,8 +75,8 @@ function Register() {
                         </div>
 
                         <p>Ou continue com</p>
-                        
-                        <button className='btn-google'><span className='google-logo'><FcGoogle  size={30}/></span></button>
+
+                        <button className='btn-google'><span className='google-logo'><FcGoogle size={30} /></span></button>
                     </div>
                 </div>
 
