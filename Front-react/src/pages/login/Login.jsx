@@ -51,8 +51,8 @@ function Login() {
 
   return (
     <>
-      <div className="container">
-        <div className="card-esquerda">
+      <div className="login-container">
+        <div className="login-card-esquerda">
           <div className="Login">
             <h1>
               Bem-vindo de volta ao <span>Recicle +</span>
@@ -107,7 +107,7 @@ function Login() {
           </div>
         </div>
 
-        <div className="card-direita">
+        <div className="login-card-direita">
           <h1>
             Preservar a natureza é o primeiro passo para preservar o futuro.
           </h1>

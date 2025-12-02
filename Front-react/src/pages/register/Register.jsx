@@ -52,8 +52,8 @@ function Register() {
 
     return (
         <>
-            <div className='container'>
-                <div className='card-esquerda'>
+            <div className='register-container'>
+                <div className='register-card-esquerda'>
                     <div className='register'>
                         <h1>Bem-vindo ao <span>Recicle +</span></h1>
                         <h2>Junte-se à nossa comunidade na busca por um futuro melhor. <span>future</span>.</h2>
@@ -80,7 +80,7 @@ function Register() {
                     </div>
                 </div>
 
-                <div className='card-direita'>
+                <div className='register-card-direita'>
                     <h1>Preservar a natureza é o primeiro passo para preservar o futuro.</h1>
                 </div>
             </div>
