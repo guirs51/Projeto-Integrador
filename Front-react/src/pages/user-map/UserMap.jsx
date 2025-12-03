@@ -14,24 +14,19 @@ export default function UserMap() {
             container._leaflet_id = null
         }
 
-        const map = L.map("map", {
-            center: [50, 10],
-            dragging: true,
-            scrollWheelZoom: true,
-            doubleClickZoom: true,
-            boxZoom: true,
-        }).setView([0, 0], 2);
+        const map = L.map("map");
+        map.setView([0, 0], 2);
 
         map.dragging.enable();
 
 
         const Stadia_AlidadeSatellite = L.tileLayer(
-            'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=YOUR_KEY',
+            'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=57544848-9855-440b-92b6-a416e1141fd2',
             {
                 minZoom: 0,
                 maxZoom: 20,
                 ext: 'jpg',
-                attribution: '57544848-9855-440b-92b6-a416e1141fd2'
+                attribution: ''
             }
         ).addTo(map);
 
@@ -43,12 +38,12 @@ export default function UserMap() {
         }).addTo(map);
 
 
-                if (L.control.coordinates) { // verifica se o plugin carregou
+        if (L.control.coordinates) { // verifica se o plugin carregou
             L.control.coordinates({
                 position: "bottomright", // posição no mapa
                 decimals: 5,             // casas decimais
                 decimalSeperator: ".",   // separador decimal
-                labelTemplateLat: "Lat: {y}", 
+                labelTemplateLat: "Lat: {y}",
                 labelTemplateLng: "Lng: {x}"
             }).addTo(map);
         }
@@ -58,12 +53,10 @@ export default function UserMap() {
             navigator.geolocation.getCurrentPosition(async position => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-                map.setView([lat, lon], 15);
 
                 let marker = L.marker([lat, lon]).addTo(map)
                     .bindPopup("📍 Você está aqui!").openPopup();
 
-                // Exemplo de Overpass API
                 const query = `[out:json];node["amenity"="townhall"](around:50000,${lat},${lon});out;`;
                 const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
 
@@ -98,12 +91,17 @@ export default function UserMap() {
             alert("Geolocalização não é suportada.");
         }
 
+        return () => map.remove();
+
     }, [])
 
     return (
         <>
-            <div id='map' style={{ height: '100vh', width: '100%' }}></div>
-            
+            <section id='map-container'>
+            <div id='map'></div>
+            </section>
+
+
         </>
     )
 }
