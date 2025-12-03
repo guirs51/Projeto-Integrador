@@ -1,61 +1,63 @@
 import React, { useEffect } from 'react'
 import "leaflet/dist/leaflet.css";
-import "../user-map/UserMap.css"
+import "../components/UserMap.css"
 import L from "leaflet";
-import 'leaflet-control-geocoder/dist/Control.Geocoder.css';
-import 'leaflet-control-geocoder';
-
 
 export default function UserMap() {
 
     useEffect(() => {
         const container = L.DomUtil.get("map");
-        if (container != null) {
-            container._leaflet_id = null
-        }
+        if (container != null) container._leaflet_id = null;
 
-        const map = L.map("map");
-        map.setView([0, 0], 2);
+        const map = L.map("map").setView([0, 0], 2);
 
-        map.dragging.enable();
-
-
-        const Stadia_AlidadeSatellite = L.tileLayer(
+        L.tileLayer(
             'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=57544848-9855-440b-92b6-a416e1141fd2',
             {
-                minZoom: 0,
                 maxZoom: 20,
-                ext: 'jpg',
-                attribution: ''
+                ext: 'jpg'
             }
         ).addTo(map);
 
+        const searchInput = document.getElementById("search");
+        let lastSearchMarker = null;
 
-        L.Control.geocoder({
-            defaultMarkGeocode: true,
-            placeholder: 'Digite um endereço...',
-            errorMessage: 'Local não encontrado!'
-        }).addTo(map);
-
-
-        if (L.control.coordinates) { // verifica se o plugin carregou
-            L.control.coordinates({
-                position: "bottomright", // posição no mapa
-                decimals: 5,             // casas decimais
-                decimalSeperator: ".",   // separador decimal
-                labelTemplateLat: "Lat: {y}",
-                labelTemplateLng: "Lng: {x}"
-            }).addTo(map);
+        async function geocode(query) {
+            const url = `https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`;
+            const response = await fetch(url);
+            return await response.json();
         }
 
-        // Geolocalização
+        searchInput.addEventListener("input", async () => {
+            const text = searchInput.value.trim();
+            if (text.length < 3) return;
+
+            const results = await geocode(text);
+            if (results.length === 0) return;
+
+            const r = results[0];
+            const lat = parseFloat(r.lat);
+            const lon = parseFloat(r.lon);
+
+            map.setView([lat, lon], 15);
+
+            if (lastSearchMarker) map.removeLayer(lastSearchMarker);
+
+            lastSearchMarker = L.marker([lat, lon])
+                .addTo(map)
+                .bindPopup(r.display_name)
+                .openPopup();
+        });
+
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(async position => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
 
-                let marker = L.marker([lat, lon]).addTo(map)
-                    .bindPopup("📍 Você está aqui!").openPopup();
+                L.marker([lat, lon])
+                    .addTo(map)
+                    .bindPopup("📍 Você está aqui!")
+                    .openPopup();
 
                 const query = `[out:json];node["amenity"="townhall"](around:50000,${lat},${lon});out;`;
                 const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`;
@@ -71,7 +73,6 @@ export default function UserMap() {
                         let markerLocals = L.marker(coords).addTo(map)
                             .bindPopup(`🏛 ${nome}`);
 
-                        // Integração com input
                         markerLocals.on('click', (e) => {
                             const content = e.target.getPopup().getContent();
                             const inputs = document.getElementsByClassName("delivery-local");
@@ -80,28 +81,26 @@ export default function UserMap() {
                             }
                         });
                     });
+
                 } catch (err) {
-                    console.error("Erro ao buscar dados da Overpass API", err);
+                    console.error("Erro ao buscar prefeituras", err);
                 }
 
             }, () => {
                 alert("Não foi possível obter sua localização.");
             });
-        } else {
-            alert("Geolocalização não é suportada.");
         }
 
         return () => map.remove();
 
-    }, [])
+    }, []);
 
     return (
         <>
             <section id='map-container'>
-            <div id='map'></div>
+                <input type="text" id='search' placeholder='Buscar endereço...' />
+                <div id='map'></div>
             </section>
-
-
         </>
     )
 }
