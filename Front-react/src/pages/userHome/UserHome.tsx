@@ -189,7 +189,7 @@ export default function ProfilePage() {
                 <div className="registers_area">
                     <div className="registers_title">
                         <ArchiveRestore />
-                        <h1>Área dos Registros</h1>
+                        <h1>Área dos Registros Pendentes</h1>
 
                     </div>
 
