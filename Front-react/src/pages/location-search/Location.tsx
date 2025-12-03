@@ -1,7 +1,8 @@
 import { Search, X, Sun, Moon, Settings, Home, LogOut, Inbox, BookOpen, CheckSquare, Users } from "lucide-react";
-import { useState } from "react";
-
+import { useRef, useState } from "react";
 import "./Location.css";
+import SearchMap from "../../components/SearchMap";
+import UserMap from "../../components/UserMap";
 
 export default function Location() {
 
@@ -11,6 +12,8 @@ export default function Location() {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark-mode");
   }
+  const mapRef = useRef(null);
+
 
   return (
     <>
@@ -63,36 +66,40 @@ export default function Location() {
           </aside>
         </div>
 
-      <div className="content">
-         <div className="location-page">
-          <div className="location-card">
+        <div className="content">
+          <div className="location-page">
+            <div className="location-card">
 
-            {/* Barra de busca */}
-            <div className="search-container">
-              <div className="search-box">
-                <Search className="search-icon" size={18} />
+              {/* Barra de busca */}
+              <div className="search-container">
+                <div className="search-box">
+                  <Search className="search-icon" size={18} />
 
-                <input
-                  type="text"
-                  placeholder="Buscar localização..."
-                  className="search-input"
-                />
+                  {/* <input
+                    type="text"
+                    placeholder="Buscar localização..."
+                    className="search-input"
+                  /> */}
 
-                <button className="clear-btn">
-                  <X size={16} />
-                </button>
+                  <SearchMap mapRef={mapRef} />
+
+                  <button className="clear-btn" onClick={() =>{
+                    
+                  }}>
+                    <X size={16} />
+                  </button>
+                </div>
               </div>
-            </div>
 
-            {/* Área do mapa */}
-            <div className="map-placeholder">
-              <p>Mapa aparecerá aqui...</p>
-            </div>
+              {/* Área do mapa */}
+              <div className="map-placeholder">
+                <UserMap mapRef={mapRef} />
+              </div>
 
+            </div>
           </div>
         </div>
-      </div>
-       
+
       </div>
 
     </>
