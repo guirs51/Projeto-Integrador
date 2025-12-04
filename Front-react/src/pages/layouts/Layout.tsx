@@ -1,9 +1,18 @@
-import { BookOpen, CheckSquare, Home, Inbox, LogOut, Settings, Users } from "lucide-react"
+import { BookOpen, CheckSquare, Home, Inbox, LogOut, Settings, Users, Sun, Moon } from "lucide-react"
 import "../../global.css"
 import "./layout.css"
 import { Outlet } from "react-router-dom"
+import { useState } from "react"
+
 
 export default function Layout() {
+    const [darkMode, setDarkMode] = useState(false);
+
+
+    const toggleDarkMode = () => {
+        setDarkMode(!darkMode);
+        document.body.classList.toggle("dark");
+    }
     return (
         <div className="w-full h-full flex">
             <div className="sidebar-container">
@@ -38,10 +47,12 @@ export default function Layout() {
                             <LogOut size={18} /> Sair
                         </a>
 
-                        <div className="darkmode-toggle"></div>
+                        <div className="darkmode-toggle" onClick={toggleDarkMode}> {darkMode ? <Sun size={18} /> : <Moon size={18} /> }</div>
+                        <div />
                     </div>
                 </aside>
             </div>
+
 
             <main className="w-full  min-h-screen">
                 <Outlet /> {/* AQUI RENDERIZA AS PÁGINAS FILHAS */}

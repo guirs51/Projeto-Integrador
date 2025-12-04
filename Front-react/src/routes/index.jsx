@@ -4,7 +4,8 @@ import Layout from "../pages/layouts/Layout";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import UserHome from "../pages/userHome/UserHome"
-import Test from "../pages/test";
+import Test from "../pages/materials/Materials";
+
 
 const routes = [
   {
@@ -32,6 +33,7 @@ const routes = [
       {path: "/test",
         element: <Test/>
       }
+     
     ]
   }
 ];
