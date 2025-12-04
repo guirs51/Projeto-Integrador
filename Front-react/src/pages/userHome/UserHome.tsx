@@ -173,11 +173,11 @@ export default function ProfilePage() {
                 </div>
 
 
-                <div className="points_log">
+               <div className="points_log">
                     <div className="points_area">
                         <h1>Pontuação</h1>
-                        <PointsChart points={Number(user?.Points)} />
-                        <p className="points_number">{Number(user?.Points)} pontos</p>
+                        <PointsChart points={points} />
+                        <p className="points_number">{points} pontos</p>
                     </div>
                 </div>
 

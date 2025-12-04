@@ -39,11 +39,9 @@ export default function Location() {
 
                   <SearchMap mapRef={mapRef} />
 
-                  <button className="clear-btn" onClick={() =>{
-                    
-                  }}>
+                 { /*  <button className="clear-btn" onClick={() =>{ }}>
                     <X size={16} />
-                  </button>
+                  </button>*/ }
                 </div>
               </div>
 

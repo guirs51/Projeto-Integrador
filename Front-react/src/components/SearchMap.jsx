@@ -1,6 +1,6 @@
 import { useState } from "react";
 import L from "leaflet";
-
+import './SearchMap.css'
 
 
 
@@ -47,7 +47,8 @@ export default function SearchInput({ mapRef }) {
                 zIndex: 9999,
                 backgroundColor:"transparent",
                 padding: 10,
-                background: "white",
+                background: "transparent",
+                border: "0"
             }}
         />
     );

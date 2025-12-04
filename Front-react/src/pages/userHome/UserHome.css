@@ -106,7 +106,8 @@
 
 .points_log {
     flex: 1;
-    margin-top: 0px;
+    margin-top: -100px;
+
 }
 
 .points-container {
@@ -117,20 +118,23 @@
     width: 100%;
 }
 .points_log canvas {
-    width: 100% !important;
-    height: 200px !important;
+   padding: 30px;
+  height: 300px;
+
 }
 
 .points {
-    background-color: #e6f4ea;
+   background-color: #e6f4ea;
     border: 1px solid #c8e6c9;
     border-radius: 12px;
     padding: 30px;
     margin: 14px;
+    right: 20px;
     width: 250px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
     position: sticky;
+    border: 1px solid #e4e4e4;
 }
 
 /* ============================= */
