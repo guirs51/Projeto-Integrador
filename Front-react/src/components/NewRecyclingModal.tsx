@@ -32,7 +32,7 @@ export default function NewRecyclingModal({
     setFormData((prev) => ({
       ...prev,
       [name]: value
-    } as RecyclingData)); // <--- diz explicitamente ao TS que isso é do tipo RecyclingData
+    } as RecyclingData)); 
   };
 
   const handleSubmit = (e: FormEvent) => {

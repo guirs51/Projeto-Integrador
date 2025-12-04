@@ -5,6 +5,7 @@ interface Props {
   points: number;
 }
 
+
 export default function PointsChart({ points }: Props) {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const chartInstance = useRef<Chart | null>(null);
@@ -12,7 +13,6 @@ export default function PointsChart({ points }: Props) {
   useEffect(() => {
     if (!chartRef.current) return;
 
-    // Destruir gráfico antigo para evitar duplicação
     if (chartInstance.current) {
       chartInstance.current.destroy();
     }

@@ -11,7 +11,7 @@ export default function RecyclingCard({ material, quantidade, localizacao }: Rec
   return (
     <div className="recycling-card">
       <h3>{material}</h3>
-      <p><strong>Quantidade:</strong> {quantidade} kg</p>
+      <p><strong>Quantidade:</strong> {quantidade} </p>
       <p><strong>Localização:</strong> {localizacao}</p>
     </div>
   );

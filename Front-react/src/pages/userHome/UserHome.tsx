@@ -173,7 +173,7 @@ export default function ProfilePage() {
                 </div>
 
 
-               <div className="points_log">
+            <div className="points_log">
                     <div className="points_area">
                         <h1>Pontuação</h1>
                         <PointsChart points={points} />
