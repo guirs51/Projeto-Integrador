@@ -4,7 +4,8 @@ import Layout from "../pages/layouts/Layout";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
 import UserHome from "../pages/userHome/UserHome"
-import Test from "../pages/materials/Materials";
+import Materials from "../pages/materials/Materials";
+import Location from "../pages/location-search/Location"
 
 
 const routes = [
@@ -30,10 +31,16 @@ const routes = [
         path: "/UserHome",
         element: <UserHome />
       },
-      {path: "/test",
-        element: <Test/>
+
+      {
+        path: "/materials",
+        element: <Materials/>
+      },
+      {
+        path: "/location",
+        element: <Location />
       }
-     
+
     ]
   }
 ];

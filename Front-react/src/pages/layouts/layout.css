@@ -7,9 +7,8 @@
     background-color: #ffffff;
     display: flex;
     flex-direction: column;
-    margin-top: auto;
     font-family: sans-serif;
-    padding: 30px;
+    padding: 3px;
     position: fixed;
     top: 0;
     left: 0;
@@ -17,7 +16,6 @@
     border-right: 1px solid #e4e4e4; /* deixa mais bonito */
 }
 
-/* empurra este bloco pro fim */
 .bottom {
     margin-top: auto; 
     display: flex;
