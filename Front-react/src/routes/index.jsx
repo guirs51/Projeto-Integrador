@@ -1,8 +1,9 @@
+import { elements } from "chart.js";
 import Home from "../pages/home/Home"
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
-import UserHome from "../pages/userHome/UserHome"
-
+import UserHome from "../pages/userHome/UserHome";
+import Location from "../pages/location-search/Location"
 const routes = [
   {
     path: "/",
@@ -16,10 +17,14 @@ const routes = [
     path: "/login",
     element: <Login />
   },
-{
+  {
     path: "/UserHome",
-  element: <UserHome/>
-}
+    element: <UserHome />
+  },
+  {
+    path: "/location",
+    element: <Location />
+  }
 ];
 
 export default routes;
