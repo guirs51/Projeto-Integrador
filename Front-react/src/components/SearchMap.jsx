@@ -48,7 +48,8 @@ export default function SearchInput({ mapRef }) {
                 backgroundColor:"transparent",
                 padding: 10,
                 background: "transparent",
-                border: "0"
+                border: "0",
+                outline: "none"
             }}
         />
     );
