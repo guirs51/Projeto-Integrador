@@ -10,7 +10,7 @@ function Register() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const cpf = "1234"
+    const cpf = "123456"
 
     const [show, setShow] = useState(false)
 
@@ -21,7 +21,7 @@ function Register() {
     async function createUser() {
         try {
             console.log("função chamada")
-            const response = await fetch('http://localhost:3001/auth/register', {
+            const response = await fetch('http://localhost:3000/auth/register', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -49,7 +49,6 @@ function Register() {
             alert("Erro de conexão com o servidor: " + e);
         }
     }
-
     return (
         <>
             <div className='register-container'>

@@ -9,7 +9,7 @@ import { useNavigate } from "react-router";
 import { User } from "lucide-react";
 
 function Login() {
-  const [show, setShow] = useState(false);
+   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const mostraOcultar = () => {
@@ -21,7 +21,7 @@ function Login() {
 
   async function login() {
     try {
-      const response = await fetch("http://localhost:3001/auth/login", {
+      const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
