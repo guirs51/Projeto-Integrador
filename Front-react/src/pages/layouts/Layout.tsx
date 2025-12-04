@@ -42,7 +42,7 @@ export default function Layout() {
                     <div className="bottom">
                         <div className="section-title">CONFIGURAÇÕES</div>
 
-                        <a className="nav-item">
+                        <a className="nav-item" href="/userConfig">
                             <Settings size={18} /> Configurações
                         </a>
 
