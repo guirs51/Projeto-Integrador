@@ -19,19 +19,19 @@ export default function Layout() {
                 <aside className="sidebar">
 
                     <nav className="nav">
-                        <a className="nav-item active">
+                        <a className="nav-item active" href="/UserHome">
                             <Home size={18} /> Home
                         </a>
                         <a className="nav-item">
                             <Inbox size={18} /> Bonificações
                         </a>
-                        <a className="nav-item">
+                        <a className="nav-item" href="/materials">
                             <BookOpen size={18} /> Materias
                         </a>
                         <a className="nav-item">
                             <CheckSquare size={18} /> Reciclagens
                         </a>
-                        <a className="nav-item">
+                        <a className="nav-item" href="/location">
                             <Users size={18} /> Localização
                         </a>
                     </nav>
@@ -54,7 +54,7 @@ export default function Layout() {
             </div>
 
 
-            <main className="w-full  min-h-screen">
+            <main className="w-full  min-h-screen ">
                 <Outlet /> {/* AQUI RENDERIZA AS PÁGINAS FILHAS */}
             </main>
         </div>
