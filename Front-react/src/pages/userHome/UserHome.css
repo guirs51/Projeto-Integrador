@@ -106,7 +106,7 @@
 
 .points_log {
     flex: 1;
-    margin-top: -80px;
+    margin-top: 0px;
 }
 
 .points-container {
@@ -115,6 +115,10 @@
     align-items: flex-start;
     gap: 20px;
     width: 100%;
+}
+.points_log canvas {
+    width: 100% !important;
+    height: 200px !important;
 }
 
 .points {

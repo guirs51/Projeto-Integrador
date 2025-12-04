@@ -36,7 +36,7 @@ export default function UserProfile() {
                 <div className="section">
                     <div className="section-title">
                         <span>Informações pessoais</span>
-                    <div className="but">  <button className="edit-btn"> <Edit fontSize={12} /> Editar  </button></div>   
+                    <div className="but">  <button className="edit-btn"> <Edit fontSize={18} /> Editar  </button></div>   
                     </div>
 
                     <div className="info-grid">

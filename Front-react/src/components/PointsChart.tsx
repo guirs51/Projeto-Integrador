@@ -1,7 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { Chart, registerables } from "chart.js";
-
-Chart.register(...registerables);
+import Chart from "chart.js/auto";
 
 interface Props {
   points: number;
@@ -14,7 +12,7 @@ export default function PointsChart({ points }: Props) {
   useEffect(() => {
     if (!chartRef.current) return;
 
-    // destrói gráfico anterior
+    // Destruir gráfico antigo para evitar duplicação
     if (chartInstance.current) {
       chartInstance.current.destroy();
     }
@@ -27,7 +25,7 @@ export default function PointsChart({ points }: Props) {
           {
             data: [points, 100 - points],
             backgroundColor: ["#4CAF50", "#e0e0e0"],
-           // cutout: 70,
+           // cutout: "70%", // Faz virar estilo "anel"
           },
         ],
       },

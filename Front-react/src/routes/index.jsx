@@ -1,4 +1,4 @@
-import { elements } from "chart.js";
+
 import Home from "../pages/home/Home"
 import Layout from "../pages/layouts/Layout";
 import Login from "../pages/login/Login";
