@@ -118,7 +118,7 @@ export default function UserProfile() {
                     anchorOrigin={{ vertical: 'top', horizontal: 'right', }}
                 >
                     <MuiAlert variant="filled" severity="success" sx={{ width: '100%' }}>
-                        Guilherme vai ser molestado
+                        Usuario foi deletado
                     </MuiAlert>
                 </Snackbar>
 
