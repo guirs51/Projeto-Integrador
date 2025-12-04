@@ -9,40 +9,42 @@ import Location from "../pages/location-search/Location"
 
 
 const routes = [
+  // Página inicial
   {
     path: "/",
     element: <Home />
   },
+
   {
     path: "/regis",
     element: <Register />
   },
+
   {
     path: "/login",
     element: <Login />
   },
 
-  // Rotas que usam o Layout
+  // Área logada com Layout
   {
     path: "/",
     element: <Layout />,
     children: [
       {
-        path: "/UserHome",
+        path: "UserHome",   // sem "/"
         element: <UserHome />
       },
-
       {
-        path: "/materials",
+        path: "materials",
         element: <Materials/>
       },
       {
-        path: "/location",
+        path: "location",
         element: <Location />
-      }
-
+      },
+      
     ]
   }
 ];
 
-export default routes;
+export default routes;
