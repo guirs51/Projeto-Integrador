@@ -97,6 +97,8 @@
 }
 
 .edit-btn {
+    display: flex;
+    flex-direction: row;
     border: 1px solid #ccc;
     background: rgb(47, 77, 43);
     padding: 6px 4px;
