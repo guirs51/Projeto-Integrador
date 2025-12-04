@@ -5,6 +5,7 @@
   margin: 20px 0 0 0;
   color: #fff;
   text-align: left;
+  margin-left: 0px;
 }
 
 .testimonial-card {
@@ -32,7 +33,7 @@ span {
   color: #ccc;
 }
 
-/* Paginação (bolinhas) */
+
 .swiper-pagination-bullet {
   background: #fff !important;
   opacity: 0.6;

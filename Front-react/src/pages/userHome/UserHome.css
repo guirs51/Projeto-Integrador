@@ -1,0 +1,259 @@
+/* ============================= */
+/*            BODY               */
+/* ============================= */
+
+.container {
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    margin: 0 auto;
+}
+
+/* ============================= */
+/*   CARD INFORMAÇÕES USUÁRIO   */
+/* ============================= */
+
+.usuario-info {
+    display: flex;
+    gap: 30px;
+    padding: 25px 55px;
+    background-color: #ffffff;
+    border-radius: 20px;
+    border: 1px solid #e3e3e3;
+    margin-bottom: 30px;
+    margin-top: 8px;
+    width: 100%;
+}
+
+/* Nome do usuário */
+.big-text {
+    position: relative;
+    top: 10px;
+    right: 5px;
+    color: black;
+    font-size: 35px;
+}
+
+/* Biografia */
+.bio {
+    color: rgb(0, 0, 0);
+    font-size: 10px;
+    margin-top: 7px;
+}
+
+/* Imagem de perfil */
+#img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Linha divisória */
+.line {
+    border: none;
+    border-top: 1px solid #858383;
+    opacity: 0.6;
+    margin: 12px 0;
+}
+
+/* ============================= */
+/*     BOTÃO ADICIONAR RECICLA  */
+/* ============================= */
+
+.btn span {
+    color: black;
+    font-size: 20px;
+    margin-bottom: 45px;
+    margin-top: 45px;
+}
+
+.circle-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0px;
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+    font-size: 24px;
+    color: #645b5b;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-top: 45px;
+    margin-bottom: 45px;
+    border-radius: 20%;
+}
+
+/* ============================= */
+/*   ÁREA DE REGISTROS E PONTOS */
+/* ============================= */
+
+.container_area_registers {
+    width: 100%;
+    min-height: 40vh;
+    display: flex;
+    gap: 30px;
+}
+
+.registers_area {
+    flex: 2;
+}
+
+.registers_log {
+    overflow-y: auto;
+    max-height: 40vh;
+}
+
+.points_log {
+    flex: 1;
+    margin-top: -80px;
+}
+
+.points-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+}
+
+.points {
+    background-color: #e6f4ea;
+    border: 1px solid #c8e6c9;
+    border-radius: 12px;
+    padding: 30px;
+    margin: 14px;
+    width: 250px;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s;
+    position: sticky;
+}
+
+/* ============================= */
+/*         TEXTO / TÍTULOS      */
+/* ============================= */
+
+.registers_title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.registers_title h1 {
+    font-size: 20px;
+}
+
+.nothing_registers {
+    display: flex;
+    justify-content: start;
+}
+
+.nothing_registers h2 {
+    font-size: 14px;
+}
+
+/* ============================= */
+/*      REMOVER SCROLLBAR       */
+/* ============================= */
+
+.sem-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.sem-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+/* ========================= */
+/*        DARK MODE          */
+/* ========================= */
+
+.dark {
+    background-color: #0f0f0f;
+    color: white;
+}
+
+.dark .usuario-info {
+    background-color: #1a1a1a;
+    color: #fff;
+}
+
+.dark .big-text {
+    color: #fff;
+}
+
+.dark .bio {
+    color: #cfcfcf;
+}
+
+.dark #img {
+    border: 3px solid #2b2b2b;
+}
+
+.dark .line {
+    border-top: 1px solid #555 !important;
+}
+
+.dark .circle-button {
+    background-color: #ffffff;
+    color: white;
+}
+
+.dark .circle-button svg {
+    color: #fff;
+}
+
+.dark .btn span {
+    color: #fff;
+}
+
+.dark .nothing_registers h2 {
+    color: #c7c7c7;
+}
+
+.dark .points {
+    background-color: #1c1c1c;
+    border-color: #333 !important;
+    color: #fff;
+}
+
+/* ========================= */
+/*        LIGHT MODE         */
+/* ========================= */
+
+body:not(.dark) {
+    background-color: #f5f6fa;
+    color: #222;
+}
+
+body:not(.dark) .usuario-info {
+    background-color: #ffffff;
+    border: 1px solid #e3e3e3;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+body:not(.dark) .big-text {
+    color: #222;
+}
+
+body:not(.dark) .bio {
+    color: #555;
+}
+
+body:not(.dark) .circle-button {
+    background-color: #ffffff;
+    border: 1px solid #dcdcdc;
+}
+
+body:not(.dark) .line {
+    border-top: 1px solid #dfdfdf !important;
+}
+
+body:not(.dark) .points {
+    background-color: #ffffff;
+    border: 1px solid #e2e2e2;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+}

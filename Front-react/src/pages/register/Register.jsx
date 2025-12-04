@@ -1,58 +1,87 @@
 import './Register.css'
 import { useState } from 'react'
+import { IoEyeSharp } from "react-icons/io5";
+import { FaEyeSlash } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
 
 
 function Register() {
 
-    const [activeForm, setActiveForm] = useState('cadastro');
+    const [name, setName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const cpf = "1234"
 
-    function login(){
-        setActiveForm('login');
+    const [show, setShow] = useState(false)
+
+    const mostraOcultar = () => {
+        setShow(!show)
     }
 
-    function cadastro(){
-        setActiveForm('cadastro');
-    }
+    async function createUser() {
+        try {
+            console.log("função chamada")
+            const response = await fetch('http://localhost:3001/auth/register', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ name, email, cpf, password })
+            })
 
-    const cardClass = `card ${activeForm === 'cadastro' ? 'cadastroActive' : 'loginActive'}`;
+            const data = await response.json();
+
+            if (!response.ok) {
+                alert(`Erro ${response.status}: ${data.message || 'Erro desconhecido'}`);
+                return;
+            }
+
+            alert("Cadastro realizado com sucesso!");
+            console.log("Usuário criado:", data);
+
+            const token = data.token
+            alert(token)
+
+            localStorage.setItem("token", token)
+
+        } catch (e) {
+            console.log("Houve um erro: " + e);
+            alert("Erro de conexão com o servidor: " + e);
+        }
+    }
 
     return (
         <>
-            <div className='container'>
-                <div className={cardClass} id='card'>
-                    <div className='esquerda'>
-                        <div className='formLogin'>
-                            <h1>Login</h1>
-                            <form action="">
-                                <input type="text" placeholder='Email' />
-                                <input type="text" placeholder='Password' />
-                                <button>Enter</button>
-                            </form>
-                        </div>
-                        <div className='login'>
-                            <h1>Already have an account?</h1>
-                            <p>Log into your account now.</p>
-                            <button onClick={login}>Login</button>
-                        </div>
+            <div className='register-container'>
+                <div className='register-card-esquerda'>
+                    <div className='register'>
+                        <h1>Bem-vindo ao <span>Recicle +</span></h1>
+                        <h2>Junte-se à nossa comunidade na busca por um futuro melhor. <span>future</span>.</h2>
                     </div>
-                    <div className='direita'>
-                        <div className='formCadastro'>
-                            <h1>Register</h1>
-                            <form action="">
-                                <input type="text" placeholder='Name' />
-                                <input type="text" placeholder='Email'/>
-                                <input type="Password" placeholder='Password'/>
-                                <button>Register</button>
-                            </form>
+                    <div className='form'>
+                        <form >
+                            <input type="text" placeholder='Nome' onChange={(e) => setName(e.target.value)} />
+                            <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+                            <input type={show ? "text" : "password"} placeholder='Senha' id='password' onChange={(e) => setPassword(e.target.value)} />
+                            <button className='btn-view' onClick={mostraOcultar} type='button'>
+                                {!show ? <FaEyeSlash size={20} color='black' /> : <IoEyeSharp size={20} color='black' />}
+                            </button>
+                        </form>
+
+                        <button onClick={createUser}>Cadastrar</button>
+
+                        <div className='createAccount'>
+                            <h1>Já tem uma conta? <a href="./login">Entre agora!</a></h1>
                         </div>
-                        <div className='cadastro'>
-                            <h1>Don't have an account?</h1>
-                            <p>Create your account now!</p>
-                            <button onClick={cadastro}>Register</button>
-                        </div>
+
+                        <p>Ou continue com</p>
+
+                        <button className='btn-google'><span className='google-logo'><FcGoogle size={30} /></span></button>
                     </div>
-                    <div className='background'>
-                    </div>
+                </div>
+
+                <div className='register-card-direita'>
+                    <h1>Preservar a natureza é o primeiro passo para preservar o futuro.</h1>
                 </div>
             </div>
         </>
