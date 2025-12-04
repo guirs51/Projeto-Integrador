@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
 * {
   margin: 0;
   padding: 0;
@@ -5,199 +7,158 @@
   font-family: "Poppins", sans-serif;
 }
 
-/* ===== CONTAINER GERAL ===== */
-.container {
-  width: 100vw;
+.register-container {
+  display: flex;
   height: 100vh;
-  background: url("https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1470&q=80")
-    no-repeat center center/cover;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  overflow: hidden;
+  width: 100%;
 }
 
-/* camada escura sobre o fundo */
-.container::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgba(0, 30, 0, 0.8);
-  backdrop-filter: blur(6px);
-}
+.register-card-esquerda {
 
-/* ===== CARD PRINCIPAL ===== */
-.card {
-  width: 80%;
-  max-width: 950px;
-  height: 70%;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 25px;
-  box-shadow: 0 10px 50px rgba(0, 0, 0, 0.6);
-  display: flex;
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
-  transition: all 0.6s ease;
-}
-
-/* ===== SEÇÕES ===== */
-.esquerda,
-.direita {
-  width: 50%;
-  height: 100%;
-  padding: 50px 40px;
+  flex: 1;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
-  z-index: 2;
-  transition: all 0.6s ease;
+  padding: 50px;
+}
+
+.register {
+  margin-bottom: 30px;
+}
+
+.register h1 {
   text-align: center;
+  font-size: 23px;
 }
 
-/* ===== TEXTOS ===== */
-h1 {
-  font-size: 2rem;
-  font-weight: 600;
-  color: #e8f5e9;
-  margin-bottom: 20px;
-}
-
-p {
-  font-size: 0.95rem;
-  color: #cde3cd;
+.register h2 {
+  text-align: center;
+  font-size: 15px;
   margin-bottom: 25px;
 }
 
-/* ===== FORMULÁRIOS ===== */
-form {
+.register span {
+  color: #1f4d3e;
+  font-size: 25px;
+}
+
+.register h2 span {
+  color: #1f4d3e;
+  font-size: 17px;
+}
+
+.form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 80%;
-  gap: 15px;
-}
-
-input {
-  width: 100%;
-  padding: 12px 18px;
-  border-radius: 10px;
-  border: none;
-  background: rgba(255, 255, 255, 0.12);
-  color: #fff;
-  font-size: 1rem;
-  transition: all 0.3s ease;
-  text-align: left;
-}
-
-input::placeholder {
-  color: rgba(255, 255, 255, 0.7);
-}
-
-input:focus {
-  outline: none;
-  background: rgba(255, 255, 255, 0.25);
-}
-
-/* ===== BOTÕES ===== */
-button {
-  width: 80%;
-  padding: 12px 0;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  color: #fff;
-  background: #3a5a40;
-  transition: all 0.3s ease;
-}
-
-button:hover {
-  transform: translateY(-2px);
-  background: #1b4332;
-}
-
-/* ===== ANIMAÇÃO DE TROCA ENTRE LOGIN/CADASTRO ===== */
-.cadastro,
-.login {
-  position: absolute;
-  transition: all 0.6s ease;
-}
-
-.formLogin,
-.formCadastro {
   position: relative;
-  opacity: 1;
-  transition: opacity 0.6s ease;
-}
-
-/* ===== ESTADOS ===== */
-.card.loginActive .login {
-  opacity: 0;
-  transform: translateX(-40px);
-  pointer-events: none;
-}
-
-.card.loginActive .formCadastro {
-  opacity: 0;
-}
-
-.card.cadastroActive .cadastro {
-  opacity: 0;
-  transform: translateX(40px);
-  pointer-events: none;
-}
-
-.card.cadastroActive .formLogin {
-  opacity: 0;
-}
-
-/* ===== FUNDO ANIMADO ===== */
-.background {
+  gap: 15px;
   width: 100%;
-  height: 100%;
-  background: #344e41;
+  max-width: 350px;
+  text-align: start;
+}
+
+
+
+.form input {
+  padding: 5px 100px;
+  border: none;
+  border-radius: 1px;
+  border-bottom: 1px #1f4d3e solid;
+  outline: none;
+  font-size: 15px;
+  margin-top: 10px;
+  align-items: center; 
+  text-align: left;
+  padding-left: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form h2 {
+  font-size: 15px;
+  margin-top: 5px;
+  color: #0b0b0bd4;
+}
+
+button {
+  margin-top: 20px;
+  padding: 8px 45px;
+  background-color: #1f4d3e;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.createAccount {
+  margin-top: 20px;
+  font-size: 8px;
+
+  text-align: center;
+}
+
+.createAccount a {
+  color: #1f4d3e;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.register-card-direita {
+  flex: 1;
+  background-image: url('https://images.pexels.com/photos/1666021/pexels-photo-1666021.jpeg');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: white;
+  padding: 40px;
+  text-align: center;
+}
+
+.register-card-direita h1 {
+  text-align: start;
+  max-width: 550px;
+  margin-right: 100px;
+}
+
+#password {
+  position: relative;
+}
+
+.btn-view {
+  background-color: rgba(234, 11, 11, 0);
+  border: 0px;
+  outline: none;
+  width: 1px;
+  height: 1px;
   position: absolute;
-  z-index: 0;
-  transition: all 0.6s ease-in-out;
-  border-radius: 25px;
-  opacity: 0.9;
+bottom: 267px;
+    left: 250px;
 }
 
-.card.loginActive .background {
-  transform: translateX(50%);
-  background: linear-gradient(120deg, #2d6a4f, #1b4332);
+p {
+ font-size: 14px;
 }
 
-.card.cadastroActive .background {
-  transform: translateX(-50%);
-  background: linear-gradient(120deg, #1b4332, #081c15);
+.btn-google {
+  border: 1px solid rgba(0, 0, 0, 0.485);
+  background-color: white;
+  width: 30px;
+  height: 45px;
+  position: relative;
 }
 
-/* ===== RESPONSIVO ===== */
-@media (max-width: 850px) {
-  .card {
-    flex-direction: column;
-    width: 90%;
-    height: auto;
-  }
-
-  .esquerda,
-  .direita {
-    width: 100%;
-    padding: 30px 20px;
-  }
-
-  input,
-  button {
-    width: 90%;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
+.google-logo {
+  position: absolute;
+  left: 30px;
+  top: 8px;
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+
 import './Home.css'
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -16,7 +16,7 @@ function Home() {
         Seu navegador não suporta vídeos em HTML5.
       </video>
 
-      {/* Overlay escura */}
+   
       <div className="dark-overlay"></div>
 
       {/* Conteúdo principal */}
@@ -60,7 +60,7 @@ function Home() {
 </section>
 
 
-      {/* Espaço para registro futuro */}
+      {/* Espaço para registro */}
       <section className="register-part">
         <h3>Junte-se a nós!</h3>
         <p>Cadastre-se e faça parte dessa jornada em busca ao futuro melhor.</p>

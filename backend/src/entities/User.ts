@@ -1,20 +1,23 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import bycrypt from 'bcrypt';
-import { Delivery } from "./Delivery";
+import { Delivery } from "./delivery";
 
 @Entity('users')
 export class User {
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
 
     @Column({ length: 100 })
-    name: String
+    name: string
 
     @Column({ unique: true, length: 200 })
     email: string
 
     @Column({ unique: true, length: 20 })
     cpf: string
+
+    @Column({nullable: true, default: 0})
+    Points: number
 
     @Column()
     password: string
@@ -25,6 +28,8 @@ export class User {
     @UpdateDateColumn()
     updatedAt: Date
 
+    @OneToMany(() => Delivery, (delivery) => delivery.user)
+    delivery: Delivery[];
 
     //salvar a senha antes de salvar ou atualizar dados
     @BeforeInsert()
@@ -39,7 +44,4 @@ export class User {
     async validatePassword(plain: string): Promise<boolean> {
         return bycrypt.compare(plain, this.password)
     }
-
-    @OneToMany(() => Delivery, (delivery) => delivery.user)
-    delivery: Delivery[];
 }

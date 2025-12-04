@@ -1,0 +1,57 @@
+
+/* ========================= */
+/*     CARD - LIGHT MODE     */
+/* ========================= */
+
+.recycling-card {
+  background-color: #ffffff;
+  border: 1px solid #c2c1c1a2;
+  border-radius: 12px;
+  padding: 16px;
+  margin: 14px;
+  width: 45vw;
+  box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.06);
+  transition: 0.25s;
+  margin-bottom: 30px;
+  margin-top: 20px;
+}
+
+.recycling-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Títulos e textos */
+.recycling-card h3 {
+  color: #222;
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+.recycling-card p {
+  margin: 4px 0;
+  color: #444;
+}
+
+
+
+/* ========================= */
+/*     CARD - DARK MODE      */
+/* ========================= */
+
+.dark .recycling-card {
+  background-color: #1c1c1c;
+  border: 1px solid #333;
+  box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.45);
+}
+
+.dark .recycling-card h3 {
+  color: #ffffff;
+}
+
+.dark .recycling-card p {
+  color: #d1d1d1;
+}
+
+.dark .recycling-card strong {
+  color: #ffffff;
+}
