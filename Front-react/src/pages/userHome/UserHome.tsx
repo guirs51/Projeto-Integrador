@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import NewRecyclingModal from '../../components/NewRecyclingModal';
 import RecyclingCard from '../../components/RecyclingCard';
 import './UserHome.css'
+import "../../global.css"
 import PointsChart from "../../components/PointsChart";
 
 import {
@@ -51,7 +52,7 @@ export default function ProfilePage() {
     useEffect(() => {
         async function getUser() {
             try {
-                const response = await fetch(`http://localhost:3000/users/${id}`, {
+                const response = await fetch(`http://localhost:3001/users/${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -153,10 +154,10 @@ export default function ProfilePage() {
 
             <hr className='line'></hr>
 
-            <div className='btn'>
-                <button className="circle-button" onClick={() => setIsModalOpen(true)}>
-                    <PlusCircle color='black' />
-                </button>
+            <div className='btn flex items-center gap-2  '>
+                
+                    <PlusCircle onClick={() => setIsModalOpen(true)} size={20} color='black' />
+                
                 <span>Adicionar reciclagem</span>
             </div>
 

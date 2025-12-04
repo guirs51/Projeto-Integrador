@@ -1,28 +1,31 @@
-/*BODY*/
-.container  {
+/* ============================= */
+/*            BODY               */
+/* ============================= */
+
+.container {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 90%;
     margin: 0 auto;
 }
 
+/* ============================= */
+/*   CARD INFORMAÇÕES USUÁRIO   */
+/* ============================= */
 
-/*card das informações do usuario*/
 .usuario-info {
     display: flex;
     gap: 30px;
     padding: 25px 55px;
-    background-color: rgb(255, 255, 255);
+    background-color: #ffffff;
     border-radius: 20px;
-    border: 15px;
-    border-color: #141414;
+    border: 1px solid #e3e3e3;
     margin-bottom: 30px;
     margin-top: 8px;
-    margin-left: 35px;
     width: 100%;
 }
 
-/*nome do usuario*/
+/* Nome do usuário */
 .big-text {
     position: relative;
     top: 10px;
@@ -31,84 +34,79 @@
     font-size: 35px;
 }
 
-/*biografia */
+/* Biografia */
 .bio {
     color: rgb(0, 0, 0);
     font-size: 10px;
     margin-top: 7px;
 }
 
-/* imagem de perfil*/
+/* Imagem de perfil */
 #img {
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin-right: 20px;
     object-fit: cover;
 }
 
-/*Linha de espaço*/
+/* Linha divisória */
 .line {
     border: none;
     border-top: 1px solid #858383;
     opacity: 0.6;
     margin: 12px 0;
-    margin-left: 20px;
 }
 
-/*Mensagem do botao*/
+/* ============================= */
+/*     BOTÃO ADICIONAR RECICLA  */
+/* ============================= */
+
 .btn span {
     color: black;
     font-size: 20px;
     margin-bottom: 45px;
     margin-top: 45px;
- 
 }
 
-/*Botao para registrar nova reciclagem*/
 .circle-button {
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 0px;
     background-color: #ffffff;
-    border: none;
+    border: 1px solid #dcdcdc;
     font-size: 24px;
     color: #645b5b;
     cursor: pointer;
     transition: 0.3s;
     margin-top: 45px;
-    margin-left: 50px;
     margin-bottom: 45px;
     border-radius: 20%;
 }
 
-.btn {
+/* ============================= */
+/*   ÁREA DE REGISTROS E PONTOS */
+/* ============================= */
+
+.container_area_registers {
+    width: 100%;
+    min-height: 40vh;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-family: Arial, sans-serif;
-    color: #222;
+    gap: 30px;
 }
 
 .registers_area {
-    margin-left: 50px;
- 
+    flex: 2;
 }
 
-.registers_title h1 {
-    font-size: 20px;
-
+.registers_log {
+    overflow-y: auto;
+    max-height: 40vh;
 }
 
-.registers_title {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.nothing_registers h2 {
-    font-size: 14px;
+.points_log {
+    flex: 1;
+    margin-top: -80px;
 }
 
 .points-container {
@@ -125,149 +123,47 @@
     border-radius: 12px;
     padding: 30px;
     margin: 14px;
-    right: 20px;
     width: 250px;
     box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
     transition: transform 0.2s;
     position: sticky;
-    border: 1px solid #e4e4e4;
 }
 
-.line2 {
-    width: 2px;
-    height: 70vh;
-    background: #d9d9d9;
-    border-radius: 2px;
-    position: relative;
-    top: -175px;
-    border: none;
-    border-top: 1px solid;
-    opacity: 0.6;
-    margin: 12px 0;
-}
+/* ============================= */
+/*         TEXTO / TÍTULOS      */
+/* ============================= */
 
-
-.sidebar {
-    width: 220px;
-    height: 100%;
-    background-color: #ffffff;
-    flex-direction: column;
-    font-family: sans-serif;
-    padding: 30px;
-    margin-top: 0px;
-    position: fixed;
-    top: 0;
-    left: 0;
-    color: rgb(2, 2, 2);
-}
-
-.section-title {
-  font-size: 12px;
-  color: #777;
-  margin: 20px 0 10px;
-  font-weight: bold;
-}
-
-.nav {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.nav-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 6px 2px;
-  text-decoration: none;
-  color: #444;
-  cursor: pointer;
-  border-radius: 6px;
-  transition: 0.2s;  
-}
-
-.nav-item:hover {
-  background: #f3f3f3;
-}
-
-.nav-item.active {
-  color: rgb(23, 72, 23);
-  font-weight: bold;
-}
-
-.bottom {
-  margin-top: 330px;
-}
-
-.logout {
-  color: #d9534f;
-}
-.logout:hover {
-  background: #fceaea;
-}
-
-.container_area_registers {
-    width: 100%;
-    min-height: 40vh;
+.registers_title {
     display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.registers_log {
-    overflow-y: auto;
-    max-height: 40vh;  
-}
-
-.registers_area {
-    flex: 1;
-    flex-grow: 2;
-}
-
-.points_log {
-  background: var(--card-bg);
-  padding: 30px;
-  height: 300px;
-  border-radius: 14px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-    margin-left: 100px;
-  
-}
-
-.points_area h1 {
-        margin-bottom: 10px;
-}
-
-.points_area {
-  text-align: center;
- 
-  margin-top: -70px; /* ajuste fino */
-}
-
-.points_number {
-  margin-top: 10px;
-  font-size: 20px;
-  font-weight: bold;
-}
-
-.sem-scrollbar::-webkit-scrollbar {
-    width: 0;              /* Remove a barra vertical */
-    height: 0;             /* Remove a barra horizontal */
-}
-
-/* Firefox */
-.sem-scrollbar {
-    scrollbar-width: none; /* Remove a barra */
-}
-
-/* Internet Explorer / Edge antigo */
-.sem-scrollbar {
-    -ms-overflow-style: none;
+.registers_title h1 {
+    font-size: 20px;
 }
 
 .nothing_registers {
     display: flex;
     justify-content: start;
+}
+
+.nothing_registers h2 {
+    font-size: 14px;
+}
+
+/* ============================= */
+/*      REMOVER SCROLLBAR       */
+/* ============================= */
+
+.sem-scrollbar::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.sem-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 }
 
 /* ========================= */
@@ -279,40 +175,9 @@
     color: white;
 }
 
-/* ----- Sidebar ----- */
-.dark .sidebar {
-    background-color: #181818;
-    color: #eaeaea;
-}
-
-.dark .nav-item {
-    color: #d1d1d1;
-}
-
-.dark .nav-item:hover {
-    background: #2a2a2a;
-}
-
-.dark .nav-item.active {
-    color: #4cd964;
-}
-
-.dark .section-title {
-    color: #bdbdbd;
-}
-
-.dark .logout {
-    color: #ff6b6b;
-}
-.dark .logout:hover {
-    background: rgba(255, 0, 0, 0.1);
-}
-
-/* ----- Cartão do usuário ----- */
 .dark .usuario-info {
     background-color: #1a1a1a;
     color: #fff;
-      border: 1px solid #333;
 }
 
 .dark .big-text {
@@ -323,19 +188,14 @@
     color: #cfcfcf;
 }
 
-/* ----- Imagens ----- */
 .dark #img {
     border: 3px solid #2b2b2b;
 }
 
-/* ----- Linhas ----- */
-.dark .line,
-.dark .line2 {
+.dark .line {
     border-top: 1px solid #555 !important;
-    background: #555 !important;
 }
 
-/* ----- Botão de adicionar reciclagem ----- */
 .dark .circle-button {
     background-color: #ffffff;
     color: white;
@@ -349,23 +209,8 @@
     color: #fff;
 }
 
-/* ----- Área de registros ----- */
-.dark .registers_area {
-    background-color: transparent;
-    color: white;
-}
-
-.dark .registers_log {
-    scrollbar-color: #333 transparent;
-}
-
 .dark .nothing_registers h2 {
     color: #c7c7c7;
-}
-
-/* ----- Pontos ----- */
-.dark .points_area h1 {
-    color: white;
 }
 
 .dark .points {
@@ -374,98 +219,41 @@
     color: #fff;
 }
 
-/* Container geral */
-.dark .container_area_registers {
-    background-color: transparent;
-}
-
 /* ========================= */
 /*        LIGHT MODE         */
 /* ========================= */
 
-/* Aplica quando NÃO está no modo escuro */
 body:not(.dark) {
     background-color: #f5f6fa;
     color: #222;
 }
 
-/* Sidebar bonita e suave */
-body:not(.dark) .sidebar {
-    background-color: #ffffff;
-    border-right: 1px solid #e0e0e0;
-    box-shadow: 2px 0px 10px rgba(0,0,0,0.05);
-}
-
-/* Nav items com harmonia */
-body:not(.dark) .nav-item {
-    color: #4a4a4a;
-}
-body:not(.dark) .nav-item:hover {
-    background-color: #f0f0f0;
-}
-
-body:not(.dark) .nav-item.active {
-    color: #2e7d32;   /* verde suave */
-}
-
-/* Card de usuário */
 body:not(.dark) .usuario-info {
     background-color: #ffffff;
-    border: 1px solid #c2c1c1a2;
+    border: 1px solid #e3e3e3;
     border-radius: 16px;
     box-shadow: 0 2px 6px rgba(0,0,0,0.05);
-     
 }
 
-/* Títulos */
 body:not(.dark) .big-text {
     color: #222;
 }
+
 body:not(.dark) .bio {
     color: #555;
 }
 
-/* Botão de adicionar */
 body:not(.dark) .circle-button {
     background-color: #ffffff;
     border: 1px solid #dcdcdc;
 }
-body:not(.dark) .btn span {
-    color: #333;
+
+body:not(.dark) .line {
+    border-top: 1px solid #dfdfdf !important;
 }
 
-/* Divider */
-body:not(.dark) .line,
-body:not(.dark) .line2 {
-    border-top: 1px solid #b2aeae !important;
-}
-
-/* Área de registros */
-body:not(.dark) .registers_area {
-    background-color: transparent;
-    color: #222;
-}
-
-/* Card de pontos */
 body:not(.dark) .points {
     background-color: #ffffff;
     border: 1px solid #e2e2e2;
     box-shadow: 0 1px 4px rgba(0,0,0,0.06);
-}
-
-body:not(.dark) .points_area h1 {
-    color: #222;
-}
-
-/* Toggle */
-body:not(.dark) .darkmode-toggle {
- 
-    color: #333;
-}
-
-body:not(.dark) .logout {
-    color: #ff6b6b;
-}
-body:not(.dark) .logout:hover {
-    background: rgba(255, 0, 0, 0.1);
 }
