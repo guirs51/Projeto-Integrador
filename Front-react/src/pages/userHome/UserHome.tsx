@@ -17,13 +17,14 @@ import {
     Moon,
     User
 } from 'lucide-react';
-import { useLocation } from 'react-router';
+import { data, useLocation } from 'react-router';
 
 
 interface RecyclingData {
-    material: string;
+    id: number,
+    materialType: string;
     quantidade: string;
-    localizacao: string;
+    deliveryLocal: string;
 }
 
 interface User {
@@ -36,12 +37,9 @@ interface User {
 
 export default function ProfilePage() {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [recyclingHistory, setRecyclingHistory] = useState<RecyclingData[]>([]);
     const [darkMode, setDarkMode] = useState(false);
-    const handleAddRecycling = (newItem: RecyclingData) => {
-        setRecyclingHistory((prev) => [...prev, newItem]);
+    const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
 
-    };
 
     const [user, setUser] = useState<User | null>(null)
     const token = localStorage.getItem("token")
@@ -70,7 +68,9 @@ export default function ProfilePage() {
                     return;
                 }
 
-                setUser(data);
+                setUser(data)
+                setDeliveries(data.delivery)
+
             } catch (error) {
                 console.error("Erro de rede:", error);
             }
@@ -80,11 +80,38 @@ export default function ProfilePage() {
             getUser();
         }
     }, [id, token]);
-    const points = recyclingHistory.length * 10;
+    const points = deliveries.length * 10;
 
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
         document.body.classList.toggle("dark");
+    }
+
+    const postDelivery = async (local: string, materialType: string, quantidade: number) => {
+        try {
+            const response = await fetch("http://localhost:3000/users/create/delivery", {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + token
+                },
+                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id } })
+            })
+
+            const data = await response.json()
+
+
+            if (!response.ok) {
+                alert("Houve um erro ao adicionar uma reciclagem. Erro: " + data?.mensagem)
+                return
+            }
+
+            alert("reciclagem criada com sucesso")
+
+        } catch (e) {
+            console.log("Houve um erro: ", e);
+            alert("Erro na conexão com o servidor.");
+        }
     }
     return (
         <div className="container">
@@ -92,10 +119,10 @@ export default function ProfilePage() {
             <NewRecyclingModal
                 isOpen={isModalOpen}
                 onClose={() => setIsModalOpen(false)}
-                onSubmit={handleAddRecycling}
+                onSubmit={postDelivery}
             />
 
-         
+
 
 
             <div className='usuario-info'>
@@ -111,9 +138,9 @@ export default function ProfilePage() {
             <hr className='line'></hr>
 
             <div className='btn flex items-center gap-2  '>
-                
-                    <PlusCircle onClick={() => setIsModalOpen(true)} size={20} color='black' />
-                
+
+                <PlusCircle onClick={() => setIsModalOpen(true)} size={20} color='black' />
+
                 <span>Adicionar reciclagem</span>
             </div>
 
@@ -151,18 +178,18 @@ export default function ProfilePage() {
                     </div>
 
                     <div className='registers_log sem-scrollbar'>
-                        {recyclingHistory.length < 1 ? (
+                        {deliveries.length < 1 ? (
                             <div className='nothing_registers'>
                                 <h2>Você não possui registros</h2>
                             </div>
                         ) : (
                             <div>
-                                {recyclingHistory.map((item, index) => (
+                                {deliveries.slice(0, 4).map(item => (
                                     <RecyclingCard
-                                        key={index}
-                                        material={item.material}
+                                        key={item.id}
+                                        material={item.materialType}
                                         quantidade={item.quantidade}
-                                        localizacao={item.localizacao}
+                                        localizacao={item.deliveryLocal}
                                     />
                                 ))}
                             </div>
@@ -173,7 +200,7 @@ export default function ProfilePage() {
                 </div>
 
 
-            <div className="points_log">
+                <div className="points_log">
                     <div className="points_area">
                         <h1>Pontuação</h1>
                         <PointsChart points={points} />
