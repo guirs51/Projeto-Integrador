@@ -14,8 +14,13 @@ export class DeliveryController {
   }
 
   async list(req: Request, res: Response) {
-    const users = await service.findAll()
-    res.json(users)
+    try {
+      const users = await service.findAll()
+      res.status(201).json(users)
+    } catch (e: any) {
+      res.status(400).json({message: e.mensagem})
+    }
+
   }
 
   async getById(req: Request, res: Response) {

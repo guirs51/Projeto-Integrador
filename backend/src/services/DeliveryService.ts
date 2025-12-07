@@ -24,7 +24,7 @@ export class DeliveryService {
 
     async findAll() {
         try {
-            const deliverys = this.Repo.find();
+            const deliverys = this.Repo.find({relations: ["users"]});
             return (await deliverys).map((u) => {
                 const clone: any = { ...u };
                 return clone;
