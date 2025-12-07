@@ -27,7 +27,7 @@ export default function Layout() {
                         </a>
 
                         <a className="nav-item" href="/materials">
-                            <BookOpen size={18} /> Materias
+                            <BookOpen size={18} /> Materiais
                         </a>
 
                         <a className="nav-item">

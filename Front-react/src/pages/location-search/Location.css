@@ -188,37 +188,7 @@ body.dark-mode .content {
   color: #e5e5e5;
 }
 
-/* Sidebar */
-body.dark-mode .sidebar {
-  background: #1b1c1d;
-  color: #e5e5e5;
-  border-right: 1px solid #222327;
-}
 
-body.dark-mode .section-title {
-  color: #b0b0b0;
-}
-
-body.dark-mode .nav-item {
-  color: #d0d0d0;
-}
-
-body.dark-mode .nav-item:hover {
-  background: #222327;
-}
-
-body.dark-mode .nav-item.active {
-  color: #ffffff;
-}
-
-/* Buttons logout */
-body.dark-mode .logout {
-  color: #ff8a84;
-}
-
-body.dark-mode .logout:hover {
-  background: #2d1f1f;
-}
 
 /* Location dark mode */
 body.dark-mode .location-page {
