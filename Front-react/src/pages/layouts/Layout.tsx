@@ -1,16 +1,20 @@
 import { BookOpen, CheckSquare, Home, Inbox, LogOut, Settings, Users, Sun, Moon } from "lucide-react"
 import "../../global.css"
 import "./layout.css"
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import { useState } from "react"
+import { useUser } from "../../context/UserContext"
 
 export default function Layout() {
+    const { userId } = useUser()
     const [darkMode, setDarkMode] = useState(false);
-
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
         document.body.classList.toggle("dark");
     };
+    const navigate = useNavigate();
+
+    console.log("ID no Layout:", userId);
 
     return (
         <div className="w-full h-full flex">
@@ -18,7 +22,7 @@ export default function Layout() {
                 <aside className="sidebar">
 
                     <nav className="nav">
-                        <a className="nav-item active" href="/UserHome">
+                        <a className="nav-item active" onClick={() => navigate("/UserHome")}>
                             <Home size={18} /> Home
                         </a>
 
@@ -42,7 +46,7 @@ export default function Layout() {
                     <div className="bottom">
                         <div className="section-title">CONFIGURAÇÕES</div>
 
-                        <a className="nav-item" href="/userConfig">
+                        <a className="nav-item" onClick={() => navigate("/userConfig")}>
                             <Settings size={18} /> Configurações
                         </a>
 
@@ -60,6 +64,6 @@ export default function Layout() {
             <main className="w-full min-h-screen">
                 <Outlet /> {/* Aqui renderiza as páginas filhas */}
             </main>
-        </div>
-    );
+        </div>
+    );
 }

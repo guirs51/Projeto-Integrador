@@ -6,7 +6,7 @@ import Register from "../pages/register/Register";
 import UserHome from "../pages/userHome/UserHome"
 import Materials from "../pages/materials/Materials";
 import Location from "../pages/location-search/Location"
-import UserProfile from "../pages/userProfile/userProfile";
+import UserProfile from "../pages/userProfile/UserProfile";
 
 
 const routes = [
@@ -29,7 +29,7 @@ const routes = [
   // Área logada com Layout
   {
     path: "/",
-    element: <Layout />,
+    element: <Layout/>,
     children: [
       {
         path: "UserHome",   // sem "/"
@@ -37,7 +37,7 @@ const routes = [
       },
       {
         path: "materials",
-        element: <Materials/>
+        element: <Materials />
       },
       {
         path: "location",
@@ -51,4 +51,4 @@ const routes = [
   }
 ];
 
-export default routes;
+export default routes;

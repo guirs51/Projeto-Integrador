@@ -7,6 +7,7 @@ import jsonData from './testHistorico.json'
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
+import { useLocation } from "react-router";
 
 export default function UserProfile() {
 
@@ -14,7 +15,6 @@ export default function UserProfile() {
     const [open, setOpen] = useState(false);
 
     const [darkMode, setDarkMode] = useState(false);
-
     return (
 
 
@@ -32,11 +32,11 @@ export default function UserProfile() {
                 </div>
 
                 <hr className="line" />
-                
+
                 <div className="section">
                     <div className="section-title">
                         <span>Informações pessoais</span>
-                    <div className="but">  <button className="edit-btn"> <Edit fontSize={18} /> Editar  </button></div>   
+                        <div className="but">  <button className="edit-btn"> <Edit fontSize={18} /> Editar  </button></div>
                     </div>
 
                     <div className="info-grid">
@@ -57,7 +57,7 @@ export default function UserProfile() {
                         Hi 👋, I'm Fulano, a passionate developer with experience in creating intuitive digital interfaces...
                     </p>
                 </div>
-           <div id="personal-info">
+                <div id="personal-info">
 
                     <div id="info-header">
                         <h2>Historico</h2>
@@ -100,7 +100,7 @@ export default function UserProfile() {
                 */ }
 
 
-             
+
 
 
             </section>

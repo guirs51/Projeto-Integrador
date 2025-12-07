@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useId, useState } from 'react';
 import NewRecyclingModal from '../../components/NewRecyclingModal';
 import RecyclingCard from '../../components/RecyclingCard';
 import './UserHome.css'
@@ -18,6 +18,7 @@ import {
     User
 } from 'lucide-react';
 import { data, useLocation } from 'react-router';
+import { useUser } from '../../context/UserContext';
 
 
 interface RecyclingData {
@@ -43,14 +44,15 @@ export default function ProfilePage() {
 
     const [user, setUser] = useState<User | null>(null)
     const token = localStorage.getItem("token")
-    const location = useLocation()
-    const { id, mensagem } = location.state || {}
-    console.log("Voce " + mensagem + " um " + id)
+
+    const { userId } = useUser()
+    // const location = useLocation()
+    // const { id } = location.state || {}
 
     useEffect(() => {
         async function getUser() {
             try {
-                const response = await fetch(`http://localhost:3000/users/${id}`, {
+                const response = await fetch(`http://localhost:3000/users/${userId}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -76,10 +78,11 @@ export default function ProfilePage() {
             }
         }
 
-        if (id && token) {
+        if (userId && token) {
             getUser();
         }
-    }, [id, token]);
+    }, [userId, token]);
+
     const points = deliveries.length * 10;
 
     const toggleDarkMode = () => {
@@ -95,7 +98,7 @@ export default function ProfilePage() {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + token
                 },
-                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id } })
+                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { userId } })
             })
 
             const data = await response.json()
