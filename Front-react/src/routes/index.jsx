@@ -7,6 +7,9 @@ import UserHome from "../pages/userHome/UserHome"
 import Materials from "../pages/materials/Materials";
 import Location from "../pages/location-search/Location"
 import UserProfile from "../pages/userProfile/userProfile";
+import Bonifications from "../pages/bonifications/Bonifications"
+import path from "path";
+import { elements } from "chart.js";
 
 
 const routes = [
@@ -46,6 +49,10 @@ const routes = [
       {
         path: "userConfig",
         element: <UserProfile />
+      },
+      {
+        path: "bonifications",
+        element: <Bonifications/>
       }
     ]
   }

@@ -1,0 +1,90 @@
+.bonus-container {
+  padding: 30px;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: sans-serif;
+}
+
+.bonus-title {
+  font-size: 30px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.bonus-card {
+  width: 100%;
+  max-width: 450px;
+  padding: 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 40px;
+}
+
+.bonus-subtitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.bonus-progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 14px;
+  background: #ddd;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.progress-fill {
+  height: 100%;
+  background: #4caf50;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.bonus-unlocked {
+  margin-top: 10px;
+  color: green;
+  font-weight: 600;
+  text-align: center;
+}
+
+.bonus-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 20px;
+  width: 100%;
+  max-width: 900px;
+}
+
+.benefit-card {
+  padding: 20px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.benefit-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.benefit-description {
+  font-size: 14px;
+  color: #555;
+}

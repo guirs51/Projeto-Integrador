@@ -22,7 +22,7 @@ export default function Layout() {
                             <Home size={18} /> Home
                         </a>
 
-                        <a className="nav-item">
+                        <a className="nav-item" href="/bonifications">
                             <Inbox size={18} /> Bonificações
                         </a>
 
