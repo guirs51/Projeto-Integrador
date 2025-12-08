@@ -30,8 +30,8 @@ export default function Layout() {
                             <BookOpen size={18} /> Materiais
                         </a>
 
-                        <a className="nav-item">
-                            <CheckSquare size={18} /> Reciclagens
+                        <a className="nav-item" href="/recycling">
+                            <CheckSquare size={18}  /> Reciclagens 
                         </a>
 
                         <a className="nav-item" href="/location">

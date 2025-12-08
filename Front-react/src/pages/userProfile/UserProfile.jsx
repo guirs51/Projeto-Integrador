@@ -1,132 +1,127 @@
 import React, { useState } from "react";
 import "./UserProfile.css";
+
+// Components
 import DataField from "../../components/DataField";
 import DataPasswordField from "../../components/DataPasswordField";
 import HistoricCard from "../../components/HistoricCard";
-import jsonData from './testHistorico.json'
+import EditProfileModal from "../../components/EditProfileModal";
+
+// Data
+import historyData from "./testHistorico.json";
+
+// UI
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
+import { Edit } from "lucide-react";
 
 export default function UserProfile() {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
+const [openEditModal, setOpenEditModal] = useState(false);
 
-    const historic = jsonData["Atividades"];
-    const [open, setOpen] = useState(false);
+const [userData, setUserData] = useState({
+  nome: "Fulano",
+  sobrenome: "Silva",
+  email: "fulano@email.com",
+  bio: "Hi 👋, I'm Fulano, a passionate developer..."
+});
 
-    const [darkMode, setDarkMode] = useState(false);
+  const history = historyData.Atividades;
 
-    return (
+  return (
+    <div id="default" className={darkMode ? "dark" : ""}>
 
+      {/* ================= HEADER + PROFILE ================= */}
+      <section className="profile-card">
+        
+        <div className="profile-header">
+          <img
+            src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&fm=jpg&q=60&w=3000"
+            alt="Foto"
+            className="profile-photo"
+          />
+        </div>
 
-        <div id="default" className={darkMode ? "dark" : ""}>
+        <hr className="line" />
 
-            <section className="profile-card">
+        {/* ================= PERSONAL INFO ================= */}
+        <div className="section">
+          <div className="section-title">
+            <span>Informações pessoais</span>
+            <button className="edit-btn"  onClick={() => setOpenEditModal(true)}>
+              <Edit size={18} /> Editar
+            </button>
+          </div>
 
-                <div className="profile-header">
-                    <img
-                        src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&fm=jpg&q=60&w=3000"
-                        alt="Foto"
-                        className="profile-photo"
-                    />
+          <div className="info-grid">
+            <DataField title="Nome" info="Fulano" />
+            <DataField title="Sobrenome" info="Silva" />
+            <DataField title="Email" info="fulano@email.com" />
+            <DataPasswordField title="Senha" info="••••••••" />
+          </div>
+        </div>
 
-                </div>
+        {/* ================= BIO ================= */}
+        <div className="section">
+          <div className="section-title">
+            <span>Bio</span>
+          </div>
 
-                <hr className="line" />
-                
-                <div className="section">
-                    <div className="section-title">
-                        <span>Informações pessoais</span>
-                    <div className="but">  <button className="edit-btn"> <Edit fontSize={18} /> Editar  </button></div>   
-                    </div>
+          <p className="bio-text">
+            Hi 👋, I'm Fulano, a passionate developer focused on crafting great
+            digital experiences...
+          </p>
+        </div>
 
-                    <div className="info-grid">
-                        <DataField title={"Nome"} info={"Nome"} />
-                        <DataField title={"Sobrenome"} info={"Sobrenome"} />
-                        <DataField title={"Email"} info={"Email"} />
-                        <DataPasswordField title={"Senha"} info={"Senha"} />
-                    </div>
-                </div>
+        {/* ================= HISTORY ================= */}
+        <div id="personal-info">
+          <div id="info-header">
+            <h2>Histórico</h2>
+            <a id="more-info-btn" href='/recycling' >Mais Informações</a>
+          </div>
 
-                <div className="section">
-                    <div className="section-title">
-                        <span>Bio</span>
+          <hr id="line" />
 
-                    </div>
-
-                    <p className="bio-text">
-                        Hi 👋, I'm Fulano, a passionate developer with experience in creating intuitive digital interfaces...
-                    </p>
-                </div>
-           <div id="personal-info">
-
-                    <div id="info-header">
-                        <h2>Historico</h2>
-                        <button id="more-info-btn">Mais Informações</button>
-                    </div>
-
-                    <hr id="line" />
-
-                    <div id="info-historic">
-
-                        {historic.map((item, index) => (
-                            <HistoricCard
-                                key={index}
-                                historicTitle={item.Titulo}
-                                historicDate={item.Data}
-                            />
-                        ))}
-
-                    </div>
-                </div>
-            </section>
-
-
-            <section id="user-info">
-                {/*
-                <div id="personal-info1">
-                    <div id="info-header">
-                        <h2>Informações</h2>
-                        <button id="edit-btn">Editar</button>
-                    </div>
-                    <hr id="line" />
-                    <div id="info-data">
-                        <DataField title={"Nome"} info={"Nome"} />
-                        <DataField title={"Sobrenome"} info={"Sobrenome"} />
-                        <DataField title={"Email"} info={"Email"} />
-                        <DataPasswordField title={"Senha"} info={"Senha"} />
-                    </div>
-                </div>
-                
-                */ }
+          <div id="info-historic">
+            {history.map((item, index) => (
+              <HistoricCard
+                key={index}
+                historicTitle={item.Titulo}
+                historicDate={item.Data}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
 
 
-             
+      {/* ================= DELETE ACCOUNT ================= */}
+      <div id="delete">
+        <button id="delete-btn" onClick={() => setOpenSnackbar(true)}>
+          Deletar conta
+        </button>
 
+        <Snackbar
+          open={openSnackbar}
+          autoHideDuration={1000}
+          onClose={() => setOpenSnackbar(false)}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <MuiAlert variant="filled" severity="success" sx={{ width: "100%" }}>
+            Usuário foi deletado
+          </MuiAlert>
+        </Snackbar>
 
-            </section>
+        {openEditModal && (
+  <EditProfileModal
+    onClose={() => setOpenEditModal(false)}
+    userData={userData}
+    onSave={(newData) => setUserData(newData)}
+  />
+)}
 
-            <div id="delete">
-                <button id="delete-btn" onClick={() => setOpen(true)}>
-                    Deletar conta
-                </button>
-
-
-                <Snackbar
-                    open={open}
-                    autoHideDuration={1000}
-                    onClose={() => setOpen(false)}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'right', }}
-                >
-                    <MuiAlert variant="filled" severity="success" sx={{ width: '100%' }}>
-                        Usuario foi deletado
-                    </MuiAlert>
-                </Snackbar>
-
-            </div>
-
-
-
-        </div >
-
-    );
+      </div>
+    </div>
+  );
 }

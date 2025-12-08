@@ -169,6 +169,13 @@ main {
     color: #fff;
 }
 
+
+.dark .section {
+    color: #ffffff;
+}
+
+
+
 /* Container geral */
 .dark .container_area_registers {
     background-color: transparent;

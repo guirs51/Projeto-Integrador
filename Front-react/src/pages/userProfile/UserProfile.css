@@ -11,49 +11,50 @@
    VARIÁVEIS
 ========================================================= */
 :root {
-    --bg: rgb(223, 223, 223);
-    --card: rgb(245, 245, 245);
-    --text: black;
-    --text-light: rgb(0, 0, 0);
-    --line: rgb(228, 228, 228);
-    --btn-bg: rgba(241, 241, 241, 0.904);
-    --accent: rgb(35, 201, 192);
+    --bg: #dfdfdf;
+    --card: #f5f5f5;
+    --text: #000;
+    --text-light: #222;
+    --line: #e4e4e4;
+    --btn-bg: #f1f1f1;
+    --accent: #23c9c0;
+    --sidebar-bg: #ffffff;
 }
 
 .dark {
     --bg: #0f0f0f;
     --card: #1a1a1a;
-    --side-bar: #0000
-    --text: #ffffff;
+    --text: #fff;
     --text-light: #e1e1e1;
     --line: #333;
     --btn-bg: #222;
     --accent: #23c9c0;
+    --sidebar-bg: #141414;
 }
 
 /* =========================================================
    LAYOUT PRINCIPAL
 ========================================================= */
 #default {
- 
-  
     padding: 40px;
-   padding-left: 200px;
+    padding-left: 200px;
     width: 80vw;
+  
+    color: var(--text);
+    transition: background .2s, color .2s;
 }
 
 /* =========================================================
-   PROFILE CARD (FOTO + INFO)
+   PROFILE CARD
 ========================================================= */
 .profile-card {
     background: var(--card);
     border-radius: 16px;
     padding: 32px;
-  
     width: 100%;
-    max-width: 850px;       
+    max-width: 850px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    border: 1px solid rgba(255, 255, 255, 0.937);
+    border: 1px solid rgba(255,255,255,0.2);
 }
 
 .profile-header {
@@ -67,14 +68,13 @@
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 12px;
-    margin-right: 590px;
 }
 
 /* =========================================================
-   SEÇÕES DO CARD (INFO / BIO)
+   SECTIONS
 ========================================================= */
 .section {
-        background: var(--card);
+    background: var(--card);
     border-radius: 10px;
     padding: 18px 20px;
     margin-top: 25px;
@@ -91,37 +91,37 @@
 .section-title span {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
-    margin-top: -20px;
-    margin-bottom: 20px;
-}
-
-.edit-btn {
-    display: flex;
-    flex-direction: row;
-    border: 1px solid #ccc;
-    background: rgb(47, 77, 43);
-    padding: 6px 4px;
-    border-radius: 8px;
-    cursor: pointer;
-    width: 90px;
-    height: 40px;
-    margin-top: -20px;
+    color: var(--text);
 }
 
 /* =========================================================
-   GRID DE INFORMAÇÕES
+   BOTÃO EDITAR
+========================================================= */
+.edit-btn {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    background: rgb(47, 77, 43);
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-size: 14px;
+    transition: 0.2s;
+}
+
+.edit-btn:hover {
+    background: rgb(38, 62, 35);
+}
+
+/* =========================================================
+   GRID DE DADOS
 ========================================================= */
 .info-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 5px;
-}
-
-.info-item label {
-    font-size: 13px;
-    font-weight: bold;
-    color: #666;
+    gap: 14px;
 }
 
 /* =========================================================
@@ -133,145 +133,51 @@
 }
 
 /* =========================================================
-   BOTÕES EXTERNOS (EDITAR / MAIS INFO)
-========================================================= */
-#edit-btn {
-    width: 8vw;
-    border-radius: 10px;
-    background-color: var(--accent);
-    margin-right: 10px;
-    height: 5vh;
-}
-
-#more-info-btn {
-    width: 8vw;
-    border-radius: 10px;
-    background-color: var(--accent);
-    margin-right: 10px;
-    height: 5vh;
-    font-size: 12px;
-}
-
-/* =========================================================
-   PERSONAL INFO (CARD ANTIGO)
-========================================================= */
-#personal-info {
-    flex: 1;
-    background-color: var(--card);
-    border-radius: 20px;
-    padding: 25px;
-    min-width: 300px;
-    border: 1px solid #7f7f7f;
-    font-size: 15px;
-}
-
-/* Espaço entre campos */
-#personal-info #info-data {
-    row-gap: 10px;
-    column-gap: 20px;
-    height: auto;
-}
-
-/* Título dentro do card */
-#info-header {
-    display: flex;
-    align-items: center;
-    gap: 50px;
-    width: 100%;
-    padding: 20px;
-    justify-content: space-between;
-    margin-left: 30px;
-    font-size: 15px;
-}
-
-#line {
-    display: flex;
-    align-self: center;
-    background-color: var(--line);
-    width: 45vw;
-    height: 0.1px;
-    border: none;
-}
-
-/* GRID DOS CAMPOS ANTIGOS */
-#info-data {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    column-gap: 40px;
-    row-gap: 30px;
-    font-size: 15px;
-    height: 130px;
-}
-
-#data-field {
-    width: 100%;
-    background-color: var(--card);
-}
-
-/* =========================================================
-   USER INFO SECTIONS
-========================================================= */
-#user-info {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 100%;
-    align-items: flex-start;
-    justify-content: space-between;
-    font-size: 10px;
-}
-
-/* =========================================================
    HISTÓRICO
 ========================================================= */
-#info-historic {
-      background: var(--card);
-    border-radius: 10px;
-    padding: 18px 20px;
-    margin-top: 25px;
-
-    display: block;
-    box-shadow: none; 
-}
-
 #personal-info {
-    margin-left: 10px;
     margin-top: 40px;
-     border: 1px solid #7f7f7f3e;
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid #7f7f7f3e;
+    padding: 25px;
 }
-#personal-info #info-header {
+
+#info-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 12px;
-    padding: 0 0 10px 0;
-  
 }
 
-#personal-info #info-header h2 {
+#info-header h2 {
     font-size: 18px;
     font-weight: 600;
-    color: #000;
+    color: var(--text);
 }
-/* Botão "Mais Informações" com o mesmo estilo do botão editar */
+
 #more-info-btn {
     background: rgb(47, 77, 43);
     color: white;
     border: none;
-    padding: 6px 14px;
+    padding: 8px 16px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 14px;
-    height: 40px;
-    transition: background-color 0.2s;
+    transition: 0.2s;
 }
 
 #more-info-btn:hover {
     background: rgb(38, 62, 35);
 }
 
+#info-historic {
+    margin-top: 12px;
+    padding: 10px 5px;
+}
+
 /* =========================================================
-   DELETAR CONTA
+   BOTÃO DELETAR CONTA
 ========================================================= */
 #delete {
     display: flex;
@@ -282,16 +188,16 @@
 
 #delete-btn {
     width: 10vw;
-    height: 5vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--btn-bg);
-    
+    height: 45px;
+    background: var(--btn-bg);
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: 0.2s;
 }
 
 #delete-btn:hover {
-    background-color: rgba(255, 0, 0, 0.671);
+    background: rgba(255, 0, 0, 0.7);
     color: white;
 }
 
@@ -299,24 +205,15 @@
    SIDEBAR
 ========================================================= */
 .sidebar {
-     width: 220px;
+    width: 220px;
     height: 100%;
-    background-color: #ffffff;
-    flex-direction: column;
-    font-family: sans-serif;
+    background: var(--sidebar-bg);
     padding: 30px;
-    margin-top: 0px;
     position: fixed;
     top: 0;
     left: 0;
-    color: rgb(2, 2, 2);;
-}
-
-.section-title {
-     font-size: 12px;
-  color: #777;
-  margin: 20px 0 10px;
-  font-weight: bold;
+    color: var(--text);
+    transition: background .2s;
 }
 
 .nav {
@@ -329,10 +226,9 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 6px 2px;
+    padding: 8px;
     text-decoration: none;
-    color: #444;
-    cursor: pointer;
+    color: var(--text-light);
     border-radius: 6px;
     transition: 0.2s;
 }
@@ -346,10 +242,6 @@
     font-weight: bold;
 }
 
-.bottom {
-    margin-top: 260px;
-}
-
 .logout {
     color: #d9534f;
 }
@@ -358,4 +250,6 @@
     background: #fceaea;
 }
 
-
+.bottom {
+    margin-top: 260px;
+}

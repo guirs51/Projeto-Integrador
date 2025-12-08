@@ -8,6 +8,7 @@ import Materials from "../pages/materials/Materials";
 import Location from "../pages/location-search/Location"
 import UserProfile from "../pages/userProfile/userProfile";
 import Bonifications from "../pages/bonifications/Bonifications"
+import HistoricRec from "../pages/reciclagens/HistoricRec"
 import path from "path";
 import { elements } from "chart.js";
 
@@ -53,6 +54,10 @@ const routes = [
       {
         path: "bonifications",
         element: <Bonifications/>
+      }, 
+      {
+        path: "recycling",
+        element: <HistoricRec/>
       }
     ]
   }
