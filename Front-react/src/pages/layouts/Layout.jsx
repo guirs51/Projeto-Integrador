@@ -2,18 +2,15 @@ import { BookOpen, CheckSquare, Home, Inbox, LogOut, Settings, Users, Sun, Moon 
 import "../../global.css"
 import "./layout.css"
 import { Outlet } from "react-router-dom"
-import { useState } from "react"
+
+import { useTheme } from "../../contexts/DarkModeContext";
 
 export default function Layout() {
-    const [darkMode, setDarkMode] = useState(false);
+  const { darkMode, toggleDarkMode } = useTheme();
 
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        document.body.classList.toggle("dark");
-    };
-
+ 
     return (
-        <div className="w-full h-full flex">
+        <div className="w-full h-full flex" >
             <div className="sidebar-container">
                 <aside className="sidebar">
 

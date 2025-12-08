@@ -14,6 +14,7 @@
   align-items: center;
   z-index: 1000;
   backdrop-filter: blur(3px);
+  outline: none;
 }
 
 /* ==================================== */
@@ -55,7 +56,7 @@
 }
 
 .modal-form input:focus {
-  border-color: #4f46e5;
+  border-color: #2b8842;
 }
 
 /* Buttons */

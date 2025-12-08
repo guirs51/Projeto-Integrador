@@ -4,7 +4,7 @@
     box-sizing: border-box;
 }
 
-#card {
+#cardHist {
     display: flex;
     flex-direction: column;
     background-color: rgba(207, 207, 207, 0.11);
@@ -14,12 +14,12 @@
     padding: 10px;
 }
 
-#text-title {
+#text-hist1 {
     color: black;
     text-decoration: none;
 
 }
 
-#text-date {
+#text-dateHist {
     color: rgba(0, 0, 0, 0.514);
 }

@@ -181,6 +181,13 @@ main {
     background-color: transparent;
 }
 
+/*reciclagem*/
+
+.dark #text-dateHist {
+    color: #2e7d32;
+}
+
+
 /* ========================= */
 /*        LIGHT MODE         */
 /* ========================= */
@@ -209,6 +216,12 @@ body:not(.dark) .nav-item:hover {
 body:not(.dark) .nav-item.active {
     color: #2e7d32;   /* verde suave */
 }
+body:not(.dark) .logout {
+    color: #ff6b6b;
+}
+body:not(.dark).logout:hover {
+    background: rgba(255, 0, 0, 0.1);
+}
 
 /* Card de usuário */
 body:not(.dark) .usuario-info {
@@ -220,7 +233,7 @@ body:not(.dark) .usuario-info {
 
 /* Títulos */
 body:not(.dark) .big-text {
-    color: #222;
+    color: #333333;
 }
 body:not(.dark) .bio {
     color: #555;
@@ -244,8 +257,9 @@ body:not(.dark) .line2 {
 /* Área de registros */
 body:not(.dark) .registers_area {
     background-color: transparent;
-    color: #222;
+    color: #333333;
 }
+
 
 /* Card de pontos */
 body:not(.dark) .points {
