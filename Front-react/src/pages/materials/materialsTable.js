@@ -1,10 +1,6 @@
-export interface Material {
-  name: string;
-  importance: number; 
-  points: number;
-}
 
-export const materials: Material[] = [
+
+export const materials = [
   { name: "Alumínio (latas)", importance: 5, points: 40 },
   { name: "Cobre", importance: 4, points: 30 },
   { name: "Plástico PET", importance: 4, points: 25 },

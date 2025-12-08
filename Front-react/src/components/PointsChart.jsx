@@ -1,12 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
-interface Props {
-  points: number;
-}
 
 
-export default function PointsChart({ points }: Props) {
+export default function PointsChart({ points }) {
   const chartRef = useRef<HTMLCanvasElement | null>(null);
   const chartInstance = useRef<Chart | null>(null);
 
