@@ -1,11 +1,9 @@
 import React, { useEffect, useRef } from "react";
 import Chart from "chart.js/auto";
 
-
-
 export default function PointsChart({ points }) {
-  const chartRef = useRef<HTMLCanvasElement | null>(null);
-  const chartInstance = useRef<Chart | null>(null);
+  const chartRef = useRef(null);
+  const chartInstance = useRef(null);
 
   useEffect(() => {
     if (!chartRef.current) return;
@@ -20,9 +18,8 @@ export default function PointsChart({ points }) {
         labels: ["Pontos"],
         datasets: [
           {
-            data: [points, 100 - points],
+            data: [points, Math.max(0, 100 - points)],
             backgroundColor: ["#4CAF50", "#e0e0e0"],
-           // cutout: "70%", // Faz virar estilo "anel"
           },
         ],
       },
@@ -33,6 +30,12 @@ export default function PointsChart({ points }) {
         },
       },
     });
+
+    return () => {
+      if (chartInstance.current) {
+        chartInstance.current.destroy();
+      }
+    };
   }, [points]);
 
   return <canvas ref={chartRef} />;

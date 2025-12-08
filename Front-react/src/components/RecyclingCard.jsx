@@ -1,13 +1,9 @@
 import React from 'react';
 import './RecyclingCard.css';
 
-interface RecyclingCardProps {
-  material: string;
-  quantidade: string;
-  localizacao: string;
-}
 
-export default function RecyclingCard({ material, quantidade, localizacao }: RecyclingCardProps) {
+
+export default function RecyclingCard({ material, quantidade, localizacao }) {
   return (
     <div className="recycling-card">
       <h3>{material}</h3>

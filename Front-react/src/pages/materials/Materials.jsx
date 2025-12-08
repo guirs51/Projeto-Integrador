@@ -1,5 +1,5 @@
 import React from "react";
-import { materials,Material } from "./materialsTable";
+import { materials } from "./materialsTable";
 
 export default function MaterialsTable() {
   return (
@@ -17,7 +17,7 @@ export default function MaterialsTable() {
           </thead>
 
           <tbody>
-            {materials.map((item: Material, index: number) => (
+            {materials.map((item, index) => (
               <tr
                 key={index}
                 className="border-b border-gray-500 dark:border-gray-200 hover:bg-green-500/300 dark:hover:bg-green-500/3 transition"

@@ -1,188 +1,176 @@
-import React, { useEffect, useState } from 'react';
-import NewRecyclingModal from '../../components/NewRecyclingModal';
-import RecyclingCard from '../../components/RecyclingCard';
-import './UserHome.css'
-import "../../global.css"
+import React, { useEffect, useState } from "react";
+import NewRecyclingModal from "../../components/NewRecyclingModal";
+import RecyclingCard from "../../components/RecyclingCard";
+import "./UserHome.css";
+import "../../global.css";
 import PointsChart from "../../components/PointsChart";
 
 import {
-    ArchiveRestore, PlusCircle, Home,
-    Inbox,
-    BookOpen,
-    CheckSquare,
-    Users,
-    Settings,
-    LogOut,
-    Sun,
-    Moon,
-    User
-} from 'lucide-react';
-import { useLocation } from 'react-router';
+  ArchiveRestore,
+  PlusCircle,
+  Sun,
+  Moon
+} from "lucide-react";
 
+import { useLocation } from "react-router";
 
-interface RecyclingData {
-    material: string;
-    quantidade: string;
-    localizacao: string;
-}
+export default function UserHome() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [recyclingHistory, setRecyclingHistory] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
-interface User {
-    id: number
-    name: string
-    email: string
-    cpf: string
-    Points: number
-}
+  const [user, setUser] = useState(null);
+  const token = localStorage.getItem("token");
 
-export default function ProfilePage() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [recyclingHistory, setRecyclingHistory] = useState<RecyclingData[]>([]);
-    const [darkMode, setDarkMode] = useState(false);
-    const handleAddRecycling = (newItem: RecyclingData) => {
-        setRecyclingHistory((prev) => [...prev, newItem]);
+  const location = useLocation();
+  const { id, mensagem } = location.state || {};
+  console.log("Voce " + mensagem + " um " + id);
 
-    };
+  // ---------------------------
+  // 🔥 DARK MODE PERSISTENTE
+  // ---------------------------
+  useEffect(() => {
+    const savedMode = JSON.parse(localStorage.getItem("darkMode"));
 
-    const [user, setUser] = useState<User | null>(null)
-    const token = localStorage.getItem("token")
-    const location = useLocation()
-    const { id, mensagem } = location.state || {}
-    console.log("Voce " + mensagem + " um " + id)
-
-    useEffect(() => {
-        async function getUser() {
-            try {
-                const response = await fetch(`http://localhost:3000/users/${id}`, {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": "Bearer " + token
-                    }
-                });
-
-                const data = await response.json();
-
-                if (!response.ok) {
-                    alert(
-                        "Erro ao buscar dados do usuário: " +
-                        response.status + " " + data.mensagem
-                    );
-                    return;
-                }
-
-                setUser(data);
-            } catch (error) {
-                console.error("Erro de rede:", error);
-            }
-        }
-
-        if (id && token) {
-            getUser();
-        }
-    }, [id, token]);
-    const points = recyclingHistory.length * 10;
-
-    const toggleDarkMode = () => {
-        setDarkMode(!darkMode);
-        document.body.classList.toggle("dark");
+    if (savedMode) {
+      setDarkMode(true);
+      document.body.classList.add("dark");
     }
-    return (
-        <div className="container">
+  }, []);
 
-            <NewRecyclingModal
-                isOpen={isModalOpen}
-                onClose={() => setIsModalOpen(false)}
-                onSubmit={handleAddRecycling}
-            />
+  const toggleDarkMode = () => {
+    const newMode = !darkMode;
+    setDarkMode(newMode);
 
-         
+    document.body.classList.toggle("dark", newMode);
 
+    localStorage.setItem("darkMode", JSON.stringify(newMode));
+  };
 
-            <div className='usuario-info'>
-                <img src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8cGxhbnRhJTIwdHJvcGljYWx8ZW58MHx8MHx8fDA%3D&fm=jpg&q=60&w=3000" alt="" id="img" />
+  // ----------------------------
+  // 🔥 BUSCAR DADOS DO USUÁRIO
+  // ----------------------------
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + token
+          }
+        });
 
-                <div className="bio">
-                    <h1 className="big-text">{user?.name || "null"} </h1>
-                    <h2>Hi, my names is Fulana! im developer sistems and i have 18 years old.</h2>
-                    <h3>rua tal 123</h3>
-                </div>
-            </div>
+        const data = await response.json();
 
-            <hr className='line'></hr>
+        if (!response.ok) {
+          alert(
+            "Erro ao buscar dados do usuário: " +
+              response.status +
+              " " +
+              data.mensagem
+          );
+          return;
+        }
 
-            <div className='btn flex items-center gap-2  '>
-                
-                    <PlusCircle onClick={() => setIsModalOpen(true)} size={20} color='black' />
-                
-                <span>Adicionar reciclagem</span>
-            </div>
+        setUser(data);
+      } catch (error) {
+        console.error("Erro de rede:", error);
+      }
+    }
 
-            {/* <div className="card-grid">
-                {recyclingHistory.map((item, index) => (
-                    <RecyclingCard
-                        key={index}
-                        material={item.material}
-                        quantidade={item.quantidade}
-                        localizacao={item.localizacao}
-                    />
-                ))}
-            </div>
+    if (id && token) {
+      getUser();
+    }
+  }, [id, token]);
 
+  // ----------------------------
+  // 🔥 ADICIONAR RECICLAGEM
+  // ----------------------------
+  const handleAddRecycling = (newItem) => {
+    setRecyclingHistory((prev) => [...prev, newItem]);
+  };
 
+  const points = recyclingHistory.length * 10;
 
-            <div className='points-container'>
-                <hr className="line2" />
+  return (
+    <div className="container">
 
-                <div className='points'>
-                    <h1>Pontos acumulados</h1>
-                </div>
+      {/* MODAL */}
+      <NewRecyclingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onSubmit={handleAddRecycling}
+      />
 
-            </div> */}
+      {/* USUÁRIO */}
+      <div className="usuario-info">
+        <img
+          src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000"
+          alt="foto"
+          id="img"
+        />
 
-
-            <div className="container_area_registers">
-
-
-                <div className="registers_area">
-                    <div className="registers_title">
-                        <ArchiveRestore />
-                        <h1>Área dos Registros Pendentes</h1>
-
-                    </div>
-
-                    <div className='registers_log sem-scrollbar'>
-                        {recyclingHistory.length < 1 ? (
-                            <div className='nothing_registers'>
-                                <h2>Você não possui registros</h2>
-                            </div>
-                        ) : (
-                            <div>
-                                {recyclingHistory.map((item, index) => (
-                                    <RecyclingCard
-                                        key={index}
-                                        material={item.material}
-                                        quantidade={item.quantidade}
-                                        localizacao={item.localizacao}
-                                    />
-                                ))}
-                            </div>
-                        )}
-
-                    </div>
-
-                </div>
-
-
-            <div className="points_log">
-                    <div className="points_area">
-                        <h1>Pontuação</h1>
-                        <PointsChart points={points} />
-                        <p className="points_number">{points} pontos</p>
-                    </div>
-                </div>
-
-            </div>
-
+        <div className="bio">
+          <h1 className="big-text">{user?.name || "Usuário"}</h1>
+          <h2>
+            Hi, my name is Fulana! I'm a system developer and I am 18 years
+            old.
+          </h2>
+          <h3>Rua Tal, 123</h3>
         </div>
-    );
+      </div>
+
+    
+      <hr className="line" />
+
+      {/* BOTÃO DE ADICIONAR */}
+      <div className="btn flex items-center gap-2">
+        <PlusCircle
+          onClick={() => setIsModalOpen(true)}
+          size={20}
+          color="black"
+        />
+        <span>Adicionar reciclagem</span>
+      </div>
+
+      {/* ÁREA DOS REGISTROS */}
+      <div className="container_area_registers">
+        <div className="registers_area">
+          <div className="registers_title">
+            <ArchiveRestore />
+            <h1>Área dos Registros Pendentes</h1>
+          </div>
+
+          <div className="registers_log sem-scrollbar">
+            {recyclingHistory.length === 0 ? (
+              <div className="nothing_registers">
+                <h2>Você não possui registros</h2>
+              </div>
+            ) : (
+              <div>
+                {recyclingHistory.map((item, index) => (
+                  <RecyclingCard
+                    key={index}
+                    material={item.material}
+                    quantidade={item.quantidade}
+                    localizacao={item.localizacao}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* PONTUAÇÃO */}
+        <div className="points_log">
+          <div className="points_area">
+            <h1>Pontuação</h1>
+            <PointsChart points={points} />
+            <p className="points_number">{points} pontos</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }

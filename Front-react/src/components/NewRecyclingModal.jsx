@@ -1,24 +1,12 @@
-import React, { useState, ChangeEvent, FormEvent } from 'react';
+import React, { useState } from 'react';
 import './NewRecyclingModal.css';
-
-interface RecyclingData {
-  material: string;
-  quantidade: string;
-  localizacao: string;
-}
-
-interface NewRecyclingModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (data: RecyclingData) => void;
-}
 
 export default function NewRecyclingModal({
   isOpen,
   onClose,
   onSubmit
-}: NewRecyclingModalProps) {
-  const [formData, setFormData] = useState<RecyclingData>({
+}) {
+  const [formData, setFormData] = useState({
     material: '',
     quantidade: '',
     localizacao: ''
@@ -26,16 +14,15 @@ export default function NewRecyclingModal({
 
   if (!isOpen) return null;
 
- 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value
-    } as RecyclingData)); 
+    }));
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     onSubmit(formData);
     setFormData({ material: '', quantidade: '', localizacao: '' });
@@ -43,10 +30,12 @@ export default function NewRecyclingModal({
   };
 
   return (
-    <div className={`modal-overlay ${isOpen ? "active" : ""}`} onClick={onClose} >
+    <div className={`modal-overlay ${isOpen ? "active" : ""}`} onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Registrar Nova Reciclagem</h2>
+
         <form onSubmit={handleSubmit} className="modal-form">
+
           <label>
             Tipo de Material:
             <input
@@ -87,10 +76,12 @@ export default function NewRecyclingModal({
             <button type="submit" className="save-btn">
               Salvar
             </button>
+
             <button type="button" className="cancel-btn" onClick={onClose}>
               Cancelar
             </button>
           </div>
+
         </form>
       </div>
     </div>
