@@ -26,9 +26,7 @@ export default function UserHome() {
   const { id, mensagem } = location.state || {};
   console.log("Voce " + mensagem + " um " + id);
 
-  // ---------------------------
-  // 🔥 DARK MODE PERSISTENTE
-  // ---------------------------
+ 
   useEffect(() => {
     const savedMode = JSON.parse(localStorage.getItem("darkMode"));
 
@@ -47,9 +45,7 @@ export default function UserHome() {
     localStorage.setItem("darkMode", JSON.stringify(newMode));
   };
 
-  // ----------------------------
-  // 🔥 BUSCAR DADOS DO USUÁRIO
-  // ----------------------------
+
   useEffect(() => {
     async function getUser() {
       try {

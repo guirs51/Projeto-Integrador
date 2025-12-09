@@ -24,7 +24,7 @@ const [userData, setUserData] = useState({
   nome: "Fulano",
   sobrenome: "Silva",
   email: "fulano@email.com",
-  bio: "Hi 👋, I'm Fulano, a passionate developer..."
+  bio: "Hi, I'm Fulano, a passionate developer..."
 });
 
   const history = historyData.Atividades;
