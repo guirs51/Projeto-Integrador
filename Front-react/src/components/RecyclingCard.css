@@ -5,7 +5,7 @@
 
 .recycling-card {
   background-color: #ffffff;
-  border: 2px solid #39993ca2;
+  border: 1px solid #39993ca2;
   border-radius: 12px;
   padding: 16px;
   margin: 14px;
@@ -40,7 +40,7 @@
 
 .dark .recycling-card {
   background-color: #1c1c1c;
-  border: 1px solid #333;
+  border: 1px solid #48772c;
   box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.45);
 }
 

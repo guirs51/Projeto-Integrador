@@ -39,11 +39,17 @@
     padding: 40px;
     padding-left: 200px;
     width: 80vw;
-  
     color: var(--text);
     transition: background .2s, color .2s;
 }
 
+.dark #default {
+    padding: 40px;
+    padding-left: 200px;
+    width: 80vw;
+    color: var(--text);
+    transition: background .2s, color .2s;
+}
 /* =========================================================
    PROFILE CARD
 ========================================================= */
@@ -136,6 +142,14 @@
    HISTÓRICO
 ========================================================= */
 #personal-info {
+    margin-top: 40px;
+    background: var(--card);
+    border-radius: 12px;
+    border: 1px solid #7f7f7f3e;
+    padding: 25px;
+}
+
+.dark #personal-info {
     margin-top: 40px;
     background: var(--card);
     border-radius: 12px;

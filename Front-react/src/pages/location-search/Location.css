@@ -191,30 +191,27 @@ body.dark-mode .content {
 
 
 /* Location dark mode */
-body.dark-mode .location-page {
-  background: #11110f;
-}
 
-body.dark-mode .location-card {
+
+body.dark .location-card {
   background: #1b1c1d;
   color: #e5e5e5;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
 }
 
-body.dark-mode .search-box {
-  background: #313132;
+.dark .search-box {
+  background: #dadadb;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.201);
 }
 
-body.dark-mode .search-input {
-  color: #e5e5e5;
+.dark .search-input {
+  color: #444343;
 }
 
-body.dark-mode .search-icon {
-  color: #b0b0b0;
+.dark .search-icon {
+  color: #212121;
 }
-
-body.dark-mode .clear-btn {
+.dark .clear-btn {
   background: #2c2f33;
   color: #e5e5e5;
 }
@@ -223,7 +220,7 @@ body.dark-mode .clear-btn:hover {
   background: #3a3d42;
 }
 
-body.dark-mode .map-placeholder {
+.dark .map-placeholder {
   background: #1b1c1d;
   border-color: #33373d;
   color: #d0d0d0;

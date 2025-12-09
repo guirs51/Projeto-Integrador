@@ -9,6 +9,10 @@
     font-size: 1rem;
 }
 
+.dark #text-local {
+    color: rgba(255, 253, 253, 0.753);
+    font-size: 1rem;
+}
 
 
 #input-field::placeholder {
@@ -16,6 +20,11 @@
     font-size: 1rem;
 }
 
+.dark 
+#input-field::placeholder {
+    color: rgb(176, 176, 176);
+    font-size: 1rem;
+}
 #data-field {
     display: flex;
     flex-direction: column;

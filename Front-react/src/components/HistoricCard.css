@@ -7,9 +7,9 @@
 #cardHist {
     display: flex;
     flex-direction: column;
-    background-color: rgba(207, 207, 207, 0.11);
+    background-color: rgba(207, 203, 203, 0.11);
     border-radius: 15px;
-    height: 7vh;
+    height: 9vh;
     width: 43vw;
     padding: 10px;
 }
@@ -23,3 +23,14 @@
 #text-dateHist {
     color: rgba(0, 0, 0, 0.514);
 }
+.dark #cardHist {
+    background-color: rgb(37, 37, 37);
+      border: 1px solid #4e7e2a9f;
+ 
+}
+.dark #text-dateHist {
+    color: #ffffff;
+  
+}
+
+

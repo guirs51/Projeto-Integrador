@@ -69,7 +69,7 @@ const [userData, setUserData] = useState({
           </div>
 
           <p className="bio-text">
-            Hi 👋, I'm Fulano, a passionate developer focused on crafting great
+            Hi, I'm Fulano, a passionate developer focused on crafting great
             digital experiences...
           </p>
         </div>
