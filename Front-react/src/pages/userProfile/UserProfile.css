@@ -36,6 +36,10 @@
    LAYOUT PRINCIPAL
 ========================================================= */
 #default {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     padding: 40px;
     padding-left: 200px;
     width: 80vw;
@@ -54,6 +58,9 @@
    PROFILE CARD
 ========================================================= */
 .profile-card {
+    display: flex;
+    flex-direction: column;
+
     background: var(--card);
     border-radius: 16px;
     padding: 32px;
@@ -195,9 +202,8 @@
 ========================================================= */
 #delete {
     display: flex;
-    justify-content: end;
-    margin-top: 190px;
-    padding: 25px;
+    margin-left:650px ;
+    padding: 10px;
 }
 
 #delete-btn {

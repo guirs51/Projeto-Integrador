@@ -10,8 +10,9 @@
     background-color: rgba(207, 203, 203, 0.11);
     border-radius: 15px;
     height: 9vh;
-    width: 43vw;
+    width: 38vw;
     padding: 10px;
+    margin-top:3px ;
 }
 
 #text-hist1 {

@@ -27,29 +27,18 @@ export default function SearchInput({ mapRef }) {
 
         if (!map) return;
 
-        // move o mapa
         map.setView([lat, lon], 15);
 
-        // adiciona marker
-        L.marker([lat, lon])
-            .addTo(map)
-            .bindPopup(r.display_name)
-            .openPopup();
     }
 
     return (
-        <input
+        <input id="search-input"
             type="text"
             placeholder="Buscar endereço..."
             value={text}
             onChange={handleSearch}
             style={{
-                zIndex: 9999,
-                backgroundColor:"transparent",
-                padding: 10,
-                background: "transparent",
-                border: "0",
-                outline: "none"
+
             }}
         />
     );

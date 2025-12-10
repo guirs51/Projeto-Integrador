@@ -55,7 +55,7 @@ function Register() {
                 <div className='register-card-esquerda'>
                     <div className='register'>
                         <h1>Bem-vindo ao <span>Recicle +</span></h1>
-                        <h2>Junte-se à nossa comunidade na busca por um futuro melhor. <span>future</span>.</h2>
+                        <h2>Junte-se à nossa comunidade na busca por um futuro melhor.</h2>
                     </div>
                     <div className='form'>
                         <form >
@@ -70,7 +70,7 @@ function Register() {
                         <button onClick={createUser}>Cadastrar</button>
 
                         <div className='createAccount'>
-                            <h1>Já tem uma conta? <a href="./login">Entre agora!</a></h1>
+                            <h1 className='redirect-text'>Já tem uma conta? <a href="./login">Entre agora!</a></h1>
                         </div>
 
                         <p>Ou continue com</p>

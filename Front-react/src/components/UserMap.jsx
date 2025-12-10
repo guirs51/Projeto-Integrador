@@ -14,7 +14,8 @@ export default function UserMap({ mapRef }) {
         L.tileLayer(
             'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=57544848-9855-440b-92b6-a416e1141fd2',
             {
-                maxZoom: 20,
+                maxZoom: 19,
+                minZoom:8 ,
                 ext: 'jpg'
             }
         ).addTo(map);
@@ -25,6 +26,8 @@ export default function UserMap({ mapRef }) {
 
                 const lat = pos.coords.latitude;
                 const lon = pos.coords.longitude;
+
+                map.setView([lat,lon],20)
 
                 L.marker([lat, lon]).addTo(map)
                     .bindPopup("📍 Você está aqui!")

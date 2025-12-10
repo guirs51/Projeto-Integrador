@@ -144,6 +144,10 @@ p {
   position: relative;
 }
 
+.redirect-text{
+  font-size: 0.9rem;
+}
+
 .google-logo {
   position: absolute;
   left: 30px;

@@ -59,7 +59,6 @@ function Login() {
             </h1>
             <h2>
               Junte-se à nossa comunidade na busca por um futuro melhor.{" "}
-              <span>future</span>.
             </h2>
           </div>
           <div className="form">
@@ -91,7 +90,7 @@ function Login() {
             <button onClick={login}>Entrar</button>
 
             <div className="loginAccount">
-              <h1>
+              <h1 className="redirect-text">
                 {" "}
                 Não tem uma conta? <a href="./regis">Crie agora!</a>
               </h1>
