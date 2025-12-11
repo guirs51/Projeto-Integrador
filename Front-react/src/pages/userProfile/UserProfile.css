@@ -16,7 +16,7 @@
     --text: #000;
     --text-light: #222;
     --line: #e4e4e4;
-    --btn-bg: #f1f1f1;
+    --btn-bg: #c4c4c4;
     --accent: #23c9c0;
     --sidebar-bg: #ffffff;
 }
@@ -46,6 +46,8 @@
     color: var(--text);
     transition: background .2s, color .2s;
 }
+
+
 
 .dark #default {
     padding: 40px;

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
-
+import { useNavigate } from "react-router-dom";
 // Components
 import DataField from "../../components/DataField";
 import DataPasswordField from "../../components/DataPasswordField";
@@ -14,14 +14,14 @@ import historyData from "./testHistorico.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Edit, User } from "lucide-react";
-import { useLocation } from "react-router";
+import { Navigate, useLocation } from "react-router";
 
 export default function UserProfile() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-const [openEditModal, setOpenEditModal] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
 
-const [user, setuser] = useState( null
+  const [user, setuser] = useState(null
   /*{
   nome: "Fulano",
   sobrenome: "Silva",
@@ -29,7 +29,9 @@ const [user, setuser] = useState( null
   bio: "Hi, I'm Fulano, a passionate developer..."
 } */);
 
-const token = localStorage.getItem("token")
+  const navigate = useNavigate();
+
+  const token = localStorage.getItem("token")
 
   const location = useLocation();
 
@@ -37,46 +39,79 @@ const token = localStorage.getItem("token")
 
   const history = historyData.Atividades;
 
-  useEffect(()=>{
-    if(location.state?.id){
-      localStorage.setItem("id",location.state.id)
+  async function deleteUser(id) {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${id}`, {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        }
+      })
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert("Erro ao deletar usuario " + response.status + " ", data.mensagem)
+        return;
+      }
+      localStorage.removeItem("token")
+      localStorage.removeItem("id")
+
+
+      setOpenSnackbar(true)
+
+      setTimeout(() =>{
+        navigate("/regis")
+      },1200);
+
+
+    } catch (error) {
+      console.error("Erro de rede: " + error);
+
+    }
+  }
+
+  useEffect(() => {
+    if (location.state?.id) {
+      localStorage.setItem("id", location.state.id)
     }
 
     async function getUser() {
       try {
-        const response = await fetch(`http://localhost:3000/users/${id}`,{
+        const response = await fetch(`http://localhost:3000/users/${id}`, {
           method: "GET",
-          headers:{
-            "Content-Type":"application/json",
+          headers: {
+            "Content-Type": "application/json",
             Authorization: "Bearer " + token
           }
         })
 
         const data = await response.json();
 
-        if(!response.ok){
+        if (!response.ok) {
           alert("Erro ao buscar dados do usuário: " + response.status + " " + data.mensagem);
           return
         }
 
         setuser(data)
       } catch (error) {
-        console.error("Erro de rede: "+error);
-        
+        console.error("Erro de rede: " + error);
+
       }
     }
 
     if (id && token) {
       getUser()
     }
-  },[id,token,location.state])
+  }, [id, token, location.state])
 
   return (
     <div id="default" className={darkMode ? "dark" : ""}>
 
       {/* ================= HEADER + PROFILE ================= */}
       <section className="profile-card">
-        
+
         <div className="profile-header">
           <img
             src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&fm=jpg&q=60&w=3000"
@@ -91,7 +126,7 @@ const token = localStorage.getItem("token")
         <div className="section">
           <div className="section-title">
             <span>Informações pessoais</span>
-            <button className="edit-btn"  onClick={() => setOpenEditModal(true)}>
+            <button className="edit-btn" onClick={() => setOpenEditModal(true)}>
               <Edit size={18} /> Editar
             </button>
           </div>
@@ -123,7 +158,7 @@ const token = localStorage.getItem("token")
             <a id="more-info-btn" href='/recycling' >Mais Informações</a>
           </div>
 
-          <hr id="line" />
+          <hr className="line" />
 
           <div id="info-historic">
             {history.map((item, index) => (
@@ -140,7 +175,7 @@ const token = localStorage.getItem("token")
 
       {/* ================= DELETE ACCOUNT ================= */}
       <div id="delete">
-        <button id="delete-btn" onClick={() => setOpenSnackbar(true)}>
+        <button id="delete-btn" onClick={() => deleteUser(user.id)}>
           Deletar conta
         </button>
 
@@ -156,12 +191,12 @@ const token = localStorage.getItem("token")
         </Snackbar>
 
         {openEditModal && (
-  <EditProfileModal
-    onClose={() => setOpenEditModal(false)}
-    userData={user}
-    onSave={(newData) => setuser(newData)}
-  />
-)}
+          <EditProfileModal
+            onClose={() => setOpenEditModal(false)}
+            userData={user}
+            onSave={(newData) => setuser(newData)}
+          />
+        )}
 
       </div>
     </div>

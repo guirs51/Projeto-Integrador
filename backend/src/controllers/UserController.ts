@@ -38,8 +38,10 @@ export class UserController {
 
   async remove(req: Request, res: Response) {
     try {
-      const result = await service.remove(Number(req.params.id))
-      res.json(result)
+      // const result = await service.remove(Number(req.params.id))
+      // res.json(result)
+      await service.remove(Number(req.params.id))
+      return res.json({message:"Usuario deletado com sucesso"})
     } catch (e: any) {
       res.status(404).json({ message: e.message })
     }

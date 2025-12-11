@@ -30,17 +30,20 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
           <label>
             Nome:
             <input
-              name="nome"
-              value={form.nome}
+              name="name"
+              type="text"
+              value={form.name}
               onChange={handleChange}
             />
           </label>
 
           <label>
-            Sobrenome:
+            CPF:
             <input
-              name="sobrenome"
-              value={form.sobrenome}
+
+            type="text"
+              name="cpf"
+              value={form.cpf}
               onChange={handleChange}
             />
           </label>
@@ -59,6 +62,7 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
             Bio:
             <textarea
               name="bio"
+              type="text"
               rows={4}
               value={form.bio}
               onChange={handleChange}
