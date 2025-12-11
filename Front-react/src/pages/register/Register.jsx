@@ -10,7 +10,7 @@ function Register() {
     const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const cpf = "123456"
+    const [cpf,setCpf] = useState('')
 
     const [show, setShow] = useState(false)
 
@@ -61,6 +61,7 @@ function Register() {
                         <form >
                             <input type="text" placeholder='Nome' onChange={(e) => setName(e.target.value)} />
                             <input type="text" placeholder='Email' onChange={(e) => setEmail(e.target.value)} />
+                            <input type="text" placeholder='Cpf' onChange={(e) => setCpf(e.target.value)} />
                             <input type={show ? "text" : "password"} placeholder='Senha' id='password' onChange={(e) => setPassword(e.target.value)} />
                             <button className='btn-view' onClick={mostraOcultar} type='button'>
                                 {!show ? <FaEyeSlash size={20} color='black' /> : <IoEyeSharp size={20} color='black' />}

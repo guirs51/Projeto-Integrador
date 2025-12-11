@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./UserProfile.css";
 
 // Components
@@ -13,21 +13,63 @@ import historyData from "./testHistorico.json";
 // UI
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-import { Edit } from "lucide-react";
+import { Edit, User } from "lucide-react";
+import { useLocation } from "react-router";
 
 export default function UserProfile() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 const [openEditModal, setOpenEditModal] = useState(false);
 
-const [userData, setUserData] = useState({
+const [user, setuser] = useState( null
+  /*{
   nome: "Fulano",
   sobrenome: "Silva",
   email: "fulano@email.com",
   bio: "Hi, I'm Fulano, a passionate developer..."
-});
+} */);
+
+const token = localStorage.getItem("token")
+
+  const location = useLocation();
+
+  const id = location.state?.id || localStorage.getItem("id")
 
   const history = historyData.Atividades;
+
+  useEffect(()=>{
+    if(location.state?.id){
+      localStorage.setItem("id",location.state.id)
+    }
+
+    async function getUser() {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${id}`,{
+          method: "GET",
+          headers:{
+            "Content-Type":"application/json",
+            Authorization: "Bearer " + token
+          }
+        })
+
+        const data = await response.json();
+
+        if(!response.ok){
+          alert("Erro ao buscar dados do usuário: " + response.status + " " + data.mensagem);
+          return
+        }
+
+        setuser(data)
+      } catch (error) {
+        console.error("Erro de rede: "+error);
+        
+      }
+    }
+
+    if (id && token) {
+      getUser()
+    }
+  },[id,token,location.state])
 
   return (
     <div id="default" className={darkMode ? "dark" : ""}>
@@ -55,10 +97,10 @@ const [userData, setUserData] = useState({
           </div>
 
           <div className="info-grid">
-            <DataField title="Nome" info="Fulano" />
-            <DataField title="Sobrenome" info="Silva" />
-            <DataField title="Email" info="fulano@email.com" />
-            <DataPasswordField title="Senha" info="••••••••" />
+            <DataField title="Nome" info={user?.name || ""} />
+            <DataField title="CPF" info={user?.cpf || ""} />
+            <DataField title="Email" info={user?.email || ""} />
+            <DataPasswordField title="Senha" info={user?.senha || "••••••••"} />
           </div>
         </div>
 
@@ -116,8 +158,8 @@ const [userData, setUserData] = useState({
         {openEditModal && (
   <EditProfileModal
     onClose={() => setOpenEditModal(false)}
-    userData={userData}
-    onSave={(newData) => setUserData(newData)}
+    userData={user}
+    onSave={(newData) => setuser(newData)}
   />
 )}
 

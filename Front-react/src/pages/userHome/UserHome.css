@@ -25,6 +25,7 @@
     width: 100%;
 }
 
+
 /* Nome do usuário */
 .big-text {
     position: relative;
@@ -32,6 +33,10 @@
     right: 5px;
     color: black;
     font-size: 35px;
+}
+
+.bio-small-text{
+    font-size: 0.8rem;
 }
 
 /* Biografia */

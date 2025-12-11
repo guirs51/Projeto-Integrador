@@ -23,18 +23,23 @@ export default function UserHome() {
   const token = localStorage.getItem("token");
 
   const location = useLocation();
-  const { id, mensagem } = location.state || {};
-  console.log("Voce " + mensagem + " um " + id);
 
+
+
+  const id = location.state?.id || localStorage.getItem("id")
  
   useEffect(() => {
     const savedMode = JSON.parse(localStorage.getItem("darkMode"));
+
+    if(location.state?.id){
+      localStorage.setItem("id",location.state.id)
+    }
 
     if (savedMode) {
       setDarkMode(true);
       document.body.classList.add("dark");
     }
-  }, []);
+  }, [location.state]);
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
@@ -109,11 +114,11 @@ export default function UserHome() {
 
         <div className="bio">
           <h1 className="big-text">{user?.name || "Usuário"}</h1>
-          <h2>
-            Hi, my name is Fulana! I'm a system developer and I am 18 years
+          <h2 className="bio-small-text">
+            Hi, my name is {user?.name}! I'm a system developer and I am 18 years
             old.
           </h2>
-          <h3>Rua Tal, 123</h3>
+          <h3 className="bio-small-text">Rua Tal, 123</h3>
         </div>
       </div>
 
