@@ -1,7 +1,7 @@
 
 import { AppDataSource } from "../data-source";
 import { Company } from "../entities/Company";
-import { Delivery, DeliveryStatus } from "../entities/Delivery";
+import { Delivery, DeliveryStatus } from "../entities/delivery";
 import { User } from "../entities/User";
 
 export class DeliveryService {
@@ -9,28 +9,18 @@ export class DeliveryService {
     private userRepo = AppDataSource.getRepository(User);
     private companyRepo = AppDataSource.getRepository(Company);
 
-    async create(data:{userId:number; companyId:number;deliveryLocal:string,materialType:string;deliveryDate:string}) {
+   async create(dataDelivery: Delivery) {
         try {
-            const user = await this.userRepo.findOneBy({id:data.userId})
-            const company = await this.companyRepo.findOneBy({id:data.companyId})
-
-            if(!user) throw new Error("Usuario não encontrado")
-            if(!company) throw new Error("Compania não encontrada")
-
+            const { user, ...data } = dataDelivery
+            const userDelivery = await this.userRepo.findOneBy({ id: user.id });
+            if(userDelivery.id != user.id) return "Erro ao pegar o id_user:  " + user.id 
             const delivery = this.deliveryRepo.create({
-                user,
-                company,
-                deliveryLocal:data.deliveryLocal,
-                deliveryDate:data.deliveryDate,
-                materialType:data.materialType,
-                status:DeliveryStatus.PENDING
+                ...data,
+                user: userDelivery
             });
-
-
             return await this.deliveryRepo.save(delivery);
-
         } catch (e) {
-            console.log(e);
+            console.log("Erro: " + e);
         }
     }
 

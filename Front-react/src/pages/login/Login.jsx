@@ -7,9 +7,12 @@ import { FcEditImage, FcGoogle } from "react-icons/fc";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 import { User } from "lucide-react";
+import { useUser } from "../../context/UserContext";
 
 function Login() {
-   const [show, setShow] = useState(false);
+
+  const { setUserId } = useUser()
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
   const mostraOcultar = () => {
@@ -40,9 +43,11 @@ function Login() {
         );
         return;
       }
-      
+
+      setUserId(data.user.id)
+
       alert("Login realizado com sucesso");
-      navigate("/UserHome", { state: {id: data.user.id, mensagem: "Recebeu"} })
+      navigate("/UserHome")
 
     } catch (e) {
       console.log("Erro: " + e);

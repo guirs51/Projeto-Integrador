@@ -27,7 +27,7 @@ export class Delivery{
     status:DeliveryStatus;
 
     @Column()
-    deliveryDate: string
+    quantidade: number
 
     @ManyToOne(() => User, (user) => user.delivery)
     @JoinColumn({ name: 'user_id' }) // ← Adicionar JoinColumn para criar a FK

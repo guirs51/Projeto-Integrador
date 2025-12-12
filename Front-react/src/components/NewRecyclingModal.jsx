@@ -1,48 +1,42 @@
 import React, { useState } from 'react';
 import './NewRecyclingModal.css';
+import { Drama } from 'lucide-react';
 
-export default function NewRecyclingModal({
-  isOpen,
-  onClose,
-  onSubmit
-}) {
-  const [formData, setFormData] = useState({
-    material: '',
-    quantidade: '',
-    localizacao: ''
-  });
 
-  if (!isOpen) return null;
+// interface NewRecyclingModalProps {
+//   isOpen: boolean;
+//   onClose: () => void;
+//   onSubmit: (local: string, materialType: string, quantidade: number) => void;
+// }
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+export default function NewRecyclingModal({ isOpen, onClose, onSubmit }) {
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSubmit(formData);
-    setFormData({ material: '', quantidade: '', localizacao: '' });
-    onClose();
-  };
+  if (!isOpen) return null
+
+  const [materialType, setMaterialType] = useState<string>('')
+  const [local, setLocal] = useState<string>('')
+  const [quantidade, setQuantidade] = useState<number>()
+
+  const postDelivery = async () => {
+    try {
+      onSubmit(local, materialType, Number(quantidade))
+      onClose()
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return (
     <div className={`modal-overlay ${isOpen ? "active" : ""}`} onClick={onClose}>
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
         <h2>Registrar Nova Reciclagem</h2>
-
-        <form onSubmit={handleSubmit} className="modal-form">
-
+        <form className="modal-form">
           <label>
             Tipo de Material:
             <input
               type="text"
               name="material"
-              value={formData.material}
-              onChange={handleChange}
+              onChange={(e) => setMaterialType(e.target.value)}
               placeholder="Ex: Plástico, Papel..."
               required
             />
@@ -53,8 +47,7 @@ export default function NewRecyclingModal({
             <input
               type="number"
               name="quantidade"
-              value={formData.quantidade}
-              onChange={handleChange}
+              onChange={(e) => setQuantidade(Number(e.target.value))}
               placeholder="Ex: 2"
               required
             />
@@ -65,15 +58,14 @@ export default function NewRecyclingModal({
             <input
               type="text"
               name="localizacao"
-              value={formData.localizacao}
-              onChange={handleChange}
+              onChange={(e) => setLocal(e.target.value)}
               placeholder="Ex: Rua das Flores, 123"
               required
             />
           </label>
 
           <div className="modal-buttons">
-            <button type="submit" className="save-btn">
+            <button type="button" className="save-btn" onClick={postDelivery}>
               Salvar
             </button>
 

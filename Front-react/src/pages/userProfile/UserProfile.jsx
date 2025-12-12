@@ -15,6 +15,8 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Edit, User } from "lucide-react";
 import { Navigate, useLocation } from "react-router";
+import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
+import { useLocation } from "react-router";
 
 export default function UserProfile() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
