@@ -1,12 +1,12 @@
 import { Request, Response } from 'express'
 import { CompanyService } from '../services/CompanyService'
 
-const service = new CompanyService()
+const companyService = new CompanyService()
 
 export class CompanyController {
   async create(req: Request, res: Response) {
     try {
-      const user = await service.create(req.body)
+      const user = await companyService.create(req.body)
       res.status(201).json(user)
     } catch (e: any) {
       res.status(400).json({ message: e.message })
@@ -14,13 +14,13 @@ export class CompanyController {
   }
 
   async list(req: Request, res: Response) {
-    const users = await service.findAll()
+    const users = await companyService.findAll()
     res.json(users)
   }
 
   async getById(req: Request, res: Response) {
     try {
-      const user = await service.findById(Number(req.params.id))
+      const user = await companyService.findById(Number(req.params.id))
       res.json(user)
     } catch (e: any) {
       res.status(404).json({ message: e.message })
@@ -29,7 +29,7 @@ export class CompanyController {
 
   async update(req: Request, res: Response) {
     try {
-      const user = await service.update(Number(req.params.id), req.body)
+      const user = await companyService.update(Number(req.params.id), req.body)
       res.json(user)
     } catch (e: any) {
       res.status(400).json({ message: e.message })
@@ -38,10 +38,36 @@ export class CompanyController {
 
   async remove(req: Request, res: Response) {
     try {
-      const result = await service.remove(Number(req.params.id))
+      const result = await companyService.remove(Number(req.params.id))
       res.json(result)
     } catch (e: any) {
       res.status(404).json({ message: e.message })
+    }
+  }
+
+  async accept(req: Request, res: Response) {
+
+    const companyId = Number(req.params.companyId)
+    const deliveryId = Number(req.params.deliveryId)
+
+    try {
+      const result = await companyService.acceptDelivery(companyId, deliveryId)
+      res.json(result)
+    } catch (e: any) {
+      res.status(400).json({ message: e.message })
+    }
+  }
+
+  async reject(req: Request, res: Response) {
+
+    const companyId = Number(req.params.companyId)
+    const deliveryId = Number(req.params.deliveryId)
+
+    try {
+      const result = await companyService.rejectDelivery(companyId,deliveryId)
+      res.json(result)
+    } catch (e:any) {
+      res.status(400).json({message:e.message})
     }
   }
 }

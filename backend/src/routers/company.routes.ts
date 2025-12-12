@@ -10,4 +10,15 @@ router.post('/', controller.create.bind(controller))
 router.put('/:id', controller.update.bind(controller))
 router.delete('/:id', controller.remove.bind(controller))
 
+router.put(
+  '/:companyId/delivery/:deliveryId/accept',
+  controller.accept.bind(controller)
+)
+
+router.put(
+  '/:companyId/delivery/:deliveryId/reject',
+  controller.reject.bind(controller)
+)
+
+
 export default router

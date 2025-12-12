@@ -1,5 +1,13 @@
 import { Entity,PrimaryGeneratedColumn,Column,ManyToOne,JoinColumn} from "typeorm";
 import { User } from "./User";
+import { Company } from "./Company";
+
+export enum DeliveryStatus{
+    PENDING = "pending",
+    ACCEPTED = "accepted",
+    REJECTED = "rejected"
+}
+
 
 @Entity('delivery')
 export class Delivery{
@@ -11,6 +19,12 @@ export class Delivery{
 
     @Column({length:100})
     materialType:string
+
+    @ManyToOne(() => Company, company => company.delivery)
+    company:Company;
+
+    @Column({type:"enum", enum :DeliveryStatus,default:DeliveryStatus.PENDING})
+    status:DeliveryStatus;
 
     @Column()
     deliveryDate: string

@@ -1,11 +1,11 @@
 import { Entity, PrimaryGeneratedColumn, Column, BeforeInsert, BeforeUpdate, CreateDateColumn, UpdateDateColumn, OneToMany } from "typeorm";
 import bycrypt from 'bcrypt';
-// import { Delivery } from "./delivery";
+import { Delivery } from "./Delivery";
 
 @Entity('company')
 export class Company {
     @PrimaryGeneratedColumn()
-    id: Number
+    id: number
 
     @Column({ length: 100 })
     name: String
@@ -15,6 +15,9 @@ export class Company {
 
     @Column({ unique: true, length: 20 })
     cnpj: string
+
+    @OneToMany(() => Delivery, delivery => delivery.company)
+    delivery:Delivery[];
 
     @CreateDateColumn()
     createdAt: Date
