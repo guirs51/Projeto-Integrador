@@ -45,29 +45,29 @@ export class CompanyController {
     }
   }
 
-  async accept(req: Request, res: Response) {
+  // async accept(req: Request, res: Response) {
 
-    const companyId = Number(req.params.companyId)
-    const deliveryId = Number(req.params.deliveryId)
+  //   const companyId = Number(req.params.companyId)
+  //   const deliveryId = Number(req.params.deliveryId)
 
-    try {
-      const result = await companyService.acceptDelivery(companyId, deliveryId)
-      res.json(result)
-    } catch (e: any) {
-      res.status(400).json({ message: e.message })
-    }
-  }
+  //   try {
+  //     const result = await companyService.acceptDelivery(companyId, deliveryId)
+  //     res.json(result)
+  //   } catch (e: any) {
+  //     res.status(400).json({ message: e.message })
+  //   }
+  // }
 
-  async reject(req: Request, res: Response) {
+  // async reject(req: Request, res: Response) {
 
-    const companyId = Number(req.params.companyId)
-    const deliveryId = Number(req.params.deliveryId)
+  //   const companyId = Number(req.params.companyId)
+  //   const deliveryId = Number(req.params.deliveryId)
 
-    try {
-      const result = await companyService.rejectDelivery(companyId,deliveryId)
-      res.json(result)
-    } catch (e:any) {
-      res.status(400).json({message:e.message})
-    }
-  }
+  //   try {
+  //     const result = await companyService.rejectDelivery(companyId,deliveryId)
+  //     res.json(result)
+  //   } catch (e:any) {
+  //     res.status(400).json({message:e.message})
+  //   }
+  // }
 }

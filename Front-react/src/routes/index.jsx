@@ -47,14 +47,14 @@ const routes = [
         path: "userConfig",
         element: <UserProfile />
       },
-      {
-        path: "bonifications",
-        element: <Bonifications/>
-      }, 
-      {
-        path: "recycling",
-        element: <HistoricRec/>
-      }
+      // {
+      //   path: "bonifications",
+      //   element: <Bonifications/>
+      // }, 
+      // {
+      //   path: "recycling",
+      //   element: <HistoricRec/>
+      // }
     ]
   }
 ];

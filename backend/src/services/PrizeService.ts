@@ -4,7 +4,7 @@ import { Prize } from "../entities/Prize";
 export class PrizeService {
   private prizeRepo = AppDataSource.getRepository(Prize);
 
-  async create(data: { namePrize: string; prizePoints: number  }) {
+  async create(data: Prize) {
     try {
       const prize = await this.prizeRepo.create(data);
       return await this.prizeRepo.save(prize);

@@ -15,8 +15,8 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Edit, User } from "lucide-react";
 import { Navigate, useLocation } from "react-router";
-import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
-import { useLocation } from "react-router";
+// import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
+// import { useLocation } from "react-router";
 
 export default function UserProfile() {
   const [openSnackbar, setOpenSnackbar] = useState(false);
@@ -37,47 +37,47 @@ export default function UserProfile() {
 
   const location = useLocation();
 
-  const id = location.state?.id || localStorage.getItem("id")
+  // const id = location.state?.id || localStorage.getItem("id")
 
-  const history = historyData.Atividades;
+  // const history = historyData.Atividades;
 
-  async function deleteUser(id) {
-    try {
-      const response = await fetch(`http://localhost:3000/users/${id}`, {
-        method: "Delete",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + token
-        }
-      })
+  // async function deleteUser(id) {
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/users/${id}`, {
+  //       method: "Delete",
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Authorization: "Bearer " + token
+  //       }
+  //     })
 
-      const data = await response.json();
+  //     const data = await response.json();
 
-      if (!response.ok) {
-        alert("Erro ao deletar usuario " + response.status + " ", data.mensagem)
-        return;
-      }
-      localStorage.removeItem("token")
-      localStorage.removeItem("id")
-
-
-      setOpenSnackbar(true)
-
-      setTimeout(() =>{
-        navigate("/regis")
-      },1200);
+  //     if (!response.ok) {
+  //       alert("Erro ao deletar usuario " + response.status + " ", data.mensagem)
+  //       return;
+  //     }
+  //     localStorage.removeItem("token")
+  //     localStorage.removeItem("id")
 
 
-    } catch (error) {
-      console.error("Erro de rede: " + error);
+  //     setOpenSnackbar(true)
 
-    }
-  }
+  //     setTimeout(() => {
+  //       navigate("/regis")
+  //     }, 1200);
+
+
+  //   } catch (error) {
+  //     console.error("Erro de rede: " + error);
+
+  //   }
+  // }
 
   useEffect(() => {
-    if (location.state?.id) {
-      localStorage.setItem("id", location.state.id)
-    }
+    // if (location.state?.id) {
+    //   localStorage.setItem("id", location.state.id)
+    // }
 
     async function getUser() {
       try {
@@ -85,7 +85,7 @@ export default function UserProfile() {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + token
+            "Authorization": "Bearer " + token
           }
         })
 

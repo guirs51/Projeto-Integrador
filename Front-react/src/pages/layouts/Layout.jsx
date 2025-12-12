@@ -16,7 +16,7 @@ export default function Layout() {
 
     console.log("ID no Layout:", userId);
 
- 
+
     return (
         <div className="w-full h-full flex" >
             <div className="sidebar-container">
@@ -36,7 +36,7 @@ export default function Layout() {
                         </a>
 
                         <a className="nav-item" href="/recycling">
-                            <CheckSquare size={18}  /> Reciclagens 
+                            <CheckSquare size={18} /> Reciclagens
                         </a>
 
                         <a className="nav-item" href="/location">

@@ -18,7 +18,7 @@ router.delete('/:id', controller.remove.bind(controller))
 router.post("/create/delivery/",authMiddleware, controllerDelivery.create.bind(controllerDelivery));
 router.get('/delivery/', controllerDelivery.list.bind(controllerDelivery))
 router.get('/delivery/:id', controllerDelivery.getById.bind(controller));
-router.put('delivery/:id', controllerDelivery.update.bind(controllerDelivery))
+// router.put('delivery/:id', controllerDelivery.update.bind(controllerDelivery))
 router.delete('/delivery/:id', controllerDelivery.remove.bind(controller))
 
 export default router

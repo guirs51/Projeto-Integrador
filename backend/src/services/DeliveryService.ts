@@ -1,7 +1,7 @@
 
 import { AppDataSource } from "../data-source";
 import { Company } from "../entities/Company";
-import { Delivery, DeliveryStatus } from "../entities/delivery";
+import { Delivery } from "../entities/delivery";
 import { User } from "../entities/User";
 
 export class DeliveryService {
@@ -9,14 +9,16 @@ export class DeliveryService {
     private userRepo = AppDataSource.getRepository(User);
     private companyRepo = AppDataSource.getRepository(Company);
 
-   async create(dataDelivery: Delivery) {
+    async create(dataDelivery: Delivery) {
         try {
-            const { user, ...data } = dataDelivery
-            const userDelivery = await this.userRepo.findOneBy({ id: user.id });
-            if(userDelivery.id != user.id) return "Erro ao pegar o id_user:  " + user.id 
+            const { user, company, ...data } = dataDelivery
+            const userDelivery = await this.userRepo.findOneBy({ id: user.id })
+            const companyDelivery = await this.companyRepo.findOneBy({ id: company.id });
+            if (!userDelivery.id || !companyDelivery.id) return "Erro ao pegar o id_user ou da company:  " + user.id + " e " + company.id
             const delivery = this.deliveryRepo.create({
                 ...data,
-                user: userDelivery
+                user: userDelivery,
+                company: companyDelivery
             });
             return await this.deliveryRepo.save(delivery);
         } catch (e) {
@@ -47,20 +49,11 @@ export class DeliveryService {
         }
     }
 
-    async update(id: number, data: Partial<Delivery>) {
-        try {
-            const delivery = await this.deliveryRepo.findOne({ where: { id } });
-            if (!delivery) throw new Error("Delivery não encontrado");
-            return await this.deliveryRepo.save(delivery);
-        } catch (e) {
-            console.log("Erro: " + e);
-        }
-    }
-
     async remove(id: number) {
         try {
             const delivery = await this.deliveryRepo.findOne({ where: { id } });
             if (!delivery) throw new Error("Delivery não encontrado");
+            if (delivery.status != "PENDING") throw new Error("Esse Delivery já não pode mais ser excluido")
             await this.deliveryRepo.remove(delivery);
             return { mensagem: "Delivery deletado" };
         } catch (e) {
@@ -68,5 +61,26 @@ export class DeliveryService {
         }
     }
 
+    async accept(id: number) {
+        try {
+            const delivery = await this.deliveryRepo.findOne({ where: { id } })
+            if (!delivery) throw new Error("Delivery não encontrado")
+            delivery.status = "accepted"
+            return this.deliveryRepo.save(delivery)
+        } catch (e) {
+            throw new Error("Erro ao aceitar delivery")
+        }
+    }
+
+    async rejected(id: number) {
+        try {
+            const delivery = await this.deliveryRepo.findOne({ where: { id } })
+            if (!delivery) throw new Error("Delivery não encontrado")
+            delivery.status = "rejected"
+            return this.deliveryRepo.save(delivery)
+        } catch (e) {
+            throw new Error("Erro ao rejeitar delivery")
+        }
+    }
 
 }

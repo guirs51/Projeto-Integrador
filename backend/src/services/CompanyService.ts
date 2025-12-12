@@ -1,7 +1,6 @@
-import e from "express";
 import { AppDataSource } from "../data-source";
 import { Company } from "../entities/Company";
-import { Delivery, DeliveryStatus } from "../entities/Delivery";
+import { Delivery } from "../entities/delivery";
 
 export class CompanyService {
   private CompanyRepo = AppDataSource.getRepository(Company);
@@ -9,7 +8,7 @@ export class CompanyService {
 
 
 
-  async create(data: { name: string; email: string; cnpj: string }) {
+  async create(data: Company) {
     try {
       const emailOrCnpj = await this.CompanyRepo.findOne({
         where: { email: data.email, cnpj: data.cnpj },
@@ -56,9 +55,9 @@ export class CompanyService {
       const company = await this.CompanyRepo.findOne({ where: { id } });
       if (!company) throw new Error("Empresa não encontrado");
 
-      // if(data.password){
-      //     user.password = data.password
-      // }
+      if (data.password) {
+        company.password = data.password
+      }
 
       const { ...rest } = data;
 
@@ -96,36 +95,34 @@ export class CompanyService {
     }
   }
 
-  async acceptDelivery(companyId: number, deliveryId: number) {
+  // async acceptDelivery(companyId: number, deliveryId: number) {
 
-    const delivery = await this.deliveryRepo.findOne({
-      where: { id: deliveryId },
-      relations: ["company"]
-    })
+  //   const delivery = await this.deliveryRepo.findOne({
+  //     where: { id: deliveryId },
+  //     relations: ["company"]
+  //   })
 
 
-    if (delivery.company.id !== companyId) {
-      throw new Error("Esta empresa não tem permissão para aceitar a entrega");
-    }
+  //   if (delivery.company.id !== companyId) {
+  //     throw new Error("Esta empresa não tem permissão para aceitar a entrega");
+  //   }
 
-    delivery.status = DeliveryStatus.ACCEPTED
+  //   return await this.deliveryRepo.save(delivery)
+  // }
 
-    return await this.deliveryRepo.save(delivery)
-  }
+  // async rejectDelivery(companyId: number, deliveryId: number) {
+  //   const delivery = await this.deliveryRepo.findOne({
+  //     where: { id: deliveryId },
+  //     relations: ["company"]
+  //   })
 
-  async rejectDelivery(companyId: number, deliveryId: number) {
-    const delivery = await this.deliveryRepo.findOne({
-      where: { id: deliveryId },
-      relations: ["company"]
-    })
+  //   if (delivery.company.id !== companyId) {
+  //     throw new Error("Esta empresa não tem permissão para aceitar a entrega");
+  //   }
 
-    if (delivery.company.id !== companyId) {
-      throw new Error("Esta empresa não tem permissão para aceitar a entrega");
-    }
+  //   delivery.status = DeliveryStatus.REJECTED;
 
-    delivery.status = DeliveryStatus.REJECTED;
-
-    return await this.deliveryRepo.save(delivery)
-  }
+  //   return await this.deliveryRepo.save(delivery)
+  // }
 
 }

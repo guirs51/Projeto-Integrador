@@ -32,14 +32,14 @@ export class DeliveryController {
     }
   }
 
-  async update(req: Request, res: Response) {
-    try {
-      const user = await service.update(Number(req.params.id), req.body)
-      res.json(user)
-    } catch (e: any) {
-      res.status(400).json({ message: e.message })
-    }
-  }
+  // async update(req: Request, res: Response) {
+  //   try {
+  //     const user = await service.update(Number(req.params.id), req.body)
+  //     res.json(user)
+  //   } catch (e: any) {
+  //     res.status(400).json({ message: e.message })
+  //   }
+  // }
 
   async remove(req: Request, res: Response) {
     try {
