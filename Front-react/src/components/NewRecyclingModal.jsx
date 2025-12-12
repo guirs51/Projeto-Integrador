@@ -13,9 +13,9 @@ export default function NewRecyclingModal({ isOpen, onClose, onSubmit }) {
 
   if (!isOpen) return null
 
-  const [materialType, setMaterialType] = useState<string>('')
-  const [local, setLocal] = useState<string>('')
-  const [quantidade, setQuantidade] = useState<number>()
+  const [materialType, setMaterialType] = useState('')
+  const [local, setLocal] = useState('')
+  const [quantidade, setQuantidade] = useState()
 
   const postDelivery = async () => {
     try {
