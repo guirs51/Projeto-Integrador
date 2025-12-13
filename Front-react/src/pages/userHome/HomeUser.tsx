@@ -97,11 +97,12 @@ export default function ProfilePage() {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + token
                 },
-                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { userId: userId } })
+                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id: userId }, company: { id: 1} })
             })
 
             const data = await response.json()
 
+            console.log(userId)
 
             if (!response.ok) {
                 alert("Houve um erro ao adicionar uma reciclagem. Erro: " + data?.mensagem)
@@ -109,6 +110,7 @@ export default function ProfilePage() {
             }
 
             alert("reciclagem criada com sucesso")
+            console.log(data)
 
         } catch (e) {
             console.log("Houve um erro: ", e);
