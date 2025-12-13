@@ -8,10 +8,11 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { User } from "lucide-react";
 import { useUser } from "../../context/UserContext";
+import { useAuth } from "../../context/AuthContext";
 
 function Login() {
 
-  const { setUserId } = useUser()
+  const { login } = useAuth()
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
 
@@ -22,7 +23,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  async function login() {
+  async function loginUser() {
     try {
       const response = await fetch("http://localhost:3000/auth/login", {
         method: "POST",
@@ -44,7 +45,7 @@ function Login() {
         return;
       }
 
-      setUserId(data.user.id)
+      login(data.user.id)
 
       alert("Login realizado com sucesso");
       navigate("/UserHome")
@@ -92,7 +93,7 @@ function Login() {
               </button>
             </form>
 
-            <button onClick={login}>Entrar</button>
+            <button onClick={loginUser}>Entrar</button>
 
             <div className="loginAccount">
               <h1 className="redirect-text">

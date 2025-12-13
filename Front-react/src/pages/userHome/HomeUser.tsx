@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { data, useLocation } from 'react-router';
 import { useUser } from '../../context/UserContext';
+import { useAuth } from '../../context/AuthContext';
 
 
 interface RecyclingData {
@@ -45,9 +46,7 @@ export default function ProfilePage() {
     const [user, setUser] = useState<User | null>(null)
     const token = localStorage.getItem("token")
 
-    const { userId } = useUser()
-    // const location = useLocation()
-    // const { id } = location.state || {}
+    const { userId } = useAuth()
 
     useEffect(() => {
         async function getUser() {
@@ -98,7 +97,7 @@ export default function ProfilePage() {
                     "Content-Type": "application/json",
                     "Authorization": "Bearer " + token
                 },
-                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { userId: userId} })
+                body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { userId: userId } })
             })
 
             const data = await response.json()
