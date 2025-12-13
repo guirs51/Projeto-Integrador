@@ -1,13 +1,13 @@
-
 import Home from "../pages/home/Home"
 import Layout from "../pages/layouts/Layout";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
-import UserHome from "../pages/userHome/HomeUser"
 import Materials from "../pages/materials/Materials";
 import Location from "../pages/location-search/Location"
 import UserProfile from "../pages/userProfile/UserProfile";
 import HomeUser from "../pages/userHome/HomeUser"
+import Bonifications from "../pages/bonifications/Bonifications"
+import HistoricRec from "../pages/reciclagens/HistoricRec"
 
 
 const routes = [
@@ -48,14 +48,14 @@ const routes = [
         path: "userConfig",
         element: <UserProfile />
       },
-      // {
-      //   path: "bonifications",
-      //   element: <Bonifications/>
-      // }, 
-      // {
-      //   path: "recycling",
-      //   element: <HistoricRec/>
-      // }
+      {
+        path: "bonifications",
+        element: <Bonifications />
+      },
+      {
+        path: "recycling",
+        element: <HistoricRec />
+      }
     ]
   }
 ];

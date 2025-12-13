@@ -14,7 +14,8 @@ import historyData from "./testHistorico.json";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Edit, User } from "lucide-react";
-import { Navigate, useLocation } from "react-router";
+import { data, Navigate, useLocation } from "react-router";
+import { useAuth } from "../../context/AuthContext";
 // import { Home, Inbox, BookOpen, CheckSquare, Users, Settings, LogOut, Sun, Moon, Edit } from 'lucide-react';
 // import { useLocation } from "react-router";
 
@@ -32,14 +33,8 @@ export default function UserProfile() {
 } */);
 
   const navigate = useNavigate();
-
+  const { userId } = useAuth()
   const token = localStorage.getItem("token")
-
-  const location = useLocation();
-
-  // const id = location.state?.id || localStorage.getItem("id")
-
-  // const history = historyData.Atividades;
 
   // async function deleteUser(id) {
   //   try {
@@ -74,14 +69,27 @@ export default function UserProfile() {
   //   }
   // }
 
-  useEffect(() => {
-    // if (location.state?.id) {
-    //   localStorage.setItem("id", location.state.id)
-    // }
+  // useEffect(() => {
+  //   async function updateUser() {
+  //     try {
+  //       const response = await fetch(`http://localhost:3000/users/update/${userId}`, {
+  //         method: "PUT",
+  //         headers: {
+  //           "Content-Type": "application/json",
+  //           "Authorization": "Bearer " + token
+  //         },
+  //         body: JSON.stringify()
+  //       })
+  //     } catch (e) {
 
+  //     }
+  //   }
+  // })
+
+  useEffect(() => {
     async function getUser() {
       try {
-        const response = await fetch(`http://localhost:3000/users/${id}`, {
+        const response = await fetch(`http://localhost:3000/users/${userId}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -103,10 +111,10 @@ export default function UserProfile() {
       }
     }
 
-    if (id && token) {
+    if (userId && token) {
       getUser()
     }
-  }, [id, token, location.state])
+  }, [userId, token])
 
   return (
     <div id="default" className={darkMode ? "dark" : ""}>
@@ -154,7 +162,7 @@ export default function UserProfile() {
         </div>
 
         {/* ================= HISTORY ================= */}
-        <div id="personal-info">
+        {/* <div id="personal-info">
           <div id="info-header">
             <h2>Histórico</h2>
             <a id="more-info-btn" href='/recycling' >Mais Informações</a>
@@ -162,7 +170,7 @@ export default function UserProfile() {
 
           <hr className="line" />
 
-          <div id="info-historic">
+          {/* <div id="info-historic">
             {history.map((item, index) => (
               <HistoricCard
                 key={index}
@@ -170,8 +178,8 @@ export default function UserProfile() {
                 historicDate={item.Data}
               />
             ))}
-          </div>
-        </div>
+          </div> 
+        </div> */}
       </section>
 
 

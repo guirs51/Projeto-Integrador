@@ -4,17 +4,17 @@ import "./layout.css"
 import { Outlet, useNavigate } from "react-router-dom"
 import { useState } from "react"
 import { useUser } from "../../context/UserContext"
+import { useAuth } from "../../context/AuthContext"
 
 export default function Layout() {
-    const { userId } = useUser()
     const [darkMode, setDarkMode] = useState(false);
     const toggleDarkMode = () => {
         setDarkMode(!darkMode);
         document.body.classList.toggle("dark");
     };
-    const navigate = useNavigate();
 
-    console.log("ID no Layout:", userId);
+    const navigate = useNavigate();
+    const { logout } = useAuth()
 
 
     return (
@@ -51,7 +51,7 @@ export default function Layout() {
                             <Settings size={18} /> Configurações
                         </a>
 
-                        <a className="nav-item logout">
+                        <a className="nav-item logout" onChange={logout} onClick={() => navigate("/login")}>
                             <LogOut size={18} /> Sair
                         </a>
 
