@@ -27,6 +27,7 @@ interface RecyclingData {
     materialType: string;
     quantidade: string;
     deliveryLocal: string;
+    status: string
 }
 
 interface User {
@@ -194,6 +195,7 @@ export default function ProfilePage() {
                                         material={item.materialType}
                                         quantidade={item.quantidade}
                                         localizacao={item.deliveryLocal}
+                                        status={item.status}
                                     />
                                 ))}
                             </div>

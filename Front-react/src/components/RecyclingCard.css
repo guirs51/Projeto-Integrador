@@ -1,4 +1,3 @@
-
 /* ========================= */
 /*     CARD - LIGHT MODE     */
 /* ========================= */
@@ -54,4 +53,20 @@
 
 .dark .recycling-card strong {
   color: #ffffff;
+}
+
+.status {
+  font-weight: bold;
+}
+
+.status.pending {
+  color: orange;
+}
+
+.status.accepted {
+  color: green;
+}
+
+.status.rejected {
+  color: red;
 }
