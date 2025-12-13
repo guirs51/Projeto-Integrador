@@ -125,4 +125,25 @@ export class CompanyService {
   //   return await this.deliveryRepo.save(delivery)
   // }
 
+  async accept(id: number) {
+    try {
+      const delivery = await this.deliveryRepo.findOne({ where: { id } })
+      if (!delivery) throw new Error("Delivery não encontrado")
+      delivery.status = "accepted"
+      return this.deliveryRepo.save(delivery)
+    } catch (e) {
+      throw new Error("Erro ao aceitar delivery")
+    }
+  }
+
+  async rejected(id: number) {
+    try {
+      const delivery = await this.deliveryRepo.findOne({ where: { id } })
+      if (!delivery) throw new Error("Delivery não encontrado")
+      delivery.status = "rejected"
+      return this.deliveryRepo.save(delivery)
+    } catch (e) {
+      throw new Error("Erro ao rejeitar delivery")
+    }
+  }
 }

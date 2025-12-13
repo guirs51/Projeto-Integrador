@@ -9,7 +9,7 @@ export class DeliveryController {
       const user = await service.create(req.body)
       res.status(201).json(user)
     } catch (e: any) {
-      res.status(400).json({ message: e.message })
+      res.status(400).json({ message: e.mensagem })
     }
   }
 
@@ -28,7 +28,7 @@ export class DeliveryController {
       const user = await service.findById(Number(req.params.id))
       res.json(user)
     } catch (e: any) {
-      res.status(404).json({ message: e.message })
+      res.status(404).json({ message: e.mensagem })
     }
   }
 
@@ -46,9 +46,8 @@ export class DeliveryController {
       const result = await service.remove(Number(req.params.id))
       res.json(result)
     } catch (e: any) {
-      res.status(404).json({ message: e.message })
+      res.status(404).json({ message: e.mensagem })
     }
   }
-
 
 }
