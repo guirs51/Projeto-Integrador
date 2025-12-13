@@ -4,17 +4,42 @@ import { useState } from "react";
 
 export default function EditProfileModal({ onClose, userData, onSave }) {
 
-  const [form, setForm] = useState(userData);
+  const [formName, setFormName] = useState(userData.name);
+  const [formEmail, setFormEmail] = useState(userData.email);
+  const [formCpf, setFormCpf] = useState(userData.cpf);
 
-  const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value });
-  };
+  const buildUpdateUser = () => {
+    const playload = {}
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    onSave(form);
-    onClose();
-  };
+    if (formName.trim() !== "" && formName.trim() !== userData.name) {
+      playload.name = formName
+    }
+
+    if (formEmail.trim() !== "" && formEmail.trim() !== userData.email) {
+      playload.email = formEmail
+    }
+
+    if (formCpf.trim() !== "" && formCpf.trim() !== userData.cpf) {
+      playload.cpf = formCpf
+    }
+
+    return playload;
+  }
+
+  const update = buildUpdateUser()
+
+  const handleSubmit = async () => {
+    try {
+      onSave(update)
+      onClose()
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  // };
 
   return (
     <div className="modal-overlay">
@@ -26,14 +51,14 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
 
         <h2>Editar Perfil</h2>
 
-        <form onSubmit={handleSubmit} className="modal-form">
+        <form className="modal-form">
           <label>
             Nome:
             <input
               name="name"
               type="text"
-              value={form.name}
-              onChange={handleChange}
+              value={formName}
+              onChange={(e) => setFormName(e.target.value)}
             />
           </label>
 
@@ -41,10 +66,10 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
             CPF:
             <input
 
-            type="text"
+              type="text"
               name="cpf"
-              value={form.cpf}
-              onChange={handleChange}
+              value={formCpf}
+              onChange={(e) => setFormCpf(e.target.value)}
             />
           </label>
 
@@ -53,8 +78,8 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
             <input
               name="email"
               type="email"
-              value={form.email}
-              onChange={handleChange}
+              value={formEmail}
+              onChange={(e) => setFormEmail(e.target.value)}
             />
           </label>
 
@@ -64,12 +89,12 @@ export default function EditProfileModal({ onClose, userData, onSave }) {
               name="bio"
               type="text"
               rows={4}
-              value={form.bio}
-              onChange={handleChange}
+              value={"oi"}
+              onChange={(e) => console.log(e)}
             />
           </label>
 
-          <button className="save-btn" type="submit">
+          <button className="save-btn" type="button" onClick={handleSubmit}>
             Salvar
           </button>
         </form>

@@ -34,57 +34,67 @@ export default function UserProfile() {
 
   const navigate = useNavigate();
   const { userId } = useAuth()
+  const { logout } = useAuth()
   const token = localStorage.getItem("token")
 
-  // async function deleteUser(id) {
-  //   try {
-  //     const response = await fetch(`http://localhost:3000/users/${id}`, {
-  //       method: "Delete",
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Authorization: "Bearer " + token
-  //       }
-  //     })
+  async function deleteUser() {
+    try {
+      const response = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "Delete",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + token
+        }
+      })
 
-  //     const data = await response.json();
+      const data = await response.json();
 
-  //     if (!response.ok) {
-  //       alert("Erro ao deletar usuario " + response.status + " ", data.mensagem)
-  //       return;
-  //     }
-  //     localStorage.removeItem("token")
-  //     localStorage.removeItem("id")
+      if (!response.ok) {
+        alert("Erro ao deletar usuario " + response.status + " ", data.mensagem)
+        return;
+      }
 
+      logout()
+      setOpenSnackbar(true)
 
-  //     setOpenSnackbar(true)
-
-  //     setTimeout(() => {
-  //       navigate("/regis")
-  //     }, 1200);
+      setTimeout(() => {
+        navigate("/regis")
+      }, 1200);
 
 
-  //   } catch (error) {
-  //     console.error("Erro de rede: " + error);
+    } catch (error) {
+      console.error("Erro de rede: " + error);
 
-  //   }
-  // }
+    }
+  }
 
-  // useEffect(() => {
-  //   async function updateUser() {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/users/update/${userId}`, {
-  //         method: "PUT",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           "Authorization": "Bearer " + token
-  //         },
-  //         body: JSON.stringify()
-  //       })
-  //     } catch (e) {
+  async function updateUser(update) {
+    try {
+      const response = await fetch(`http://localhost:3000/users/update/${userId}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${token}`,
+        },
+        body: JSON.stringify(update),
+      }
+      );
 
-  //     }
-  //   }
-  // })
+      const data = await response.json();
+
+      if (!response.ok) {
+        alert("Erro ao atualizar");
+        return;
+      }
+
+      alert("Usuário atualizado");
+      console.log("Enviado:", update);
+      console.log("Resposta:", data);
+
+    } catch (error) {
+      console.error("Erro de rede:", error);
+    }
+  }
 
   useEffect(() => {
     async function getUser() {
@@ -204,7 +214,7 @@ export default function UserProfile() {
           <EditProfileModal
             onClose={() => setOpenEditModal(false)}
             userData={user}
-            onSave={(newData) => setuser(newData)}
+            onSave={updateUser}
           />
         )}
 

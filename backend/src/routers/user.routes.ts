@@ -8,10 +8,10 @@ const controller = new UserController()
 const controllerDelivery = new DeliveryController()
 
 router.get('/', authMiddleware, controller.list.bind(controller))
-router.get('/:id', controller.getById.bind(controller))
+router.get('/:id', authMiddleware, controller.getById.bind(controller))
 // router.post('/', controller.create.bind(controller)) user já pode ser criado usando a rota auth
-router.put('/update/:id', controller.update.bind(controller))
-router.delete('/:id', controller.remove.bind(controller))
+router.patch('/update/:id', authMiddleware, controller.update.bind(controller))
+router.delete('/:id', authMiddleware, controller.remove.bind(controller))
 
 // rotas para o user criar os deliverys
 
