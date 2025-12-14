@@ -113,7 +113,7 @@ export default function ProfilePage() {
           "Content-Type": "application/json",
           "Authorization": "Bearer " + token
         },
-        body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id: userId }, company: { id: 1 } })
+        body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id: userId } })
       })
 
       const data = await response.json()
@@ -133,15 +133,15 @@ export default function ProfilePage() {
       alert("Erro na conexão com o servidor.");
     }
   }
- function handleAddRecycling(data: RecyclingFormData) {
-  postDelivery(
-    data.localizacao,
-    data.material,
-    Number(data.quantidade)
-  )
+  function handleAddRecycling(data: RecyclingFormData) {
+    postDelivery(
+      data.localizacao,
+      data.material,
+      Number(data.quantidade)
+    )
 
-  setIsModalOpen(false)
-}
+    setIsModalOpen(false)
+  }
   return (
     <div className="mx-auto w-[90%] py-6 space-y-8">
       {/* MODAL */}

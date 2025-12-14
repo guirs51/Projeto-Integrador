@@ -19,11 +19,10 @@ export class Delivery {
     @Column()
     quantidade: number
 
-    @ManyToOne(() => User, (user) => user.delivery)
+    @ManyToOne(() => User, (user) => user.delivery, {
+        nullable: true,
+        onDelete: "SET NULL"
+    })
     @JoinColumn({ name: 'user_id' }) // ← Adicionar JoinColumn para criar a FK
-    user: User
-
-    @ManyToOne(() => Company, company => company.delivery)
-    @JoinColumn({ name: "company_id" })
-    company: Company;
+    user: User | null
 }

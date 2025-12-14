@@ -11,14 +11,12 @@ export class DeliveryService {
 
     async create(dataDelivery: Delivery) {
         try {
-            const { user, company, ...data } = dataDelivery
+            const { user, ...data } = dataDelivery
             const userDelivery = await this.userRepo.findOneBy({ id: user.id })
-            const companyDelivery = await this.companyRepo.findOneBy({ id: company.id });
-            if (!userDelivery.id || !companyDelivery.id) return "Erro ao pegar o id_user ou da company:  " + user.id + " e " + company.id
+            if (!userDelivery.id) return { mesagem: "Erro ao pegar o id_user ou da company:  " + user.id }
             const delivery = this.deliveryRepo.create({
                 ...data,
-                user: userDelivery,
-                company: companyDelivery
+                user: userDelivery
             });
             return await this.deliveryRepo.save(delivery);
         } catch (e) {

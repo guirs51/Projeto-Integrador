@@ -19,9 +19,6 @@ export class Company {
     @Column()
     password: string
 
-    @OneToMany(() => Delivery, delivery => delivery.company)
-    delivery: Delivery[];
-
     @CreateDateColumn()
     createdAt: Date
 
