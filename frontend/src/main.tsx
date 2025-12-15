@@ -22,30 +22,29 @@ createRoot(document.getElementById('root')!).render(
   <BrowserRouter>
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <AuthProvider>
-      <Routes>
-        {/* rotas que não respeitam o layout */}
+        <Routes>
+          {/* rotas que não respeitam o layout */}
 
-        <Route path="/" element={<Home/>} />
-        <Route path='/regis' element={<Register/>}></Route>
-        <Route path='/login' element={<Login/>}></Route>
+          <Route path="/" element={<Home />} />
+          <Route path='/regis' element={<Register />}></Route>
+          <Route path='/login' element={<Login />}></Route>
 
-        {/* rotas que respeitam */}
-        
-        <Route element={<Layout />}>
+          {/* rotas que respeitam */}
+
+          <Route element={<Layout />}>
+
+            <Route path='/userHome' element={<UserHome />} />
+
+            <Route path='/userConfig' element={<UserProfile />}></Route>
+
+            <Route path='/materials' element={<Materials />}></Route>
+            <Route path='/bonifications' element={<Bonifications />}></Route>
+            <Route path='/location' element={<Location />}></Route>
+          </Route>
+
           <Route path='/admin/dashboard' element={<Admin />} />
           <Route path='/admin/requests' element={<AdminRequest />} />
-
-          <Route path='/userHome' element={<UserHome />} />
-
-          <Route path='/userConfig' element={<UserProfile />}></Route>
-
-          <Route path='/materials' element={<Materials/>}></Route>
-          <Route path='/bonifications' element={<Bonifications/>}></Route>
-                <Route path='/location' element={<Location/>}></Route>
-        </Route>
-
-
-      </Routes>
+        </Routes>
       </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>

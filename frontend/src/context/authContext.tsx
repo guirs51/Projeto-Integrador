@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 
 interface InterfaceAuthContext {
     userId: string | null,
@@ -10,6 +11,7 @@ const AuthContext = createContext<InterfaceAuthContext | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [userId, setUserId] = useState(() => localStorage.getItem("userId"))
+    const navigate = useNavigate()
 
     const login = (id: string) => {
         setUserId(id)
@@ -19,6 +21,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     const logout = () => {
         setUserId(null)
         localStorage.removeItem("userId")
+        navigate("/login")
     }
 
     return (

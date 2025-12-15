@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
 
 import {
   Sidebar,
@@ -13,6 +13,8 @@ import {
 import { ModeToggle } from "./mode-toggle"
 
 import { UserSidebar } from "./userSidebar"
+import { useAuth } from "@/context/authContext"
+import { useEffect, useState } from "react"
 
 // Menu items.
 const items = [
@@ -44,6 +46,45 @@ const items = [
 ]
 
 export function AppSidebar() {
+
+  const [nome, setNome] = useState<String>('')
+  const token = localStorage.getItem('token')
+  const {userId} = useAuth()
+
+
+  useEffect(() => {
+      async function getUser() {
+        try {
+          const response = await fetch(`http://localhost:3000/users/${userId}`, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": "Bearer " + token
+            }
+          });
+  
+          const data = await response.json();
+  
+          if (!response.ok) {
+            alert(
+              "Erro ao buscar dados do usuário: " +
+              response.status + " " + data.mensagem
+            );
+            return;
+          }
+
+          setNome(data.name)  
+        } catch (error) {
+          console.error("Erro de rede:", error);
+        }
+      }
+  
+      if (userId && token) {
+        getUser();
+      }
+    }, [userId, token]);
+
+
   return (
     <Sidebar className="">
       <SidebarContent>
@@ -68,7 +109,11 @@ export function AppSidebar() {
         
       </SidebarContent>
                 <ModeToggle/>
-       
+              <UserSidebar user={{
+        name: String(nome),
+        email: "",
+        avatar: ""
+      }}/>
     </Sidebar>
   )
 }

@@ -29,6 +29,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar"
+import { useAuth } from "@/context/authContext"
+  
 
 export function UserSidebar({
   user,
@@ -40,6 +42,8 @@ export function UserSidebar({
   }
 }) {
   const { isMobile } = useSidebar()
+
+   const { logout } = useAuth()
 
   return (
     <SidebarMenu>
@@ -81,7 +85,7 @@ export function UserSidebar({
             </DropdownMenuLabel>
             <DropdownMenuSeparator />
             
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>
               <LogOut />
               Sair
             </DropdownMenuItem>
