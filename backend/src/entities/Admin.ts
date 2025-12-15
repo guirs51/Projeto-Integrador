@@ -9,6 +9,9 @@ export class Admin {
     @Column()
     password: string
 
+    @Column({unique: true})
+    email: string
+
     @Column()
     role: "admin"
 

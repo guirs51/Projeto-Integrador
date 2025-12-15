@@ -12,4 +12,16 @@ export class AdminService {
             console.log("Erro: " + e);
         }
     }
+
+    async findEmail(email: string) {
+        try {
+            const admin = await this.userRepo.findOne({ where: { email } });
+
+            if (!admin) throw new Error("Usuario não encontrado");
+
+            return admin;
+        } catch (e) {
+            console.log("Erro:" + e);
+        }
+    }
 }

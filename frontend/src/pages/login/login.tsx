@@ -35,7 +35,12 @@ export default function Login() {
       localStorage.setItem("token", data.token)
       login(data.user.id)
 
-      alert("Login realizado com sucesso!")
+      alert("Login realizado com sucesso! " + data.user.role)
+
+      if (data.user.role === "admin") {
+        return navigate("/admin/requests")
+      }
+
       navigate("/UserHome")
     } catch {
       alert("Erro de conexão com o servidor")
@@ -43,13 +48,13 @@ export default function Login() {
   }
 
   return (
- 
+
     <div className="flex h-screen w-full bg-white text-zinc-900">
-      
+
       {/* ESQUERDA */}
       <div className="flex flex-1 items-center justify-center">
         <Card className="w-full max-w-md bg-white border shadow-lg">
-          
+
           <CardHeader className="text-center space-y-2">
             <h1 className="text-xl font-semibold text-black">
               Bem-vindo de volta ao{" "}
