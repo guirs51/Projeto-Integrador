@@ -45,47 +45,4 @@ export class CompanyController {
     }
   }
 
-  // async accept(req: Request, res: Response) {
-
-  //   const companyId = Number(req.params.companyId)
-  //   const deliveryId = Number(req.params.deliveryId)
-
-  //   try {
-  //     const result = await companyService.acceptDelivery(companyId, deliveryId)
-  //     res.json(result)
-  //   } catch (e: any) {
-  //     res.status(400).json({ message: e.message })
-  //   }
-  // }
-
-  // async reject(req: Request, res: Response) {
-
-  //   const companyId = Number(req.params.companyId)
-  //   const deliveryId = Number(req.params.deliveryId)
-
-  //   try {
-  //     const result = await companyService.rejectDelivery(companyId,deliveryId)
-  //     res.json(result)
-  //   } catch (e:any) {
-  //     res.status(400).json({message:e.message})
-  //   }
-  // }
-
-  async acceped(req: Request, res: Response) {
-    try {
-      const result = await service.accept(Number(req.params.id))
-      res.status(200).json(result)
-    } catch (e: any) {
-      res.status(401).json({ message: e.mensagem })
-    }
-  }
-
-  async reject(req: Request, res: Response) {
-    try {
-      const result = await service.rejected(Number(req.params.id))
-      res.status(200).json(result)
-    } catch (e: any) {
-      res.status(401).json({ message: e.mensagem })
-    }
-  }
 }

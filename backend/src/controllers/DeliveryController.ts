@@ -23,15 +23,6 @@ export class DeliveryController {
 
   }
 
-  async getById(req: Request, res: Response) {
-    try {
-      const user = await service.findById(Number(req.params.id))
-      res.json(user)
-    } catch (e: any) {
-      res.status(404).json({ message: e.mensagem })
-    }
-  }
-
   // async update(req: Request, res: Response) {
   //   try {
   //     const user = await service.update(Number(req.params.id), req.body)
@@ -47,6 +38,24 @@ export class DeliveryController {
       res.json(result)
     } catch (e: any) {
       res.status(404).json({ message: e.mensagem })
+    }
+  }
+
+  async acceped(req: Request, res: Response) {
+    try {
+      const result = await service.accept(Number(req.params.id))
+      res.status(200).json(result)
+    } catch (e: any) {
+      res.status(401).json({ message: e.mensagem })
+    }
+  }
+
+  async reject(req: Request, res: Response) {
+    try {
+      const result = await service.rejected(Number(req.params.id))
+      res.status(200).json(result)
+    } catch (e: any) {
+      res.status(401).json({ message: e.mensagem })
     }
   }
 

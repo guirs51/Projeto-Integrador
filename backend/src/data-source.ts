@@ -5,6 +5,8 @@ import { User } from './entities/User'
 import { Delivery } from './entities/delivery'
 import { Company } from './entities/Company'
 import { Prize } from './entities/Prize'
+import { Admin } from './entities/Admin'
+import { Material } from './entities/Material'
 
 config()
 
@@ -15,7 +17,7 @@ export const AppDataSource = new DataSource({
     username: process.env.DB_USERNAME,
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
-    entities: [User, Delivery, Company, Prize],
+    entities: [User, Delivery, Company, Prize, Admin, Material],
     synchronize: true, // cria tabelas automaticamentes (apenas para desevolvimento);
     logging: false
 })
