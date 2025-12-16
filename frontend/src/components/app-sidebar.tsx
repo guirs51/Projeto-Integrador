@@ -48,6 +48,7 @@ const items = [
 export function AppSidebar() {
 
   const [nome, setNome] = useState<String>('')
+  const [email,setEmail] = useState<String>('')
   const token = localStorage.getItem('token')
   const {userId} = useAuth()
 
@@ -74,6 +75,7 @@ export function AppSidebar() {
           }
 
           setNome(data.name)  
+          setEmail(data.email)
         } catch (error) {
           console.error("Erro de rede:", error);
         }
@@ -111,7 +113,7 @@ export function AppSidebar() {
                 <ModeToggle/>
               <UserSidebar user={{
         name: String(nome),
-        email: "",
+        email: String(email),
         avatar: ""
       }}/>
     </Sidebar>

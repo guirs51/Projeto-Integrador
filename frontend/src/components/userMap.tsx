@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react"
 import L from "leaflet"
 import "leaflet/dist/leaflet.css"
@@ -11,7 +12,8 @@ export default function UserMap({ mapRef }: UserMapProps) {
     const container = L.DomUtil.get("map")
     if (container != null) {
       // evita erro ao recarregar componente
-      ;(container as any)._leaflet_id = null
+
+      ; (container as any)._leaflet_id = null
     }
 
     const map = L.map("map", {
@@ -20,13 +22,13 @@ export default function UserMap({ mapRef }: UserMapProps) {
 
     mapRef.current = map
 
-   L.tileLayer(
-  "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key=57544848-9855-440b-92b6-a416e1141fd2",
-  {
-    maxZoom: 19,
-    minZoom: 8,
-  }
-).addTo(map)
+    L.tileLayer(
+      "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key=57544848-9855-440b-92b6-a416e1141fd2",
+      {
+        maxZoom: 19,
+        minZoom: 8,
+      }
+    ).addTo(map)
 
 
     // 🌍 GEOLOCALIZAÇÃO
@@ -34,6 +36,16 @@ export default function UserMap({ mapRef }: UserMapProps) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
         const lat = pos.coords.latitude
         const lon = pos.coords.longitude
+
+        const icons = {
+          prefeitura: new L.Icon({
+            iconUrl: "https://cdn-icons-png.flaticon.com/512/1666/1666066.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+            shadowUrl: undefined
+          }),
+        }
 
         map.setView([lat, lon], 15)
 
@@ -60,7 +72,7 @@ export default function UserMap({ mapRef }: UserMapProps) {
             const nome = element.tags?.name || "Prefeitura"
             const coords: [number, number] = [element.lat, element.lon]
 
-            L.marker(coords)
+            L.marker(coords,{icon:icons.prefeitura})
               .addTo(map)
               .bindPopup(`🏛 ${nome}`)
           })

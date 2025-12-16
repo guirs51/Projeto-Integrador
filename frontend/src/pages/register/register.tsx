@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react"
 import { IoEyeSharp } from "react-icons/io5"
 import { FaEyeSlash } from "react-icons/fa"
@@ -8,11 +9,14 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 export default function Register() {
+
   const [name, setName] = useState("")
   const [email, setEmail] = useState("")
   const [cpf, setCpf] = useState("")
   const [password, setPassword] = useState("")
   const [show, setShow] = useState(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
+
 
   async function createUser() {
     try {
@@ -25,7 +29,11 @@ export default function Register() {
       const data = await response.json()
 
       if (!response.ok) {
-        alert(data.message)
+        const messages = data.map((err:any) =>Object.values(err)[0]).join("\n")
+
+        setErrorMessage(messages)
+        alert(messages)
+        // alert(data.message)
         return
       }
 
@@ -38,7 +46,7 @@ export default function Register() {
 
   return (
     <div className="flex h-screen w-full">
-      
+
       {/* ESQUERDA */}
       <div className="flex flex-1 items-center justify-center bg-background">
         <Card className="w-full max-w-md shadow-lg">

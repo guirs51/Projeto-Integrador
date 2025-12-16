@@ -2,7 +2,7 @@ import { Search, X, Sun, Moon, Settings, Home, LogOut, Inbox, BookOpen, CheckSqu
 import { useRef, useState } from "react";
 import "./Location.css";
 import SearchMap from "../../components/SearchMap";
-import UserMap from "../../components/UserMap";
+
 
 export default function Location() {
 
