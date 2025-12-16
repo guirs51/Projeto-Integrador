@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -108,12 +108,13 @@ export function AppSidebar() {
         </SidebarGroup>
         
       </SidebarContent>
-                <ModeToggle/>
-              <UserSidebar user={{
+             <div className="mb-2 ml-2" > <ModeToggle /> </div>   
+       
+              <div>       <UserSidebar user={{
         name: String(nome),
         email: "",
         avatar: ""
-      }}/>
+      }}/></div>
     </Sidebar>
   )
 }
