@@ -64,7 +64,6 @@ export default function EditProfileModal({
         <DialogHeader className="flex flex-row items-center justify-between">
           <DialogTitle>Editar perfil</DialogTitle>
           <button onClick={onClose}>
-            <X className="w-4 h-4" />
           </button>
         </DialogHeader>
 
