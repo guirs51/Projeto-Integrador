@@ -53,7 +53,7 @@ export default function Login() {
 
       {/* ESQUERDA */}
       <div className="flex flex-1 items-center justify-center">
-        <Card className="w-full max-w-md bg-white border shadow-lg">
+        <Card className="w-full max-w-md bg-neutral-100 border shadow-lg">
 
           <CardHeader className="text-center space-y-2">
             <h1 className="text-xl font-semibold text-black">

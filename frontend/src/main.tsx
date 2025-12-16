@@ -1,5 +1,4 @@
 import { createRoot } from 'react-dom/client'
-import App from './App.tsx'
 import { BrowserRouter, Routes, Route } from 'react-router'
 import Layout from './layout.tsx'
 import Admin from './pages/admin.tsx'
@@ -14,6 +13,7 @@ import Register from './pages/register/register.tsx'
 import Login from './pages/login/login.tsx'
 import Bonifications from './pages/bonificaions/bonifications.tsx'
 import Location from './pages/locations/location.tsx'
+import AdminConfig from './pages/admin/admin-config.tsx'
 
 
 
@@ -44,6 +44,7 @@ createRoot(document.getElementById('root')!).render(
 
           <Route path='/admin/dashboard' element={<Admin />} />
           <Route path='/admin/requests' element={<AdminRequest />} />
+          <Route path='/admin/config' element={<AdminConfig/>}></Route>
         </Routes>
       </AuthProvider>
     </ThemeProvider>

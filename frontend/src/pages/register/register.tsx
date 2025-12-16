@@ -48,18 +48,18 @@ export default function Register() {
     <div className="flex h-screen w-full">
 
       {/* ESQUERDA */}
-      <div className="flex flex-1 items-center justify-center bg-background">
-        <Card className="w-full max-w-md shadow-lg">
+      <div className="flex flex-1 items-center justify-center bg-neutral-50">
+        <Card className="w-full max-w-md shadow-lg bg-neutral-100">
           <CardHeader className="text-center space-y-2">
-            <h1 className="text-xl font-semibold">
+            <h1 className="text-xl font-semibold text-neutral-900">
               Bem-vindo ao <span className="text-green-600">Recicle +</span>
             </h1>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-sm text-muted-foreground  text-zinc-600">
               Junte-se à nossa comunidade sustentável
             </p>
           </CardHeader>
 
-          <CardContent className="space-y-4">
+          <CardContent className="space-y-4 ">
             <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} />
             <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
             <Input placeholder="CPF" onChange={(e) => setCpf(e.target.value)} />
@@ -87,7 +87,7 @@ export default function Register() {
               Cadastrar
             </Button>
 
-            <p className="text-xs text-center">
+            <p className="text-xs text-center  text-zinc-600">
               Já tem uma conta?{" "}
               <a href="/login" className="text-green-600 font-medium">
                 Entrar
