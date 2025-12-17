@@ -44,11 +44,11 @@ export default function ReciclyngModal({
         e.preventDefault();
 
         // Converter quantidade para número corretamente
-        onSubmit({
-            material: formData.material,
-            quantidade: Number(formData.quantidade),
-            localizacao: formData.localizacao
-        });
+        // onSubmit({
+        //     material: formData.material,
+        //     quantidade: Number(formData.quantidade),
+        //     localizacao: formData.localizacao
+        // });
 
         // Limpar campos
         setFormData({ material: "", quantidade: "", localizacao: "" });

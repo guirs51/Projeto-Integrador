@@ -8,6 +8,9 @@ export class Material {
     @Column({ length: 120, unique: true })
     name: string
 
+    @Column({ nullable: true, default: 2 })
+    importance: number
+
     @Column()
     points: number
 

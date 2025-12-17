@@ -163,7 +163,7 @@ export function RequestModal({ onCreated }: RequestModalProps) {
             status,
             quantidade: Number(quantity),
             // createdAt,
-            id_request: uuid
+            id: uuid
         })
     }
 

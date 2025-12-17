@@ -29,7 +29,7 @@ export default function Register() {
       const data = await response.json()
 
       if (!response.ok) {
-        const messages = data.map((err:any) =>Object.values(err)[0]).join("\n")
+        const messages = data.map((err: any) => Object.values(err)[0]).join("\n")
 
         setErrorMessage(messages)
         alert(messages)
@@ -60,9 +60,9 @@ export default function Register() {
           </CardHeader>
 
           <CardContent className="space-y-4 ">
-            <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} />
-            <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
-            <Input placeholder="CPF" onChange={(e) => setCpf(e.target.value)} />
+            <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} className="bg-white text-zinc-900" />
+            <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} className="bg-white text-zinc-900" />
+            <Input placeholder="CPF" onChange={(e) => setCpf(e.target.value)} className="bg-white text-zinc-900" />
 
             {/* Senha */}
             <div className="relative">
@@ -70,6 +70,7 @@ export default function Register() {
                 type={show ? "text" : "password"}
                 placeholder="Senha"
                 onChange={(e) => setPassword(e.target.value)}
+                className="bg-white text-zinc-900"
               />
               <button
                 type="button"

@@ -24,17 +24,91 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { materialsTable } from "../materials/materialsTable";
+// import { materialsTable } from "../materials/materialsTable";
 
 import { Label } from "@/components/ui/label";
+import { use, useEffect, useState } from "react";
+import { data } from "react-router";
 
 interface Material {
+  id: number;
   name: string;
   importance: number;
   points: number;
 }
 
 export default function AdminConfig() {
+
+  const [material, setMaterial] = useState<Material[]>([])
+  const [pontos, setPontos] = useState<String>("")
+  const [nomeMaterial, setNomeMaterial] = useState<string>("")
+  const [importancia, setImportancia] = useState<String>("")
+
+  useEffect(() => {
+    const getMaterial = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/material/", {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+
+        const data = await response.json()
+        if (!response.ok) {
+          alert("Houve um Erro")
+          return
+        }
+        setMaterial(data)
+
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    getMaterial()
+
+  }, [])
+
+  const postMaterial = async () => {
+    try {
+      const response = await fetch("http://localhost:3000/material/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name: nomeMaterial, points: Number(pontos), importance: Number(importancia) })
+      })
+
+      if (!response.ok) {
+        alert("houve um Erro")
+        return
+      }
+      
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const deleteMaterial = async (id: number) => {
+    try {
+      const response = await fetch(`http://localhost:3000/material/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json"
+        },
+      })
+
+      if (!response.ok) {
+        alert("houve um Erro")
+        return
+      }
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
   return (
     <div className="">
       <div className="flex w-full max-w-sm items-center gap-2 p-10 ">
@@ -56,9 +130,9 @@ export default function AdminConfig() {
           </TableHeader>
 
           <TableBody>
-            {materialsTable.map((item: Material, index: number) => (
+            {material.map((item: Material) => (
               <TableRow
-                key={index}
+                key={item.id}
                 className="border-b hover:bg-green-500/10 dark:hover:bg-green-500/20 transition"
               >
                 <TableCell>{item.name}</TableCell>
@@ -73,7 +147,7 @@ export default function AdminConfig() {
 
                 <TableCell >
                   <AlertDialog>
-                    <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition ">Remover</AlertDialogTrigger>
+                    <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition " >Remover</AlertDialogTrigger>
                     <AlertDialogContent>
                       <AlertDialogHeader>
                         <AlertDialogTitle>
@@ -85,7 +159,9 @@ export default function AdminConfig() {
                       </AlertDialogHeader>
                       <AlertDialogFooter>
                         <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition">Remover</AlertDialogAction>
+                        <Button type="submit" variant="outline" onClick={() => deleteMaterial(item.id)}>
+                          remover
+                        </Button>
                       </AlertDialogFooter>
                     </AlertDialogContent>
                   </AlertDialog>
@@ -115,6 +191,7 @@ export default function AdminConfig() {
                     id="width"
                     defaultValue="100%"
                     className="col-span-2 h-8"
+                    onChange={(e) => setImportancia(String(e.target.value))}
                   />
                 </div>
                 <div className="grid grid-cols-3 items-center gap-4">
@@ -123,6 +200,8 @@ export default function AdminConfig() {
                     id="Material"
                     defaultValue="papel"
                     className="col-span-2 h-8"
+                    value={nomeMaterial}
+                    onChange={(e) => setNomeMaterial(String(e.target.value))}
                   />
                 </div>
                 <div className="grid grid-cols-3 items-center gap-4">
@@ -131,10 +210,15 @@ export default function AdminConfig() {
                     id="Pontos"
                     defaultValue="10"
                     className="col-span-2 h-8"
+                    onChange={(e) => setPontos(String(e.target.value))}
                   />
                 </div>
               </div>
             </div>
+
+            <Button type="submit" variant="outline" onClick={postMaterial}>
+              Salvar
+            </Button>
           </PopoverContent>
         </Popover>
       </div>

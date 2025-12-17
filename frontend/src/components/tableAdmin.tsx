@@ -25,7 +25,7 @@ import { RequestModal } from "@/pages/admin/admin-requests";
 
 export const mock: Request[] = [
   {
-    id_request: "1",
+    id: "1",
     // createdAt: "11-11-25",
     materialType: "papel",
     status: "success",
@@ -37,7 +37,7 @@ export const mock: Request[] = [
     },
   },
   {
-    id_request: "2",
+    id: "2",
     // createdAt: "10-11-25",
     materialType: "plástico",
     status: "PENDING",
@@ -49,7 +49,7 @@ export const mock: Request[] = [
     },
   },
   {
-    id_request: "3",
+    id: "3",
     // createdAt: "09-11-25",
     materialType: "vidro",
     status: "success",
@@ -61,7 +61,7 @@ export const mock: Request[] = [
     },
   },
   {
-    id_request: "4",
+    id: "4",
     // createdAt: "08-11-25",
     materialType: "metal",
     status: "canceled",
@@ -73,7 +73,7 @@ export const mock: Request[] = [
     },
   },
   {
-    id_request: "5",
+    id: "5",
     // createdAt: "07-11-25",
     materialType: "papelão",
     status: "PENDING",
@@ -85,7 +85,7 @@ export const mock: Request[] = [
     },
   },
   {
-    id_request: "6",
+    id: "6",
     // createdAt: "06-11-25",
     materialType: "eletrônicos",
     status: "success",
@@ -122,7 +122,7 @@ export type UserMock = {
 }
 
 export type Request = {
-  id_request: string
+  id: string
   user: UserMock
   materialType: string
   // createdAt: string
@@ -211,7 +211,7 @@ export default function TableAdmin({ data }: TableAdminProps) {
 
               {data.map((item, index) => (
                 <TableRow
-                  key={item.id_request}
+                  key={item.id}
                   className={cn(
                     "transition-colors hover:bg-accent/40",
                     index % 2 === 0 ? "bg-background" : "bg-muted/20"
@@ -266,15 +266,51 @@ import {
 
 interface RequestDetailsModalProps {
   data: Request
-  onAccept?: (request: Request) => void
-  onDeny?: (request: Request) => void
+  // onAccept?: (request: Request) => void
+  // onDeny?: (request: Request) => void
 }
 
-export function RequestDetailsModal({
-  data,
-  onAccept,
-  onDeny,
-}: RequestDetailsModalProps) {
+export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
+  const getAccept = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/delivery/accept/${Number(data.id)}`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if (!response.ok) {
+        alert("Houve um Erro")
+        console.log(data)
+        return
+      }
+      alert("OK")
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const getReject = async () => {
+    try {
+      const response = await fetch(`http://localhost:3000/delivery/reject/${Number(data.id)}`, {
+        method: 'GET',
+        headers: {
+          "Content-Type": "application/json"
+        }
+      })
+      if (!response.ok) {
+        alert("Houve um Erro")
+        console.log(data)
+        return
+      }
+      alert("OK")
+
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -321,14 +357,14 @@ export function RequestDetailsModal({
         <DialogFooter className="gap-2">
           <Button
             variant="destructive"
-            onClick={() => onDeny?.({ ...data, status: "failed" })}
+            onClick={getReject}
           >
             Negar
           </Button>
 
           <Button
             className="bg-primary"
-            onClick={() => onAccept?.({ ...data, status: "success" })}
+            onClick={getAccept}
           >
             Aceitar
           </Button>

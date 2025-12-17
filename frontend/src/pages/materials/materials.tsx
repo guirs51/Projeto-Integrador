@@ -8,14 +8,44 @@ import {
 } from "@/components/ui/table"
 
 import { materialsTable } from "./materialsTable"
+import { useEffect, useState } from "react"
 
 interface Material {
+  id: number
   name: string
   importance: number
   points: number
 }
 
 export default function Materials() {
+
+  const [material, setMaterial] = useState<Material[]>([])
+
+  useEffect(() => {
+    const getMaterial = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/material/", {
+          method: 'GET',
+          headers: {
+            "Content-Type": "application/json"
+          }
+        })
+
+        const data = await response.json()
+        if (!response.ok) {
+          alert("Houve um Erro")
+          return
+        }
+        setMaterial(data)
+
+      } catch (e) {
+        console.log(e)
+      }
+    }
+
+    getMaterial()
+
+  }, [])
   return (
     <div className="h-full w-full overflow-x-auto p-20 ">
       <Table className="scale-95">
@@ -28,9 +58,9 @@ export default function Materials() {
         </TableHeader>
 
         <TableBody>
-          {materialsTable.map((item: Material, index: number) => (
+          {material.map((item: Material) => (
             <TableRow
-              key={index}
+              key={item.id}
               className="border-b hover:bg-green-500/10 dark:hover:bg-green-500/20 transition"
             >
               <TableCell>{item.name}</TableCell>
