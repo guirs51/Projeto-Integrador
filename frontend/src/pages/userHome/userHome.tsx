@@ -84,7 +84,7 @@ export default function ProfilePage() {
           );
           return;
         }
-
+        
         setUser(data)
         setDeliveries(data.delivery)
 

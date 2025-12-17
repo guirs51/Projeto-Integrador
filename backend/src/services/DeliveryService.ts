@@ -28,6 +28,14 @@ export class DeliveryService {
             const deliverys = this.deliveryRepo.find({ relations: ["user"] });
             return (await deliverys).map((u) => {
                 const clone: any = { ...u };
+                if (clone.user) {
+                    delete clone.user.password
+                    delete clone.user.id
+                    delete clone.user.Points
+                    delete clone.user.updatedAt
+                    delete clone.user.createdAt
+                    delete clone.deliveryLocal
+                }
                 return clone;
             });
         } catch (e) {

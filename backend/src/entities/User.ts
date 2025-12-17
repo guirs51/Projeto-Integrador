@@ -16,7 +16,7 @@ export class User {
     @Column({ unique: true, length: 20 })
     cpf: string
 
-    @Column({nullable: true, default: 0})
+    @Column({ nullable: true, default: 0 })
     Points: number
 
     @Column()
@@ -28,7 +28,9 @@ export class User {
     @UpdateDateColumn()
     updatedAt: Date
 
-    @OneToMany(() => Delivery, (delivery) => delivery.user)
+    @OneToMany(() => Delivery, (delivery) => delivery.user, {
+        onDelete: "CASCADE"
+    })
     delivery: Delivery[];
 
     //salvar a senha antes de salvar ou atualizar dados

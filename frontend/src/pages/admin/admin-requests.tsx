@@ -2,7 +2,7 @@ import TableAdmin, { mock } from "@/components/tableAdmin";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { use, useState } from "react";
+import { use, useEffect, useState } from "react";
 
 import type { Request, RequestStatus } from "@/components/tableAdmin";
 import { Button } from "@/components/ui/button";
@@ -12,15 +12,54 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 
 export default function AdminRequest() {
-    const [requests, setRequests] = useState<Request[]>([...mock])
+    const [requests, setRequests] = useState<Request[]>([])
     const [filter, setFilter] = useState<string>("")
     const [barData, setBarData] = useState<'pending' | 'all'>("pending")
 
     const filterRequests = filter !== "" ? requests.filter(i => i.user.name.toUpperCase().includes(filter.toUpperCase())) : requests
 
-    const itensPending = filterRequests.filter(r => r.status === "pending")
+    const itensPending = filterRequests.filter(r => r.status === "PENDING")
 
+    console.log("filtrando as request: ", filterRequests)
 
+    useEffect(() => {
+        const getAll = async () => {
+            try {
+                const respose = await fetch('http://localhost:3000/delivery/', {
+                    method: "GET",
+                    headers: {
+                        "Content-Type": "application/json"
+                    }
+                })
+
+                const data = await respose.json()
+
+                const parsed: Request[] = data.map((item: any) => ({
+                    id_request: item.id_request,
+                    recycling: item.recycling,
+                    status: item.status,
+                    quantity: item.quantity,
+                    user: {
+                        name: item.name,
+                        cpf: item.cpf,
+                        email: item.email,
+                    },
+                }))
+
+                setRequests(parsed)
+                if (!respose.ok) {
+                    alert("Erro na requesição")
+                    return
+                }
+                console.log(data)
+                setRequests([...data])
+            } catch (e) {
+                console.log(e)
+            }
+        }
+
+        getAll()
+    }, [])
 
     return (
         <section className="w-full h-full p-5 ">
@@ -51,37 +90,37 @@ export default function AdminRequest() {
             </div>
 
 
-      <div className="flex gap-2 py-4">
-  <Button
-    onClick={() => setBarData("pending")}
-    size="sm"
-    variant="ghost"
-    className={cn(
-      "h-8 rounded-full px-4 text-sm font-medium transition-all",
-      "hover:bg-accent",
-      barData === "pending"
-        ? "bg-primary/15 text-primary ring-1 ring-primary/30"
-        : "text-muted-foreground"
-    )}
-  >
-    Pendentes
-  </Button>
+            <div className="flex gap-2 py-4">
+                <Button
+                    onClick={() => setBarData("pending")}
+                    size="sm"
+                    variant="ghost"
+                    className={cn(
+                        "h-8 rounded-full px-4 text-sm font-medium transition-all",
+                        "hover:bg-accent",
+                        barData === "pending"
+                            ? "bg-primary/15 text-primary ring-1 ring-primary/30"
+                            : "text-muted-foreground"
+                    )}
+                >
+                    Pendentes
+                </Button>
 
-  <Button
-    onClick={() => setBarData("all")}
-    size="sm"
-    variant="ghost"
-    className={cn(
-      "h-8 rounded-full px-4 text-sm font-medium transition-all",
-      "hover:bg-accent",
-      barData === "all"
-        ? "bg-primary/15 text-primary ring-1 ring-primary/30"
-        : "text-muted-foreground"
-    )}
-  >
-    Todas
-  </Button>
-</div>
+                <Button
+                    onClick={() => setBarData("all")}
+                    size="sm"
+                    variant="ghost"
+                    className={cn(
+                        "h-8 rounded-full px-4 text-sm font-medium transition-all",
+                        "hover:bg-accent",
+                        barData === "all"
+                            ? "bg-primary/15 text-primary ring-1 ring-primary/30"
+                            : "text-muted-foreground"
+                    )}
+                >
+                    Todas
+                </Button>
+            </div>
 
 
             <div className="w-full ">
@@ -106,8 +145,8 @@ export function RequestModal({ onCreated }: RequestModalProps) {
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [cpf, setCpf] = useState("")
-    const [recycling, setRecycling] = useState("")
-    const [status, setStatus] = useState<RequestStatus>("pending")
+    const [materialType, setRecycling] = useState("")
+    const [status, setStatus] = useState<RequestStatus>("PENDING")
     const [quantity, setQuantity] = useState<number | "">("")
     const [createdAt, setCreatedAt] = useState("")
 
@@ -121,10 +160,10 @@ export function RequestModal({ onCreated }: RequestModalProps) {
                 cpf,
                 email
             },
-            recycling,
+            materialType,
             status,
-            quantity: Number(quantity),
-            createdAt,
+            quantidade: Number(quantity),
+            // createdAt,
             id_request: uuid
         })
     }
@@ -184,7 +223,7 @@ export function RequestModal({ onCreated }: RequestModalProps) {
                         <Input
                             placeholder="Vidro, Engrenagem"
                             id="recycling"
-                            value={recycling}
+                            value={materialType}
                             onChange={(e) => setRecycling(e.target.value)}
                         />
                     </div>

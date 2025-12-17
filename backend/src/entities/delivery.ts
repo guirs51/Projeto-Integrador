@@ -20,8 +20,8 @@ export class Delivery {
     quantidade: number
 
     @ManyToOne(() => User, (user) => user.delivery, {
-        nullable: true,
-        onDelete: "SET NULL"
+        cascade: true,
+        onDelete: "CASCADE"
     })
     @JoinColumn({ name: 'user_id' }) // ← Adicionar JoinColumn para criar a FK
     user: User | null

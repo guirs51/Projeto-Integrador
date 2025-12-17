@@ -26,10 +26,10 @@ import { RequestModal } from "@/pages/admin/admin-requests";
 export const mock: Request[] = [
   {
     id_request: "1",
-    createdAt: "11-11-25",
-    recycling: "papel",
+    // createdAt: "11-11-25",
+    materialType: "papel",
     status: "success",
-    quantity: 100,
+    quantidade: 100,
     user: {
       name: "Arthur Tavares Souto",
       cpf: "142.555.159-99",
@@ -38,10 +38,10 @@ export const mock: Request[] = [
   },
   {
     id_request: "2",
-    createdAt: "10-11-25",
-    recycling: "plástico",
-    status: "pending",
-    quantity: 45,
+    // createdAt: "10-11-25",
+    materialType: "plástico",
+    status: "PENDING",
+    quantidade: 45,
     user: {
       name: "Nathalia Minossi",
       cpf: "321.654.987-00",
@@ -50,10 +50,10 @@ export const mock: Request[] = [
   },
   {
     id_request: "3",
-    createdAt: "09-11-25",
-    recycling: "vidro",
+    // createdAt: "09-11-25",
+    materialType: "vidro",
     status: "success",
-    quantity: 200,
+    quantidade: 200,
     user: {
       name: "Lucas Andrade",
       cpf: "987.123.456-11",
@@ -62,10 +62,10 @@ export const mock: Request[] = [
   },
   {
     id_request: "4",
-    createdAt: "08-11-25",
-    recycling: "metal",
+    // createdAt: "08-11-25",
+    materialType: "metal",
     status: "canceled",
-    quantity: 30,
+    quantidade: 30,
     user: {
       name: "Mariana Lopes",
       cpf: "456.789.123-22",
@@ -74,10 +74,10 @@ export const mock: Request[] = [
   },
   {
     id_request: "5",
-    createdAt: "07-11-25",
-    recycling: "papelão",
-    status: "pending",
-    quantity: 150,
+    // createdAt: "07-11-25",
+    materialType: "papelão",
+    status: "PENDING",
+    quantidade: 150,
     user: {
       name: "Rafael Costa",
       cpf: "654.321.987-33",
@@ -86,10 +86,10 @@ export const mock: Request[] = [
   },
   {
     id_request: "6",
-    createdAt: "06-11-25",
-    recycling: "eletrônicos",
+    // createdAt: "06-11-25",
+    materialType: "eletrônicos",
     status: "success",
-    quantity: 12,
+    quantidade: 12,
     user: {
       name: "Beatriz Fernandes",
       cpf: "789.456.123-44",
@@ -103,13 +103,13 @@ const STATUS_BADGE_STYLES: Record<RequestStatus, string> = {
   success: "bg-green-600 hover:bg-green-700",
   failed: "bg-red-600 hover:bg-red-700",
   processing: "bg-yellow-500 text-black hover:bg-yellow-600",
-  pending: "bg-neutral-500 hover:bg-neutral-600",
+  PENDING: "bg-neutral-500 hover:bg-neutral-600",
   canceled: "bg-zinc-600 hover:bg-zinc-700",
 }
 
 
 export type RequestStatus =
-  | "pending"
+  | "PENDING"
   | "success"
   | "processing"
   | "failed"
@@ -124,10 +124,10 @@ export type UserMock = {
 export type Request = {
   id_request: string
   user: UserMock
-  recycling: string
-  createdAt: string
+  materialType: string
+  // createdAt: string
   status: RequestStatus
-  quantity: number
+  quantidade: number
 
 }
 
@@ -137,6 +137,7 @@ interface TableAdminProps {
 }
 
 export default function TableAdmin({ data }: TableAdminProps) {
+  console.log("data recebido: ", data)
   return (
     <div className="w-full h-full">
       {/*  <div className="grid max-w-sm gap-6">
@@ -158,7 +159,7 @@ export default function TableAdmin({ data }: TableAdminProps) {
                 <TableHead>CPF</TableHead>
                 <TableHead>Reciclagem</TableHead>
                 <TableHead>Quantidade</TableHead>
-                <TableHead>Data</TableHead>
+                {/* <TableHead>Data</TableHead> */}
                 <TableHead>Status</TableHead>
                 <TableHead className="text-center">Ações</TableHead>
               </TableRow>
@@ -216,13 +217,12 @@ export default function TableAdmin({ data }: TableAdminProps) {
                     index % 2 === 0 ? "bg-background" : "bg-muted/20"
                   )}
                 >
-
                   <TableCell>{item.user.name}</TableCell>
                   <TableCell>{item.user.email}</TableCell>
                   <TableCell>{item.user.cpf}</TableCell>
-                  <TableCell>{item.recycling}</TableCell>
-                  <TableCell>{String(item.quantity)}</TableCell>
-                  <TableCell>{item.createdAt}</TableCell>
+                  <TableCell>{item.materialType}</TableCell>
+                  <TableCell>{String(item.quantidade)}</TableCell>
+                  {/* <TableCell>{item.createdAt}</TableCell> */}
 
 
                   {/* STATUS BADGE */}
@@ -239,7 +239,7 @@ export default function TableAdmin({ data }: TableAdminProps) {
 
                   {/* SELECT NA COLUNA DE AÇÕES */}
                   <TableCell className="text-center">
-                      <RequestDetailsModal data={item}/>
+                    <RequestDetailsModal data={item} />
                   </TableCell>
 
                 </TableRow>
@@ -296,9 +296,9 @@ export function RequestDetailsModal({
           <Info label="Nome" value={data.user.name} />
           <Info label="Email" value={data.user.email} />
           <Info label="CPF" value={data.user.cpf} />
-          <Info label="Reciclagem" value={data.recycling} />
-          <Info label="Quantidade" value={`${data.quantity}`} />
-          <Info label="Data" value={data.createdAt} />
+          <Info label="Reciclagem" value={data.materialType} />
+          <Info label="Quantidade" value={`${data.quantidade}`} />
+          {/* <Info label="Data" value={data.createdAt} /> */}
 
           <div className="flex items-center justify-between">
             <span className="text-muted-foreground">Status</span>
@@ -308,7 +308,7 @@ export function RequestDetailsModal({
                 data.status === "success" && "bg-primary",
                 data.status === "failed" && "bg-destructive",
                 data.status === "processing" && "bg-accent",
-                data.status === "pending" && "bg-muted",
+                data.status === "PENDING" && "bg-muted",
                 data.status === "canceled" && "bg-secondary"
               )}
             >
