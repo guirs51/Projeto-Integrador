@@ -18,12 +18,21 @@ import "../../global.css"
 
 
 import {
-  ArchiveRestore, PlusCircle,
-
+  ArchiveRestore, PlusCircle, Home,
+  Inbox,
+  BookOpen,
+  CheckSquare,
+  Users,
+  Settings,
+  LogOut,
+  Sun,
+  Moon,
   User
 } from 'lucide-react';
-
+import { data, useLocation } from 'react-router';
+import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
+import Materials from "../materials/materials"
 
 
 
@@ -47,7 +56,7 @@ interface User {
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [darkMode, setDarkMode] = useState(false);
   const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
 
 
@@ -76,7 +85,7 @@ export default function ProfilePage() {
           );
           return;
         }
-        
+
         setUser(data)
         setDeliveries(data.delivery)
 
@@ -92,6 +101,14 @@ export default function ProfilePage() {
 
   const points = deliveries.length * 10;
 
+  // deliveries.map((item, index) => {
+  //     if(item.status != "accepted") return 
+  // })
+
+  const toggleDarkMode = () => {
+    setDarkMode(!darkMode);
+    document.body.classList.toggle("dark");
+  }
 
   const postDelivery = async (local: string, materialType: string, quantidade: number) => {
     try {
@@ -140,7 +157,7 @@ export default function ProfilePage() {
       />
 
       {/* CARD USUÁRIO */}
-      <Card className="rounded-2xl border bg-backgroundnd  ">
+      <Card className="rounded-2xl border bg-background">
         <CardContent className="flex gap-8 p-8">
           <Avatar className="h-36 w-36">
             <AvatarImage src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000" />
@@ -169,7 +186,7 @@ export default function ProfilePage() {
         >
           <PlusCircle className="h-4 w-4" />
         </Button>
-        <span className="text-base font-medium text-emerald-800 dark:text-emerald-300">Adicionar reciclagem</span>
+        <span className="text-base font-medium">Adicionar reciclagem</span>
       </div>
 
       {/* ÁREA PRINCIPAL */}
@@ -178,12 +195,12 @@ export default function ProfilePage() {
         <div className="flex-[2] space-y-4">
           <div className="flex items-center gap-2">
             <ArchiveRestore className="h-5 w-5" />
-            <h2 className="text-lg font-semibold text-emerald-800  dark:text-emerald-300">Área dos Registros Pendentes</h2>
+            <h2 className="text-lg font-semibold">Área dos Registros Pendentes</h2>
           </div>
 
           <ScrollArea className="h-[40vh] rounded-xl border p-4">
             {deliveries.length === 0 ? (
-              <p className="text-sm text-muted-foreground p-3">
+              <p className="text-sm text-muted-foreground">
                 Você não possui registros
               </p>
             ) : (
@@ -202,14 +219,14 @@ export default function ProfilePage() {
         </div>
 
         {/* PONTUAÇÃO */}
-        <div className="flex-1 ">
-          <Card className="sticky top-6 rounded-xl border bg-green-800/30 dark:bg-green-950 ">
+        <div className="flex-1">
+          <Card className="sticky top-6 rounded-xl border">
             <CardHeader>
               <CardTitle className="text-base">Pontuação</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <PointsChart points={points} />
-              <div className="rounded-lg bg-emerald-500/10 text-neutral-900 dark:text-emerald-400 px-3 py-1 text-center text-sm font-medium">
+              <div className="rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-3 py-1 text-center text-sm font-medium">
                 {points} pontos
               </div>
             </CardContent>

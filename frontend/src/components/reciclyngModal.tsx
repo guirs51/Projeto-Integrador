@@ -1,126 +1,183 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-
-// Tipagem dos dados enviados pelo formulário
-export interface RecyclingFormData {
-    deliveryLocal(deliveryLocal: any, material: string, arg2: number): unknown;
-    material: string;
-    quantidade: number;
-    localizacao: string;
+ export interface RecyclingFormData {
+  material: string;
+  quantidade: number;
+  localizacao: string;
 }
 
-// Tipagem das props recebidas pelo componente
+interface Material {
+  id: number;
+  name: string;
+  importance: number;
+  points: number;
+}
+
 interface NewRecyclingModalProps {
-    isOpen: boolean;
-    onClose: () => void;
-    onSubmit: (data: RecyclingFormData) => void;
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (data: RecyclingFormData) => void;
 }
 
 export default function ReciclyngModal({
-    isOpen,
-    onClose,
-    onSubmit
+  isOpen,
+  onClose,
+  onSubmit
 }: NewRecyclingModalProps) {
 
-    const [formData, setFormData] = useState({
-        material: "",
-        quantidade: "",
-        localizacao: ""
+  const [formData, setFormData] = useState<RecyclingFormData>({
+    material: "",
+    quantidade: 0,
+    localizacao: ""
+  });
+
+  const [materials, setMaterials] = useState<Material[]>([]);
+
+  useEffect(() => {
+    const getMaterial = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/material/", {
+          method: "GET",
+          headers: { "Content-Type": "application/json" }
+        });
+
+        if (!response.ok) {
+          alert("Houve um erro ao buscar materiais");
+          return;
+        }
+
+        const data = await response.json();
+        setMaterials(data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    getMaterial();
+  }, []);
+
+  if (!isOpen) return null;
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setFormData(prev => ({
+      ...prev,
+      [name]: name === "quantidade" ? Number(value) : value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    onSubmit(formData);
+
+    setFormData({
+      material: "",
+      quantidade: 0,
+      localizacao: ""
     });
 
-    if (!isOpen) return null;
+    onClose();
+  };
 
-    const handleChange = (
-        e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-        const { name, value } = e.target;
-        setFormData((prev) => ({
-            ...prev,
-            [name]: value
-        }));
-    };
+  return (
+    <div
+      className="fixed inset-0 bg-black/55 flex items-center justify-center z-[1000]"
+      onClick={onClose}
+    >
+      <div
+        className="w-full max-w-[500px] p-8 rounded-xl shadow-xl
+        bg-white dark:bg-[#1b1b1b]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className="text-center mb-5 dark:text-white">
+          Registrar Nova Reciclagem
+        </h2>
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+        <form onSubmit={handleSubmit} className="flex flex-col">
 
-        // Converter quantidade para número corretamente
-        // onSubmit({
-        //     material: formData.material,
-        //     quantidade: Number(formData.quantidade),
-        //     localizacao: formData.localizacao
-        // });
+          <label className="flex flex-col mb-6 text-[#ddd]">
+            Tipo de Material:
+            <select
+              value={formData.material}
+              onChange={(e) =>
+                setFormData(prev => ({
+                  ...prev,
+                  material: e.target.value
+                }))
+              }
+              required
+              className="
+                border-0 border-b border-[#444]
+                bg-transparent outline-none py-2
+                text-[15px] text-[#e5e5e5]
+                focus:border-[#2b8842]
+                appearance-none
+              "
+            >
+              <option value="" disabled hidden>
+                Selecione o material
+              </option>
 
-        // Limpar campos
-        setFormData({ material: "", quantidade: "", localizacao: "" });
+              {materials.map((item) => (
+                <option
+                  key={item.id}
+                  value={item.name}
+                  className="bg-black text-white"
+                >
+                  {item.name}
+                </option>
+              ))}
+            </select>
+          </label>
 
-        onClose();
-    };
+          <label className="flex flex-col mb-4 dark:text-[#ddd]">
+            Quantidade:
+            <input
+              type="number"
+              name="quantidade"
+              value={formData.quantidade}
+              onChange={handleInputChange}
+              required
+              className="bg-transparent border-b outline-none py-2"
+            />
+          </label>
 
-    return (
-        <div className={`fixed inset-0 bg-black/55 flex items-center justify-center z-[1000] backdrop-blur-sm outline-none ${isOpen ? "active" : ""}`} onClick={onClose}>
-            <div className=" w-full max-w-[500px] p-8 rounded-xl shadow-xl
-  bg-white dark:bg-[#1b1b1b]
-  border border-transparent dark:border-[#2e2e2e]
-  transition-colors" onClick={(e) => e.stopPropagation()}>
-                <h2 className="text-center mb-5 text-[#222] dark:text-white">Registrar Nova Reciclagem</h2>
+          <label className="flex flex-col mb-4 dark:text-[#ddd]">
+            Localização:
+            <input
+              type="text"
+              name="localizacao"
+              value={formData.localizacao}
+              onChange={handleInputChange}
+              required
+              className="bg-transparent border-b outline-none py-2"
+            />
+          </label>
 
-                <form onSubmit={handleSubmit} className="flex flex-col mb-4 font-medium text-[#333] dark:text-[#ddd]">
+          <div className="flex justify-between mt-6">
+            <button
+              type="submit"
+              className="px-5 py-2.5 rounded-lg text-white
+              bg-green-500 hover:bg-green-700"
+            >
+              Salvar
+            </button>
 
-                    <label className="flex flex-col mb-4 font-medium text-[#333] dark:text-[#ddd]">
-                        Tipo de Material:
-                        <input className="border-0 border-b border-[#ccc] dark:border-[#555]
-                             bg-transparent outline-none py-2 text-[15px]
-    text-[#333] dark:text-[#e5e5e5]
-    focus:border-[#2b8842] dark:focus:border-indigo-400"
-                            type="text"
-                            name="material"
-                            value={formData.material}
-                            onChange={handleChange}
-                            placeholder="Ex: Plástico, Papel..."
-                            required
-                        />
-                    </label>
-
-                    <label className="flex flex-col mb-4 font-medium text-[#333] dark:text-[#ddd]">
-                        Quantidade:
-                        <input
-                            type="number"
-                            name="quantidade"
-                            value={formData.quantidade}
-                            onChange={handleChange}
-                            placeholder="Ex: 2"
-                            required
-                        />
-                    </label>
-
-                    <label className="flex flex-col mb-4 font-medium text-[#333] dark:text-[#ddd]">
-                        Localização:
-                        <input
-                            type="text"
-                            name="localizacao"
-                            value={formData.localizacao}
-                            onChange={handleChange}
-                            placeholder="Ex: Rua das Flores, 123"
-                            required
-                        />
-                    </label>
-
-                    <div className="flex justify-between mt-6">
-                        <button type="submit" className=" px-5 py-2.5 rounded-lg text-white cursor-pointer transition
-    bg-green-400 hover:bg-green-600
-    dark:bg-green-500 dark:hover:bg-green-700">
-                            Salvar
-                        </button>
-
-                        <button type="button" className=" px-5 py-2.5 rounded-lg text-white cursor-pointer transition
-    bg-red-500 hover:bg-red-600
-    dark:bg-red-600 dark:hover:bg-red-700" onClick={onClose}>
-                            Cancelar
-                        </button>
-                    </div>
-
-                </form>
-            </div>
-        </div>
-    );
+            <button
+              type="button"
+              onClick={onClose}
+              className="px-5 py-2.5 rounded-lg text-white
+              bg-red-500 hover:bg-red-700"
+            >
+              Cancelar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
 }

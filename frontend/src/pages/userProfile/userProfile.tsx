@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { useNavigate} from "react-router"
+import { useNavigate } from "react-router"
 import { Edit } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
@@ -32,13 +32,44 @@ export interface User {
 export default function UserProfile() {
   const [user, setUser] = useState<User | null>(null)
   const [openEditModal, setOpenEditModal] = useState(false)
+  const [passwordVeri, setPasswordVeri] = useState('')
 
   const navigate = useNavigate()
   const { userId, logout } = useAuth()
   const token = localStorage.getItem("token")
 
+
+  async function confirmPassword() {
+    try {
+      const response = await fetch("http://localhost:3000/auth/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ user: user?.email, password: passwordVeri }),
+      })
+
+      const data = await response.json()
+
+      if (!response.ok) {
+        alert(data.message || "Erro ")
+        return
+      }
+
+      if (data.user.role === "admin") {
+        alert("Senha Invalida")
+        return
+      }
+
+      return true
+    } catch {
+      alert("Erro de conexão com o servidor")
+    }
+  }
+
   async function deleteUser() {
     if (!userId || !token) return
+
+    if (!confirmPassword()) return
+
 
     const response = await fetch(`http://localhost:3000/users/${userId}`, {
       method: "DELETE",
@@ -147,23 +178,23 @@ export default function UserProfile() {
           {/* Delete */}
           <div className="flex justify-end">
             <AlertDialog>
-                    <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition ">Deletar</AlertDialogTrigger>
-                    <AlertDialogContent>
-                      <AlertDialogHeader>
-                        <AlertDialogTitle>
-                          Você tem certeza que deseja deletar sua conta?
-                        </AlertDialogTitle>
-                        <AlertDialogDescription>
-                          Essa ação sera permante, confirme sua senha para prosseguir.
-                        </AlertDialogDescription>
-                      </AlertDialogHeader>
-                      <AlertDialogFooter>
-                        <Input placeholder="Digite sua senha"></Input>
-                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                        <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition" onClick={deleteUser}>Deletar</AlertDialogAction>
-                      </AlertDialogFooter>
-                    </AlertDialogContent>
-                  </AlertDialog>
+              <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition ">Deletar</AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>
+                    Você tem certeza que deseja deletar sua conta?
+                  </AlertDialogTitle>
+                  <AlertDialogDescription>
+                    Essa ação sera permante, confirme sua senha para prosseguir.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  {/* <Input placeholder="Digite sua senha" onChange={(e) => setPasswordVeri(e.target.value)}></Input> */}
+                  <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                  <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition" onClick={deleteUser}>Deletar</AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         </CardContent>
       </Card>

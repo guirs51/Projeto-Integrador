@@ -23,7 +23,7 @@ export default function UserMap({ mapRef }: UserMapProps) {
     mapRef.current = map
 
     L.tileLayer(
-      "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key=57544848-9855-440b-92b6-a416e1141fd2",
+      "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key=7bc68d46-d9ea-4531-9fbc-c45d11bee1be",
       {
         maxZoom: 19,
         minZoom: 8,

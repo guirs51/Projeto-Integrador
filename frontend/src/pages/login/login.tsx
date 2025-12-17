@@ -35,7 +35,7 @@ export default function Login() {
       localStorage.setItem("token", data.token)
       login(data.user.id)
 
-      alert("Login realizado com sucesso! " + data.user.role)
+      alert("Login realizado com sucesso! ")
 
       if (data.user.role === "admin") {
         return navigate("/admin/requests")
