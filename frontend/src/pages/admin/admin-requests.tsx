@@ -1,5 +1,4 @@
 import TableAdmin, { mock } from "@/components/tableAdmin";
-import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
 import { use, useEffect, useState } from "react";

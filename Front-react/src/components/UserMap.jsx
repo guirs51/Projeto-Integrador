@@ -14,8 +14,8 @@ export default function UserMap({ mapRef }) {
         L.tileLayer(
             'https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.{ext}?api_key=57544848-9855-440b-92b6-a416e1141fd2',
             {
-                maxZoom: 19,
-                minZoom:8 ,
+                maxZoom: 20,
+                minZoom: 8,
                 ext: 'jpg'
             }
         ).addTo(map);
@@ -27,7 +27,21 @@ export default function UserMap({ mapRef }) {
                 const lat = pos.coords.latitude;
                 const lon = pos.coords.longitude;
 
-                map.setView([lat,lon],20)
+
+                const icons = {
+                    prefeitura: new L.Icon({
+                        iconUrl: "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+                        iconSize: [25, 41],
+                        iconAnchor: [12, 41],
+                        popupAnchor: [1, -34],
+                        shadowUrl:null
+                    }),
+                }
+
+
+                map.setView([lat, lon], 20)
+
+
 
                 L.marker([lat, lon]).addTo(map)
                     .bindPopup("📍 Você está aqui!")
@@ -44,9 +58,10 @@ export default function UserMap({ mapRef }) {
                     const nome = element.tags.name || "Prefeitura";
                     const coords = [element.lat, element.lon];
 
-                    L.marker(coords)
-                        .addTo(map)
-                        .bindPopup(`🏛 ${nome}`);
+                    let icon = icons.prefeitura;
+
+
+                    L.marker(coords, {icon}).addTo(map).bindPopup(`🏛 ${nome}`);
                 });
 
             });
@@ -55,5 +70,5 @@ export default function UserMap({ mapRef }) {
         return () => map.remove();
     }, []);
 
-    return <div id="map" style={{ height: "60vh", width: "100%",borderRadius:"15px" }}></div>;
+    return <div id="map" style={{ height: "60vh", width: "100%", borderRadius: "15px" }}></div>;
 }

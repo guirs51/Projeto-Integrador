@@ -1,4 +1,5 @@
 import { IsEmail, isNotEmpty, IsNotEmpty, IsString, Matches, MaxLength, MinLength } from "class-validator";
+import { IsCPF } from "class-validator-cpf";
 
 
 export class CreateUserDTO {
@@ -22,7 +23,7 @@ export class CreateUserDTO {
 
 
     @IsNotEmpty({ message: "O cpf é obrigatorio" })
-    @IsString()
+    @IsCPF({message:"Este CPF é invalido"})
     cpf:string
 
 }

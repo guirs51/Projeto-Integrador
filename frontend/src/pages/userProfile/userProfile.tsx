@@ -6,10 +6,21 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar"
 import { useAuth } from "@/context/authContext"
-
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
 import DataField from "@/components/dataField"
 import DataPasswordField from "@/components/dataPasswordField"
 import EditProfileModal from "@/components/editProfileModal"
+import { Input } from "@/components/ui/input"
 
 export interface User {
   id: string
@@ -89,8 +100,8 @@ export default function UserProfile() {
   }, [userId, token])
 
   return (
-    <div className="flex justify-center p-3">
-      <Card className="w-full max-w-3xl rounded-2xl shadow-lg">
+    <div className="flex justify-center p-22">
+      <Card className="w-full max-w-3xl  rounded-2xl shadow-lg">
         <CardContent className="p-8 space-y-6">
           {/* Header */}
           <div className="flex flex-col items-center gap-3">
@@ -135,9 +146,24 @@ export default function UserProfile() {
 
           {/* Delete */}
           <div className="flex justify-end">
-            <Button variant="destructive" onClick={deleteUser}>
-              Deletar conta
-            </Button>
+            <AlertDialog>
+                    <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition ">Deletar</AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Você tem certeza que deseja deletar sua conta?
+                        </AlertDialogTitle>
+                        <AlertDialogDescription>
+                          Essa ação sera permante, confirme sua senha para prosseguir.
+                        </AlertDialogDescription>
+                      </AlertDialogHeader>
+                      <AlertDialogFooter>
+                        <Input placeholder="Digite sua senha"></Input>
+                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition" onClick={deleteUser}>Deletar</AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
           </div>
         </CardContent>
       </Card>

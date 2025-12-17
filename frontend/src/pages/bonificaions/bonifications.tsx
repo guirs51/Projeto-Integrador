@@ -1,9 +1,56 @@
 import { Gift, Zap, Droplet, Flame, Building2 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
+import { useEffect, useState } from "react";
+import { useAuth } from "@/context/authContext";
 
 export default function Bonifications() {
-  const points = 65
+
+
+  const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
+
+
+  const [user, setUser] = useState<User | null>(null)
+  const token = localStorage.getItem("token")
+
+  const { userId } = useAuth()
+
+  useEffect(() => {
+    async function getUser() {
+      try {
+        const response = await fetch(`http://localhost:3000/users/${userId}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          }
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+          alert(
+            "Erro ao buscar dados do usuário: " +
+            response.status + " " + data.mensagem
+          );
+          return;
+        }
+
+        setUser(data)
+        setDeliveries(data.delivery)
+
+      } catch (error) {
+        console.error("Erro de rede:", error);
+      }
+    }
+
+    if (userId && token) {
+      getUser();
+    }
+  }, [userId, token]);
+
+  const points = deliveries.length * 10;
+
   const goal = 100
   const progress = (points / goal) * 100
 
@@ -36,7 +83,7 @@ export default function Bonifications() {
 
   return (
     <div className="min-h-screen w-full px-6 py-10 flex flex-col items-center gap-10 bg-background text-foreground">
-      
+
       {/* TÍTULO */}
       <h1 className="flex items-center gap-2 text-3xl font-bold">
         <Gift className="h-7 w-7 text-green-600" />
@@ -70,7 +117,7 @@ export default function Bonifications() {
         {benefits.map((item, index) => (
           <Card key={index} className="transition hover:shadow-lg">
             <CardContent className="p-5 space-y-3">
-              
+
               <div className="flex items-center gap-2">
                 {item.icon}
                 <h3 className="font-semibold text-lg">{item.title}</h3>

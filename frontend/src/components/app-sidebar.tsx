@@ -1,4 +1,4 @@
-import { Calendar, Home, Inbox, Search, Settings, User } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
 
 import {
   Sidebar,
@@ -48,6 +48,7 @@ const items = [
 export function AppSidebar() {
 
   const [nome, setNome] = useState<String>('')
+  const [email,setEmail] = useState<String>('')
   const token = localStorage.getItem('token')
   const {userId} = useAuth()
 
@@ -74,6 +75,7 @@ export function AppSidebar() {
           }
 
           setNome(data.name)  
+          setEmail(data.email)
         } catch (error) {
           console.error("Erro de rede:", error);
         }
@@ -108,12 +110,13 @@ export function AppSidebar() {
         </SidebarGroup>
         
       </SidebarContent>
-                <ModeToggle/>
-              <UserSidebar user={{
+             <div className="mb-2 ml-2" > <ModeToggle /> </div>   
+       
+              <div>       <UserSidebar user={{
         name: String(nome),
-        email: "",
+        email: String(email),
         avatar: ""
-      }}/>
+      }}/></div>
     </Sidebar>
   )
 }

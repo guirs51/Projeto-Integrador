@@ -17,7 +17,7 @@ interface Material {
 
 export default function Materials() {
   return (
-    <div className="w-full overflow-x-auto">
+    <div className="h-full w-full overflow-x-auto p-20 ">
       <Table className="scale-95">
         <TableHeader>
           <TableRow>
