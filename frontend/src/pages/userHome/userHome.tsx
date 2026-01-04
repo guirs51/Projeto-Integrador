@@ -99,7 +99,7 @@ export default function ProfilePage() {
     }
   }, [userId, token]);
 
-  const points = deliveries.length * 10;
+  const points = user?.Points || 0
 
   // deliveries.map((item, index) => {
   //     if(item.status != "accepted") return 

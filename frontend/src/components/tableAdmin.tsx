@@ -271,12 +271,15 @@ interface RequestDetailsModalProps {
 }
 
 export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
+
+  const token = localStorage.getItem("token")
   const getAccept = async () => {
     try {
       const response = await fetch(`http://localhost:3000/delivery/accept/${Number(data.id)}`, {
         method: 'GET',
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "Authorization": "Bearer " + token
         }
       })
       if (!response.ok) {
