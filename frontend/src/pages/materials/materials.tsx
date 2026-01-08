@@ -9,6 +9,8 @@ import {
 
 import { materialsTable } from "./materialsTable"
 import { useEffect, useState } from "react"
+import { useAuth } from "@/context/authContext"
+import { useNavigate } from "react-router"
 
 interface Material {
   id: number
@@ -20,6 +22,10 @@ interface Material {
 export default function Materials() {
 
   const [material, setMaterial] = useState<Material[]>([])
+
+  const { userId } = useAuth()
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const getMaterial = async () => {
@@ -44,7 +50,9 @@ export default function Materials() {
     }
 
     getMaterial()
-
+    if (!userId && !token) {
+      navigate("/login")
+    }
   }, [])
   return (
     <div className="h-full w-full overflow-x-auto p-20 ">

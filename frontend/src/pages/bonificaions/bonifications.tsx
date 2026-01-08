@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/authContext";
+import { useNavigate } from "react-router";
 
 export default function Bonifications() {
 
@@ -12,6 +13,7 @@ export default function Bonifications() {
 
   const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem("token")
+  const navigate = useNavigate()
 
   const { userId } = useAuth()
 
@@ -46,6 +48,10 @@ export default function Bonifications() {
 
     if (userId && token) {
       getUser();
+    }
+
+    if (!userId && !token) {
+      navigate("/login")
     }
   }, [userId, token]);
 

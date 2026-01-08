@@ -9,11 +9,16 @@ import { DialogDescription, DialogFooter, DialogHeader, DialogTitle, Dialog, Dia
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import { useAuth } from "@/context/authContext";
+import { useNavigate } from "react-router";
 
 export default function AdminRequest() {
     const [requests, setRequests] = useState<Request[]>([])
     const [filter, setFilter] = useState<string>("")
     const [barData, setBarData] = useState<'pending' | 'all'>("pending")
+    const { userId } = useAuth()
+    const navigate = useNavigate()
+    const token = localStorage.getItem('token')
 
     const filterRequests = filter !== "" ? requests.filter(i => i.user.name.toUpperCase().includes(filter.toUpperCase())) : requests
 
@@ -23,6 +28,11 @@ export default function AdminRequest() {
 
     useEffect(() => {
         const getAll = async () => {
+
+            if (!userId && !token) {
+                navigate("/login")
+            }
+
             try {
                 const respose = await fetch('http://localhost:3000/delivery/', {
                     method: "GET",
