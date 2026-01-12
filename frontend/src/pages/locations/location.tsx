@@ -29,6 +29,8 @@ export default function Location() {
     })
   }
 
+
+  
   return (
     <div className="w-full min-h-screen bg-background text-foreground p-6">
       {/* HEADER */}

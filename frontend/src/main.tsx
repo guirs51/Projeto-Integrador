@@ -14,11 +14,13 @@ import Login from './pages/login/login.tsx'
 import Bonifications from './pages/bonificaions/bonifications.tsx'
 import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
+import { LocationProvider } from './context/locationContext.tsx'
 
 
 
 
 createRoot(document.getElementById('root')!).render(
+  <LocationProvider>
   <BrowserRouter>
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <AuthProvider>
@@ -49,5 +51,7 @@ createRoot(document.getElementById('root')!).render(
       </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>
+  </LocationProvider>
+
 
 )

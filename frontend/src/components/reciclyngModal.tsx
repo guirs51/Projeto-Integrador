@@ -1,3 +1,4 @@
+import {useLocation} from "@/context/locationContext";
 import React, { useEffect, useState } from "react";
 
  export interface RecyclingFormData {
@@ -25,6 +26,8 @@ export default function ReciclyngModal({
   onSubmit
 }: NewRecyclingModalProps) {
 
+  const {location} = useLocation()
+
   const [formData, setFormData] = useState<RecyclingFormData>({
     material: "",
     quantidade: 0,
@@ -32,6 +35,16 @@ export default function ReciclyngModal({
   });
 
   const [materials, setMaterials] = useState<Material[]>([]);
+
+  useEffect(() =>{
+    if(location?.address){
+      setFormData(prev => ({
+        ...prev,
+        localizacao: location.address
+      }))
+    }
+  },[location])
+
 
   useEffect(() => {
     const getMaterial = async () => {
@@ -82,6 +95,8 @@ export default function ReciclyngModal({
 
     onClose();
   };
+
+  console.log("🪟 MODAL recebeu:", location)
 
   return (
     <div
@@ -154,6 +169,7 @@ export default function ReciclyngModal({
               value={formData.localizacao}
               onChange={handleInputChange}
               required
+              disabled
               className="bg-transparent border-b outline-none py-2"
             />
           </label>

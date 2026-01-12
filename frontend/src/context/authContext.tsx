@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import { useLocation } from "./locationContext";
 
 interface InterfaceAuthContext {
     userId: string | null,
@@ -11,6 +12,7 @@ const AuthContext = createContext<InterfaceAuthContext | null>(null)
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
     const [userId, setUserId] = useState(() => localStorage.getItem("userId"))
+    const {clearLocation} = useLocation()
     const navigate = useNavigate()
 
     const login = (id: string) => {
@@ -22,6 +24,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUserId(null)
         localStorage.removeItem("userId")
         localStorage.removeItem("token")
+        clearLocation()
         navigate("/login")
     }
 
