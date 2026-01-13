@@ -1,15 +1,11 @@
 
 
 import { useEffect, useState } from "react"
-
-
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 import ReciclyngModal, { type RecyclingFormData } from "@/components/reciclyngModal"
 import RecyclingCard from "@/components/recyclingCard"
 import PointsChart from "@/components/pointsChart"
@@ -33,6 +29,7 @@ import { data, useLocation } from 'react-router';
 import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
 import Materials from "../materials/materials"
+import { RecycleBin } from "@/components/RecycleBin"
 
 
 
@@ -148,7 +145,32 @@ export default function ProfilePage() {
     setIsModalOpen(false)
   }
   return (
-    <div className="mx-auto w-[90%] py-6 space-y-8">
+    <div className="mx-auto w-[90%] py-6 space-y-8 ">
+
+   <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
+  
+  {/* Texto */}
+  <div className="max-w-xl text-center md:text-left mt-12">
+    <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+      Seja bem-vindo ao, <br />
+      Recicle +.
+    </h1>
+
+    <h2 className="mt-2 ">Inicie sua jornada em pró ao meio ambiente agora e <br />
+    registre sua primeira reciclagem!</h2>
+  </div>
+
+  {/* Lixeiras */}
+  <div className="flex gap-8 justify-center flex-wrap mt-15">
+    <RecycleBin label="Papel" color="bg-blue-500" />
+    <RecycleBin label="Plástico" color="bg-red-500" />
+    <RecycleBin label="Vidro" color="bg-green-600" />
+    <RecycleBin label="Metal" color="bg-yellow-400" />
+  </div>
+
+</div>
+
+
       {/* MODAL */}
       <ReciclyngModal
         isOpen={isModalOpen}
@@ -156,8 +178,8 @@ export default function ProfilePage() {
         onSubmit={handleAddRecycling}
       />
 
-      {/* CARD USUÁRIO */}
-      <Card className="rounded-2xl border bg-background">
+      {/* CARD USUÁRIO
+      <Card className="rounded-2xl border bg-card">
         <CardContent className="flex gap-8 p-8">
           <Avatar className="h-36 w-36">
             <AvatarImage src="https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000" />
@@ -172,7 +194,8 @@ export default function ProfilePage() {
             <span className="text-xs text-muted-foreground">Rua Tal, 123</span>
           </div>
         </CardContent>
-      </Card>
+      </Card> */}
+      
 
       <Separator />
 

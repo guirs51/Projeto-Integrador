@@ -37,11 +37,7 @@ export default function Location() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl  font-semibold">Localização</h1>
 
-        <div className="flex items-center gap-2">
-          <Sun size={16} />
-          <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
-          <Moon size={16} />
-        </div>
+      
       </div>
 
       <Separator className="mb-6" />
