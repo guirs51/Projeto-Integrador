@@ -14,23 +14,14 @@ import Login from './pages/login/login.tsx'
 import Bonifications from './pages/bonificaions/bonifications.tsx'
 import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
-<<<<<<< HEAD
-import { LocationProvider } from './context/locationContext.tsx'
-=======
 import { SnackbarProvider } from 'notistack'
->>>>>>> feature/segurança
 
 
 
 
 createRoot(document.getElementById('root')!).render(
-<<<<<<< HEAD
-  <LocationProvider>
-  <BrowserRouter>
-=======
   <SnackbarProvider autoHideDuration={5000}>
 <BrowserRouter>
->>>>>>> feature/segurança
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <AuthProvider>
         <Routes>
@@ -60,7 +51,6 @@ createRoot(document.getElementById('root')!).render(
       </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>
-  </LocationProvider>
 
 
   </SnackbarProvider>
