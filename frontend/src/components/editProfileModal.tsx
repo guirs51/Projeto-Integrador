@@ -13,10 +13,13 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 
 interface User {
+  id: number
   name: string
   email: string
   cpf: string
+  fotoPerfil?: string
 }
+
 
 interface EditProfileModalProps {
   userData: User
@@ -33,6 +36,33 @@ export default function EditProfileModal({
   const [formEmail, setFormEmail] = useState(userData.email)
   const [formCpf, setFormCpf] = useState(userData.cpf)
   const [bio, setBio] = useState("")
+
+  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(
+    userData.fotoPerfil
+      ? `http://localhost:3000${userData.fotoPerfil}`
+      : null
+  )
+
+  function handleFileChange(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0]
+    if (!file) return
+
+    setSelectedFile(file)
+    setPreview(URL.createObjectURL(file))
+  }
+
+  async function uploadFoto() {
+    if (!selectedFile) return
+
+    const formData = new FormData()
+    formData.append("foto", selectedFile)
+
+    await fetch(`http://localhost:3000/users/${userData.id}/foto`, {
+      method: "POST",
+      body: formData,
+    })
+  }
 
   function buildUpdateUser(): Partial<User> {
     const payload: Partial<User> = {}
@@ -55,6 +85,10 @@ export default function EditProfileModal({
   function handleSubmit() {
     const update = buildUpdateUser()
     onSave(update)
+
+    if (selectedFile) {
+      uploadFoto()
+    }
     onClose()
   }
 
@@ -66,6 +100,28 @@ export default function EditProfileModal({
           <button onClick={onClose}>
           </button>
         </DialogHeader>
+        
+        <div className="flex flex-col items-center gap-2">
+          {preview ? (
+            <img
+              src={preview}
+              alt="Foto de perfil"
+              className="w-24 h-24 rounded-full object-cover"
+            />
+          ) : (
+            <div className="w-24 h-24 rounded-full bg-gray-200" />
+          )}
+
+          <label className="text-sm cursor-pointer text-blue-600">
+            Trocar foto
+            <input
+              type="file"
+              accept="image/*"
+              className="hidden"
+              onChange={handleFileChange}
+            />
+          </label>
+        </div>
 
         <div className="space-y-4">
           <div className="space-y-1">

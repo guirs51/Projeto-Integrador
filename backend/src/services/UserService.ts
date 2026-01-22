@@ -25,7 +25,7 @@ export class UserService {
 
   async findAll() {
     try {
-      const users = this.userRepo.find({relations: ["delivery"]});
+      const users = this.userRepo.find({ relations: ["delivery"] });
       return (await users).map((u) => {
         const clone: any = { ...u };
         delete clone.password;
@@ -95,6 +95,17 @@ export class UserService {
       return user;
     } catch (e) {
       console.log("Erro:" + e);
+    }
+  }
+
+  async updateFoto(userId: number, foto: string) {
+    try {
+      const user = await this.userRepo.findOneBy({ id: userId })
+      if (!user) throw new Error("Usuário não encontrado");
+      user.fotoPerfil = foto
+      await this.userRepo.save(user)
+    } catch (e) {
+      console.log(e)
     }
   }
 }
