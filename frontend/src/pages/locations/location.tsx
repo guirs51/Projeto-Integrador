@@ -9,15 +9,25 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Switch } from "@/components/ui/switch"
 import { Separator } from "@/components/ui/separator"
+import { useAuth } from "@/context/authContext"
+import { useNavigate } from "react-router"
 
 export default function Location() {
   const mapRef = useRef(null)
   const [darkMode, setDarkMode] = useState(false)
 
+  const { userId } = useAuth()
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
+
   useEffect(() => {
     const saved = localStorage.getItem("darkMode") === "true"
     setDarkMode(saved)
     document.documentElement.classList.toggle("dark", saved)
+
+    if (!userId && !token) {
+      navigate("/login")
+    }
   }, [])
 
   const toggleDarkMode = () => {

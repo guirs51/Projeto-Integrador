@@ -29,7 +29,7 @@ import {
   Moon,
   User
 } from 'lucide-react';
-import { data, useLocation } from 'react-router';
+import { data, useLocation, useNavigate } from 'react-router';
 import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
 import Materials from "../materials/materials"
@@ -64,6 +64,8 @@ export default function ProfilePage() {
   const token = localStorage.getItem("token")
 
   const { userId } = useAuth()
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     async function getUser() {
@@ -97,6 +99,11 @@ export default function ProfilePage() {
     if (userId && token) {
       getUser();
     }
+
+    if (!userId && !token) {
+      navigate("/login")
+    }
+
   }, [userId, token]);
 
   const points = user?.Points || 0

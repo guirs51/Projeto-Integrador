@@ -28,7 +28,8 @@ import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
 import { use, useEffect, useState } from "react";
-import { data } from "react-router";
+import { data, useNavigate } from "react-router";
+import { useAuth } from "@/context/authContext";
 
 interface Material {
   id: number;
@@ -43,9 +44,15 @@ export default function AdminConfig() {
   const [pontos, setPontos] = useState<String>("")
   const [nomeMaterial, setNomeMaterial] = useState<string>("")
   const [importancia, setImportancia] = useState<String>("")
+  const { userId } = useAuth()
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const getMaterial = async () => {
+      if (!userId && !token) {
+        navigate("/login")
+      }
       try {
         const response = await fetch("http://localhost:3000/material/", {
           method: 'GET',
@@ -84,7 +91,7 @@ export default function AdminConfig() {
         alert("houve um Erro")
         return
       }
-      
+
 
     } catch (e) {
       console.log(e)
