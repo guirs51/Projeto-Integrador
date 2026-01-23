@@ -9,6 +9,14 @@ import { DialogDescription, DialogFooter, DialogHeader, DialogTitle, Dialog, Dia
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
+import LogoR from "@/imgs/logo.png";
+import { navigationItems2 } from "@/constants/Navigation";
+import { Link } from "react-router";
+import { ModeToggle } from "@/components/mode-toggle";
+import { UserMenu } from "@/components/userMenu";
+
+
+
 
 export default function AdminRequest() {
     const [requests, setRequests] = useState<Request[]>([])
@@ -61,23 +69,86 @@ export default function AdminRequest() {
     }, [])
 
     return (
+
+        
+<div>
+
+      <header
+        className="
+    sticky top-0 z-50
+    border-b border-white/10
+    bg-[#91B338] backdrop-blur-xl
+  "
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
+
+          {/* Brand */}
+          <div className="flex items-center gap-2 text-white">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/10">
+              <img
+                src={LogoR}
+                alt="logoRecicle.png"
+                className="h-6 w-6 object-contain"
+              />
+            </div>
+            <div className="leading-tight">
+              <p className="text-sm font-semibold">Recicle +</p>
+            </div>
+          </div>
+
+          {/* Nav */}
+          <nav className="hidden md:flex items-center gap-2">
+            {navigationItems2.map(({ title, url, icon: Icon }) => (
+              <Link key={title} to={url}>
+                <button
+                  className="
+              inline-flex items-center gap-2
+              rounded-full px-3 py-2
+              text-xs font-medium
+              text-white/70 hover:text-white
+              hover:bg-white/10
+              border border-transparent hover:border-white/10
+              transition
+            "
+                >
+                  <Icon size={15} />
+                  {title}
+                </button>
+              </Link>
+            ))}
+          </nav>
+
+          {/* Right */}
+          <div className="flex items-center gap-3">
+            <ModeToggle />
+
+          </div>
+
+          <div>
+            <UserMenu />
+          </div>
+        </div>
+      </header>
+
+   <main>
         <section className="w-full h-full p-5 ">
-            <div className="w-full flex gap-7 flex-row items-center ">
-                <div className=" p-2">
-                    <h1 className="text-3xl font-bold">
+
+
+     
+      
+                <div className="w-full flex gap-7 flex-row items-center ">
+                <div className=" p-4 pl-10">
+                    <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
                         Olá ADM
                     </h1>
-                    <p className="text-accent-foreground/60 text-sm">
-                        Essa é a tela onde você consegue gerenciar as solicitações de reciclagem.
+                    <p className="text-accent-foreground/70 text-sm">
+                        Essa é a tela onde você consegue adicionar novos materiais.
                     </p>
                 </div>
             </div>
 
 
             <div className="flex  items-center gap-4">
-
-
-
 
                 <div className="py-1 relative  flex-1 max-w-2xl">
                     <Input onChange={(e) => setFilter(e.target.value)} className=" rounded-sm" placeholder="ex: request123" ></Input>
@@ -130,7 +201,13 @@ export default function AdminRequest() {
                     <TableAdmin data={filterRequests} />
                 )}
             </div>
-        </section>
+                  </section>
+      </main>
+            
+</div>
+
+     
+  
     )
 }
 
@@ -186,7 +263,7 @@ export function RequestModal({ onCreated }: RequestModalProps) {
                     <div className="grid gap-2">
                         <Label htmlFor="name">Nome</Label>
                         <Input
-                            placeholder="Arthur"
+                            placeholder="Fulano"
                             id="name"
                             value={name}
                             onChange={(e) => setName(e.target.value)}
@@ -220,7 +297,7 @@ export function RequestModal({ onCreated }: RequestModalProps) {
                     <div className="grid gap-2">
                         <Label htmlFor="recycling">Reciclagem</Label>
                         <Input
-                            placeholder="Vidro, Engrenagem"
+                            placeholder="Vidro, Papel"
                             id="recycling"
                             value={materialType}
                             onChange={(e) => setRecycling(e.target.value)}

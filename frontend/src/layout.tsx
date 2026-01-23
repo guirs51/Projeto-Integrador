@@ -6,7 +6,8 @@ import { navigationItems } from "../src/constants/Navigation"
 import { Link } from "react-router"
 import { ModeToggle } from "./components/mode-toggle"
 import { Button } from "./components/ui/button"
-import LogoR from './imgs/LogoRecicle.png'
+import { UserMenu } from "./components/userMenu";
+import LogoR from './imgs/logo.png'
 
 
 
@@ -67,6 +68,9 @@ export default function Layout() {
             
             </div>
 
+              <div>
+                <UserMenu/>
+              </div>
           </div>
         </header>
 

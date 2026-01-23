@@ -27,3 +27,17 @@ export const navigationItems = [
     icon: Settings,
   },
 ]
+
+export const navigationItems2 = [
+  {
+    title: "Solicitações",
+    url: "/admin/requests",
+    icon: Home,
+  },
+  {
+    title: "Materiais",
+    url: "/admin/config",
+    icon: Inbox,
+  },
+
+]

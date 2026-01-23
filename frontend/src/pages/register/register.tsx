@@ -52,7 +52,7 @@ export default function Register() {
         <Card className="w-full max-w-md shadow-lg bg-neutral-100">
           <CardHeader className="text-center space-y-2">
             <h1 className="text-xl font-semibold text-neutral-900">
-              Bem-vindo ao <span className="text-green-600">Recicle +</span>
+              Bem-vindo ao <span className="text-[#91b338]">Recicle +</span>
             </h1>
             <p className="text-sm text-muted-foreground  text-zinc-600">
               Junte-se à nossa comunidade sustentável
@@ -82,7 +82,7 @@ export default function Register() {
             </div>
 
             <Button
-              className="w-full bg-green-700 hover:bg-green-800"
+              className="w-full bg-[#91b338] hover:bg-green-600"
               onClick={createUser}
             >
               Cadastrar
