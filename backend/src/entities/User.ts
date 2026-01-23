@@ -13,14 +13,20 @@ export class User {
     @Column({ unique: true, length: 200 })
     email: string
 
-    @Column({ unique: true, length: 20 })
+    @Column({ unique: true, length: 20, nullable: true })
     cpf: string
 
     @Column({ nullable: true, default: 0 })
     Points: number
 
-    @Column()
-    password: string
+    @Column({ nullable: true })
+    password: string; // deixa de ser obrigatório
+
+    @Column({ nullable: true, unique: true })
+    googleId: string;
+
+    @Column({ default: 'local' })
+    provider: 'local' | 'google';
 
     @Column({ nullable: true })
     fotoPerfil: string;
@@ -40,7 +46,7 @@ export class User {
     @BeforeInsert()
     @BeforeUpdate()
     async hashPassword() {
-        if (!this.password.startsWith('$2')) {
+        if ( this.password &&  !this.password.startsWith('$2')) {
             const rounds = parseInt(process.env.BCRYPT_SALT_ROUNDS || '10', 10);
             this.password = await bycrypt.hash(this.password, rounds);
         }

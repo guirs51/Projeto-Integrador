@@ -155,9 +155,16 @@ export default function ProfilePage() {
 
     setIsModalOpen(false)
   }
+  let perfilFoto = ""
+  if (user?.fotoPerfil?.startsWith("https:")) {
+    perfilFoto = user.fotoPerfil
+  } else if (user?.fotoPerfil) {
+    perfilFoto = "http://localhost:3000" + user?.fotoPerfil
+  } else {
+    perfilFoto = "https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000"
+  }
 
-  const perfilFoto = user?.fotoPerfil || "https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000"
-
+  console.log(perfilFoto)
   return (
     <div className="mx-auto w-[90%] py-6 space-y-8">
       {/* MODAL */}
@@ -171,7 +178,7 @@ export default function ProfilePage() {
       <Card className="rounded-2xl border bg-background">
         <CardContent className="flex gap-8 p-8">
           <Avatar className="h-36 w-36">
-            <AvatarImage src={`http://localhost:3000${perfilFoto}`} />
+            <AvatarImage src={perfilFoto} />
             <AvatarFallback>U</AvatarFallback>
           </Avatar>
 

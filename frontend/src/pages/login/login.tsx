@@ -9,6 +9,7 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "../../context/authContext"
 import { useSnackbar } from "notistack"
+import { GoogleLogin } from "@react-oauth/google"
 
 export default function Login() {
   const { login } = useAuth()
@@ -84,6 +85,22 @@ export default function Login() {
     }
   }
 
+  async function googleLogin(credentialResponse: any) {
+    const idToken = credentialResponse.credential;
+
+    const res = await fetch("http://localhost:3000/auth/google", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+
+    const data = await res.json();
+    localStorage.setItem("token", data.token)
+    login(data.userId)
+
+    navigate("/UserHome");
+  }
+
   return (
 
     <div className="flex h-screen w-full bg-white text-zinc-900">
@@ -144,13 +161,7 @@ export default function Login() {
               <span className="text-xs text-zinc-500">
                 Ou continue com
               </span>
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-white border-zinc-300"
-              >
-                <FcGoogle size={22} />
-              </Button>
+              <GoogleLogin onSuccess={googleLogin} />
             </div>
           </CardContent>
         </Card>

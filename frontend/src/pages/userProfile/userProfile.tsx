@@ -131,6 +131,15 @@ export default function UserProfile() {
     getUser()
   }, [userId, token])
 
+  let perfilFoto = ""
+  if (user?.fotoPerfil?.startsWith("https:")) {
+    perfilFoto = user.fotoPerfil
+  } else if (user?.fotoPerfil) {
+    perfilFoto = "http://localhost:3000" + user?.fotoPerfil
+  } else {
+    perfilFoto = "https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000"
+  }
+
   return (
     <div className="flex justify-center p-22">
       <Card className="w-full max-w-3xl  rounded-2xl shadow-lg">
@@ -138,7 +147,7 @@ export default function UserProfile() {
           {/* Header */}
           <div className="flex flex-col items-center gap-3">
             <Avatar className="w-28 h-28">
-              <AvatarImage src={`http://localhost:3000${user?.fotoPerfil}`} />
+              <AvatarImage src={perfilFoto} />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
             <h2 className="text-xl font-semibold">Perfil do Usuário</h2>

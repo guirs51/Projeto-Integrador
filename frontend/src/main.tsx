@@ -1,5 +1,7 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router'
+import { GoogleOAuthProvider } from '@react-oauth/google'
+
 import Layout from './layout.tsx'
 import Admin from './pages/admin.tsx'
 import UserHome from './pages/userHome/userHome.tsx'
@@ -16,43 +18,32 @@ import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
 import { SnackbarProvider } from 'notistack'
 
-
-
-
 createRoot(document.getElementById('root')!).render(
   <SnackbarProvider autoHideDuration={5000}>
-<BrowserRouter>
-    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-      <AuthProvider>
-        <Routes>
-          {/* rotas que não respeitam o layout */}
+    <GoogleOAuthProvider clientId="283937599928-psbk3t7eocu0etr13q7rdrnhdl9bkrn0.apps.googleusercontent.com">
+      <BrowserRouter>
+        <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path='/regis' element={<Register />} />
+              <Route path='/login' element={<Login />} />
 
-          <Route path="/" element={<Home />} />
-          <Route path='/regis' element={<Register />}></Route>
-          <Route path='/login' element={<Login />}></Route>
+              <Route element={<Layout />}>
+                <Route path='/userHome' element={<UserHome />} />
+                <Route path='/userConfig' element={<UserProfile />} />
+                <Route path='/materials' element={<Materials />} />
+                <Route path='/bonifications' element={<Bonifications />} />
+                <Route path='/location' element={<Location />} />
+              </Route>
 
-          {/* rotas que respeitam */}
-
-          <Route element={<Layout />}>
-
-            <Route path='/userHome' element={<UserHome />} />
-
-            <Route path='/userConfig' element={<UserProfile />}></Route>
-
-            <Route path='/materials' element={<Materials />}></Route>
-            <Route path='/bonifications' element={<Bonifications />}></Route>
-            <Route path='/location' element={<Location />}></Route>
-          </Route>
-
-          <Route path='/admin/dashboard' element={<Admin />} />
-          <Route path='/admin/requests' element={<AdminRequest />} />
-          <Route path='/admin/config' element={<AdminConfig/>}></Route>
-        </Routes>
-      </AuthProvider>
-    </ThemeProvider>
-  </BrowserRouter>
-
-
+              <Route path='/admin/dashboard' element={<Admin />} />
+              <Route path='/admin/requests' element={<AdminRequest />} />
+              <Route path='/admin/config' element={<AdminConfig/>} />
+            </Routes>
+          </AuthProvider>
+        </ThemeProvider>
+      </BrowserRouter>
+    </GoogleOAuthProvider>
   </SnackbarProvider>
-  
 )

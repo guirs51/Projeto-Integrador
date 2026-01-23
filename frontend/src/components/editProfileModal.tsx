@@ -40,7 +40,7 @@ export default function EditProfileModal({
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(
     userData.fotoPerfil
-      ? `http://localhost:3000${userData.fotoPerfil}`
+      ? userData.fotoPerfil
       : null
   )
 
