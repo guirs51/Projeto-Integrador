@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Progress } from "@/components/ui/progress"
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/authContext";
-import { useNavigate } from "react-router";
+import type { Bonus } from "@/types/bonus";
 
 export default function Bonifications() {
 
@@ -60,32 +60,27 @@ export default function Bonifications() {
   const goal = 100
   const progress = (points / goal) * 100
 
-  const benefits = [
-    {
-      icon: <Zap className="h-5 w-5 text-yellow-500" />,
-      title: "Conta de Luz",
-      discount: "5% - 25%",
-      description: "Ganhe descontos ao completar metas mensais.",
-    },
-    {
-      icon: <Droplet className="h-5 w-5 text-blue-500" />,
-      title: "Conta de Água",
-      discount: "5% - 20%",
-      description: "Economize acumulando pontos recicláveis.",
-    },
-    {
-      icon: <Building2 className="h-5 w-5 text-zinc-500" />,
-      title: "IPTU",
-      discount: "3% - 15%",
-      description: "Descontos progressivos com base em sustentabilidade.",
-    },
-    {
-      icon: <Flame className="h-5 w-5 text-orange-500" />,
-      title: "Gás",
-      discount: "5% - 10%",
-      description: "Ganhe bônus ao manter alta pontuação mensal.",
-    },
-  ]
+  const bonuses: Bonus[] = [
+  {
+    id: "1",
+    title: "Desconto na Conta de Luz",
+    description: "Até 25% de desconto na fatura mensal.",
+    requiredPoints: 100,
+  },
+  {
+    id: "2",
+    title: "Desconto na Conta de Água",
+    description: "Economize com bônus sustentável.",
+    requiredPoints: 50,
+  },
+  {
+    id: "3",
+    title: "IPTU Verde",
+    description: "Desconto progressivo no IPTU.",
+    requiredPoints: 80,
+  },
+]
+
 
   return (
     <div className="min-h-screen w-full px-6 py-10 flex flex-col items-center gap-10 bg-background text-foreground">
@@ -119,28 +114,54 @@ export default function Bonifications() {
       </Card>
 
       {/* BENEFÍCIOS */}
-      <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-        {benefits.map((item, index) => (
-          <Card key={index} className="transition hover:shadow-lg">
-            <CardContent className="p-5 space-y-3">
+     <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+  {bonuses.map((bonus) => {
+    const unlocked = points >= bonus.requiredPoints
 
-              <div className="flex items-center gap-2">
-                {item.icon}
-                <h3 className="font-semibold text-lg">{item.title}</h3>
-              </div>
+    return (
+      <Card
+        key={bonus.id}
+        className={`transition hover:shadow-lg ${
+          unlocked ? "" : "opacity-50"
+        }`}
+      >
+        <CardContent className="p-5 space-y-3">
 
-              <p className="text-sm">
-                <strong>Desconto disponível:</strong> {item.discount}
-              </p>
+          <div className="flex items-center gap-2">
+            <Gift
+              className={`h-5 w-5 ${
+                unlocked ? "text-green-600" : "text-zinc-400"
+              }`}
+            />
+            <h3 className="font-semibold text-lg">
+              {bonus.title}
+            </h3>
+          </div>
 
-              <p className="text-sm text-muted-foreground">
-                {item.description}
-              </p>
+          <p className="text-sm text-muted-foreground">
+            {bonus.description}
+          </p>
 
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+          <p className="text-sm font-medium">
+            🎯 Necessário: {bonus.requiredPoints} pontos
+          </p>
+
+          <div className="pt-2">
+            <span
+              className={`text-sm font-semibold ${
+                unlocked ? "text-green-600" : "text-red-500"
+              }`}
+            >
+              {unlocked ? "🎉 Disponível" : "🔒 Bloqueado"}
+            </span>
+          </div>
+
+        </CardContent>
+      </Card>
+    )
+  })}
+</div>
+
     </div>
   )
 }

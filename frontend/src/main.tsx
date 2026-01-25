@@ -16,34 +16,46 @@ import Login from './pages/login/login.tsx'
 import Bonifications from './pages/bonificaions/bonifications.tsx'
 import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
-import { SnackbarProvider } from 'notistack'
+import { LocationProvider } from './context/locationContext.tsx'
+import AdminBonus from './pages/admin/admin-bonus.tsx'
+
+
+
 
 createRoot(document.getElementById('root')!).render(
-  <SnackbarProvider autoHideDuration={5000}>
-    <GoogleOAuthProvider clientId="283937599928-psbk3t7eocu0etr13q7rdrnhdl9bkrn0.apps.googleusercontent.com">
-      <BrowserRouter>
-        <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
-          <AuthProvider>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path='/regis' element={<Register />} />
-              <Route path='/login' element={<Login />} />
+  <LocationProvider>
+  <BrowserRouter>
+    <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
+      <AuthProvider>
+        <Routes>
+          {/* rotas que não respeitam o layout */}
 
-              <Route element={<Layout />}>
-                <Route path='/userHome' element={<UserHome />} />
-                <Route path='/userConfig' element={<UserProfile />} />
-                <Route path='/materials' element={<Materials />} />
-                <Route path='/bonifications' element={<Bonifications />} />
-                <Route path='/location' element={<Location />} />
-              </Route>
+          <Route path="/" element={<Home />} />
+          <Route path='/regis' element={<Register />}></Route>
+          <Route path='/login' element={<Login />}></Route>
 
-              <Route path='/admin/dashboard' element={<Admin />} />
-              <Route path='/admin/requests' element={<AdminRequest />} />
-              <Route path='/admin/config' element={<AdminConfig/>} />
-            </Routes>
-          </AuthProvider>
-        </ThemeProvider>
-      </BrowserRouter>
-    </GoogleOAuthProvider>
-  </SnackbarProvider>
+          {/* rotas que respeitam */}
+
+          <Route element={<Layout />}>
+
+            <Route path='/userHome' element={<UserHome />} />
+
+            <Route path='/userConfig' element={<UserProfile />}></Route>
+
+            <Route path='/materials' element={<Materials />}></Route>
+            <Route path='/bonifications' element={<Bonifications />}></Route>
+            <Route path='/location' element={<Location />}></Route>
+          </Route>
+
+          <Route path='/admin/dashboard' element={<Admin />} />
+          <Route path='/admin/requests' element={<AdminRequest />} />
+          <Route path='/admin/config' element={<AdminConfig/>}></Route>
+          <Route path='/admin/bonus' element={<AdminBonus/>}></Route>
+        </Routes>
+      </AuthProvider>
+    </ThemeProvider>
+  </BrowserRouter>
+  </LocationProvider>
+
+
 )

@@ -14,30 +14,9 @@ import { useNavigate } from "react-router"
 
 export default function Location() {
   const mapRef = useRef(null)
-  const [darkMode, setDarkMode] = useState(false)
+ 
 
-  const { userId } = useAuth()
-  const navigate = useNavigate()
-  const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode") === "true"
-    setDarkMode(saved)
-    document.documentElement.classList.toggle("dark", saved)
-
-    if (!userId && !token) {
-      navigate("/login")
-    }
-  }, [])
-
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const value = !prev
-      localStorage.setItem("darkMode", String(value))
-      document.documentElement.classList.toggle("dark", value)
-      return value
-    })
-  }
 
 
   
@@ -47,11 +26,7 @@ export default function Location() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl  font-semibold">Localização</h1>
 
-        <div className="flex items-center gap-2">
-          <Sun size={16} />
-          <Switch checked={darkMode} onCheckedChange={toggleDarkMode} />
-          <Moon size={16} />
-        </div>
+      
       </div>
 
       <Separator className="mb-6" />

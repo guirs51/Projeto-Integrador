@@ -1,18 +1,16 @@
 
 
 import { useEffect, useState } from "react"
-
-
-
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-
 import ReciclyngModal, { type RecyclingFormData } from "@/components/reciclyngModal"
 import RecyclingCard from "@/components/recyclingCard"
 import PointsChart from "@/components/pointsChart"
+import "@/styles/profileResponsive.css"
+
 
 import "../../global.css"
 
@@ -33,6 +31,7 @@ import { data, useLocation, useNavigate } from 'react-router';
 import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
 import Materials from "../materials/materials"
+import { RecycleBin } from "@/components/RecycleBin"
 
 
 
@@ -166,31 +165,56 @@ export default function ProfilePage() {
 
   console.log(perfilFoto)
   return (
-    <div className="mx-auto w-[90%] py-6 space-y-8">
-      {/* MODAL */}
-      <ReciclyngModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        onSubmit={handleAddRecycling}
-      />
+    <div className="mx-auto w-[90%] py-6 space-y-8 ">
 
-      {/* CARD USUÁRIO */}
-      <Card className="rounded-2xl border bg-background">
-        <CardContent className="flex gap-8 p-8">
-          <Avatar className="h-36 w-36">
-            <AvatarImage src={perfilFoto} />
-            <AvatarFallback>U</AvatarFallback>
-          </Avatar>
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
 
-          <div className="space-y-2">
-            <h1 className="text-3xl font-bold">{user?.name || "Usuário"}</h1>
-            <p className="text-sm text-muted-foreground">
-              Hi, my name is {user?.name}. I'm a system developer.
-            </p>
-            <span className="text-xs text-muted-foreground">Rua Tal, 123</span>
-          </div>
-        </CardContent>
-      </Card>
+        {/* Texto
+             <div className="max-w-xl text-center md:text-left mt-12 bg-gradient-to-br from-[#91b338]/20 to-[#4CAF50]/10 p-10 shadow-sm">
+          <h1 className="mt-4 text-4xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+            Bem-vindo de volta, <br />
+            Nathalia Minossi.
+          </h1>
+
+          <h2 className="mt-2 ">Inicie sua jornada em pró ao meio ambiente agora e <br />
+            registre sua primeira reciclagem!</h2>
+        </div> */}
+
+
+
+
+
+        {/* MODAL */}
+        <ReciclyngModal
+          isOpen={isModalOpen}
+          onClose={() => setIsModalOpen(false)}
+          onSubmit={handleAddRecycling}
+        />
+
+        {/* CARD USUÁRIO */}
+        <Card className="rounded-2xl border max-w-xl text-center md:text-left mt-12 bg-gradient-to-br from-[#91b338]/20 to-[#4CAF50]/10 p-10 shadow-sm">
+          <CardContent className="flex gap-8 p-8">
+
+
+            <div className="space-y-2">
+              <h1 className=" mt-4 text-4xl md:text-6xl font-bold tracking-tight text-[#91b338]">   Bem-vindo de volta, {user?.name || "Usuário"}</h1>
+              <p className="text-sm">
+                Hi, my name is {user?.name}. I'm a system developer.
+              </p>
+              <span className="text-xs text-muted-foreground">Rua Tal, 123</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Lixeiras */}
+        <div className="flex gap-8 justify-center flex-wrap mt-15 ">
+          <RecycleBin  label="Papel" color="bg-blue-500/80"  />
+          <RecycleBin label="Plástico" color="bg-red-500/80" />
+          <RecycleBin label="Vidro" color="bg-green-600/80" />
+          <RecycleBin label="Metal" color="bg-yellow-400/80" />
+        </div>
+
+      </div>
 
       <Separator />
 
@@ -199,27 +223,27 @@ export default function ProfilePage() {
         <Button
           size="sm"
           variant="outline"
-          className="rounded-full"
+          className="rounded-full transition-all hover:scale-105"
           onClick={() => setIsModalOpen(true)}
         >
           <PlusCircle className="h-4 w-4" />
         </Button>
-        <span className="text-base font-medium">Adicionar reciclagem</span>
+        <span className="text-base font-medium ">Adicionar reciclagem</span>
       </div>
 
       {/* ÁREA PRINCIPAL */}
       <div className="flex gap-8">
         {/* REGISTROS */}
         <div className="flex-[2] space-y-4">
-          <div className="flex items-center gap-2">
-            <ArchiveRestore className="h-5 w-5" />
-            <h2 className="text-lg font-semibold">Área dos Registros Pendentes</h2>
+          <div className="flex items-center gap-2 mb-3">
+            <ArchiveRestore className="text-[#91b338]" />
+            <h2 className="font-semibold">Registros Pendentes</h2>
           </div>
 
           <ScrollArea className="h-[40vh] rounded-xl border p-4">
             {deliveries.length === 0 ? (
-              <p className="text-sm text-muted-foreground">
-                Você não possui registros
+              <p className="text-sm text-muted-foreground text-center py-10">
+                🌱 Nenhuma reciclagem registrada ainda
               </p>
             ) : (
               <div className="space-y-3">
@@ -244,7 +268,11 @@ export default function ProfilePage() {
             </CardHeader>
             <CardContent className="space-y-4">
               <PointsChart points={points} />
-              <div className="rounded-lg bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-3 py-1 text-center text-sm font-medium">
+              <div className="  rounded-lg bg-emerald-500/10
+  text-emerald-700
+  px-4 py-2 text-center
+  font-semibold
+  shadow-inner">
                 {points} pontos
               </div>
             </CardContent>

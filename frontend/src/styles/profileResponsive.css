@@ -1,0 +1,73 @@
+/* =========================
+   MOBILE (até 640px)
+========================= */
+@media (max-width: 640px) {
+  .profile-page {
+    width: 100%;
+    padding: 1rem;
+  }
+
+  .hero {
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  .hero-card {
+    margin-top: 0;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .main-area {
+    flex-direction: column;
+  }
+
+  .points-area {
+    width: 100%;
+  }
+}
+
+/* =========================
+   TABLET (641px até 1023px)
+========================= */
+@media (min-width: 641px) and (max-width: 1023px) {
+  .hero {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .bins {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .main-area {
+    flex-direction: column;
+  }
+}
+
+/* =========================
+   DESKTOP (1024px+)
+========================= */
+@media (min-width: 1024px) {
+  .hero {
+    flex-direction: row;
+  }
+
+  .bins {
+    display: flex;
+    justify-content: center;
+  }
+
+  .main-area {
+    flex-direction: row;
+  }
+}
