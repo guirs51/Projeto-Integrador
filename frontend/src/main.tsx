@@ -15,6 +15,7 @@ import Bonifications from './pages/bonificaions/bonifications.tsx'
 import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
 import { LocationProvider } from './context/locationContext.tsx'
+import AdminBonus from './pages/admin/admin-bonus.tsx'
 
 
 
@@ -47,6 +48,7 @@ createRoot(document.getElementById('root')!).render(
           <Route path='/admin/dashboard' element={<Admin />} />
           <Route path='/admin/requests' element={<AdminRequest />} />
           <Route path='/admin/config' element={<AdminConfig/>}></Route>
+          <Route path='/admin/bonus' element={<AdminBonus/>}></Route>
         </Routes>
       </AuthProvider>
     </ThemeProvider>

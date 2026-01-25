@@ -12,22 +12,9 @@ import { Separator } from "@/components/ui/separator"
 
 export default function Location() {
   const mapRef = useRef(null)
-  const [darkMode, setDarkMode] = useState(false)
+ 
 
-  useEffect(() => {
-    const saved = localStorage.getItem("darkMode") === "true"
-    setDarkMode(saved)
-    document.documentElement.classList.toggle("dark", saved)
-  }, [])
 
-  const toggleDarkMode = () => {
-    setDarkMode((prev) => {
-      const value = !prev
-      localStorage.setItem("darkMode", String(value))
-      document.documentElement.classList.toggle("dark", value)
-      return value
-    })
-  }
 
 
   

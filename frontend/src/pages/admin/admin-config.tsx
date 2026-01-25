@@ -33,7 +33,7 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { UserMenu } from "@/components/userMenu";
 import { ModeToggle } from "@/components/mode-toggle";
-import {  navigationItems2 } from "@/constants/Navigation";
+import {  navigationItems2 } from "@/types/Navigation";
 import LogoR from '@/imgs/logo.png'
 
 

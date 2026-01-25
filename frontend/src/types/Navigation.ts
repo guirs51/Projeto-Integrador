@@ -39,5 +39,9 @@ export const navigationItems2 = [
     url: "/admin/config",
     icon: Inbox,
   },
-
+{
+  title: "Bonificações",
+    url: "/admin/bonus",
+    icon: Inbox,
+}
 ]

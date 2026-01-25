@@ -16,7 +16,7 @@ import { UserSidebar } from "./userSidebar"
 import { useAuth } from "@/context/authContext"
 import { useEffect, useState } from "react"
 
-import { navigationItems } from "../constants/Navigation"
+import { navigationItems } from "../types/Navigation"
 
 
 export function AppSidebar() {

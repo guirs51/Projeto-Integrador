@@ -10,7 +10,7 @@ import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { cn } from "@/lib/utils";
 import LogoR from "@/imgs/logo.png";
-import { navigationItems2 } from "@/constants/Navigation";
+import { navigationItems2 } from "@/types/Navigation";
 import { Link } from "react-router";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/userMenu";
