@@ -24,6 +24,7 @@ import AdminBonus from './pages/admin/admin-bonus.tsx'
 
 createRoot(document.getElementById('root')!).render(
   <LocationProvider>
+    <GoogleOAuthProvider clientId="283937599928-psbk3t7eocu0etr13q7rdrnhdl9bkrn0.apps.googleusercontent.com">
   <BrowserRouter>
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
       <AuthProvider>
@@ -55,6 +56,7 @@ createRoot(document.getElementById('root')!).render(
       </AuthProvider>
     </ThemeProvider>
   </BrowserRouter>
+  </GoogleOAuthProvider>
   </LocationProvider>
 
 
