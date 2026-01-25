@@ -56,8 +56,6 @@ export class AuthController {
         try {
             const { idToken } = req.body
             const googleData = await verifyGoogleToken(idToken)
-            console.log("PROCURANDO USER...");
-            console.log(googleData)
             const resposta = await googleService.loginWithGoogle(googleData)
             const {token, userId} = resposta
             res.json({ token: token, userId: userId });
