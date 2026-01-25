@@ -28,13 +28,14 @@ import { Input } from "@/components/ui/input";
 
 import { Label } from "@/components/ui/label";
 import { use, useEffect, useState } from "react";
-import { data } from "react-router";
+import { data, useNavigate } from "react-router";
 import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { UserMenu } from "@/components/userMenu";
 import { ModeToggle } from "@/components/mode-toggle";
 import {  navigationItems2 } from "@/types/Navigation";
 import LogoR from '@/imgs/logo.png'
+import { useAuth } from "@/context/authContext";
 
 
 interface Material {

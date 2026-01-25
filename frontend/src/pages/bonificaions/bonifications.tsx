@@ -4,6 +4,7 @@ import { Progress } from "@/components/ui/progress"
 import { useEffect, useState } from "react";
 import { useAuth } from "@/context/authContext";
 import type { Bonus } from "@/types/bonus";
+import { useNavigate } from "react-router";
 
 export default function Bonifications() {
 
