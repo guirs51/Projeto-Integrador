@@ -97,6 +97,8 @@ export default function Login() {
     localStorage.setItem("token", data.token)
     login(data.userId)
 
+    if(!data.token || !data.userId) return alert("Erro no servidor")
+
     navigate("/UserHome");
   }
 
