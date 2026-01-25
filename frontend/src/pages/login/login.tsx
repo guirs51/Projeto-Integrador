@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "../../context/authContext"
+import { useSnackbar } from "notistack"
+import { GoogleLogin } from "@react-oauth/google"
 
 export default function Login() {
   const { login } = useAuth()
@@ -17,34 +19,86 @@ export default function Login() {
   const [password, setPassword] = useState("")
   const [show, setShow] = useState(false)
 
-  async function loginUser() {
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const { enqueueSnackbar } = useSnackbar()
+
+  async function loginUser(email: string, password: string) {
+    const response = await fetch("http://localhost:3000/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    })
+
+    const data = await response.json()
+
+    if (!response.ok) {
+      throw new Error(data.message || "Erro ao fazer login")
+    }
+
+    return data
+
+    // localStorage.setItem("token", data.token)
+    // login(data.user.id)
+
+    // alert("Login realizado com sucesso! ")
+
+    // if (data.user.role === "admin") {
+    //   return navigate("/admin/requests")
+    // }
+
+    // navigate("/UserHome")
+  }
+
+  async function handleLogin() {
     try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      })
-
-      const data = await response.json()
-
-      if (!response.ok) {
-        alert(data.message || "Erro ao fazer login")
-        return
-      }
-
+      const data = await loginUser(email, password)
       localStorage.setItem("token", data.token)
       login(data.user.id)
 
-      alert("Login realizado com sucesso! ")
+      enqueueSnackbar("Login realizado com sucesso!", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
 
       if (data.user.role === "admin") {
         return navigate("/admin/requests")
       }
 
       navigate("/UserHome")
-    } catch {
-      alert("Erro de conexão com o servidor")
+
+
+
+    } catch (error: any) {
+      setErrorMessage(error.message)
+
+      enqueueSnackbar(errorMessage, {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
+
     }
+  }
+
+  async function googleLogin(credentialResponse: any) {
+    const idToken = credentialResponse.credential;
+
+    const res = await fetch("http://localhost:3000/auth/google", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ idToken }),
+    });
+
+    const data = await res.json();
+    localStorage.setItem("token", data.token)
+    login(data.userId)
+
+    navigate("/UserHome");
   }
 
   return (
@@ -90,7 +144,7 @@ export default function Login() {
             </div>
 
             <Button
-              onClick={loginUser}
+              onClick={handleLogin}
               className="w-full bg-green-700 hover:bg-green-800 text-white"
             >
               Entrar
@@ -107,13 +161,7 @@ export default function Login() {
               <span className="text-xs text-zinc-500">
                 Ou continue com
               </span>
-              <Button
-                variant="outline"
-                size="icon"
-                className="bg-white border-zinc-300"
-              >
-                <FcGoogle size={22} />
-              </Button>
+              <GoogleLogin onSuccess={googleLogin} />
             </div>
           </CardContent>
         </Card>

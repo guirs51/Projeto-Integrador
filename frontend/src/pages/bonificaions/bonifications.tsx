@@ -13,6 +13,7 @@ export default function Bonifications() {
 
   const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem("token")
+  const navigate = useNavigate()
 
   const { userId } = useAuth()
 
@@ -47,6 +48,10 @@ export default function Bonifications() {
 
     if (userId && token) {
       getUser();
+    }
+
+    if (!userId && !token) {
+      navigate("/login")
     }
   }, [userId, token]);
 

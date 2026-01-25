@@ -27,7 +27,7 @@ import {
   Moon,
   User
 } from 'lucide-react';
-import { data, useLocation } from 'react-router';
+import { data, useLocation, useNavigate } from 'react-router';
 import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
 import Materials from "../materials/materials"
@@ -51,6 +51,7 @@ interface User {
   email: string
   cpf: string
   Points: number
+  fotoPerfil: string
 }
 
 export default function ProfilePage() {
@@ -63,6 +64,8 @@ export default function ProfilePage() {
   const token = localStorage.getItem("token")
 
   const { userId } = useAuth()
+  const navigate = useNavigate()
+
 
   useEffect(() => {
     async function getUser() {
@@ -96,6 +99,11 @@ export default function ProfilePage() {
     if (userId && token) {
       getUser();
     }
+
+    if (!userId && !token) {
+      navigate("/login")
+    }
+
   }, [userId, token]);
 
   const points = user?.Points || 0
@@ -146,6 +154,16 @@ export default function ProfilePage() {
 
     setIsModalOpen(false)
   }
+  let perfilFoto = ""
+  if (user?.fotoPerfil?.startsWith("https:")) {
+    perfilFoto = user.fotoPerfil
+  } else if (user?.fotoPerfil) {
+    perfilFoto = "http://localhost:3000" + user?.fotoPerfil
+  } else {
+    perfilFoto = "https://plus.unsplash.com/premium_photo-1663962158765-982d6ad0d006?ixlib=rb-4.1.0&q=60&w=3000"
+  }
+
+  console.log(perfilFoto)
   return (
     <div className="mx-auto w-[90%] py-6 space-y-8 ">
 

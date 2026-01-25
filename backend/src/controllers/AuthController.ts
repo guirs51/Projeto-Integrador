@@ -2,9 +2,12 @@ import { Request, Response } from 'express'
 import { UserService } from '../services/UserService'
 import { generateToken } from '../utils/jwt' // Importa a função que gera o JWT
 import { AdminService } from '../services/AdminService'
+import { verifyGoogleToken } from '../services/googleAuth.service'
+import { AuthService } from '../services/authService'
 
 const service = new UserService()
 const adminService = new AdminService
+const googleService = new AuthService
 
 export class AuthController {
     async register(req: Request, res: Response) {
@@ -49,4 +52,15 @@ export class AuthController {
         }
     }
 
+    async googleLogin(req: Request, res: Response) {
+        try {
+            const { idToken } = req.body
+            const googleData = await verifyGoogleToken(idToken)
+            const resposta = await googleService.loginWithGoogle(googleData)
+            const {token, userId} = resposta
+            res.json({ token: token, userId: userId });
+        } catch (e: any) {
+            res.status(400).json({ message: e.message })
+        }
+    }
 }

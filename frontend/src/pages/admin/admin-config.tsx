@@ -50,9 +50,15 @@ export default function AdminConfig() {
   const [pontos, setPontos] = useState<String>("")
   const [nomeMaterial, setNomeMaterial] = useState<string>("")
   const [importancia, setImportancia] = useState<String>("")
+  const { userId } = useAuth()
+  const navigate = useNavigate()
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const getMaterial = async () => {
+      if (!userId && !token) {
+        navigate("/login")
+      }
       try {
         const response = await fetch("http://localhost:3000/material/", {
           method: 'GET',

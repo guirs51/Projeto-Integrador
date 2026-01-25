@@ -1,23 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react"
-import L, { marker } from "leaflet"
+import L from "leaflet"
 import "leaflet/dist/leaflet.css"
-import { useLocation } from "@/context/locationContext"
 
 interface UserMapProps {
   mapRef: React.MutableRefObject<L.Map | null>
 }
 
 export default function UserMap({ mapRef }: UserMapProps) {
-  const { setLocation } = useLocation()
-
-
-
   useEffect(() => {
     const container = L.DomUtil.get("map")
-
     if (container != null) {
       // evita erro ao recarregar componente
+
       ; (container as any)._leaflet_id = null
     }
 
@@ -28,14 +23,12 @@ export default function UserMap({ mapRef }: UserMapProps) {
     mapRef.current = map
 
     L.tileLayer(
-      "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+      "https://tiles.stadiamaps.com/tiles/alidade_satellite/{z}/{x}/{y}{r}.jpg?api_key=7bc68d46-d9ea-4531-9fbc-c45d11bee1be",
       {
         maxZoom: 19,
         minZoom: 8,
       }
     ).addTo(map)
-
-
 
 
     // 🌍 GEOLOCALIZAÇÃO
@@ -79,46 +72,9 @@ export default function UserMap({ mapRef }: UserMapProps) {
             const nome = element.tags?.name || "Prefeitura"
             const coords: [number, number] = [element.lat, element.lon]
 
-
-
-            const marker = L.marker(coords, { icon: icons.prefeitura })
+            L.marker(coords,{icon:icons.prefeitura})
               .addTo(map)
               .bindPopup(`🏛 ${nome}`)
-
-            marker.on("click", async () => {
-              try {
-                const response = await fetch(`https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords[0]}&lon=${coords[1]}`)
-
-                const geo = await response.json()
-
-                const address = geo.display_name || `${coords[0].toFixed(5)}, ${coords[1].toFixed(5)}`
-
-                setLocation({
-                  lat: coords[0],
-                  lng: coords[1],
-                  address: `🏛 ${nome} - ${address}`
-                })
-
-                console.log("🗺️ MAPA setLocation:", {
-                  lat: coords[0],
-                  lng: coords[1],
-                  address
-                })
-                marker.bindPopup(`localização selecionado com sucesso`).openPopup()
-              } catch (error) {
-                console.error("Erro ao buscar endereço:", error)
-
-                setLocation({
-                  lat: coords[0],
-                  lng: coords[1],
-                  address: `🏛 ${nome}`,
-                })
-
-
-
-
-              }
-            })
           })
         } catch (error) {
           console.error("Erro ao buscar prefeituras:", error)
@@ -130,9 +86,7 @@ export default function UserMap({ mapRef }: UserMapProps) {
       map.remove()
       mapRef.current = null
     }
-  }, [mapRef, setLocation])
-
-
+  }, [mapRef])
 
   return (
     <div

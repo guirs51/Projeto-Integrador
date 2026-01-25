@@ -8,6 +8,8 @@ import { Card, CardContent, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
+import { useSnackbar } from "notistack"
+
 export default function Register() {
 
   const [name, setName] = useState("")
@@ -17,31 +19,60 @@ export default function Register() {
   const [show, setShow] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
 
+  const { enqueueSnackbar } = useSnackbar()
+
 
   async function createUser() {
-    try {
-      const response = await fetch("http://localhost:3000/auth/register", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, cpf, password }),
-      })
+    const response = await fetch("http://localhost:3000/auth/register", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, email, cpf, password }),
+    })
 
-      const data = await response.json()
+    const data = await response.json()
 
-      if (!response.ok) {
-        const messages = data.map((err: any) => Object.values(err)[0]).join("\n")
+    if (!response.ok) {
+      const messages = data.map((err: any) => Object.values(err)[0]).join("\n")
 
-        setErrorMessage(messages)
-        alert(messages)
-        // alert(data.message)
-        return
-      }
+      // setErrorMessage(messages)
+      // alert(data.message)
 
-      localStorage.setItem("token", data.token)
-      alert("Cadastro realizado com sucesso!")
-    } catch {
-      alert("Erro de conexão com o servidor")
+      throw new Error(messages)
     }
+
+    return data
+
+
+
+  }
+
+  async function handleRegister() {
+    try {
+      const data = await createUser()
+      localStorage.setItem("token", data.token)
+
+
+      enqueueSnackbar("Usuario cadastrado com sucesso!", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
+    } catch (error: any) {
+
+      setErrorMessage(error.message)
+
+      enqueueSnackbar(errorMessage, {
+        variant: "warning",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
+    }
+
+
   }
 
   return (

@@ -22,6 +22,9 @@ export default function AdminRequest() {
     const [requests, setRequests] = useState<Request[]>([])
     const [filter, setFilter] = useState<string>("")
     const [barData, setBarData] = useState<'pending' | 'all'>("pending")
+    const { userId } = useAuth()
+    const navigate = useNavigate()
+    const token = localStorage.getItem('token')
 
     const filterRequests = filter !== "" ? requests.filter(i => i.user.name.toUpperCase().includes(filter.toUpperCase())) : requests
 
@@ -31,6 +34,11 @@ export default function AdminRequest() {
 
     useEffect(() => {
         const getAll = async () => {
+
+            if (!userId && !token) {
+                navigate("/login")
+            }
+
             try {
                 const respose = await fetch('http://localhost:3000/delivery/', {
                     method: "GET",

@@ -38,10 +38,20 @@ export class UserController {
 
   async remove(req: Request, res: Response) {
     try {
-      // const result = await service.remove(Number(req.params.id))
-      // res.json(result)
       await service.remove(Number(req.params.id))
-      return res.json({message:"Usuario deletado com sucesso"})
+      return res.json({ message: "Usuario deletado com sucesso" })
+    } catch (e: any) {
+      res.status(404).json({ message: e.message })
+    }
+  }
+
+  async uploadFoto(req: Request, res: Response) {
+    try {
+      const userId = Number(req.params.id)
+      const imagePath = `/uploads/users/${req.file.filename}`
+
+      await service.updateFoto(userId, imagePath)
+      return res.json({ fotoPerfil: imagePath });
     } catch (e: any) {
       res.status(404).json({ message: e.message })
     }
