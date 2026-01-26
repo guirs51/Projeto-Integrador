@@ -18,12 +18,14 @@ import Location from './pages/locations/location.tsx'
 import AdminConfig from './pages/admin/admin-config.tsx'
 import { LocationProvider } from './context/locationContext.tsx'
 import AdminBonus from './pages/admin/admin-bonus.tsx'
+import { SnackbarProvider } from 'notistack'
 
 
 
 
 createRoot(document.getElementById('root')!).render(
   <LocationProvider>
+    <SnackbarProvider autoHideDuration={2000}>
     <GoogleOAuthProvider clientId="283937599928-psbk3t7eocu0etr13q7rdrnhdl9bkrn0.apps.googleusercontent.com">
   <BrowserRouter>
     <ThemeProvider defaultTheme='dark' storageKey='vite-ui-theme'>
@@ -57,6 +59,7 @@ createRoot(document.getElementById('root')!).render(
     </ThemeProvider>
   </BrowserRouter>
   </GoogleOAuthProvider>
+  </SnackbarProvider>
   </LocationProvider>
 
 

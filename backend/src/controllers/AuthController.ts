@@ -3,7 +3,7 @@ import { UserService } from '../services/UserService'
 import { generateToken } from '../utils/jwt' // Importa a função que gera o JWT
 import { AdminService } from '../services/AdminService'
 import { verifyGoogleToken } from '../services/googleAuth.service'
-import { AuthService } from '../services/authService'
+import { AuthService } from '../services/AuthService'
 
 const service = new UserService()
 const adminService = new AdminService
@@ -13,7 +13,10 @@ export class AuthController {
     async register(req: Request, res: Response) {
         try {
             const user = await service.create(req.body)
-            res.status(201).json(user)
+            const token = generateToken({ id: user.id, email: user.email })
+            const safe: any = { ...user }
+            delete safe.password
+            res.json({ user: safe, token })
         } catch (e: any) {
             res.status(400).json({ message: e.message })
         }
@@ -57,7 +60,7 @@ export class AuthController {
             const { idToken } = req.body
             const googleData = await verifyGoogleToken(idToken)
             const resposta = await googleService.loginWithGoogle(googleData)
-            const {token, userId} = resposta
+            const { token, userId } = resposta
             res.json({ token: token, userId: userId });
         } catch (e: any) {
             res.status(400).json({ message: e.message })

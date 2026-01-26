@@ -9,6 +9,8 @@ import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 
 import { useSnackbar } from "notistack"
+import { useNavigate } from "react-router"
+import { useAuth } from "@/context/authContext"
 
 export default function Register() {
 
@@ -18,11 +20,12 @@ export default function Register() {
   const [password, setPassword] = useState("")
   const [show, setShow] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
-
+  const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
+  const { login } = useAuth()
 
 
-  async function createUser() {
+  async function createUser(name: string, email: string, cpf: string, password: string) {
     const response = await fetch("http://localhost:3000/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -46,10 +49,11 @@ export default function Register() {
 
   }
 
-  async function handleRegister() {
+  async function handleRegister() { 
     try {
-      const data = await createUser()
+      const data = await createUser(name, email, cpf, password)
       localStorage.setItem("token", data.token)
+      login(data.user.id)
 
 
       enqueueSnackbar("Usuario cadastrado com sucesso!", {
@@ -59,6 +63,8 @@ export default function Register() {
           horizontal: "right"
         }
       })
+
+      navigate("/UserHome");
     } catch (error: any) {
 
       setErrorMessage(error.message)
@@ -114,7 +120,7 @@ export default function Register() {
 
             <Button
               className="w-full bg-[#91b338] hover:bg-green-600"
-              onClick={createUser}
+              onClick={handleRegister}
             >
               Cadastrar
             </Button>
