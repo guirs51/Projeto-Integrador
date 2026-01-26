@@ -22,6 +22,7 @@ import {
 import { data, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../../context/authContext';
 import { RecycleBin } from "@/components/RecycleBin"
+import { useSnackbar } from "notistack"
 
 
 
@@ -46,6 +47,7 @@ interface User {
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+    const { enqueueSnackbar } = useSnackbar()
   const [darkMode, setDarkMode] = useState(false);
   const token = localStorage.getItem("token")
 
@@ -75,6 +77,13 @@ export default function ProfilePage() {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', userId] })
+            enqueueSnackbar("reciclagem cadastrado com sucesso!", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
     }
   })
 
