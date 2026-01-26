@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 
 import { useSnackbar } from "notistack"
 import { useNavigate } from "react-router"
+import { useAuth } from "@/context/authContext"
 
 export default function Register() {
 
@@ -21,6 +22,7 @@ export default function Register() {
   const [errorMessage, setErrorMessage] = useState<string>("")
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
+  const { login } = useAuth()
 
 
   async function createUser(name: string, email: string, cpf: string, password: string) {
@@ -51,6 +53,7 @@ export default function Register() {
     try {
       const data = await createUser(name, email, cpf, password)
       localStorage.setItem("token", data.token)
+      login(data.user.id)
 
 
       enqueueSnackbar("Usuario cadastrado com sucesso!", {
