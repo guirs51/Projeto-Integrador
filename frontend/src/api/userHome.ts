@@ -43,7 +43,7 @@ export async function createDelivery(local: string, materialType: string, quanti
             return
         }
 
-        // alert("reciclagem criada com sucesso")
+        
         return data
 
     } catch (e) {
