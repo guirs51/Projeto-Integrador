@@ -11,9 +11,10 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { cn } from "@/lib/utils";
 import LogoR from "@/imgs/logo.png";
 import { navigationItems2 } from "@/types/Navigation";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/userMenu";
+import { useAuth } from "@/context/authContext";
 
 
 
