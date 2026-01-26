@@ -10,28 +10,19 @@ import ReciclyngModal, { type RecyclingFormData } from "@/components/reciclyngMo
 import RecyclingCard from "@/components/recyclingCard"
 import PointsChart from "@/components/pointsChart"
 import "@/styles/profileResponsive.css"
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getUser, createDelivery } from "@/api/userHome"
 
 
 import "../../global.css"
 
 
 import {
-  ArchiveRestore, PlusCircle, Home,
-  Inbox,
-  BookOpen,
-  CheckSquare,
-  Users,
-  Settings,
-  LogOut,
-  Sun,
-  Moon,
-  User
-} from 'lucide-react';
+  ArchiveRestore, PlusCircle } from 'lucide-react';
 import { data, useLocation, useNavigate } from 'react-router';
-import { useUser } from '../../context/userContext';
 import { useAuth } from '../../context/authContext';
-import Materials from "../materials/materials"
 import { RecycleBin } from "@/components/RecycleBin"
+import { useSnackbar } from "notistack"
 
 
 
@@ -56,104 +47,57 @@ interface User {
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+    const { enqueueSnackbar } = useSnackbar()
   const [darkMode, setDarkMode] = useState(false);
-  const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
-
-
-  const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem("token")
 
   const { userId } = useAuth()
   const navigate = useNavigate()
 
+  const queryClient = useQueryClient()
 
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await fetch(`http://localhost:3000/users/${userId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-          }
-        });
+  const { data: user, isLoading } = useQuery({
+    queryKey: ['profile', userId],
+    queryFn: () => getUser(Number(userId), String(token)),
+    enabled: !!userId && !!token
+  })
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          alert(
-            "Erro ao buscar dados do usuário: " +
-            response.status + " " + data.mensagem
-          );
-          return;
-        }
-
-        setUser(data)
-        setDeliveries(data.delivery)
-
-      } catch (error) {
-        console.error("Erro de rede:", error);
-      }
-    }
-
-    if (userId && token) {
-      getUser();
-    }
-
-    if (!userId && !token) {
-      navigate("/login")
-    }
-
-  }, [userId, token]);
-
+  const deliveries = user?.delivery || []
   const points = user?.Points || 0
 
-  // deliveries.map((item, index) => {
-  //     if(item.status != "accepted") return 
-  // })
+
+  const createDeliveryMutation = useMutation({
+    mutationFn: (data: RecyclingFormData) =>
+      createDelivery(
+        data.localizacao,
+        data.material,
+        Number(data.quantidade),
+        String(token),
+        userId!,
+      ),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile', userId] })
+            enqueueSnackbar("reciclagem cadastrado com sucesso!", {
+        variant: "success",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right"
+        }
+      })
+    }
+  })
 
   const toggleDarkMode = () => {
     setDarkMode(!darkMode);
     document.body.classList.toggle("dark");
   }
 
-  const postDelivery = async (local: string, materialType: string, quantidade: number) => {
-    try {
-      const response = await fetch("http://localhost:3000/users/create/delivery", {
-        method: 'POST',
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        },
-        body: JSON.stringify({ deliveryLocal: local, materialType: materialType, quantidade: Number(quantidade), user: { id: userId } })
-      })
 
-      const data = await response.json()
-
-      console.log(userId)
-
-      if (!response.ok) {
-        alert("Houve um erro ao adicionar uma reciclagem. Erro: " + data?.mensagem)
-        return
-      }
-
-      alert("reciclagem criada com sucesso")
-      console.log(data)
-
-    } catch (e) {
-      console.log("Houve um erro: ", e);
-      alert("Erro na conexão com o servidor.");
-    }
-  }
   function handleAddRecycling(data: RecyclingFormData) {
-    postDelivery(
-      data.localizacao,
-      data.material,
-      Number(data.quantidade)
-    )
-
+    createDeliveryMutation.mutate(data)
     setIsModalOpen(false)
   }
+
   let perfilFoto = ""
   if (user?.fotoPerfil?.startsWith("https:")) {
     perfilFoto = user.fotoPerfil
@@ -208,7 +152,7 @@ export default function ProfilePage() {
 
         {/* Lixeiras */}
         <div className="flex gap-8 justify-center flex-wrap mt-15 ">
-          <RecycleBin  label="Papel" color="bg-blue-500/80"  />
+          <RecycleBin label="Papel" color="bg-blue-500/80" />
           <RecycleBin label="Plástico" color="bg-red-500/80" />
           <RecycleBin label="Vidro" color="bg-green-600/80" />
           <RecycleBin label="Metal" color="bg-yellow-400/80" />
@@ -247,7 +191,7 @@ export default function ProfilePage() {
               </p>
             ) : (
               <div className="space-y-3">
-                {deliveries.map((item, index) => (
+                {deliveries.map((item: any, index: any) => (
                   <RecyclingCard
                     key={index}
                     material={item.materialType}

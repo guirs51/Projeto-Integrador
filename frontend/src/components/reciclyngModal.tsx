@@ -1,3 +1,4 @@
+import { useLocation } from "@/context/locationContext";
 import React, { useEffect, useState } from "react";
 
  export interface RecyclingFormData {
@@ -32,6 +33,18 @@ export default function ReciclyngModal({
   });
 
   const [materials, setMaterials] = useState<Material[]>([]);
+  const {location} = useLocation()
+
+
+
+  useEffect(() =>{
+    if(location?.address){
+      setFormData(prev => ({
+        ...prev,
+        localizacao: location.address
+      }))
+    }
+  },[location])
 
   useEffect(() => {
     const getMaterial = async () => {
@@ -151,6 +164,7 @@ export default function ReciclyngModal({
             <input
               type="text"
               name="localizacao"
+
               value={formData.localizacao}
               onChange={handleInputChange}
               required

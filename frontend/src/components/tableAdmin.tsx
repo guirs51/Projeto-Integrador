@@ -263,6 +263,9 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog"
+import { useState } from "react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { getAccept, getReject } from "@/api/requestAdmin";
 
 interface RequestDetailsModalProps {
   data: Request
@@ -273,49 +276,79 @@ interface RequestDetailsModalProps {
 export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
 
   const token = localStorage.getItem("token")
-  const getAccept = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/delivery/accept/${Number(data.id)}`, {
-        method: 'GET',
-        headers: {
-          "Content-Type": "application/json",
-          "Authorization": "Bearer " + token
-        }
-      })
-      if (!response.ok) {
-        alert("Houve um Erro")
-        console.log(data)
-        return
-      }
-      alert("OK")
+  // const getAccept = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/delivery/accept/${Number(data.id)}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         "Authorization": "Bearer " + token
+  //       }
+  //     })
+  //     if (!response.ok) {
+  //       alert("Houve um Erro")
+  //       console.log(data)
+  //       return
+  //     }
 
-    } catch (e) {
-      console.log(e)
+  //     setOpen(false)
+
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  // const getReject = async () => {
+  //   try {
+  //     const response = await fetch(`http://localhost:3000/delivery/reject/${Number(data.id)}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         "Content-Type": "application/json"
+  //       }
+  //     })
+  //     if (!response.ok) {
+  //       alert("Houve um Erro")
+  //       console.log(data)
+  //       return
+  //     }
+
+  //     setOpen(false)
+
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  const queryClient = useQueryClient()
+
+  const [open, setOpen] = useState<boolean>(false)
+
+  const getRejectMutation = useMutation({
+    mutationFn: () => getReject(data.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin'] })
     }
+  })
+
+  function handleAddReject(data: any) {
+    getRejectMutation.mutate(data)
+    setOpen(false)
   }
 
-  const getReject = async () => {
-    try {
-      const response = await fetch(`http://localhost:3000/delivery/reject/${Number(data.id)}`, {
-        method: 'GET',
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      if (!response.ok) {
-        alert("Houve um Erro")
-        console.log(data)
-        return
-      }
-      alert("OK")
-
-    } catch (e) {
-      console.log(e)
+  const getAcceptMutation = useMutation({
+    mutationFn: () => getAccept(data.id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin'] })
     }
+  })
+
+  function handleAddAccept(data: any) {
+    getAcceptMutation.mutate(data)
+    setOpen(false)
   }
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
         <Button variant="outline" size="sm">
           Ver detalhes
@@ -360,14 +393,14 @@ export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
         <DialogFooter className="gap-2">
           <Button
             variant="destructive"
-            onClick={getReject}
+            onClick={handleAddReject}
           >
             Negar
           </Button>
 
           <Button
             className="bg-primary"
-            onClick={getAccept}
+            onClick={handleAddAccept}
           >
             Aceitar
           </Button>

@@ -15,102 +15,68 @@ import { Link, useNavigate } from "react-router";
 import { ModeToggle } from "@/components/mode-toggle";
 import { UserMenu } from "@/components/userMenu";
 import { useAuth } from "@/context/authContext";
-
-
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import { getAll } from "@/api/requestAdmin";
 
 
 export default function AdminRequest() {
-    const [requests, setRequests] = useState<Request[]>([])
+    const [requestsFake, setRequests] = useState<Request[]>([])
     const [filter, setFilter] = useState<string>("")
     const [barData, setBarData] = useState<'pending' | 'all'>("pending")
     const { userId } = useAuth()
     const navigate = useNavigate()
     const token = localStorage.getItem('token')
 
-    const filterRequests = filter !== "" ? requests.filter(i => i.user.name.toUpperCase().includes(filter.toUpperCase())) : requests
+    // const queryClient = useQueryClient()
 
-    const itensPending = filterRequests.filter(r => r.status === "PENDING")
+    const { data: requests = [] } = useQuery({
+        queryKey: ['admin'],
+        queryFn: () => getAll(),
+        enabled: !!userId && !!token
+    })
 
-    console.log("filtrando as request: ", filterRequests)
+    const filterRequests = filter !== "" ? requests?.filter((i: Request) => i.user.name.toUpperCase().includes(filter.toUpperCase())) : requests
 
-    useEffect(() => {
-        const getAll = async () => {
+    const itensPending = filterRequests.filter((r: Request) => r.status === "PENDING")
 
-            if (!userId && !token) {
-                navigate("/login")
-            }
-
-            try {
-                const respose = await fetch('http://localhost:3000/delivery/', {
-                    method: "GET",
-                    headers: {
-                        "Content-Type": "application/json"
-                    }
-                })
-
-                const data = await respose.json()
-
-                const parsed: Request[] = data.map((item: any) => ({
-                    id_request: item.id_request,
-                    recycling: item.recycling,
-                    status: item.status,
-                    quantity: item.quantity,
-                    user: {
-                        name: item.name,
-                        cpf: item.cpf,
-                        email: item.email,
-                    },
-                }))
-
-                setRequests(parsed)
-                if (!respose.ok) {
-                    alert("Erro na requesição")
-                    return
-                }
-                console.log(data)
-                setRequests([...data])
-            } catch (e) {
-                console.log(e)
-            }
-        }
-
-        getAll()
-    }, [])
+    if (!userId && !token) {
+        navigate("/login")
+    }
 
     return (
 
-        
-<div>
 
-      <header
-        className="
+        <div>
+
+            <header
+                className="
     sticky top-0 z-50
     border-b border-white/10
     bg-[#91B338] backdrop-blur-xl
   "
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
+            >
+                <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
 
-          {/* Brand */}
-          <div className="flex items-center gap-2 text-white">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/10">
-              <img
-                src={LogoR}
-                alt="logoRecicle.png"
-                className="h-6 w-6 object-contain"
-              />
-            </div>
-            <div className="leading-tight">
-              <p className="text-sm font-semibold">Recicle +</p>
-            </div>
-          </div>
+                    {/* Brand */}
+                    <div className="flex items-center gap-2 text-white">
+                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/10">
+                            <img
+                                src={LogoR}
+                                alt="logoRecicle.png"
+                                className="h-6 w-6 object-contain"
+                            />
+                        </div>
+                        <div className="leading-tight">
+                            <p className="text-sm font-semibold">Recicle +</p>
+                        </div>
+                    </div>
 
-          {/* Nav */}
-          <nav className="hidden md:flex items-center gap-2">
-            {navigationItems2.map(({ title, url, icon: Icon }) => (
-              <Link key={title} to={url}>
-                <button
-                  className="
+                    {/* Nav */}
+                    <nav className="hidden md:flex items-center gap-2">
+                        {navigationItems2.map(({ title, url, icon: Icon }) => (
+                            <Link key={title} to={url}>
+                                <button
+                                    className="
               inline-flex items-center gap-2
               rounded-full px-3 py-2
               text-xs font-medium
@@ -119,104 +85,104 @@ export default function AdminRequest() {
               border border-transparent hover:border-white/10
               transition
             "
-                >
-                  <Icon size={15} />
-                  {title}
-                </button>
-              </Link>
-            ))}
-          </nav>
+                                >
+                                    <Icon size={15} />
+                                    {title}
+                                </button>
+                            </Link>
+                        ))}
+                    </nav>
 
-          {/* Right */}
-          <div className="flex items-center gap-3">
-            <ModeToggle />
+                    {/* Right */}
+                    <div className="flex items-center gap-3">
+                        <ModeToggle />
 
-          </div>
+                    </div>
 
-          <div>
-            <UserMenu />
-          </div>
+                    <div>
+                        <UserMenu />
+                    </div>
+                </div>
+            </header>
+
+            <main>
+                <section className="w-full h-full p-5 ">
+
+
+
+
+                    <div className="w-full flex gap-7 flex-row items-center ">
+                        <div className=" p-4 pl-10">
+                            <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+                                Olá ADM
+                            </h1>
+                            <p className="text-accent-foreground/70 text-sm">
+                                Essa é a tela onde você consegue adicionar novos materiais.
+                            </p>
+                        </div>
+                    </div>
+
+
+                    <div className="flex  items-center gap-4">
+
+                        <div className="py-1 relative  flex-1 max-w-2xl">
+                            <Input onChange={(e) => setFilter(e.target.value)} className=" rounded-sm" placeholder="ex: request123" ></Input>
+                            <Search size={20} className="absolute right-2 top-3 text-accent-foreground/50 " />
+                        </div>
+
+
+                        <RequestModal onCreated={(data) => { setRequests([...filterRequests, data]) }} />
+                    </div>
+
+
+                    <div className="flex gap-2 py-4">
+                        <Button
+                            onClick={() => setBarData("pending")}
+                            size="sm"
+                            variant="ghost"
+                            className={cn(
+                                "h-8 rounded-full px-4 text-sm font-medium transition-all",
+                                "hover:bg-accent",
+                                barData === "pending"
+                                    ? "bg-primary/15 text-primary ring-1 ring-primary/30"
+                                    : "text-muted-foreground"
+                            )}
+                        >
+                            Pendentes
+                        </Button>
+
+                        <Button
+                            onClick={() => setBarData("all")}
+                            size="sm"
+                            variant="ghost"
+                            className={cn(
+                                "h-8 rounded-full px-4 text-sm font-medium transition-all",
+                                "hover:bg-accent",
+                                barData === "all"
+                                    ? "bg-primary/15 text-primary ring-1 ring-primary/30"
+                                    : "text-muted-foreground"
+                            )}
+                        >
+                            Todas
+                        </Button>
+                    </div>
+
+
+                    <div className="w-full ">
+                        {barData === "pending" && (
+                            <TableAdmin data={itensPending} />
+                        )}
+                        {barData === "all" && (
+                            <TableAdmin data={filterRequests} />
+                        )}
+                    </div>
+                </section>
+            </main>
+
         </div>
-      </header>
-
-   <main>
-        <section className="w-full h-full p-5 ">
 
 
-     
-      
-                <div className="w-full flex gap-7 flex-row items-center ">
-                <div className=" p-4 pl-10">
-                    <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
-                        Olá ADM
-                    </h1>
-                    <p className="text-accent-foreground/70 text-sm">
-                        Essa é a tela onde você consegue adicionar novos materiais.
-                    </p>
-                </div>
-            </div>
 
-
-            <div className="flex  items-center gap-4">
-
-                <div className="py-1 relative  flex-1 max-w-2xl">
-                    <Input onChange={(e) => setFilter(e.target.value)} className=" rounded-sm" placeholder="ex: request123" ></Input>
-                    <Search size={20} className="absolute right-2 top-3 text-accent-foreground/50 " />
-                </div>
-
-
-                <RequestModal onCreated={(data) => { setRequests([...filterRequests, data]) }} />
-            </div>
-
-
-            <div className="flex gap-2 py-4">
-                <Button
-                    onClick={() => setBarData("pending")}
-                    size="sm"
-                    variant="ghost"
-                    className={cn(
-                        "h-8 rounded-full px-4 text-sm font-medium transition-all",
-                        "hover:bg-accent",
-                        barData === "pending"
-                            ? "bg-primary/15 text-primary ring-1 ring-primary/30"
-                            : "text-muted-foreground"
-                    )}
-                >
-                    Pendentes
-                </Button>
-
-                <Button
-                    onClick={() => setBarData("all")}
-                    size="sm"
-                    variant="ghost"
-                    className={cn(
-                        "h-8 rounded-full px-4 text-sm font-medium transition-all",
-                        "hover:bg-accent",
-                        barData === "all"
-                            ? "bg-primary/15 text-primary ring-1 ring-primary/30"
-                            : "text-muted-foreground"
-                    )}
-                >
-                    Todas
-                </Button>
-            </div>
-
-
-            <div className="w-full ">
-                {barData === "pending" && (
-                    <TableAdmin data={itensPending} />
-                )}
-                {barData === "all" && (
-                    <TableAdmin data={filterRequests} />
-                )}
-            </div>
-                  </section>
-      </main>
-            
-</div>
-
-     
-  
     )
 }
 
