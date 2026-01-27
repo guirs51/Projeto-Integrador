@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router"
 import { Edit } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -20,7 +20,10 @@ import {
 import DataField from "@/components/dataField"
 import DataPasswordField from "@/components/dataPasswordField"
 import EditProfileModal from "@/components/editProfileModal"
-import { Input } from "@/components/ui/input"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { getUser } from "@/api/userHome"
+import { deleteUser, updateUser } from "@/api/userConfig"
+import { enqueueSnackbar } from "notistack"
 
 export interface User {
   id: number
@@ -31,105 +34,53 @@ export interface User {
 }
 
 export default function UserProfile() {
-  const [user, setUser] = useState<User | null>(null)
+  // const [user, setUser] = useState<User | null>(null)
   const [openEditModal, setOpenEditModal] = useState(false)
-  const [passwordVeri, setPasswordVeri] = useState('')
 
   const navigate = useNavigate()
   const { userId, logout } = useAuth()
   const token = localStorage.getItem("token")
 
+  const queryClient = useQueryClient()
 
-  async function confirmPassword() {
-    try {
-      const response = await fetch("http://localhost:3000/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ user: user?.email, password: passwordVeri }),
-      })
+  const { data: user } = useQuery({
+    queryKey: ['profile', userId],
+    queryFn: () => getUser(Number(userId), String(token)),
+    enabled: !!userId && !!token
+  })
 
-      const data = await response.json()
-
-      if (!response.ok) {
-        alert(data.message || "Erro ")
-        return
-      }
-
-      if (data.user.role === "admin") {
-        alert("Senha Invalida")
-        return
-      }
-
-      return true
-    } catch {
-      alert("Erro de conexão com o servidor")
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteUser(Number(userId), String(token)),
+    onSuccess: () => {
+      logout()
+      navigate("/regis")
     }
+  })
+
+  const updateMutation = useMutation({
+    mutationFn: (update: Partial<User>) => updateUser(Number(userId), String(token), update),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['profile', userId] }),
+        enqueueSnackbar("reciclagem cadastrado com sucesso!", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        })
+    }
+  })
+
+  function hadleDelete() {
+    deleteMutation.mutate()
   }
 
-  async function deleteUser() {
-    if (!userId || !token) return
-
-    if (!confirmPassword()) return
-
-
-    const response = await fetch(`http://localhost:3000/users/${userId}`, {
-      method: "DELETE",
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    })
-
-    if (!response.ok) {
-      alert("Erro ao deletar usuário")
-      return
-    }
-
-    logout()
-    navigate("/regis")
+  function handlUpdate(update: Partial<User>) {
+    updateMutation.mutate(update)
   }
 
-  async function updateUser(update: Partial<User>) {
-    if (!userId || !token) return
 
-    const response = await fetch(
-      `http://localhost:3000/users/update/${userId}`,
-      {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify(update),
-      }
-    )
 
-    if (!response.ok) {
-      alert("Erro ao atualizar usuário")
-      return
-    }
-
-    const data = await response.json()
-    setUser(data)
-  }
-
-  useEffect(() => {
-    async function getUser() {
-      if (!userId || !token) return
-
-      const response = await fetch(`http://localhost:3000/users/${userId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      })
-
-      if (!response.ok) return
-
-      const data = await response.json()
-      setUser(data)
-    }
-
-    getUser()
-  }, [userId, token])
 
   let perfilFoto = ""
   if (user?.fotoPerfil?.startsWith("https:")) {
@@ -178,8 +129,7 @@ export default function UserProfile() {
           <div className="space-y-2">
             <h3 className="font-semibold text-lg">Bio</h3>
             <p className="text-muted-foreground">
-              Hi, I'm a passionate developer focused on crafting great digital
-              experiences.
+              {user?.bio ? user?.bio : "Hi, I'm a passionate developer focused on crafting great digital experiences."}
             </p>
           </div>
 
@@ -201,7 +151,7 @@ export default function UserProfile() {
                 <AlertDialogFooter>
                   {/* <Input placeholder="Digite sua senha" onChange={(e) => setPasswordVeri(e.target.value)}></Input> */}
                   <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                  <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition" onClick={deleteUser}>Deletar</AlertDialogAction>
+                  <AlertDialogAction className="bg-red-600  dark:hover:bg-red-500 transition" onClick={hadleDelete}>Deletar</AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
             </AlertDialog>
@@ -212,7 +162,7 @@ export default function UserProfile() {
       {openEditModal && user && (
         <EditProfileModal
           userData={user}
-          onSave={updateUser}
+          onSave={handlUpdate}
           onClose={() => setOpenEditModal(false)}
         />
       )}
