@@ -5,82 +5,46 @@ import { useEffect, useState } from "react";
 import { useAuth } from "@/context/authContext";
 import type { Bonus } from "@/types/bonus";
 import { useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { getUser } from "@/api/userHome";
 
 export default function Bonifications() {
-
-
-  // const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
-
-
-  // const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem("token")
   const navigate = useNavigate()
 
   const { userId } = useAuth()
 
-  useEffect(() => {
-    async function getUser() {
-      try {
-        const response = await fetch(`http://localhost:3000/users/${userId}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": "Bearer " + token
-          }
-        });
+  const { data: user, isLoading } = useQuery({
+    queryKey: ['profile', userId],
+    queryFn: () => getUser(Number(userId), String(token)),
+    enabled: !!userId && !!token
+  })
 
-        const data = await response.json();
-
-        if (!response.ok) {
-          alert(
-            "Erro ao buscar dados do usuário: " +
-            response.status + " " + data.mensagem
-          );
-          return;
-        }
-
-        setUser(data)
-        setDeliveries(data.delivery)
-
-      } catch (error) {
-        console.error("Erro de rede:", error);
-      }
-    }
-
-    if (userId && token) {
-      getUser();
-    }
-
-    if (!userId && !token) {
-      navigate("/login")
-    }
-  }, [userId, token]);
-
-  const points = deliveries.length * 10;
+  const points = user?.Points
 
   const goal = 100
   const progress = (points / goal) * 100
 
   const bonuses: Bonus[] = [
-  {
-    id: "1",
-    title: "Desconto na Conta de Luz",
-    description: "Até 25% de desconto na fatura mensal.",
-    requiredPoints: 100,
-  },
-  {
-    id: "2",
-    title: "Desconto na Conta de Água",
-    description: "Economize com bônus sustentável.",
-    requiredPoints: 50,
-  },
-  {
-    id: "3",
-    title: "IPTU Verde",
-    description: "Desconto progressivo no IPTU.",
-    requiredPoints: 80,
-  },
-]
+    {
+      id: "1",
+      title: "Desconto na Conta de Luz",
+      description: "Até 25% de desconto na fatura mensal.",
+      requiredPoints: 100,
+    },
+    {
+      id: "2",
+      title: "Desconto na Conta de Água",
+      description: "Economize com bônus sustentável.",
+      requiredPoints: 50,
+    },
+    {
+      id: "3",
+      title: "IPTU Verde",
+      description: "Desconto progressivo no IPTU.",
+      requiredPoints: 80,
+    },
+  ]
 
 
   return (
@@ -100,7 +64,7 @@ export default function Bonifications() {
 
         <CardContent className="space-y-4">
           <div className="flex justify-between text-sm font-medium">
-            <span>{points} pontos</span>
+            <span>{points ? points : 0} pontos</span>
             <span>Meta: {goal}</span>
           </div>
 
@@ -115,53 +79,50 @@ export default function Bonifications() {
       </Card>
 
       {/* BENEFÍCIOS */}
-     <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-  {bonuses.map((bonus) => {
-    const unlocked = points >= bonus.requiredPoints
+      <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {bonuses.map((bonus) => {
+          const unlocked = points >= bonus.requiredPoints
 
-    return (
-      <Card
-        key={bonus.id}
-        className={`transition hover:shadow-lg ${
-          unlocked ? "" : "opacity-50"
-        }`}
-      >
-        <CardContent className="p-5 space-y-3">
-
-          <div className="flex items-center gap-2">
-            <Gift
-              className={`h-5 w-5 ${
-                unlocked ? "text-green-600" : "text-zinc-400"
-              }`}
-            />
-            <h3 className="font-semibold text-lg">
-              {bonus.title}
-            </h3>
-          </div>
-
-          <p className="text-sm text-muted-foreground">
-            {bonus.description}
-          </p>
-
-          <p className="text-sm font-medium">
-            🎯 Necessário: {bonus.requiredPoints} pontos
-          </p>
-
-          <div className="pt-2">
-            <span
-              className={`text-sm font-semibold ${
-                unlocked ? "text-green-600" : "text-red-500"
-              }`}
+          return (
+            <Card
+              key={bonus.id}
+              className={`transition hover:shadow-lg ${unlocked ? "" : "opacity-50"
+                }`}
             >
-              {unlocked ? "🎉 Disponível" : "🔒 Bloqueado"}
-            </span>
-          </div>
+              <CardContent className="p-5 space-y-3">
 
-        </CardContent>
-      </Card>
-    )
-  })}
-</div>
+                <div className="flex items-center gap-2">
+                  <Gift
+                    className={`h-5 w-5 ${unlocked ? "text-green-600" : "text-zinc-400"
+                      }`}
+                  />
+                  <h3 className="font-semibold text-lg">
+                    {bonus.title}
+                  </h3>
+                </div>
+
+                <p className="text-sm text-muted-foreground">
+                  {bonus.description}
+                </p>
+
+                <p className="text-sm font-medium">
+                  🎯 Necessário: {bonus.requiredPoints} pontos
+                </p>
+
+                <div className="pt-2">
+                  <span
+                    className={`text-sm font-semibold ${unlocked ? "text-green-600" : "text-red-500"
+                      }`}
+                  >
+                    {unlocked ? "🎉 Disponível" : "🔒 Bloqueado"}
+                  </span>
+                </div>
+
+              </CardContent>
+            </Card>
+          )
+        })}
+      </div>
 
     </div>
   )

@@ -1,10 +1,8 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useRef } from "react"
-
-import L, { marker } from "leaflet"
+import { useEffect } from "react"
+import L from "leaflet"
 import "leaflet/dist/leaflet.css"
 import { useLocation } from "@/context/locationContext"
-
 
 interface UserMapProps {
   mapRef: React.MutableRefObject<L.Map | null>
@@ -12,13 +10,11 @@ interface UserMapProps {
 
 export default function UserMap({ mapRef }: UserMapProps) {
   const { setLocation } = useLocation()
-  const containerRef = useRef<HTMLDivElement | null>(null)
-
 
   useEffect(() => {
-    if (!containerRef.current) return
+    if (mapRef.current) return // impede recriar o mapa
 
-    const map = L.map(containerRef.current, {
+    const map = L.map("map", {
       zoomControl: true,
     }).setView([0, 0], 2)
 
@@ -29,14 +25,20 @@ export default function UserMap({ mapRef }: UserMapProps) {
       minZoom: 8,
     }).addTo(map)
 
-    let isMounted = true
-
+    // 🌍 GEOLOCALIZAÇÃO
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(async (pos) => {
-        if (isMounted || !mapRef.current) return
-
         const lat = pos.coords.latitude
         const lon = pos.coords.longitude
+
+        const icons = {
+          prefeitura: new L.Icon({
+            iconUrl: "https://cdn-icons-png.flaticon.com/512/1666/1666066.png",
+            iconSize: [25, 41],
+            iconAnchor: [12, 41],
+            popupAnchor: [1, -34],
+          }),
+        }
 
         map.setView([lat, lon], 15)
 
@@ -45,56 +47,79 @@ export default function UserMap({ mapRef }: UserMapProps) {
           .bindPopup("📍 Você está aqui!")
           .openPopup()
 
-
-      try {
+        // 🏛 PREFEITURAS (Overpass API)
+        try {
           const query = `
             [out:json];
             node["amenity"="townhall"](around:50000,${lat},${lon});
             out;
           `
+
           const url = `https://overpass-api.de/api/interpreter?data=${encodeURIComponent(query)}`
           const response = await fetch(url)
           const data = await response.json()
-
-          if (!isMounted || !mapRef.current) return
 
           data.elements.forEach((element: any) => {
             const nome = element.tags?.name || "Prefeitura"
             const coords: [number, number] = [element.lat, element.lon]
 
-            const marker = L.marker(coords).addTo(map)
+            const marker = L.marker(coords, { icon: icons.prefeitura })
+              .addTo(map)
+              .bindPopup(`🏛 ${nome}`)
 
             marker.on("click", async () => {
-              if (!mapRef.current) return
+              try {
+                const response = await fetch(
+                  `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords[0]}&lon=${coords[1]}`
+                )
 
-              const response = await fetch(
-                `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${coords[0]}&lon=${coords[1]}`
-              )
+                const geo = await response.json()
+                const addr = geo.address || {}
 
-              const geo = await response.json()
-              const address = geo.display_name
+                const cidade = addr.city || addr.town || addr.village || addr.municipality || ""
+                const estado = addr.state || ""
+                const bairro = addr.suburb || addr.neighbourhood || ""
+                const rua = addr.road || ""
 
-              setLocation({
-                lat: coords[0],
-                lng: coords[1],
-                address: `🏛 ${nome} - ${address}`,
-              })
+                const address = [
+                  rua,
+                  bairro,
+                  cidade,
+                  estado,
+                ].filter(Boolean).join(" - ")
 
-              marker.bindPopup("Localização selecionada").openPopup()
+
+                setLocation({
+                  lat: coords[0],
+                  lng: coords[1],
+                  address: `${address}`,
+                })
+
+                marker
+                  .bindPopup("Localização selecionada com sucesso")
+                  .openPopup()
+              } catch (error) {
+                console.error("Erro ao buscar endereço:", error)
+
+                setLocation({
+                  lat: coords[0],
+                  lng: coords[1],
+                  address: `🏛 ${nome}`,
+                })
+              }
             })
           })
-        } catch (err) {
-          console.error(err)
+        } catch (error) {
+          console.error("Erro ao buscar prefeituras:", error)
         }
       })
     }
-    return () =>{
-      isMounted = false
-      map.remove
+
+    return () => {
+      map.remove()
       mapRef.current = null
     }
-    },[setLocation,mapRef])
-
+  }, [])
 
   return (
     <div
