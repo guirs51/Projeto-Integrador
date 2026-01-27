@@ -89,10 +89,10 @@ export default function EditProfileModal({
     return payload
   }
 
-  function handleSubmit() {
+   async function  handleSubmit() {
     const update = buildUpdateUser()
     if (selectedFile) {
-      uploadFoto()
+       await uploadFoto()
     }
 
     onSave(update)
