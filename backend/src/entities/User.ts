@@ -31,6 +31,9 @@ export class User {
     @Column({ nullable: true })
     fotoPerfil: string;
 
+    @Column({nullable: true})
+    bio: string
+
     @CreateDateColumn()
     createdAt: Date
 

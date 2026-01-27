@@ -1,5 +1,4 @@
 import { useState } from "react"
-import { X } from "lucide-react"
 
 import {
   Dialog,
@@ -18,6 +17,7 @@ interface User {
   email: string
   cpf: string
   fotoPerfil?: string
+  bio: string
 }
 
 
@@ -75,20 +75,28 @@ export default function EditProfileModal({
       payload.email = formEmail
     }
 
-    if (formCpf.trim() && formCpf !== userData.cpf) {
+    if (!formCpf) {
+      payload.cpf = "Vazio"
+    } else if (formCpf.trim() && formCpf !== userData.cpf) {
       payload.cpf = formCpf
     }
+
+    if (bio.trim() && bio !== userData.email) {
+      payload.bio = bio
+    }
+
 
     return payload
   }
 
   function handleSubmit() {
     const update = buildUpdateUser()
-    onSave(update)
-
     if (selectedFile) {
       uploadFoto()
     }
+
+    onSave(update)
+
     onClose()
   }
 
@@ -100,7 +108,7 @@ export default function EditProfileModal({
           <button onClick={onClose}>
           </button>
         </DialogHeader>
-        
+
         <div className="flex flex-col items-center gap-2">
           {preview ? (
             <img
