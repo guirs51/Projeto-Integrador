@@ -1,7 +1,7 @@
 import { useLocation } from "@/context/locationContext";
 import React, { useEffect, useState } from "react";
 
- export interface RecyclingFormData {
+export interface RecyclingFormData {
   material: string;
   quantidade: number;
   localizacao: string;
@@ -33,6 +33,19 @@ export default function ReciclyngModal({
   });
 
   const [materials, setMaterials] = useState<Material[]>([]);
+
+  const { location } = useLocation()
+
+
+
+  useEffect(() => {
+    if (location?.address) {
+      setFormData(prev => ({
+        ...prev,
+        localizacao: location.address
+      }))
+    }
+  }, [location])
 
 
   useEffect(() => {

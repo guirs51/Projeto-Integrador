@@ -13,11 +13,7 @@ import { useAuth } from "@/context/authContext"
 import { useNavigate } from "react-router"
 
 export default function Location() {
-  const mapRef = useRef(null)
- 
-
-
-
+  const mapRef = useRef<L.Map | null>(null)
 
   
   return (

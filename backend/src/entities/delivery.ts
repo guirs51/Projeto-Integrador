@@ -7,7 +7,7 @@ export class Delivery {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({ length: 900 })
+    @Column({ length: 200 })
     deliveryLocal: string
 
     @Column({ length: 100 })
