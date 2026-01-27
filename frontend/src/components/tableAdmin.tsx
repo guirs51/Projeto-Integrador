@@ -347,6 +347,12 @@ export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
     setOpen(false)
   }
 
+  let isPending = true
+  const pending = data.status
+  if (pending !== "PENDING") {
+    isPending = false
+  }
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
@@ -391,19 +397,20 @@ export function RequestDetailsModal({ data }: RequestDetailsModalProps) {
 
         {/* Ações */}
         <DialogFooter className="gap-2">
-          <Button
+          {isPending ? <Button
             variant="destructive"
             onClick={handleAddReject}
           >
             Negar
-          </Button>
+          </Button> : null}
 
-          <Button
+          {isPending ? <Button
             className="bg-primary"
             onClick={handleAddAccept}
           >
             Aceitar
-          </Button>
+          </Button> : null}
+
         </DialogFooter>
       </DialogContent>
     </Dialog>
