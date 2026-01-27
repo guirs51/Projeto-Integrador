@@ -9,10 +9,10 @@ import { useNavigate } from "react-router";
 export default function Bonifications() {
 
 
-  const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
+  // const [deliveries, setDeliveries] = useState<RecyclingData[]>([]);
 
 
-  const [user, setUser] = useState<User | null>(null)
+  // const [user, setUser] = useState<User | null>(null)
   const token = localStorage.getItem("token")
   const navigate = useNavigate()
 

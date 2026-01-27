@@ -14,8 +14,8 @@ const sizes = {
     body: "w-24 h-28 text-sm",
   },
   md: {
-    lid: "w-30 h-6",
-    body: "w-30 h-30",
+    lid: "w-32 h-6",
+    body: "w-32 h-32",
   },
   lg: {
     lid: "w-44 h-7",

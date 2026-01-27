@@ -1,7 +1,15 @@
 import { useLocation } from "@/context/locationContext";
 import React, { useEffect, useState } from "react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
- export interface RecyclingFormData {
+
+export interface RecyclingFormData {
   material: string;
   quantidade: number;
   localizacao: string;
@@ -87,12 +95,12 @@ export default function ReciclyngModal({
 
   return (
     <div
-      className="fixed inset-0 bg-black/55 flex items-center justify-center z-[1000]"
+      className="fixed inset-0  bg-black/55 flex items-center justify-center z-[1000]"
       onClick={onClose}
     >
       <div
         className="w-full max-w-[500px] p-8 rounded-xl shadow-xl
-        bg-white dark:bg-[#1b1b1b]"
+        bg-white dark:bg-[#141313]"
         onClick={(e) => e.stopPropagation()}
       >
         <h2 className="text-center mb-5 dark:text-white">
@@ -101,8 +109,10 @@ export default function ReciclyngModal({
 
         <form onSubmit={handleSubmit} className="flex flex-col">
 
-          <label className="flex flex-col mb-6 text-[#ddd]">
+          <label className="flex flex-col mb-6 text-white">
             Tipo de Material:
+
+
             <select
               value={formData.material}
               onChange={(e) =>
@@ -112,32 +122,25 @@ export default function ReciclyngModal({
                 }))
               }
               required
-              className="
-                border-0 border-b border-[#444]
-                bg-transparent outline-none py-2
-                text-[15px] text-[#e5e5e5]
-                focus:border-[#2b8842]
-                appearance-none
-              "
+              className="bg-[#141313]"
             >
               <option value="" disabled hidden>
                 Selecione o material
               </option>
 
               {materials.map((item) => (
-                <option
-                  key={item.id}
-                  value={item.name}
-                  className="bg-black text-white"
-                >
+                <option key={item.id} value={item.name}>
                   {item.name}
                 </option>
               ))}
             </select>
+
+
+
           </label>
 
           <label className="flex flex-col mb-4 dark:text-[#ddd]">
-            Quantidade:
+            Peso:
             <input
               type="number"
               name="quantidade"
