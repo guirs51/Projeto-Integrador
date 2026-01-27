@@ -2,7 +2,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
 import { AppSidebar } from "./components/app-sidebar"
 import { Outlet } from "react-router"
 import { BookOpen, Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-import { navigationItems } from "./types/Navigation"
+import { navigationItems } from "../src/types/Navigation"
 import { Link } from "react-router"
 import { ModeToggle } from "./components/mode-toggle"
 import { Button } from "./components/ui/button"
@@ -21,10 +21,10 @@ export default function Layout() {
           className="
     sticky top-0 z-50
     border-b border-white/10
-    bg-[#91B338] backdrop-blur-xl
+    bg-[#91B338] backdrop-blur-xl 
   "
         >
-          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
+          <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3 ">
 
             {/* Brand */}
             <div className="flex items-center gap-2 text-white">
@@ -41,7 +41,7 @@ export default function Layout() {
             </div>
 
             {/* Nav */}
-            <nav className="hidden md:flex items-center gap-2">
+            <nav className="hidden md:flex items-center gap-2 ml-20">
               {navigationItems.map(({ title, url, icon: Icon }) => (
                 <Link key={title} to={url}>
                   <button
@@ -62,15 +62,16 @@ export default function Layout() {
               ))}
             </nav>
 
-            {/* Right */}
-            <div className="flex items-center gap-3">
+              <div className="">
+             
+              </div>
+
+               {/* Right */}
+            <div className="flex gap-8">
+                 <UserMenu/>
               <ModeToggle />
             
             </div>
-
-              <div>
-                <UserMenu/>
-              </div>
           </div>
         </header>
 

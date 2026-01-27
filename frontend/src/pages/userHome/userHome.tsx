@@ -18,7 +18,7 @@ import "../../global.css"
 
 
 import {
-  ArchiveRestore, PlusCircle } from 'lucide-react';
+  ArchiveRestore, Leaf, PlusCircle } from 'lucide-react';
 import { data, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../../context/authContext';
 import { RecycleBin } from "@/components/RecycleBin"
@@ -151,7 +151,7 @@ export default function ProfilePage() {
         </Card>
 
         {/* Lixeiras */}
-        <div className="flex gap-8 justify-center flex-wrap mt-15 ">
+        <div className="flex gap-8 justify-center flex-wrap mt-35 ">
           <RecycleBin label="Papel" color="bg-blue-500/80" />
           <RecycleBin label="Plástico" color="bg-red-500/80" />
           <RecycleBin label="Vidro" color="bg-green-600/80" />
@@ -187,7 +187,7 @@ export default function ProfilePage() {
           <ScrollArea className="h-[40vh] rounded-xl border p-4">
             {deliveries.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-10">
-                🌱 Nenhuma reciclagem registrada ainda
+                <Leaf size={16}/> Nenhuma reciclagem registrada ainda
               </p>
             ) : (
               <div className="space-y-3">
@@ -195,8 +195,8 @@ export default function ProfilePage() {
                   <RecyclingCard
                     key={index}
                     material={item.materialType}
-                    quantidade={item.quantidade}
-                    localizacao={item.deliveryLocal}
+                    Peso={item.Peso}
+                   localizacao={item.deliveryLocal}
                   />
                 ))}
               </div>

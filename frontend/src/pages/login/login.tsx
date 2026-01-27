@@ -112,7 +112,7 @@ export default function Login() {
           <CardHeader className="text-center space-y-2">
             <h1 className="text-xl font-semibold text-black">
               Bem-vindo de volta ao{" "}
-              <span className="text-green-700">Recicle +</span>
+              <span className="text-[#91B338]">Recicle +</span>
             </h1>
             <p className="text-sm text-zinc-600">
               Junte-se à nossa comunidade sustentável
@@ -145,7 +145,7 @@ export default function Login() {
 
             <Button
               onClick={handleLogin}
-              className="w-full bg-green-700 hover:bg-green-800 text-white"
+              className="w-full bg-[#91B338] hover:bg-green-600 text-white"
             >
               Entrar
             </Button>
