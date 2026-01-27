@@ -148,9 +148,9 @@ export default function ReciclyngModal({
           </label>
 
           <label className="flex flex-col mb-4 dark:text-[#ddd]">
-            Quantidade:
+            Peso:
             <input
-              type="number"
+              type="text"
               name="quantidade"
               value={formData.quantidade}
               onChange={handleInputChange}
