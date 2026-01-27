@@ -10,6 +10,9 @@ import { Link } from "react-router"
 import { navigationItems2 } from "@/types/Navigation"
 import LogoR from '@/imgs/logo.png'
 import { Gift } from "lucide-react"
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query"
+import { postBonus } from "@/api/bonusAdmin"
+import { enqueueSnackbar } from "notistack"
 
 
 interface Bonus {
@@ -25,18 +28,36 @@ export default function AdminBonus() {
     const [requiredPoints, setRequiredPoints] = useState(0)
     const [bonusList, setBonusList] = useState<Bonus[]>([])
 
+    const queryClient = useQueryClient()
+
+    const postBonusMutation = useMutation({
+        mutationFn: () => postBonus(title, requiredPoints, description),
+        onSuccess: () => {
+            queryClient.invalidateQueries({queryKey: ["bonus"]})
+            enqueueSnackbar("Bonus cadastrado com sucesso!", {
+                variant: "success",
+                anchorOrigin: {
+                    vertical: "top",
+                    horizontal: "right"
+                }
+            })
+        }
+    })
+
     function handleCreateBonus() {
         if (!title || !description || requiredPoints <= 0) return
 
-        setBonusList((prev) => [
-            ...prev,
-            {
-                id: crypto.randomUUID(),
-                title,
-                description,
-                requiredPoints,
-            },
-        ])
+        // setBonusList((prev) => [
+        //     ...prev,
+        //     {
+        //         id: crypto.randomUUID(),
+        //         title,
+        //         description,
+        //         requiredPoints,
+        //     },
+        // ])
+
+        postBonusMutation.mutate()
 
         setTitle("")
         setDescription("")
@@ -92,15 +113,11 @@ export default function AdminBonus() {
                         ))}
                     </nav>
 
-                    {/* Right */}
-                    <div className="flex items-center gap-3">
-                        <ModeToggle />
-
-                    </div>
-
-                    <div>
-                        <UserMenu />
-                    </div>
+                     <div className="flex gap-8">
+                 <UserMenu/>
+              <ModeToggle />
+            
+            </div>
                 </div>
             </header>
 
@@ -108,16 +125,16 @@ export default function AdminBonus() {
 
             <main>
 
-                   <div className="w-full flex items-start justify-between gap-6 px-10 py-6 ">
-                <div className=" p-4 pl-10">
-                    <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
-                        Olá ADM
-                    </h1>
-                    <p className="text-accent-foreground/70 text-sm">
-                        Essa é a tela onde você consegue adicionar novas bonificações.
-                    </p>
+                <div className="w-full flex items-start justify-between gap-6 px-10 py-6 ">
+                    <div className=" p-4 pl-10">
+                        <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+                            Olá ADM
+                        </h1>
+                        <p className="text-accent-foreground/70 text-sm">
+                            Essa é a tela onde você consegue adicionar novas bonificações.
+                        </p>
+                    </div>
                 </div>
-            </div>
 
                 <div className="p-8 space-y-8">
                     <h1 className="text-2xl mt-2  font-bold tracking-tight text-[#91b338]">Gerenciar Bônus</h1>
@@ -167,9 +184,9 @@ export default function AdminBonus() {
                     {/* Lista de bônus */}
                     <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 ">
                         {bonusList.map((bonus) => (
-                            <Card  className="bg-blue-300/25" key={bonus.id}>
+                            <Card className="bg-blue-300/25" key={bonus.id}>
                                 <CardHeader>
-                                    <CardTitle className="flex items-center gap-2 mt-2"> <Gift/>{bonus.title}</CardTitle>
+                                    <CardTitle className="flex items-center gap-2 mt-2"> <Gift />{bonus.title}</CardTitle>
                                 </CardHeader>
                                 <CardContent>
                                     <p className="text-sm text-muted-foreground mb-5">

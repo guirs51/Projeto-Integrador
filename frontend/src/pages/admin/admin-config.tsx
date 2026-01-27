@@ -171,15 +171,11 @@ export default function AdminConfig() {
             ))}
           </nav>
 
-          {/* Right */}
-          <div className="flex items-center gap-3">
-            <ModeToggle />
-
-          </div>
-
-          <div>
-            <UserMenu />
-          </div>
+           <div className="flex gap-8">
+                 <UserMenu/>
+              <ModeToggle />
+            
+            </div>
         </div>
       </header>
 

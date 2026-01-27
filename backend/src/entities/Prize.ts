@@ -11,4 +11,7 @@ import { Entity,PrimaryGeneratedColumn,Column,ManyToOne} from "typeorm";
      @Column()
      prizePoints: number
 
+     @Column()
+     descricao: string
+
  }

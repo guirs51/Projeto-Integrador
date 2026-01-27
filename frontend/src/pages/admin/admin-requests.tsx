@@ -93,14 +93,10 @@ export default function AdminRequest() {
                         ))}
                     </nav>
 
-                    {/* Right */}
-                    <div className="flex items-center gap-3">
+                    <div className="flex gap-8">
+                        <UserMenu />
                         <ModeToggle />
 
-                    </div>
-
-                    <div>
-                        <UserMenu />
                     </div>
                 </div>
             </header>

@@ -7,6 +7,7 @@ import type { Bonus } from "@/types/bonus";
 import { useNavigate } from "react-router";
 import { useQuery } from "@tanstack/react-query";
 import { getUser } from "@/api/userHome";
+import { getBonus } from "@/api/bonusAdmin";
 
 export default function Bonifications() {
   const token = localStorage.getItem("token")
@@ -20,32 +21,19 @@ export default function Bonifications() {
     enabled: !!userId && !!token
   })
 
+  const { data: bonus = []} = useQuery({
+    queryKey: ['bonus'],
+    queryFn: () => getBonus()
+  })
+
   const points = user?.Points
 
   const goal = 100
   const progress = (points / goal) * 100
 
-  const bonuses: Bonus[] = [
-    {
-      id: "1",
-      title: "Desconto na Conta de Luz",
-      description: "Até 25% de desconto na fatura mensal.",
-      requiredPoints: 100,
-    },
-    {
-      id: "2",
-      title: "Desconto na Conta de Água",
-      description: "Economize com bônus sustentável.",
-      requiredPoints: 50,
-    },
-    {
-      id: "3",
-      title: "IPTU Verde",
-      description: "Desconto progressivo no IPTU.",
-      requiredPoints: 80,
-    },
-  ]
+  const bonuses: Bonus[] = bonus || []
 
+  console.log(bonuses)
 
   return (
     <div className="min-h-screen w-full px-6 py-10 flex flex-col items-center gap-10 bg-background text-foreground">
@@ -81,7 +69,7 @@ export default function Bonifications() {
       {/* BENEFÍCIOS */}
       <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {bonuses.map((bonus) => {
-          const unlocked = points >= bonus.requiredPoints
+          const unlocked = points >= bonus?.prizePoints
 
           return (
             <Card
@@ -97,16 +85,16 @@ export default function Bonifications() {
                       }`}
                   />
                   <h3 className="font-semibold text-lg">
-                    {bonus.title}
+                    {bonus?.namePrize}
                   </h3>
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  {bonus.description}
+                  {bonus?.descricao}
                 </p>
 
                 <p className="text-sm font-medium">
-                  🎯 Necessário: {bonus.requiredPoints} pontos
+                  🎯 Necessário: {bonus.prizePoints} pontos
                 </p>
 
                 <div className="pt-2">

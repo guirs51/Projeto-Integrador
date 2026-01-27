@@ -66,7 +66,7 @@ export default function Layout() {
              
               </div>
 
-               {/* Right */}
+           
             <div className="flex gap-8">
                  <UserMenu/>
               <ModeToggle />
