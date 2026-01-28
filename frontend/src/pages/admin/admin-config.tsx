@@ -33,9 +33,12 @@ import { Search } from "lucide-react";
 import { Link } from "react-router-dom";
 import { UserMenu } from "@/components/userMenu";
 import { ModeToggle } from "@/components/mode-toggle";
-import {  navigationItems2 } from "@/types/Navigation";
+import { navigationItems2 } from "@/types/Navigation";
 import LogoR from '@/imgs/logo.png'
 import { useAuth } from "@/context/authContext";
+import { useMutation, useMutationState, useQuery, useQueryClient } from "@tanstack/react-query";
+import { getMaterial, postMaterial } from "@/api/materialAdmin";
+import { enqueueSnackbar } from "notistack";
 
 
 interface Material {
@@ -47,7 +50,7 @@ interface Material {
 
 export default function AdminConfig() {
 
-  const [material, setMaterial] = useState<Material[]>([])
+  const [open, setOpen] = useState<boolean>(false)
   const [pontos, setPontos] = useState<String>("")
   const [nomeMaterial, setNomeMaterial] = useState<string>("")
   const [importancia, setImportancia] = useState<String>("")
@@ -55,55 +58,55 @@ export default function AdminConfig() {
   const navigate = useNavigate()
   const token = localStorage.getItem('token')
 
-  useEffect(() => {
-    const getMaterial = async () => {
-      if (!userId && !token) {
-        navigate("/login")
-      }
-      try {
-        const response = await fetch("http://localhost:3000/material/", {
-          method: 'GET',
-          headers: {
-            "Content-Type": "application/json"
+  const queryClient = useQueryClient()
+
+  const { data: material = [] } = useQuery({
+    queryKey: ["material"],
+    queryFn: () => getMaterial(),
+  })
+
+  const materiais: Material[] = material || null
+
+  const postMaterialMutation = useMutation({
+    mutationFn: () => postMaterial(nomeMaterial, Number(pontos), String(importancia)),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["material"] }),
+        enqueueSnackbar("material cadastrado com sucesso!", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
           }
         })
-
-        const data = await response.json()
-        if (!response.ok) {
-          alert("Houve um Erro")
-          return
-        }
-        setMaterial(data)
-
-      } catch (e) {
-        console.log(e)
-      }
     }
-
-    getMaterial()
-
-  }, [])
-
-  const postMaterial = async () => {
-    try {
-      const response = await fetch("http://localhost:3000/material/create", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({ name: nomeMaterial, points: Number(pontos), importance: Number(importancia) })
-      })
-
-      if (!response.ok) {
-        alert("houve um Erro")
-        return
-      }
+  })
 
 
-    } catch (e) {
-      console.log(e)
-    }
+  console.log(pontos)
+  function handlePostMutation() {
+    postMaterialMutation.mutate()
+    setOpen(false)
   }
+
+  const deleteMaterialMutation = useMutation({
+    mutationFn: (id: number) => deleteMaterial(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["material"] }),
+        enqueueSnackbar("material deletado com sucesso!", {
+          variant: "success",
+          anchorOrigin: {
+            vertical: "top",
+            horizontal: "right"
+          }
+        })
+    }
+  })
+
+  function handleDeleteMutation(id: number){
+    deleteMaterialMutation.mutate(id)
+    setOpen(false)
+  }
+
 
   const deleteMaterial = async (id: number) => {
     try {
@@ -171,29 +174,29 @@ export default function AdminConfig() {
             ))}
           </nav>
 
-           <div className="flex gap-8">
-                 <UserMenu/>
-              <ModeToggle />
-            
-            </div>
+          <div className="flex gap-8">
+            <UserMenu />
+            <ModeToggle />
+
+          </div>
         </div>
       </header>
 
 
       <main>
 
-                <div className="w-full flex items-start justify-between gap-6 px-10 py-6 ">
-                <div className=" p-4 pl-10">
-                    <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
-                        Olá ADM
-                    </h1>
-                    <p className="text-accent-foreground/70 text-sm">
-                        Essa é a tela onde você consegue adicionar novos materiais.
-                    </p>
-                </div>
+        <div className="w-full flex items-start justify-between gap-6 px-10 py-6 ">
+          <div className=" p-4 pl-10">
+            <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+              Olá ADM
+            </h1>
+            <p className="text-accent-foreground/70 text-sm">
+              Essa é a tela onde você consegue adicionar novos materiais.
+            </p>
+          </div>
 
-              
-            </div>
+
+        </div>
 
 
         <div className="flex  items-center gap-4 pl-10 ">
@@ -201,56 +204,56 @@ export default function AdminConfig() {
             <Input className=" rounded-sm" placeholder="ex: vidro" ></Input>
             <Search size={20} className="absolute right-2 top-3 text-accent-foreground/50 " />
           </div>
-            <div>
-          <Popover>
-            <PopoverTrigger asChild>
-              <Button  className="bg-[#91b338] text-neutral-50" variant="outline">Adicionar material</Button>
-            </PopoverTrigger>
-            <PopoverContent className="w-80">
-              <div className="grid gap-4">
-                <div className="space-y-2">
-                  <h4 className="leading-none font-medium">
-                    Adicione um novo tipo de material
-                  </h4>
+          <div>
+            <Popover open={open} onOpenChange={setOpen}>
+              <PopoverTrigger asChild>
+                <Button className="bg-[#91b338] text-neutral-50" variant="outline">Adicionar material</Button>
+              </PopoverTrigger>
+              <PopoverContent className="w-80" >
+                <div className="grid gap-4">
+                  <div className="space-y-2">
+                    <h4 className="leading-none font-medium">
+                      Adicione um novo tipo de material
+                    </h4>
+                  </div>
+                  <div className="grid gap-2">
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="width">Importância</Label>
+                      <Input
+                        id="width"
+                        defaultValue="100%"
+                        className="col-span-2 h-8"
+                        onChange={(e) => setImportancia(String(e.target.value))}
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="maxWidth">Material</Label>
+                      <Input
+                        id="Material"
+                        defaultValue="papel"
+                        className="col-span-2 h-8"
+                        value={nomeMaterial}
+                        onChange={(e) => setNomeMaterial(String(e.target.value))}
+                      />
+                    </div>
+                    <div className="grid grid-cols-3 items-center gap-4">
+                      <Label htmlFor="height">Pontos</Label>
+                      <Input
+                        id="Pontos"
+                        defaultValue="10"
+                        className="col-span-2 h-8"
+                        onChange={(e) => setPontos(String(e.target.value))}
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="grid gap-2">
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="width">Importância</Label>
-                    <Input
-                      id="width"
-                      defaultValue="100%"
-                      className="col-span-2 h-8"
-                      onChange={(e) => setImportancia(String(e.target.value))}
-                    />
-                  </div>
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="maxWidth">Material</Label>
-                    <Input
-                      id="Material"
-                      defaultValue="papel"
-                      className="col-span-2 h-8"
-                      value={nomeMaterial}
-                      onChange={(e) => setNomeMaterial(String(e.target.value))}
-                    />
-                  </div>
-                  <div className="grid grid-cols-3 items-center gap-4">
-                    <Label htmlFor="height">Pontos</Label>
-                    <Input
-                      id="Pontos"
-                      defaultValue="10"
-                      className="col-span-2 h-8"
-                      onChange={(e) => setPontos(String(e.target.value))}
-                    />
-                  </div>
-                </div>
-              </div>
 
-              <Button  className="bg-[#91b338] text-neutral-50" type="submit" variant="outline" onClick={postMaterial}>
-                Salvar
-              </Button>
-            </PopoverContent>
-          </Popover>
-        </div>
+                <Button className="bg-[#91b338] text-neutral-50" type="submit" variant="outline" onClick={handlePostMutation}>
+                  Salvar
+                </Button>
+              </PopoverContent>
+            </Popover>
+          </div>
         </div>
 
         <div className="w-full overflow-x-auto">
@@ -265,25 +268,26 @@ export default function AdminConfig() {
             </TableHeader>
 
             <TableBody>
-              {material.map((item: Material) => (
-                <TableRow
-                  key={item.id}
+
+              {materiais.map((material) => {
+                return (<TableRow
+                  key={material?.id}
                   className="border-b hover:bg-green-500/10 dark:hover:bg-green-500/20 transition"
                 >
-                  <TableCell>{item.name}</TableCell>
+                  <TableCell>{material?.name}</TableCell>
 
                   <TableCell>
-                    {Array.from({ length: item.importance }).map((_, i) => (
+                    {Array.from({ length: material?.importance }).map((_, i) => (
                       <span key={i}>⭐</span>
                     ))}
                   </TableCell>
 
-                  <TableCell className="font-bold">{item.points}</TableCell>
+                  <TableCell className="font-bold">{material?.points}</TableCell>
 
                   <TableCell >
                     <AlertDialog>
                       <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition " >Remover</AlertDialogTrigger>
-                      <AlertDialogContent>
+                      <AlertDialogContent >
                         <AlertDialogHeader>
                           <AlertDialogTitle>
                             Você tem certeza que deseja remover esse material?
@@ -294,20 +298,20 @@ export default function AdminConfig() {
                         </AlertDialogHeader>
                         <AlertDialogFooter>
                           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-                          <Button type="submit" variant="outline" onClick={() => deleteMaterial(item.id)}>
+                          <Button type="submit" variant="outline" onClick={() => handleDeleteMutation(Number(material?.id))}>
                             remover
                           </Button>
                         </AlertDialogFooter>
                       </AlertDialogContent>
                     </AlertDialog>
                   </TableCell>
-                </TableRow>
-              ))}
+                </TableRow>)
+              })}
             </TableBody>
           </Table>
         </div>
 
-       
+
       </main>
 
     </div>
