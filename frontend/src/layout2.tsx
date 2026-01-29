@@ -1,14 +1,13 @@
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { AppSidebar } from "./components/app-sidebar"
 import { Outlet } from "react-router"
 import { BookOpen, Calendar, Home, Inbox, Search, Settings } from "lucide-react"
-import { navigationItems } from "../src/types/Navigation"
+import { navigationItems2 } from "../src/types/Navigation"
 import { Link } from "react-router"
 import { ModeToggle } from "./components/mode-toggle"
 import { Button } from "./components/ui/button"
 import { UserMenu } from "./components/userMenu";
 import LogoR from './imgs/logo.png'
-
+import { AppSidebar } from "./components/app-sidebar-adm" 
 
 
 export default function Layout() {
@@ -35,7 +34,7 @@ export default function Layout() {
 
             {/* NAV DESKTOP */}
             <nav className="hidden md:flex items-center gap-2">
-              {navigationItems.map(({ title, url, icon: Icon }) => (
+              {navigationItems2.map(({ title, url, icon: Icon }) => (
                 <Link key={title} to={url}>
                   <button className="flex items-center gap-2 px-3 py-2 text-xs text-white/70 hover:text-white">
                     <Icon size={15} />

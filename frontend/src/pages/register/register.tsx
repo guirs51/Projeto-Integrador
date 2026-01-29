@@ -49,7 +49,7 @@ export default function Register() {
 
   }
 
-  async function handleRegister() { 
+  async function handleRegister() {
     try {
       const data = await createUser(name, email, cpf, password)
       localStorage.setItem("token", data.token)
@@ -82,21 +82,21 @@ export default function Register() {
   }
 
   return (
-    <div className="flex h-screen w-full">
+    <div className="flex min-h-screen w-full flex-col md:flex-row">
 
       {/* ESQUERDA */}
-      <div className="flex flex-1 items-center justify-center bg-neutral-50">
-        <Card className="w-full max-w-md shadow-lg bg-neutral-100">
+      <div className="flex flex-1 items-center justify-center bg-neutral-50 px-4 md:px-0">
+        <Card className="w-full max-w-md shadow-lg bg-neutral-100 md:max-w-md">
           <CardHeader className="text-center space-y-2">
-            <h1 className="text-xl font-semibold text-neutral-900">
+            <h1 className="text-lg md:text-xl font-semibold text-neutral-900">
               Bem-vindo ao <span className="text-[#91b338]">Recicle +</span>
             </h1>
-            <p className="text-sm text-muted-foreground  text-zinc-600">
+            <p className="text-xs md:text-sm text-zinc-600">
               Junte-se à nossa comunidade sustentável
             </p>
           </CardHeader>
 
-          <CardContent className="space-y-4 ">
+          <CardContent className="space-y-4 px-4 md:px-6">
             <Input placeholder="Nome" onChange={(e) => setName(e.target.value)} className="bg-white text-zinc-900" />
             <Input placeholder="Email" onChange={(e) => setEmail(e.target.value)} className="bg-white text-zinc-900" />
             <Input placeholder="CPF" onChange={(e) => setCpf(e.target.value)} className="bg-white text-zinc-900" />

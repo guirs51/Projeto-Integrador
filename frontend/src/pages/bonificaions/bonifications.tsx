@@ -36,16 +36,21 @@ export default function Bonifications() {
   console.log(bonuses)
 
   return (
-    <div className="min-h-screen w-full px-6 py-10 flex flex-col items-center gap-10 bg-background text-foreground">
+    <div className="  min-h-screen w-full
+  px-4 sm:px-6
+  py-8 sm:py-10
+  flex flex-col items-center
+  gap-8 sm:gap-10
+  bg-background text-foreground">
 
       {/* TÍTULO */}
-      <h1 className="flex items-center gap-2 text-3xl font-bold">
+      <h1 className="flex items-center gap-2 text-2xl sm:text-3xl font-bold">
         <Gift className="h-7 w-7 text-green-600" />
         Bonificações
       </h1>
 
       {/* PROGRESSO */}
-      <Card className="w-full max-w-md">
+      <Card className="w-full max-w-md p-2 sm:p-5">
         <CardHeader>
           <CardTitle className="text-lg">Seu Progresso</CardTitle>
         </CardHeader>
@@ -67,7 +72,11 @@ export default function Bonifications() {
       </Card>
 
       {/* BENEFÍCIOS */}
-      <div className="grid w-full max-w-5xl grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="  grid w-full max-w-5xl
+  grid-cols-1
+  sm:grid-cols-2
+  lg:grid-cols-3
+  gap-4 sm:gap-6">
         {bonuses.map((bonus) => {
           const unlocked = points >= bonus?.prizePoints
 
@@ -77,7 +86,7 @@ export default function Bonifications() {
               className={`transition hover:shadow-lg ${unlocked ? "" : "opacity-50"
                 }`}
             >
-              <CardContent className="p-5 space-y-3">
+              <CardContent className="p-4 sm:p-5 space-y-3">
 
                 <div className="flex items-center gap-2">
                   <Gift

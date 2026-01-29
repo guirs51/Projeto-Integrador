@@ -102,7 +102,7 @@ export default function AdminConfig() {
     }
   })
 
-  function handleDeleteMutation(id: number){
+  function handleDeleteMutation(id: number) {
     deleteMaterialMutation.mutate(id)
     setOpen(false)
   }
@@ -129,65 +129,11 @@ export default function AdminConfig() {
   return (
     <div className="">
 
-      <header
-        className="
-    sticky top-0 z-50
-    border-b border-white/10
-    bg-[#91B338] backdrop-blur-xl
-  "
-      >
-        <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
-
-          {/* Brand */}
-          <div className="flex items-center gap-2 text-white">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/10">
-              <img
-                src={LogoR}
-                alt="logoRecicle.png"
-                className="h-6 w-6 object-contain"
-              />
-            </div>
-            <div className="leading-tight">
-              <p className="text-sm font-semibold">Recicle +</p>
-            </div>
-          </div>
-
-          {/* Nav */}
-          <nav className="hidden md:flex items-center gap-2">
-            {navigationItems2.map(({ title, url, icon: Icon }) => (
-              <Link key={title} to={url}>
-                <button
-                  className="
-              inline-flex items-center gap-2
-              rounded-full px-3 py-2
-              text-xs font-medium
-              text-white/70 hover:text-white
-              hover:bg-white/10
-              border border-transparent hover:border-white/10
-              transition
-            "
-                >
-                  <Icon size={15} />
-                  {title}
-                </button>
-              </Link>
-            ))}
-          </nav>
-
-          <div className="flex gap-8">
-            <UserMenu />
-            <ModeToggle />
-
-          </div>
-        </div>
-      </header>
-
-
       <main>
 
-        <div className="w-full flex items-start justify-between gap-6 px-10 py-6 ">
+        <div className="w-full flex flex-col md:flex-row items-start justify-between gap-4 md:gap-6 px-4 md:px-10 py-6">
           <div className=" p-4 pl-10">
-            <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+            <h1 className="mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
               Olá ADM
             </h1>
             <p className="text-accent-foreground/70 text-sm">
@@ -198,9 +144,9 @@ export default function AdminConfig() {
 
         </div>
 
+        <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4 px-4 md:pl-10">
 
-        <div className="flex  items-center gap-4 pl-10 ">
-          <div className="py-1 relative  flex-1 max-w-2xl">
+          <div className="py-1 relative flex-1 w-full md:max-w-2xl">
             <Input className=" rounded-sm" placeholder="ex: vidro" ></Input>
             <Search size={20} className="absolute right-2 top-3 text-accent-foreground/50 " />
           </div>
@@ -209,7 +155,7 @@ export default function AdminConfig() {
               <PopoverTrigger asChild>
                 <Button className="bg-[#91b338] text-neutral-50" variant="outline">Adicionar material</Button>
               </PopoverTrigger>
-              <PopoverContent className="w-80" >
+              <PopoverContent className="w-[90vw] max-w-80">
                 <div className="grid gap-4">
                   <div className="space-y-2">
                     <h4 className="leading-none font-medium">
@@ -256,8 +202,8 @@ export default function AdminConfig() {
           </div>
         </div>
 
-        <div className="w-full overflow-x-auto">
-          <Table className="scale-95">
+        <div className="w-full overflow-x-auto md:overflow-visible">
+          <Table className="min-w-[600px] md:min-w-0 scale-95">
             <TableHeader>
               <TableRow>
                 <TableHead className="font-semibold">Material</TableHead>
@@ -286,7 +232,7 @@ export default function AdminConfig() {
 
                   <TableCell >
                     <AlertDialog>
-                      <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition " >Remover</AlertDialogTrigger>
+                      <AlertDialogTrigger className="bg-red-700 px-3 py-1 rounded-sm text-sm dark:hover:bg-red-500 transition " >Remover</AlertDialogTrigger>
                       <AlertDialogContent >
                         <AlertDialogHeader>
                           <AlertDialogTitle>

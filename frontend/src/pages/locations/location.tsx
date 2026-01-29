@@ -21,25 +21,25 @@ export default function Location() {
 
   
   return (
-    <div className="w-full min-h-screen bg-background text-foreground p-6">
-      {/* HEADER */}
-      <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl  font-semibold">Localização</h1>
+    <div className=" w-full min-h-screen
+  bg-background text-foreground
+  p-4 md:p-6">
 
-      
+      {/* HEADER */}
+      <div className="flex justify-between items-center mb-4 md:mb-6">
+        <h1 className="text-xl md:text-2xl font-semibold">Localização</h1>
       </div>
 
       <Separator className="mb-6" />
 
       {/* CARD PRINCIPAL */}
       <Card className="rounded-2xl shadow-md">
-        <CardContent className="p-6 space-y-6">
+        <CardContent className="p-4 md:p-6 space-y-4 md:space-y-6">
+
           {/* BUSCA */}
           <div className="flex justify-center">
             <div className="relative w-full max-w-md">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" size={18} />
-
-
 
               <SearchMap mapRef={mapRef} />
 

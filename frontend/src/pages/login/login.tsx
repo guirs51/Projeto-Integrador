@@ -96,25 +96,25 @@ export default function Login() {
     localStorage.setItem("token", data.token)
     login(data.userId)
 
-    if(!data.token || !data.userId) return alert("Erro no servidor")
+    if (!data.token || !data.userId) return alert("Erro no servidor")
 
     navigate("/UserHome");
   }
 
   return (
 
-    <div className="flex h-screen w-full bg-white text-zinc-900">
+    <div className="flex min-h-screen w-full bg-white text-zinc-900">
 
       {/* ESQUERDA */}
-      <div className="flex flex-1 items-center justify-center">
-        <Card className="w-full max-w-md bg-neutral-100 border shadow-lg">
+      <div className="flex flex-1 items-center justify-center px-4">
+        <Card className="w-full max-w-md bg-neutral-100 border shadow-lg rounded-2xl">
 
           <CardHeader className="text-center space-y-2">
-            <h1 className="text-xl font-semibold text-black">
+            <h1 className="text-lg md:text-xl font-semibold text-black">
               Bem-vindo de volta ao{" "}
               <span className="text-[#91B338]">Recicle +</span>
             </h1>
-            <p className="text-sm text-zinc-600">
+            <p className="text-xs md:text-sm text-zinc-600">
               Junte-se à nossa comunidade sustentável
             </p>
           </CardHeader>
@@ -122,18 +122,20 @@ export default function Login() {
           <CardContent className="space-y-4">
             <Input
               placeholder="Email"
-              className="bg-white text-zinc-900"
+              className="bg-white text-zinc-900 h-11"
               onChange={(e) => setEmail(e.target.value)}
             />
+
 
             {/* Senha */}
             <div className="relative">
               <Input
                 type={show ? "text" : "password"}
                 placeholder="Senha"
-                className="bg-white text-zinc-900 pr-10"
+                className="bg-white text-zinc-900 pr-10 h-11"
                 onChange={(e) => setPassword(e.target.value)}
               />
+
               <button
                 type="button"
                 onClick={() => setShow(!show)}
@@ -145,12 +147,13 @@ export default function Login() {
 
             <Button
               onClick={handleLogin}
-              className="w-full bg-[#91B338] hover:bg-green-600 text-white"
+              className="w-full h-11 bg-[#91B338] hover:bg-green-600 text-white"
             >
+
               Entrar
             </Button>
 
-            <p className="text-xs text-center text-zinc-600">
+            <p className="text-xs text-center text-zinc-600 leading-relaxed">
               Não tem uma conta?{" "}
               <a href="/regis" className="text-green-700 font-medium">
                 Crie agora!
