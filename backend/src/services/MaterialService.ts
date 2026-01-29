@@ -1,3 +1,4 @@
+import { BadRequestException } from "@nestjs/common";
 import { AppDataSource } from "../data-source";
 import { Material } from "../entities/Material";
 
@@ -5,15 +6,11 @@ export class MaterialService {
     private MaterialRepo = AppDataSource.getRepository(Material);
 
     async create(data: Material) {
-        try {
-            const exist = await this.MaterialRepo.findOne({ where: { name: data.name } })
-            if (exist) return { mensagem: "material já foi cadastrado"};
+        const exist = await this.MaterialRepo.findOne({ where: { name: data.name } })
+        if (exist) throw new BadRequestException("Esse material já foi cadastrado")
 
-            const material = await this.MaterialRepo.create(data);
-            return await this.MaterialRepo.save(material);
-        } catch (e) {
-            console.log("Erro ao criar prize: " + e);
-        }
+        const material = await this.MaterialRepo.create(data);
+        return await this.MaterialRepo.save(material);
     }
 
     async findAll() {

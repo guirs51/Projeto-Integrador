@@ -92,25 +92,25 @@ export default function UserProfile() {
   }
 
   return (
-    <div className="flex justify-center p-22">
+    <div className="flex justify-center p-4 md:p-22">
       <Card className="w-full max-w-3xl  rounded-2xl shadow-lg">
-        <CardContent className="p-8 space-y-6">
+        <CardContent className="p-4 md:p-8 space-y-4 md:space-y-6">
           {/* Header */}
-          <div className="flex flex-col items-center gap-3">
-            <Avatar className="w-28 h-28">
+          <div className="lex flex-col items-center gap-2 md:gap-3">
+            <Avatar className="w-20 h-20 md:w-28 md:h-28">
               <AvatarImage src={perfilFoto} />
               <AvatarFallback>U</AvatarFallback>
             </Avatar>
-            <h2 className="text-xl font-semibold">Perfil do Usuário</h2>
+            <h2 className="text-lg md:text-xl font-semibold">Perfil do Usuário</h2>
           </div>
 
           <Separator />
 
           {/* Informações pessoais */}
           <div className="space-y-4">
-            <div className="flex justify-between items-center">
+            <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
               <h3 className="font-semibold text-lg">Informações pessoais</h3>
-              <Button size="sm" onClick={() => setOpenEditModal(true)}>
+              <Button size="sm" onClick={() => setOpenEditModal(true)} className="self-start sm:self-auto">
                 <Edit className="w-4 h-4 mr-2" /> Editar
               </Button>
             </div>
@@ -128,7 +128,7 @@ export default function UserProfile() {
           {/* Bio */}
           <div className="space-y-2">
             <h3 className="font-semibold text-lg">Bio</h3>
-            <p className="text-muted-foreground">
+            <p className="text-sm md:text-base text-muted-foreground">
               {user?.bio ? user?.bio : "Hi, I'm a passionate developer focused on crafting great digital experiences."}
             </p>
           </div>
@@ -136,7 +136,7 @@ export default function UserProfile() {
           <Separator />
 
           {/* Delete */}
-          <div className="flex justify-end">
+          <div className="flex justify-center sm:justify-end">
             <AlertDialog>
               <AlertDialogTrigger className="bg-red-700 p-2 rounded-sm  dark:hover:bg-red-500 transition ">Deletar</AlertDialogTrigger>
               <AlertDialogContent>

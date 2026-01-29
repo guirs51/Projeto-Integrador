@@ -16,7 +16,7 @@ import { UserSidebar } from "./userSidebar"
 import { useAuth } from "@/context/authContext"
 import { useEffect, useState } from "react"
 
-import { navigationItems } from "../types/Navigation"
+import { navigationItems2 } from "../types/Navigation"
 
 
 export function AppSidebar() {
@@ -68,7 +68,7 @@ export function AppSidebar() {
           <SidebarGroupLabel className="mt-6">Recicle +</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              {navigationItems.map((item) => (
+              {navigationItems2.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
                     <a href={item.url}>

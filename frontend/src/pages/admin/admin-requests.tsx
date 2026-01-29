@@ -48,68 +48,12 @@ export default function AdminRequest() {
 
         <div>
 
-            <header
-                className="
-    sticky top-0 z-50
-    border-b border-white/10
-    bg-[#91B338] backdrop-blur-xl
-  "
-            >
-                <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-6 py-3">
-
-                    {/* Brand */}
-                    <div className="flex items-center gap-2 text-white">
-                        <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white/10 border border-white/10">
-                            <img
-                                src={LogoR}
-                                alt="logoRecicle.png"
-                                className="h-6 w-6 object-contain"
-                            />
-                        </div>
-                        <div className="leading-tight">
-                            <p className="text-sm font-semibold">Recicle +</p>
-                        </div>
-                    </div>
-
-                    {/* Nav */}
-                    <nav className="hidden md:flex items-center gap-2">
-                        {navigationItems2.map(({ title, url, icon: Icon }) => (
-                            <Link key={title} to={url}>
-                                <button
-                                    className="
-              inline-flex items-center gap-2
-              rounded-full px-3 py-2
-              text-xs font-medium
-              text-white/70 hover:text-white
-              hover:bg-white/10
-              border border-transparent hover:border-white/10
-              transition
-            "
-                                >
-                                    <Icon size={15} />
-                                    {title}
-                                </button>
-                            </Link>
-                        ))}
-                    </nav>
-
-                    <div className="flex gap-8">
-                        <UserMenu />
-                        <ModeToggle />
-
-                    </div>
-                </div>
-            </header>
-
             <main>
                 <section className="w-full h-full p-5 ">
 
-
-
-
-                    <div className="w-full flex gap-7 flex-row items-center ">
+                    <div className="w-full flex flex-col md:flex-row gap-4 md:gap-7 items-start md:items-center">
                         <div className=" p-4 pl-10">
-                            <h1 className=" mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
+                            <h1 className="mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">
                                 Olá ADM
                             </h1>
                             <p className="text-accent-foreground/70 text-sm">
@@ -119,9 +63,9 @@ export default function AdminRequest() {
                     </div>
 
 
-                    <div className="flex  items-center gap-4">
+                    <div className="flex flex-col md:flex-row items-stretch md:items-center gap-3 md:gap-4">
 
-                        <div className="py-1 relative  flex-1 max-w-2xl">
+                        <div className="relative flex-1 w-full md:max-w-2xl">
                             <Input onChange={(e) => setFilter(e.target.value)} className=" rounded-sm" placeholder="ex: request123" ></Input>
                             <Search size={20} className="absolute right-2 top-3 text-accent-foreground/50 " />
                         </div>
@@ -164,7 +108,7 @@ export default function AdminRequest() {
                     </div>
 
 
-                    <div className="w-full ">
+                    <div className="w-full overflow-x-auto md:overflow-visible ">
                         {barData === "pending" && (
                             <TableAdmin data={itensPending} />
                         )}
@@ -221,7 +165,7 @@ export function RequestModal({ onCreated }: RequestModalProps) {
                 <Button>Simular Request</Button>
             </DialogTrigger>
 
-            <DialogContent className="sm:max-w-[425px]">
+            <DialogContent className="w-[95vw] max-w-[425px]">
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <DialogHeader>
                         <DialogTitle>Nova Request</DialogTitle>

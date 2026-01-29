@@ -18,7 +18,8 @@ import "../../global.css"
 
 
 import {
-  ArchiveRestore, Leaf, PlusCircle } from 'lucide-react';
+  ArchiveRestore, Leaf, PlusCircle
+} from 'lucide-react';
 import { data, useLocation, useNavigate } from 'react-router';
 import { useAuth } from '../../context/authContext';
 import { RecycleBin } from "@/components/RecycleBin"
@@ -47,7 +48,7 @@ interface User {
 
 export default function ProfilePage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-    const { enqueueSnackbar } = useSnackbar()
+  const { enqueueSnackbar } = useSnackbar()
   const [darkMode, setDarkMode] = useState(false);
   const token = localStorage.getItem("token")
 
@@ -77,7 +78,7 @@ export default function ProfilePage() {
       ),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', userId] })
-            enqueueSnackbar("reciclagem cadastrado com sucesso!", {
+      enqueueSnackbar("reciclagem cadastrado com sucesso!", {
         variant: "success",
         anchorOrigin: {
           vertical: "top",
@@ -109,9 +110,9 @@ export default function ProfilePage() {
 
   console.log(perfilFoto)
   return (
-    <div className="mx-auto w-[90%] py-6 space-y-8 ">
+    <div className="max-w-7xl mx-auto w-[90%] py-6 space-y-8 px-4 md:px-0">
 
-      <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
+      <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-6 md:gap-10">
 
         {/* Texto
              <div className="max-w-xl text-center md:text-left mt-12 bg-gradient-to-br from-[#91b338]/20 to-[#4CAF50]/10 p-10 shadow-sm">
@@ -136,22 +137,24 @@ export default function ProfilePage() {
         />
 
         {/* CARD USUÁRIO */}
-        <Card className="rounded-2xl border max-w-xl text-center md:text-left mt-12 bg-gradient-to-br from-[#91b338]/20 to-[#4CAF50]/10 p-10 shadow-sm">
+        <Card className="     rounded-2xl border max-w-xl
+  text-center md:text-left
+  mt-6 md:mt-12
+  p-6 md:p-10  bg-gradient-to-br from-[#91b338]/20 to-[#4CAF50]/10  shadow-sm">
           <CardContent className="flex gap-8 p-8">
 
 
             <div className="space-y-2">
-              <h1 className=" mt-4 text-4xl md:text-6xl font-bold tracking-tight text-[#91b338]">   Bem-vindo de volta, {user?.name || "Usuário"}</h1>
+              <h1 className=" mt-2 md:mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">   Bem-vindo de volta, {user?.name || "Usuário"}</h1>
               <p className="text-sm">
-                Hi, my name is {user?.name}. I'm a system developer.
+                {user?.bio || "Ainda não tem bio"}
               </p>
-              <span className="text-xs text-muted-foreground">Rua Tal, 123</span>
             </div>
           </CardContent>
         </Card>
 
         {/* Lixeiras */}
-        <div className="flex gap-8 justify-center flex-wrap mt-35 ">
+        <div className="flex gap-4 md:gap-8 justify-center flex-wrap mt-6 md:mt-35">
           <RecycleBin label="Papel" color="bg-blue-500/80" />
           <RecycleBin label="Plástico" color="bg-red-500/80" />
           <RecycleBin label="Vidro" color="bg-green-600/80" />
@@ -163,7 +166,7 @@ export default function ProfilePage() {
       <Separator />
 
       {/* BOTÃO */}
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center gap-3">
         <Button
           size="sm"
           variant="outline"
@@ -176,18 +179,18 @@ export default function ProfilePage() {
       </div>
 
       {/* ÁREA PRINCIPAL */}
-      <div className="flex gap-8">
+      <div className="flex flex-col md:flex-row gap-6 md:gap-8">
         {/* REGISTROS */}
         <div className="flex-[2] space-y-4">
           <div className="flex items-center gap-2 mb-3">
             <ArchiveRestore className="text-[#91b338]" />
-            <h2 className="font-semibold">Registros Pendentes</h2>
+            <h2 className="font-semibold">Registros Realizados</h2>
           </div>
 
-          <ScrollArea className="h-[40vh] rounded-xl border p-4">
+          <ScrollArea className="h-[55vh] md:h-[40vh] rounded-xl border p-4">
             {deliveries.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-10">
-                <Leaf size={16}/> Nenhuma reciclagem registrada ainda
+               Nenhuma reciclagem registrada ainda
               </p>
             ) : (
               <div className="space-y-3">
@@ -196,7 +199,7 @@ export default function ProfilePage() {
                     key={index}
                     material={item.materialType}
                     Peso={item.Peso}
-                   localizacao={item.deliveryLocal}
+                    localizacao={item.deliveryLocal}
                   />
                 ))}
               </div>
@@ -206,7 +209,7 @@ export default function ProfilePage() {
 
         {/* PONTUAÇÃO */}
         <div className="flex-1">
-          <Card className="sticky top-6 rounded-xl border">
+          <Card className="md:sticky md:top-6 rounded-xl border">
             <CardHeader>
               <CardTitle className="text-base">Pontuação</CardTitle>
             </CardHeader>

@@ -1,26 +1,23 @@
 import { AppDataSource } from "../data-source";
 import { User } from "../entities/User";
+import { BadRequestException } from "@nestjs/common";
 
 export class UserService {
   private userRepo = AppDataSource.getRepository(User);
 
   async create(data: User) {
-    try {
-      const emailExist = await this.userRepo.findOne({
-        where: { email: data.email },
-      });
-      const cpfExist = await this.userRepo.findOne({
-        where: { cpf: data.cpf },
-      });
+    const emailExist = await this.userRepo.findOne({
+      where: { email: data.email },
+    });
+    const cpfExist = await this.userRepo.findOne({
+      where: { cpf: data.cpf },
+    });
 
-      if (emailExist) throw new Error("E-mail já cadastrado");
-      if (cpfExist) throw new Error("CPF já cadastrado");
+    if (emailExist) throw new BadRequestException("E-mail já cadastrado");
+    if (cpfExist) throw new BadRequestException("CPF já cadastrado");
 
-      const user = await this.userRepo.create(data);
-      return await this.userRepo.save(user);
-    } catch (e) {
-      console.log("Erro: " + e);
-    }
+    const user = await this.userRepo.create(data);
+    return await this.userRepo.save(user);
   }
 
   async findAll() {

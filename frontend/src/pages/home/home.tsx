@@ -24,7 +24,7 @@ export default function Home() {
         </header>
 
 
-        <section className="relative h-screen w-full overflow-hidden flex items-center justify-center px-5 text-white">
+        <section className="relative min-h-screen w-full overflow-hidden flex items-center justify-center px-5 text-white">
 
           {/* Vídeo */}
           <video
@@ -59,24 +59,25 @@ export default function Home() {
           </div> */}
 
 
-          <div>
-            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">
+          <div className="max-w-xl text-center md:text-left">
+
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-bold text-white leading-tight">
               Recicle + protegendo a <span className="text-lime-400">natureza</span>, <br />
               garantindo o <span className="text-lime-400">futuro</span>.
             </h1>
 
-            <p className="mt-6 text-gray-400 max-w-md">
+            <p className="mt-6 text-gray-300 max-w-md mx-auto md:mx-0 text-sm sm:text-base">
               Dê o primeiro passo rumo a um amanhã mais verde e sustentável.
             </p>
 
-            <div className="mt-8 flex gap-4">
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <a href="/regis">
                 <button className="bg-green-900 hover:bg-green-600 text-white px-6 py-3 rounded-lg font-semibold">
                   Cadastre-se já!
                 </button>
               </a>
 
-              <a href="#sobre">              <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg">
+              <a href="#sobre"> <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg">
                 Sobre nós!
               </button></a>
 
@@ -87,7 +88,7 @@ export default function Home() {
 
 
         {/* QUEM SOMOS */}
-        <section className="flex items-center justify-between gap-16 px-[10%] py-20 bg-white max-lg:flex-col max-lg:text-center max-lg:px-6">
+        <section className="flex items-center justify-between gap-16 px-[10%] py-20 bg-white max-lg:flex-col max-lg:text-center max-lg:px-6 max-lg:py-16">
 
           {/* Imagem */}
           <div className="flex-1 max-lg:order-[-1]">

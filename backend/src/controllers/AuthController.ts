@@ -41,7 +41,7 @@ export class AuthController {
             console.log(admin)
 
             const valid = await user.validatePassword(password)
-            if (!valid) return res.status(401).json({ message: 'Senha inválida' })
+            if (!valid) return res.status(404).json({ message: 'Senha inválida' })
 
             const safe: any = { ...user }
             delete safe.password

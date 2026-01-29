@@ -20,6 +20,8 @@ import { LocationProvider } from './context/locationContext.tsx'
 import AdminBonus from './pages/admin/admin-bonus.tsx'
 import { SnackbarProvider } from 'notistack'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import '@/styles/profileResponsive.css'
+import Layout2 from './layout2.tsx'
 
 
 const queryClient = new QueryClient()
@@ -52,10 +54,14 @@ createRoot(document.getElementById('root')!).render(
                     <Route path='/location' element={<Location />}></Route>
                   </Route>
 
-                  <Route path='/admin/dashboard' element={<Admin />} />
-                  <Route path='/admin/requests' element={<AdminRequest />} />
-                  <Route path='/admin/config' element={<AdminConfig />}></Route>
-                  <Route path='/admin/bonus' element={<AdminBonus />}></Route>
+
+                  <Route element={<Layout2 />}>
+                    <Route path='/admin/dashboard' element={<Admin />} />
+                    <Route path='/admin/requests' element={<AdminRequest />} />
+                    <Route path='/admin/config' element={<AdminConfig />}></Route>
+                    <Route path='/admin/bonus' element={<AdminBonus />}></Route>
+                  </Route>
+
                 </Routes>
               </AuthProvider>
             </ThemeProvider>
