@@ -54,9 +54,7 @@ export default function AdminConfig() {
   const [pontos, setPontos] = useState<String>("")
   const [nomeMaterial, setNomeMaterial] = useState<string>("")
   const [importancia, setImportancia] = useState<String>("")
-  const { userId } = useAuth()
-  const navigate = useNavigate()
-  const token = localStorage.getItem('token')
+
 
   const queryClient = useQueryClient()
 
@@ -68,7 +66,7 @@ export default function AdminConfig() {
   const materiais: Material[] = material || null
 
   const postMaterialMutation = useMutation({
-    mutationFn: () => postMaterial(nomeMaterial, Number(pontos), String(importancia)),
+    mutationFn: () => postMaterial(nomeMaterial, String(pontos), String(importancia)),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["material"] }),
         enqueueSnackbar("material cadastrado com sucesso!", {
@@ -78,11 +76,18 @@ export default function AdminConfig() {
             horizontal: "right"
           }
         })
+    },
+    onError: (error: any) => {
+      enqueueSnackbar(error.message || "Erro ao cadastrar material", {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      })
     }
   })
 
-
-  console.log(pontos)
   function handlePostMutation() {
     postMaterialMutation.mutate()
     setOpen(false)
@@ -102,7 +107,7 @@ export default function AdminConfig() {
     }
   })
 
-  function handleDeleteMutation(id: number){
+  function handleDeleteMutation(id: number) {
     deleteMaterialMutation.mutate(id)
     setOpen(false)
   }
@@ -126,6 +131,7 @@ export default function AdminConfig() {
       console.log(e)
     }
   }
+
   return (
     <div className="">
 
@@ -221,7 +227,7 @@ export default function AdminConfig() {
                       <Label htmlFor="width">Importância</Label>
                       <Input
                         id="width"
-                        defaultValue="100%"
+                        defaultValue=""
                         className="col-span-2 h-8"
                         onChange={(e) => setImportancia(String(e.target.value))}
                       />
@@ -240,7 +246,7 @@ export default function AdminConfig() {
                       <Label htmlFor="height">Pontos</Label>
                       <Input
                         id="Pontos"
-                        defaultValue="10"
+                        defaultValue=""
                         className="col-span-2 h-8"
                         onChange={(e) => setPontos(String(e.target.value))}
                       />

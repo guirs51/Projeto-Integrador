@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button"
 import { useSnackbar } from "notistack"
 import { useNavigate } from "react-router"
 import { useAuth } from "@/context/authContext"
+import { createUser } from "@/api/auth"
 
 export default function Register() {
 
@@ -19,67 +20,66 @@ export default function Register() {
   const [cpf, setCpf] = useState("")
   const [password, setPassword] = useState("")
   const [show, setShow] = useState(false)
-  const [errorMessage, setErrorMessage] = useState<string>("")
+  //const [errorMessage, setErrorMessage] = useState<string>("")
   const navigate = useNavigate()
   const { enqueueSnackbar } = useSnackbar()
   const { login } = useAuth()
 
-
-  async function createUser(name: string, email: string, cpf: string, password: string) {
-    const response = await fetch("http://localhost:3000/auth/register", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ name, email, cpf, password }),
-    })
-
-    const data = await response.json()
-
-    if (!response.ok) {
-      const messages = data.map((err: any) => Object.values(err)[0]).join("\n")
-
-      // setErrorMessage(messages)
-      // alert(data.message)
-
-      throw new Error(messages)
+  // Extrai as mensagens de erro do que não está de acordo com o DTO
+  function extractDtoError(errors: any): string {
+    if (Array.isArray(errors)) {
+      for (const fieldError of errors) {
+        const messages = Object.values(fieldError)
+        if (messages.length > 0) {
+          return messages[0] as string
+        }
+      }
     }
 
-    return data
+    if (typeof errors === "object" && errors.message) {
+      return errors.message
+    }
 
+    if (typeof errors.message === "string") {
+      return errors.message
+    }
 
-
+    return "Erro ao cadastrar"
   }
 
-  async function handleRegister() { 
+
+
+  async function handleRegister() {
+    // tenta cadastrar o usuário
     try {
+      // cria o usuario
       const data = await createUser(name, email, cpf, password)
+
+      // envia o token para o localstorage
       localStorage.setItem("token", data.token)
+      // realiza o login
       login(data.user.id)
 
-
-      enqueueSnackbar("Usuario cadastrado com sucesso!", {
+      // mensagens
+      enqueueSnackbar("Usuário cadastrado com sucesso!", {
         variant: "success",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right"
-        }
+        anchorOrigin: { vertical: "top", horizontal: "right" }
       })
 
-      navigate("/UserHome");
+      navigate("/UserHome")
+
     } catch (error: any) {
+      // se n consegui cadastrar, chama a função que extrai o erro para exibir no "alert"
+      const message = extractDtoError(error)
 
-      setErrorMessage(error.message)
-
-      enqueueSnackbar(errorMessage, {
+      enqueueSnackbar(message, {
         variant: "warning",
-        anchorOrigin: {
-          vertical: "top",
-          horizontal: "right"
-        }
+        anchorOrigin: { vertical: "top", horizontal: "right" }
       })
     }
-
-
   }
+
+
 
   return (
     <div className="flex h-screen w-full">

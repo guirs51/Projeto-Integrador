@@ -34,17 +34,6 @@ export default function Login() {
     }
 
     return data
-
-    // localStorage.setItem("token", data.token)
-    // login(data.user.id)
-
-    // alert("Login realizado com sucesso! ")
-
-    // if (data.user.role === "admin") {
-    //   return navigate("/admin/requests")
-    // }
-
-    // navigate("/UserHome")
   }
 
   async function handleLogin() {
@@ -70,10 +59,8 @@ export default function Login() {
 
 
     } catch (error: any) {
-      setErrorMessage(error.message)
-
-      enqueueSnackbar(errorMessage, {
-        variant: "error",
+      enqueueSnackbar(error.message, {
+        variant: "warning",
         anchorOrigin: {
           vertical: "top",
           horizontal: "right"

@@ -16,6 +16,7 @@ import {
 } from "./ui/dropdown-menu"
 import { useAuth } from "@/context/authContext"
 import { getUser } from "@/api/userHome"
+import { Users } from "lucide-react"
 
 export function UserMenu() {
 

@@ -26,7 +26,7 @@ const queryClient = new QueryClient()
 
 createRoot(document.getElementById('root')!).render(
   <LocationProvider>
-    <SnackbarProvider autoHideDuration={2000}>
+    <SnackbarProvider autoHideDuration={3500}>
       <GoogleOAuthProvider clientId="283937599928-psbk3t7eocu0etr13q7rdrnhdl9bkrn0.apps.googleusercontent.com">
         <QueryClientProvider client={queryClient}>
           <BrowserRouter>
