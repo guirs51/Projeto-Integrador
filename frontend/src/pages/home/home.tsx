@@ -77,7 +77,7 @@ export default function Home() {
                 </button>
               </a>
 
-              <a href="#sobre">              <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg">
+              <a href="#sobre"> <button className="bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-lg">
                 Sobre nós!
               </button></a>
 

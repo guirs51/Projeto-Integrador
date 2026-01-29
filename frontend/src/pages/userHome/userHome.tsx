@@ -190,7 +190,7 @@ export default function ProfilePage() {
           <ScrollArea className="h-[55vh] md:h-[40vh] rounded-xl border p-4">
             {deliveries.length === 0 ? (
               <p className="text-sm text-muted-foreground text-center py-10">
-                <Leaf size={16} /> Nenhuma reciclagem registrada ainda
+               Nenhuma reciclagem registrada ainda
               </p>
             ) : (
               <div className="space-y-3">
