@@ -147,9 +147,8 @@ export default function ProfilePage() {
             <div className="space-y-2">
               <h1 className=" mt-2 md:mt-4 text-3xl md:text-6xl font-bold tracking-tight text-[#91b338]">   Bem-vindo de volta, {user?.name || "Usuário"}</h1>
               <p className="text-sm">
-                Hi, my name is {user?.name}. I'm a system developer.
+                {user?.bio || "Ainda não tem bio"}
               </p>
-              <span className="text-xs text-muted-foreground">Rua Tal, 123</span>
             </div>
           </CardContent>
         </Card>
@@ -185,7 +184,7 @@ export default function ProfilePage() {
         <div className="flex-[2] space-y-4">
           <div className="flex items-center gap-2 mb-3">
             <ArchiveRestore className="text-[#91b338]" />
-            <h2 className="font-semibold">Registros Pendentes</h2>
+            <h2 className="font-semibold">Registros Realizados</h2>
           </div>
 
           <ScrollArea className="h-[55vh] md:h-[40vh] rounded-xl border p-4">
