@@ -51,22 +51,28 @@ export class UserService {
   }
 
   async update(id: number, data: Partial<User>) {
-    try {
-      const user = await this.userRepo.findOne({ where: { id } });
-      if (!user) throw new Error("usuario não encontrado");
+    const user = await this.userRepo.findOne({ where: { id } });
+    if (!user) throw new Error("usuario não encontrado");
 
-      if (data.password) {
-        user.password = data.password;
-      }
-
-      const { password, ...rest } = data;
-
-      Object.assign(user, rest);
-
-      return await this.userRepo.save(user);
-    } catch (e) {
-      console.log("Erro: " + e);
+    if (data.email) {
+      const emailExist = await this.userRepo.findOne({ where: { email: data.email } });
+      if (emailExist) throw new BadRequestException("E-mail já cadastrado");
     }
+
+    if (data.cpf) {
+      const cpfExist = await this.userRepo.findOne({ where: { cpf: data.cpf } })
+      if (cpfExist) throw new BadRequestException("Esse CPF ja esta sendo usado")
+    }
+
+    if (data.password) {
+      user.password = data.password;
+    }
+
+    const { password, ...rest } = data;
+
+    Object.assign(user, rest);
+
+    return await this.userRepo.save(user);
   }
 
   async remove(id: number) {

@@ -61,13 +61,22 @@ export default function UserProfile() {
     mutationFn: (update: Partial<User>) => updateUser(Number(userId), String(token), update),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['profile', userId] }),
-        enqueueSnackbar("reciclagem cadastrado com sucesso!", {
+        enqueueSnackbar("user atualizado com sucesso!", {
           variant: "success",
           anchorOrigin: {
             vertical: "top",
             horizontal: "right"
           }
         })
+    },
+    onError: (error: any) => {
+      enqueueSnackbar(error.message || "Erro ao atualizar user", {
+        variant: "error",
+        anchorOrigin: {
+          vertical: "top",
+          horizontal: "right",
+        },
+      })
     }
   })
 

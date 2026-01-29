@@ -18,33 +18,28 @@ export async function updateUser(userId: number, token: string, update: Partial<
             body: JSON.stringify(update),
         }
     )
+    const data = await response.json()
 
     if (!response.ok) {
-        alert("Erro ao atualizar usuário")
-        return
+        throw data
     }
-
-    const data = await response.json()
     return data
 }
 
 
 export async function deleteUser(userId: number, token: string) {
-    try {
-        const response = await fetch(`http://localhost:3000/users/${userId}`, {
-            method: "DELETE",
-            headers: {
-                Authorization: `Bearer ${token}`,
-            },
-        })
+    const response = await fetch(`http://localhost:3000/users/${userId}`, {
+        method: "DELETE",
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    })
 
-        if (!response.ok) {
-            alert("Erro ao deletar usuário")
-            return
-        }
-    }
-    catch (e) {
-        console.log(e)
+    const data = await response.json()
+
+    if (!response.ok) {
+        throw data
     }
 
+    return data
 }
