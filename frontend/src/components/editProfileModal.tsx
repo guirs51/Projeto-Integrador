@@ -81,7 +81,7 @@ export default function EditProfileModal({
       payload.cpf = formCpf
     }
 
-    if (bio.trim() && bio !== userData.email) {
+    if (bio.trim() && bio !== userData.bio) {
       payload.bio = bio
     }
 
